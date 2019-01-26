@@ -6,6 +6,7 @@ TagManager:
   tags:
   - spacecraft
   - planet
+  - aerolite
   layers:
   - Default
   - TransparentFX

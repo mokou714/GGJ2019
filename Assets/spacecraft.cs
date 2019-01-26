@@ -45,6 +45,13 @@ public class spacecraft : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "planet")
+        {
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        }
+    }
 
 
 

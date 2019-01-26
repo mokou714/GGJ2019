@@ -19,8 +19,27 @@ public class Aerolite : MonoBehaviour {
         Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
         Collider2D[] aroundColliders = Physics2D.OverlapCircleAll(myPos, EscapeRange);
         List<Vector2> escapeList = new List<Vector2>();
+        if(myPos.x >= 11){
+            escapeList.Add(new Vector2(myPos.x - 11, 1));
+            escapeList.Add(new Vector2(myPos.x - 11, -1));
+        }
+        if (myPos.x <= -11)
+        {
+            escapeList.Add(new Vector2(myPos.x + 11, 1));
+            escapeList.Add(new Vector2(myPos.x + 11, -1));
+        }
+        if (myPos.y >= 8)
+        {
+            escapeList.Add(new Vector2(1, myPos.y - 8));
+            escapeList.Add(new Vector2(-1, myPos.y - 8));
+        }
+        if (myPos.y <= -8)
+        {
+            escapeList.Add(new Vector2(1, myPos.y + 8));
+            escapeList.Add(new Vector2(-1, myPos.y + 8));
+        }
 
-        foreach(Collider2D objAround in aroundColliders){
+        foreach (Collider2D objAround in aroundColliders){
             GameObject obj = objAround.gameObject;
             if(obj.tag == "planet"){
                 Vector2 pltPos = new Vector2(obj.transform.position.x, obj.transform.position.y);

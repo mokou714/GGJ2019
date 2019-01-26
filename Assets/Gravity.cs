@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour {
 
-    public int mass;
+    private float mass;
     public float gravityRadius;
     public float velocity;
+
+    private bool collided;
 
 	// Use this for initialization
 	void Start () {
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, velocity);
-
+        mass = gameObject.GetComponent<Rigidbody2D>().mass;
     }
 	
 	// Update is called once per frame
@@ -81,5 +83,20 @@ public class Gravity : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "planet")
+        {
+            collided = true;
+            //gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(collided){
+            gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        }
+    }
 
 }

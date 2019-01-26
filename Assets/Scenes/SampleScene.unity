@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 889307822}
   - component: {fileID: 889307823}
   - component: {fileID: 889307824}
+  - component: {fileID: 889307825}
   m_Layer: 0
   m_Name: ob2
   m_TagString: spacecraft
@@ -262,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 889307819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.46, y: 0, z: 0}
+  m_LocalPosition: {x: -1.77, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -324,6 +325,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &889307825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889307819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 1
+  gravityRadius: 20
+  velocity: 1.5
 --- !u!1 &1006965599
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,12 +348,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1006965601}
   - component: {fileID: 1006965600}
-  - component: {fileID: 1006965602}
   - component: {fileID: 1006965603}
+  - component: {fileID: 1006965602}
   - component: {fileID: 1006965604}
   m_Layer: 0
   m_Name: ob1
-  m_TagString: Untagged
+  m_TagString: spacecraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,9 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 0
+  mass: 20
   gravityRadius: 20
-  G: 0
+  velocity: 0
 --- !u!50 &1006965603
 Rigidbody2D:
   serializedVersion: 4
@@ -427,7 +442,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

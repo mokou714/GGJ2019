@@ -9,10 +9,10 @@ public class Gravity : MonoBehaviour {
     public float velocity;
 
     private bool collided;
+    private bool stopped = false;
 
 	// Use this for initialization
 	void Start () {
-
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, velocity);
         mass = gameObject.GetComponent<Rigidbody2D>().mass;
     }
@@ -34,22 +34,37 @@ public class Gravity : MonoBehaviour {
             //check if collider is the allowed gameobject
 
             GameObject ob = hitColliders[i].gameObject;
-            if (ob != gameObject
-                &&
-                (
-                (ob.tag == "planet" && gameObject.tag == "spacecraft")
-                ||
-                (ob.tag == "spacecraft" && gameObject.tag == "planet")
-                   )
-               )
+            if (ob != gameObject && (ob.tag == "spacecraft" && gameObject.tag == "planet"))
                 
             {
+
                 if (ob.tag == "spacecraft")
                     ob.GetComponent<Gravity>().gravityRadius = gravityRadius;
 
                 //apply gravity force
                 Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
                 Vector2 pos2 = new Vector2(ob.transform.position.x, ob.transform.position.y);
+
+                if (!stopped && Vector2.Distance(pos1, pos2) < 2)
+                {
+                    Rigidbody2D ac = ob.GetComponent<Rigidbody2D>();
+
+                    if (ac.velocity.x > 2 || ac.velocity.x < -2 || ac.velocity.y > 2 || ac.velocity.y < -2)
+                    {
+                        //ac.velocity = new Vector2((float)0.2, (float)0.2);
+
+                        Vector2 acPos = ac.position;
+                        Vector2 diff = pos1 - pos2;
+
+                        Vector2 normDir = Vector2.Perpendicular(diff);
+                        Debug.Log("Norm velocity:" + pos1 + pos2 + diff + normDir);
+                        ac.velocity = Vector2.zero;
+                        ac.velocity = -normDir;
+                    }
+                    stopped = true;
+
+                }
+
                 float dis = Vector2.Distance(pos1,pos2);
 
                 float cos = Mathf.Abs(pos1.x - pos2.x) / dis;
@@ -64,6 +79,8 @@ public class Gravity : MonoBehaviour {
                 ob.GetComponent<Rigidbody2D>().AddForce(ob.transform.right * x_y_dir.x);
                 ob.GetComponent<Rigidbody2D>().AddForce(ob.transform.up * x_y_dir.y);
 
+
+                break;
            
             }
             ++i;
@@ -94,9 +111,9 @@ public class Gravity : MonoBehaviour {
 
     private void LateUpdate()
     {
-        if(collided){
-            gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
-        }
+        //if(collided){
+        //    gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        //}
     }
 
 }

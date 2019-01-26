@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 2
   velocity: 0
 --- !u!50 &137178339
 Rigidbody2D:
@@ -171,7 +171,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100000
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 5
   velocity: 0
 --- !u!50 &1006965603
 Rigidbody2D:
@@ -885,7 +885,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100000
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -903,7 +903,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1211,7 +1211,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.07, y: 0}
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 2
   velocity: 0
 --- !u!50 &1978382863
 Rigidbody2D:
@@ -1241,7 +1241,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100000
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0

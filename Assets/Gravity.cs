@@ -19,6 +19,7 @@ public class Gravity : MonoBehaviour {
 	void Update () {
 
         checkGravity();
+
 	}
 
     void checkGravity(){
@@ -26,12 +27,23 @@ public class Gravity : MonoBehaviour {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, gravityRadius);
         int i = 0;
 
-        while (i<hitColliders.Length){
+        while (i < hitColliders.Length)
+        {
             //check if collider is the allowed gameobject
 
             GameObject ob = hitColliders[i].gameObject;
-            if (ob.tag == "spacecraft" && ob != gameObject)
+            if (ob != gameObject
+                &&
+                (
+                (ob.tag == "planet" && gameObject.tag == "spacecraft")
+                ||
+                (ob.tag == "spacecraft" && gameObject.tag == "planet")
+                   )
+               )
+                
             {
+                if (ob.tag == "spacecraft")
+                    ob.GetComponent<Gravity>().gravityRadius = gravityRadius;
 
                 //apply gravity force
                 Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
@@ -68,4 +80,6 @@ public class Gravity : MonoBehaviour {
             return false;
         }
     }
+
+
 }

@@ -28,12 +28,12 @@ public class DustParticles : MonoBehaviour {
 	}
 
 	private void checkSetDustSize() {
-		Gravity planetGrav;
-		if ((planet == null) || (planetGrav = planet.GetComponent<Gravity>()) == null)
+		Catcher planetGrav;
+		if ((planet == null) || (planetGrav = planet.GetComponent<Catcher>()) == null)
 			return;
-		if (savedPlanetGravityRad == planetGrav.gravityRadius)
+		if (savedPlanetGravityRad == planetGrav.catching_radius)
 			return;
-		savedPlanetGravityRad = planetGrav.gravityRadius;
+		savedPlanetGravityRad = planetGrav.catching_radius;
 		var pShape = particles.shape;
 		pShape.radius = savedPlanetGravityRad;
 		particles.Stop();

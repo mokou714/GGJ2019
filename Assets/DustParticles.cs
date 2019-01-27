@@ -28,14 +28,18 @@ public class DustParticles : MonoBehaviour {
 	}
 
 	private void checkSetDustSize() {
-		Gravity planetGrav;
-		if ((planet == null) || (planetGrav = planet.GetComponent<Gravity>()) == null)
+        Planet planetGrav;
+        if ((planet == null) || (planetGrav = planet.GetComponent<Planet>()) == null)
 			return;
-		if (savedPlanetGravityRad == planetGrav.gravityRadius)
+        if (Mathf.Abs(savedPlanetGravityRad - planetGrav.catching_radius) < 1e-3)
 			return;
-		savedPlanetGravityRad = planetGrav.gravityRadius;
+		savedPlanetGravityRad = planetGrav.catching_radius;
 		var pShape = particles.shape;
 		pShape.radius = savedPlanetGravityRad;
+		CircleCollider2D coll;
+		if ((coll = GetComponent<CircleCollider2D>()) != null) {
+			coll.radius = savedPlanetGravityRad;
+		}
 		particles.Stop();
 		print("Changed");
 	}

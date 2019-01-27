@@ -5,6 +5,7 @@ using UnityEngine;
 public class Aerolite : MonoBehaviour {
     public float EscapeRange;
     private int[] dirs = {1, 0, -1};
+    public int damage;
 	// Use this for initialization
 	void Start () {
 		

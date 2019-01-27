@@ -7,15 +7,21 @@ public class spacecraft : MonoBehaviour {
 
     public float direction;
     public int rotation_sensitivity;
-    public float remaining_enegy;
     public float boost_power;
-    public float max_speed;
     public float launch_speed;
+
+    public float enegy;
+
+    public bool moving;
 
 
     public float rotating_speed;
     public bool rotate_on;
     public Vector3 rotation_center;
+
+    public float enerdecSpeed;
+
+    public GameObject rotating_planet;
 
 	// Use this for initialization
 	void Start () {
@@ -27,26 +33,24 @@ public class spacecraft : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-        if(Input.GetKey(KeyCode.LeftArrow)){
-            transform.Rotate(0,0, Time.deltaTime * rotation_sensitivity);
-            direction = transform.eulerAngles.z;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow)){
-            transform.Rotate(0,0, -Time.deltaTime * rotation_sensitivity);
-            direction = transform.eulerAngles.z;
-        }
+        //if(Input.GetKey(KeyCode.LeftArrow)){
+        //    transform.Rotate(0,0, Time.deltaTime * rotation_sensitivity);
+        //    direction = transform.eulerAngles.z;
+        //}
+        //else if (Input.GetKey(KeyCode.RightArrow)){
+        //    transform.Rotate(0,0, -Time.deltaTime * rotation_sensitivity);
+        //    direction = transform.eulerAngles.z;
+        //} 
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!rotate_on)
-                Boost();
-            else
+            if (rotate_on)
                 Launch();
-        }
-
-
-        if(rotate_on){
+        }else if(rotate_on){
             Rotate();
+        }
+        if(moving){
+            enegy -= Time.deltaTime * enerdecSpeed;
         }
 
 
@@ -79,11 +83,16 @@ public class spacecraft : MonoBehaviour {
         //Vector2 x_y_dir = new Vector2(pos1.x - pos2.x, pos1.y - pos2.y);
         //x_y_dir.Normalize();
 
-        Debug.Log(sin);
-        Debug.Log(cos);
+        //Debug.Log(sin);
+        //Debug.Log(cos);
         Vector2 new_v = new Vector2(sin, -cos) * rotating_speed;
 
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_v;
+
+        Vector2 v_dir = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
+        v_dir.Normalize();
+
+        transform.up = new Vector3(v_dir.x, v_dir.y, 0);
 
 
     }
@@ -98,6 +107,7 @@ public class spacecraft : MonoBehaviour {
         if (origin_speed < 0.1f)
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = transform.up * origin_speed * launch_speed;
+        moving = true;
 
     }
 

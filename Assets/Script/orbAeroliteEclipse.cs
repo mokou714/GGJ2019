@@ -7,6 +7,7 @@ public class orbAeroliteEclipse : MonoBehaviour {
     private float mass;
     public float gravityRadius;
     public float velocity;
+    public int damage;
 
     private bool collided;
     private bool stopped = false;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour {
 
+    public float collide_strengh;
+    public bool collided;
+    public float asteroidDamage;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,12 +19,32 @@ public class Collision : MonoBehaviour {
 
 	}
 
+    private void LateUpdate()
+    {
+        if (collided)
+        {
+            gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            collided = false;
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "aerolite")
+        Debug.Log("Collision:" + col.gameObject.tag);
+        if (col.gameObject.tag == "aerolite" ){
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
+            transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<Aerolite>().damage;
+            collided = true;
+        }
+        else if (col.gameObject.tag == "obaerolite"){
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
+            transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<orbAeroliteEclipse>().damage;
+            collided = true;
+        }else if (col.gameObject.tag == "asteroid")
         {
-            Destroy(gameObject);
-            Debug.Log("You exploded!");
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
+            transform.GetChild(0).GetComponent<spacecraft>().enegy -= asteroidDamage;
+            collided = true;
         }
     }
 

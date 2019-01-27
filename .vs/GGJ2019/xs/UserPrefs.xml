@@ -1,8 +1,14 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Asteroid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DustParticles.cs">
     <Files>
-      <File FileName="Assets/Script/Asteroid.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/SillyAsteroid.cs" Line="10" Column="6" />
+      <File FileName="Assets/Script/MeteorSpawner.cs" Line="27" Column="26" />
+      <File FileName="Assets/Script/orbAeroliteEclipse.cs" Line="37" Column="1" />
+      <File FileName="Assets/Script/spacecraft.cs" Line="95" Column="45" />
+      <File FileName="Assets/Script/Collision.cs" Line="26" Column="70" />
+      <File FileName="Assets/Script/Planet.cs" Line="41" Column="28" />
+      <File FileName="Assets/DustParticles.cs" Line="32" Column="64" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

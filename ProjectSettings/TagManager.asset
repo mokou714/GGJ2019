@@ -8,6 +8,8 @@ TagManager:
   - planet
   - aerolite
   - asteroid
+  - orbaerolite
+  - orbaeroliteEc
   layers:
   - Default
   - TransparentFX

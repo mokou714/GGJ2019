@@ -5,7 +5,7 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
 
-    public int dustLevel;
+    public int dustAmount;
     public int dustRadius;
 
 
@@ -37,7 +37,8 @@ public class Planet : MonoBehaviour
             //player catched
             if (ob != gameObject && ob.tag == "spacecraft")
             {
-                Debug.Log("!!!!");
+                Debug.Log("!!!!" +
+                          "");
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>(); 
                 if(sc.rotating_planet == null || sc.rotating_planet != gameObject){
                     sc.rotating_planet = gameObject;
@@ -45,6 +46,14 @@ public class Planet : MonoBehaviour
                     sc.rotate_on = true;
                     sc.moving = false;
                 }
+
+                sc.enegy += dustAmount;
+                if (sc.enegy > 100)
+                    sc.enegy = 100;
+                dustAmount = 0;
+
+                ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
+
 
 
 

@@ -23,11 +23,11 @@ public class spacecraft : MonoBehaviour {
 
     public GameObject rotating_planet;
 
+
 	// Use this for initialization
 	void Start () {
 
         Vector3 dir = new Vector3(0, 0, direction);
-
 	}
 	
 	// Update is called once per frame
@@ -51,6 +51,13 @@ public class spacecraft : MonoBehaviour {
         }
         if(moving){
             enegy -= Time.deltaTime * enerdecSpeed;
+            transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = enegy / 100f;
+        }
+
+        if (enegy <= 0)
+        {
+            Application.LoadLevel(0);
+            Debug.Log("Player lost");
         }
 
 

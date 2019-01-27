@@ -5,6 +5,7 @@ using UnityEngine;
 public class OrbitAerolite : MonoBehaviour {
     public int speed;
     public Rigidbody2D orbitCenter;
+    public float damage;
 	// Use this for initialization
 	void Start () {
         

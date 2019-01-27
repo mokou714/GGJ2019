@@ -36,6 +36,10 @@ public class DustParticles : MonoBehaviour {
 		savedPlanetGravityRad = planetGrav.catching_radius;
 		var pShape = particles.shape;
 		pShape.radius = savedPlanetGravityRad;
+		CircleCollider2D coll;
+		if ((coll = GetComponent<CircleCollider2D>()) != null) {
+			coll.radius = savedPlanetGravityRad;
+		}
 		particles.Stop();
 		print("Changed");
 	}

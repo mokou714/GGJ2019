@@ -62,9 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Aerolite.cs" />
+    <Compile Include="Assets\Catcher.cs" />
     <Compile Include="Assets\Collision.cs" />
     <Compile Include="Assets\Gravity.cs" />
     <Compile Include="Assets\GravitySource.cs" />
+    <Compile Include="Assets\orbAeroliteEclipse.cs" />
     <Compile Include="Assets\spacecraft.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/TonyXzh/GGJ2019/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

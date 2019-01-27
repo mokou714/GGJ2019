@@ -9,6 +9,13 @@ public class spacecraft : MonoBehaviour {
     public int rotation_sensitivity;
     public float remaining_enegy;
     public float boost_power;
+    public float max_speed;
+    public float launch_speed;
+
+
+    public float rotating_speed;
+    public bool rotate_on;
+    public Vector3 rotation_center;
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +36,19 @@ public class spacecraft : MonoBehaviour {
             direction = transform.eulerAngles.z;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Boost();
+            if (!rotate_on)
+                Boost();
+            else
+                Launch();
         }
+
+
+        if(rotate_on){
+            Rotate();
+        }
+
 
     }
 
@@ -40,18 +56,52 @@ public class spacecraft : MonoBehaviour {
     {
         if (gameObject.tag == "spacecraft")
         {
+            float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
+            float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
+            float origin_speed = Mathf.Sqrt(x_speed * x_speed + y_speed * y_speed);
 
-            transform.parent.GetComponent<Rigidbody2D>().AddForce(transform.up * boost_power);
+            if (origin_speed < 0.1f)
+                origin_speed = 1f;
+            transform.parent.GetComponent<Rigidbody2D>().velocity = transform.up * origin_speed * boost_power;
+
+            //transform.parent.GetComponent<Rigidbody2D>().AddForce(transform.up * boost_power);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "planet")
-        {
-            transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
-        }
+    void Rotate(){
+        Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
+        Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
+        float dis = Vector2.Distance(pos1, pos2);
+
+        float sin = (pos1.y - pos2.y) / dis;
+        float cos = (pos1.x - pos2.x) / dis;
+
+        //Vector2 x_y_dir = new Vector2(pos1.x - pos2.x, pos1.y - pos2.y);
+        //x_y_dir.Normalize();
+
+        Debug.Log(sin);
+        Debug.Log(cos);
+        Vector2 new_v = new Vector2(sin, -cos) * rotating_speed;
+
+        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_v;
+
+
     }
+
+    void Launch(){
+        rotate_on = false;
+
+        float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
+        float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
+        float origin_speed = Mathf.Sqrt(x_speed * x_speed + y_speed * y_speed);
+
+        if (origin_speed < 0.1f)
+            origin_speed = 1f;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = transform.up * origin_speed * launch_speed;
+
+    }
+
+
 
 
 

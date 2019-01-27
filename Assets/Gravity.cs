@@ -20,7 +20,7 @@ public class Gravity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        checkGravity();
+        //checkGravity();
 
 	}
 
@@ -32,7 +32,6 @@ public class Gravity : MonoBehaviour {
         while (i < hitColliders.Length)
         {
             //check if collider is the allowed gameobject
-
             GameObject ob = hitColliders[i].gameObject;
             if (ob != gameObject
                 &&

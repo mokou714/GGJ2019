@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 137178339}
   - component: {fileID: 137178338}
   - component: {fileID: 137178337}
+  - component: {fileID: 137178342}
   m_Layer: 0
   m_Name: planet3
   m_TagString: planet
@@ -153,12 +154,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137178336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 1
   velocity: 0
 --- !u!50 &137178339
 Rigidbody2D:
@@ -239,6 +240,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137178342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 137178336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6deb533e7774489861310306c2ed25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catching_radius: 1
 --- !u!1 &301289695
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,9 +294,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  rotation_sensitivity: 80
+  rotation_sensitivity: 300
   remaining_enegy: 0
-  boost_power: 5
+  boost_power: 1.1
+  max_speed: 0
+  launch_speed: 4
+  rotating_speed: 2
+  rotate_on: 0
+  rotation_center: {x: 0, y: 0, z: 0}
 --- !u!212 &301289698
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -581,7 +599,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 889307819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.42, y: -3.03, z: 0}
+  m_LocalPosition: {x: 4.42, y: 0.54, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 301289696}
@@ -599,7 +617,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -620,7 +638,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00070525706, y: -0.002820976}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -631,7 +649,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.1021698, y: 0.23898773}
   m_EdgeRadius: 0
 --- !u!114 &889307825
 MonoBehaviour:
@@ -639,12 +657,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 889307819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 0
+  gravityRadius: 1
   velocity: 2
 --- !u!1 &1005550366
 GameObject:
@@ -795,6 +813,7 @@ GameObject:
   - component: {fileID: 1006965603}
   - component: {fileID: 1006965602}
   - component: {fileID: 1006965604}
+  - component: {fileID: 1006965605}
   m_Layer: 0
   m_Name: planet1
   m_TagString: planet
@@ -867,12 +886,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1006965599}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 1
   velocity: 0
 --- !u!50 &1006965603
 Rigidbody2D:
@@ -909,6 +928,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10.18
+--- !u!114 &1006965605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006965599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6deb533e7774489861310306c2ed25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catching_radius: 1
 --- !u!1 &1546866783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1226,7 @@ GameObject:
   - component: {fileID: 1978382863}
   - component: {fileID: 1978382862}
   - component: {fileID: 1978382861}
+  - component: {fileID: 1978382866}
   m_Layer: 0
   m_Name: planet2
   m_TagString: planet
@@ -1223,12 +1255,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1978382860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400406b2cb77347309b76791998b5416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityRadius: 3
+  gravityRadius: 1
   velocity: 0
 --- !u!50 &1978382863
 Rigidbody2D:
@@ -1309,3 +1341,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978382866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1978382860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6deb533e7774489861310306c2ed25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catching_radius: 1

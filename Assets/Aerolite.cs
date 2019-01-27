@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Aerolite : MonoBehaviour {
-    public float FloatStrenght;
-    public float RandomRotationStrenght;
     public float EscapeRange;
-    private int[] dirs = { 1, 0, -1 };
+    private int[] dirs = {1, 0, -1};
 	// Use this for initialization
 	void Start () {
 		
@@ -56,6 +54,8 @@ public class Aerolite : MonoBehaviour {
             rand_dir = randDirGen();
         }
         //Debug.Log("Random Dir:" + rand_dir);
+
+        int FloatStrenght = Random.Range(1, 5);
 
         GetComponent<Rigidbody2D>().AddForce(rand_dir * FloatStrenght);
         transform.Rotate(0, 0, 1);

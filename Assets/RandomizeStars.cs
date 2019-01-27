@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomizeChildren : MonoBehaviour {
-
+public class RandomizeStars : MonoBehaviour {
 	[SerializeField] [Range(0, 5)] 
 	private float minScaleChange = 1;
 

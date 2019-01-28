@@ -5,25 +5,25 @@ using UnityEngine;
 public class RandomStars : MonoBehaviour {
 
 	[SerializeField]
-	private int numberOfStars;
+	private int numberOfStars = 55;
 
 	[SerializeField] [Range(0, 5)] 
-	private float minScaleChange = 1;
+	private float minScaleChange = .1f;
 
 	[SerializeField] [Range(0, 5)]
-	private float maxScaleChange = 1;
+	private float maxScaleChange = 1.15f;
 
 	[SerializeField] [Range(0, 360)] 
-	private float minRotationChange;
+	private float minRotationChange = 0;
 
 	[SerializeField] [Range(0, 360)]
-	private float maxRotationChange;
+	private float maxRotationChange = 360f;
 
 	[SerializeField] [Range(-5, 5)]
-	private float minPositionChange;
+	private float minPositionChange = -1f;
 
 	[SerializeField] [Range(-5, 5)]
-	private float maxPositionChange;
+	private float maxPositionChange = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -62,11 +62,12 @@ public class RandomStars : MonoBehaviour {
 	private void formStars(int numberOfStars, GameObject star) {
 		do {
 			GameObject newStar = Instantiate(star, transform);
-			int width = Camera.main.pixelWidth;
-			int height = Camera.main.pixelHeight;
-			Vector2 starPos = new Vector2(
-				Random.Range(0, width), 
-				height
+            float heightEx = Camera.main.orthographicSize;
+            float widthEx = heightEx * Camera.main.aspect;
+
+            Vector2 starPos = new Vector2(
+                Random.Range(-widthEx, widthEx),
+                Random.Range(-heightEx, heightEx)
 			);
 			newStar.transform.position = starPos;
 		} while (numberOfStars-- > 0);

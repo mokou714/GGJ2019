@@ -19,16 +19,21 @@ public class Planet : MonoBehaviour
     void Start()
     {
         sounds = GameObject.FindGameObjectsWithTag("background");
-        foreach(GameObject obj in sounds){
-            sound = obj;
+        sounds = GameObject.FindGameObjectsWithTag("bgm");
 
+        foreach (GameObject obj in sounds)
+        {
+            sound = obj;
         }
-        if(sound != null){
+
+        if (sound != null)
+        {
             AudioSource[] ts = sound.GetComponentsInChildren<AudioSource>();
             dustLand = ts[0];
-            normalLand = ts[1];
+ 
 
         }
+        
 
     }
 

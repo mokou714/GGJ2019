@@ -13,7 +13,7 @@ public class OrbitAerolite : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.RotateAround(orbitCenter.position, Vector3.forward, speed * Time.deltaTime);
-
+        if(orbitCenter != null)
+            transform.RotateAround(orbitCenter.position, Vector3.forward, speed * Time.deltaTime);
 	}
 }

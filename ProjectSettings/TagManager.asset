@@ -10,6 +10,7 @@ TagManager:
   - asteroid
   - orbaerolite
   - orbaeroliteEc
+  - background
   layers:
   - Default
   - TransparentFX

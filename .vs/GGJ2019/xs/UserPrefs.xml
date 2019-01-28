@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/OrbitAerolite.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/spacecraft.cs">
     <Files>
-      <File FileName="Assets/Script/SillyAsteroid.cs" Line="10" Column="6" />
-      <File FileName="Assets/Script/MeteorSpawner.cs" Line="27" Column="26" />
-      <File FileName="Assets/Script/orbAeroliteEclipse.cs" Line="37" Column="1" />
-      <File FileName="Assets/Script/spacecraft.cs" Line="56" Column="24" />
-      <File FileName="Assets/Script/Collision.cs" Line="26" Column="70" />
-      <File FileName="Assets/Script/Planet.cs" Line="53" Column="32" />
-      <File FileName="Assets/DustParticles.cs" Line="34" Column="82" />
-      <File FileName="Assets/Script/OrbitAerolite.cs" Line="15" Column="1" />
+      <File FileName="Assets/Script/MeteorSpawner.cs" Line="43" Column="1" />
+      <File FileName="Assets/Script/orbAeroliteEclipse.cs" Line="48" Column="25" />
+      <File FileName="Assets/Script/Collision.cs" Line="64" Column="29" />
+      <File FileName="Assets/Script/Planet.cs" Line="75" Column="22" />
+      <File FileName="Assets/Script/Gravity.cs" Line="17" Column="60" />
+      <File FileName="Assets/Script/ParticlesAbsorb.cs" Line="16" Column="27" />
+      <File FileName="Assets/Script/Init.cs" Line="21" Column="10" />
+      <File FileName="Assets/Script/Aerolite.cs" Line="76" Column="29" />
+      <File FileName="Assets/Script/OrbitAerolite.cs" Line="17" Column="99" />
+      <File FileName="Assets/Script/spacecraft.cs" Line="124" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

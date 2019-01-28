@@ -7,10 +7,13 @@ public class Collision : MonoBehaviour {
     public float collide_strengh;
     public bool collided;
     public float asteroidDamage;
+    public AudioSource hitSound;
+
+    public ParticleSystem energyLossOnCollide;
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -25,6 +28,9 @@ public class Collision : MonoBehaviour {
         {
             gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
             collided = false;
+
+            if (energyLossOnCollide)
+                energyLossOnCollide.Play();
         }
     }
 
@@ -37,6 +43,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<Aerolite>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
+            hitSound.Play();
         }
         else if (col.gameObject.tag == "orbaeroliteEc")
         {
@@ -44,6 +51,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<orbAeroliteEclipse>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
+            hitSound.Play();
         }
         else if (col.gameObject.tag == "asteroid")
         {
@@ -58,7 +66,16 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<OrbitAerolite>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
+            hitSound.Play();
         }
+        else if (col.gameObject.tag == "Finish"){
+
+            Application.LoadLevel(Application.loadedLevel + 1);
+        }
+
+
+
+
     }
 
 }

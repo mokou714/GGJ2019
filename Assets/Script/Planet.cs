@@ -10,10 +10,26 @@ public class Planet : MonoBehaviour
 
 
     public float catching_radius;
+    private GameObject[] sounds;
+    private GameObject sound;
+    private AudioSource dustLand;
+    private AudioSource normalLand;
 
     // Use this for initialization
     void Start()
     {
+        sounds = GameObject.FindGameObjectsWithTag("background");
+        foreach(GameObject obj in sounds){
+            sound = obj;
+
+        }
+        if(sound != null){
+            AudioSource[] ts = sound.GetComponentsInChildren<AudioSource>();
+            dustLand = ts[0];
+            normalLand = ts[1];
+
+        }
+
     }
 
     // Update is called once per frame
@@ -37,17 +53,33 @@ public class Planet : MonoBehaviour
             //player catched
             if (ob != gameObject && ob.tag == "spacecraft")
             {
-                Debug.Log("!!!!" +
-                          "");
+                //Debug.Log("!!!!" +
+                          //"");
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>(); 
                 if(sc.rotating_planet == null || sc.rotating_planet != gameObject){
                     sc.rotating_planet = gameObject;
                     sc.rotation_center = transform.position;
                     sc.rotate_on = true;
                     sc.moving = false;
+                    sc.movingStart = false;
+                    if (dustLand != null && normalLand != null)
+                    {
+                        if (dustAmount > 0)
+                        {
+                            dustLand.Play();
+                        }
+                        else
+                        {
+                            normalLand.Play();
+                        }
+                    }
+
                 }
 
+
+
                 sc.enegy += dustAmount;
+
                 if (sc.enegy > 100)
                     sc.enegy = 100;
                 dustAmount = 0;

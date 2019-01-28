@@ -14,7 +14,7 @@ public class ParticlesAbsorb : MonoBehaviour {
 		float maxTime = 2f;
 		float currentTime = 0f;
 		while (currentTime < maxTime) {
-			print(numAlive);
+			//print(numAlive);
 
 			if (currentTime == 0) {
 				for (int i = 0; i < numAlive; i++) {

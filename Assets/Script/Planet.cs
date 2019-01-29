@@ -2,38 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class Planet : MonoBehaviour
 {
 
     public int dustAmount;
     public int dustRadius;
-
-
+    
     public float catching_radius;
-    private GameObject[] sounds;
-    private GameObject sound;
-    private AudioSource dustLand;
-    private AudioSource normalLand;
 
     // Use this for initialization
     void Start()
     {
-        sounds = GameObject.FindGameObjectsWithTag("background");
-        sounds = GameObject.FindGameObjectsWithTag("bgm");
-
-        foreach (GameObject obj in sounds)
-        {
-            sound = obj;
-        }
-
-        if (sound != null)
-        {
-            AudioSource[] ts = sound.GetComponentsInChildren<AudioSource>();
-            dustLand = ts[0];
- 
-
-        }
-        
+               
 
     }
 
@@ -42,8 +24,7 @@ public class Planet : MonoBehaviour
     {
 
         checkCatcing();
-
-
+        
     }
 
     void checkCatcing()
@@ -67,18 +48,28 @@ public class Planet : MonoBehaviour
                     sc.rotate_on = true;
                     sc.moving = false;
                     sc.movingStart = false;
-                    if (dustLand != null && normalLand != null)
-                    {
-                        if (dustAmount > 0)
+
+
+                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                    {                        
+                        //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
+                        AudioManager.instance.PlaySFX("Harp EFX Land_" + AudioManager.sfxNormalLandID.ToString());
+
+                        AudioManager.sfxNormalLandID++;
+                        if (AudioManager.sfxNormalLandID > 4)
                         {
-                            dustLand.Play();
-                        }
-                        else
-                        {
-                            normalLand.Play();
+                            AudioManager.sfxNormalLandID = 1;
                         }
                     }
 
+                    if (dustAmount > 0)
+                    {
+                        float id = Random.Range(0f, 10.1f);
+                        print("sfxDustLand id: " + (int)id);
+                        AudioManager.instance.PlaySFXEnergyCharge("Sound Charge " + (int)id);
+                    }
+                    
+                    
                 }
 
 

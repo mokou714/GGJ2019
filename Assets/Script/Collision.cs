@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class Collision : MonoBehaviour {
 
     public float collide_strengh;
     public bool collided;
     public float asteroidDamage;
-    public AudioSource hitSound;
+
+
 
     public ParticleSystem energyLossOnCollide;
 
@@ -36,14 +39,14 @@ public class Collision : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Collision:" + col.gameObject.tag);
+        // Debug.Log("Collision:" + col.gameObject.tag);
         if (col.gameObject.tag == "aerolite")
         {
             col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<Aerolite>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
-            hitSound.Play();
+            AudioManager.instance.PlaySFX("being hit", true);
         }
         else if (col.gameObject.tag == "orbaeroliteEc")
         {
@@ -51,7 +54,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<orbAeroliteEclipse>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
-            hitSound.Play();
+            AudioManager.instance.PlaySFX("being hit", true);
         }
         else if (col.gameObject.tag == "asteroid")
         {
@@ -66,11 +69,27 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<OrbitAerolite>().damage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
             collided = true;
-            hitSound.Play();
+            AudioManager.instance.PlaySFX("being hit", true);
         }
         else if (col.gameObject.tag == "Finish"){
+                   
+            switch (SceneManager.GetActiveScene().buildIndex)
+            {                
+                case 0:
+                    print("bgmGame");
+                    AudioManager.instance.PlayMusic("bgmGame");
 
-            Application.LoadLevel(Application.loadedLevel + 1);
+                    break;
+
+                default:                  
+                    break;
+            }
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+
+
+
         }
 
 

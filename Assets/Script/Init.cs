@@ -23,6 +23,9 @@ public class Init : MonoBehaviour {
         }
 
         DontDestroyOnLoad(this.gameObject);
+
+        GameObject[] playBGM = GameObject.FindGameObjectsWithTag("bgm");
+        DontDestroyOnLoad(this.gameObject);
     }
 
 }

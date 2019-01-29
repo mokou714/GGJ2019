@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioController.cs" />
+    <Compile Include="Assets\DontDestroyBGM.cs" />
     <Compile Include="Assets\DustParticles.cs" />
     <Compile Include="Assets\Script\ActivateAbsorb.cs" />
     <Compile Include="Assets\Script\Aerolite.cs" />

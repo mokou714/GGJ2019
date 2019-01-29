@@ -56,11 +56,11 @@ public class spacecraft : MonoBehaviour {
         //} 
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * enegy / 100f;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
         {
             if (rotate_on)
                 Launch();
-        }else if(Input.GetKeyDown(KeyCode.R)){
+        }else if(Input.GetKeyDown(KeyCode.R)|| (Input.touchCount == 2)){
             Application.LoadLevel(Application.loadedLevel);
         }
         else if(rotate_on){

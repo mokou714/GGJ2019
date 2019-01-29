@@ -62,12 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AudioController.cs" />
-    <Compile Include="Assets\DontDestroyBGM.cs" />
-    <Compile Include="Assets\DustParticles.cs" />
     <Compile Include="Assets\Script\ActivateAbsorb.cs" />
     <Compile Include="Assets\Script\Aerolite.cs" />
     <Compile Include="Assets\Script\Catcher.cs" />
     <Compile Include="Assets\Script\Collision.cs" />
+    <Compile Include="Assets\Script\Effect Script\DontDestroyBGM.cs" />
+    <Compile Include="Assets\Script\Effect Script\DustParticles.cs" />
     <Compile Include="Assets\Script\Gravity.cs" />
     <Compile Include="Assets\Script\GravitySource.cs" />
     <Compile Include="Assets\Script\Init.cs" />

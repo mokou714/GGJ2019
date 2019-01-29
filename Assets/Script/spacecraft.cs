@@ -20,6 +20,7 @@ public class spacecraft : MonoBehaviour {
     public float rotating_speed;
     public bool rotate_on;
     public Vector3 rotation_center;
+    public int rotating_dir;
 
     public float enerdecSpeed;
 
@@ -133,7 +134,7 @@ public class spacecraft : MonoBehaviour {
 
         //Debug.Log(sin);
         //Debug.Log(cos);
-        Vector2 new_v = new Vector2(sin, -cos) * rotating_speed;
+        Vector2 new_v = new Vector2(sin, -cos) * rotating_dir* rotating_speed;
 
         Vector2 offset = pos2 - pos1;
         offset.Normalize();

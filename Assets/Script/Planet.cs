@@ -61,12 +61,43 @@ public class Planet : MonoBehaviour
                 //Debug.Log("!!!!" +
                           //"");
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>(); 
-                if(sc.rotating_planet == null || sc.rotating_planet != gameObject){
+
+                //check if spacecraft is not orbiting the same planet after launch
+                if(sc.rotating_planet == null || sc.rotating_planet != gameObject)
+                {
+                    //rotate
                     sc.rotating_planet = gameObject;
                     sc.rotation_center = transform.position;
                     sc.rotate_on = true;
                     sc.moving = false;
                     sc.movingStart = false;
+                    
+                    Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
+                                             transform.position.y - sc.transform.position.y);
+                    //v1.Normalize();
+                    Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
+                    //v2.Normalize();
+
+                    float angle = Vector2.SignedAngle(v1, v2);
+               
+                    if (angle < 0f && angle < 90f)
+                        sc.rotating_dir = -1; //counterclockwise rotation
+                    else
+                        sc.rotating_dir = 1; //clockwise rotation
+
+                    Debug.Log(angle);
+                   // Time.timeScale = 0;
+
+
+
+                    //enegy
+                    if (sc.enegy > 100)
+                        sc.enegy = 100;
+                    dustAmount = 0;
+                    ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
+                    sc.enegy += dustAmount;
+
+                    //dust
                     if (dustLand != null && normalLand != null)
                     {
                         if (dustAmount > 0)
@@ -79,17 +110,17 @@ public class Planet : MonoBehaviour
                         }
                     }
 
+
+
+
+
                 }
 
 
 
-                sc.enegy += dustAmount;
 
-                if (sc.enegy > 100)
-                    sc.enegy = 100;
-                dustAmount = 0;
 
-                ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
+
 
 
 

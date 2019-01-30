@@ -76,9 +76,7 @@ public class Planet : MonoBehaviour
                     
                     if (dustAmount > 0)
                     {
-                        float id = Random.Range(1f, 2.99f);    //Yihui
-                        print("sfxDustLand id: " + (int)id);
-                        AudioManager.instance.PlaySFX("Harp Charge_" + (int)id);   //Yihui
+                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Yihui2
                     }
                     else
                     {

@@ -76,17 +76,17 @@ public class spacecraft : MonoBehaviour {
                 energyLoss.Play();
             }else{
                 float offset = ((curTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * enerdecSpeed;
-                Debug.Log("Distance:" + offset);
+                //Debug.Log("Distance:" + offset);
                 enegy -= offset;
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = enegy / 100f;
 
                 movingTime = curTime;
-                Debug.Log("Energy:" + enegy);
+                //Debug.Log("Energy:" + enegy);
             }
 
         }else{
             if(movingStart){
-                Debug.Log("Moved:" + (Time.time - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude);
+                //Debug.Log("Moved:" + (Time.time - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude);
             }
             if (energyLoss.isEmitting)
                 energyLoss.Stop();

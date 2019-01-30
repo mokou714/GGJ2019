@@ -1,49 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Planet : MonoBehaviour
 {
 
     public int dustAmount;
     public int dustRadius;
-
-
+    
     public float catching_radius;
-    private GameObject[] sounds;
-    private GameObject sound;
-    private AudioSource dustLand;
-    private AudioSource normalLand;
+
 
     // Use this for initialization
     void Start()
-    {
-        sounds = GameObject.FindGameObjectsWithTag("background");
-        sounds = GameObject.FindGameObjectsWithTag("bgm");
-
-        foreach (GameObject obj in sounds)
-        {
-            sound = obj;
-        }
-
-        if (sound != null)
-        {
-            AudioSource[] ts = sound.GetComponentsInChildren<AudioSource>();
-            dustLand = ts[0];
- 
-
-        }
-        
+    {                
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         checkCatcing();
-
-
     }
 
     void checkCatcing()
@@ -83,50 +61,53 @@ public class Planet : MonoBehaviour
                     if (angle < 0f && angle < 90f)
                         sc.rotating_dir = -1; //counterclockwise rotation
                     else
-                        sc.rotating_dir = 1; //clockwise rotation
+                        sc.rotating_dir = 1; //clockwise rotation 
 
-                    Debug.Log(angle);
-                   // Time.timeScale = 0;
+                    // Debug.Log(angle);
+                    // Time.timeScale = 0;
 
 
 
                     //enegy
-                    if (sc.enegy > 100)
-                        sc.enegy = 100;
-                    dustAmount = 0;
-                    ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
                     sc.enegy += dustAmount;
+                                                           
 
-                    //dust
-                    if (dustLand != null && normalLand != null)
+                    //landing sound
+                    
+                    if (dustAmount > 0)
                     {
-                        if (dustAmount > 0)
+                        float id = Random.Range(1f, 2.99f);    //Yihui
+                        print("sfxDustLand id: " + (int)id);
+                        AudioManager.instance.PlaySFX("Harp Charge_" + (int)id);   //Yihui
+                    }
+                    else
+                    {
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
                         {
-                            dustLand.Play();
-                        }
-                        else
-                        {
-                            normalLand.Play();
+                            //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+
+                            AudioManager.sfxNormalLandID++;
+                            if (AudioManager.sfxNormalLandID > 4)
+                            {
+                                AudioManager.sfxNormalLandID = 1;
+                            }
                         }
                     }
 
 
-
-
-
+                    // change
+                    if (sc.enegy > 100)
+                        sc.enegy = 100;
+                    dustAmount = 0;
+                    ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
                 }
-
-
-
-
-
-
-
-
-
-
+                                                             
             }
+
+
             ++i;
+
         }
     }
 }

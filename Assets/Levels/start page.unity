@@ -4838,7 +4838,7 @@ MonoBehaviour:
   direction: 0
   rotation_sensitivity: 80
   launch_speed: 3
-  enegy: 100
+  energy: 0
   moving: 0
   start_velocity: 0
   end: {fileID: 0}
@@ -4846,7 +4846,7 @@ MonoBehaviour:
   rotate_on: 0
   rotation_center: {x: 0, y: 0, z: 0}
   rotating_dir: 0
-  enerdecSpeed: 10
+  egdecSpeed: 0
   rotating_planet: {fileID: 0}
   movingStart: 0
   inwardVel: 0
@@ -4990,7 +4990,7 @@ MonoBehaviour:
   direction: 0
   rotation_sensitivity: 80
   launch_speed: 3
-  enegy: 100
+  energy: 0
   moving: 0
   start_velocity: 2
   end: {fileID: 892961500}
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   rotate_on: 0
   rotation_center: {x: 0, y: 0, z: 0}
   rotating_dir: 0
-  enerdecSpeed: 3
+  egdecSpeed: 0
   rotating_planet: {fileID: 0}
   movingStart: 0
   inwardVel: 0

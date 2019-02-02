@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MeteorSpawner : MonoBehaviour {
@@ -9,9 +10,12 @@ public class MeteorSpawner : MonoBehaviour {
     public float velocity;
     public float maxX, maxY;
     public float mass, gravityScale;
-    private float TimeCounter = 0;
+    private float timeCounter = 0;
     public float peoriod;
     public bool isSmart = false;
+
+    enum Side { left, right };
+
 	// Use this for initialization
 	void Start () {
         
@@ -24,34 +28,39 @@ public class MeteorSpawner : MonoBehaviour {
 	private void Update()
 	{
         if(Input.GetKeyDown(KeyCode.O)){
-            Application.LoadLevel(0);
+            SceneManager.LoadScene(0);
         }else if (Input.GetKeyDown(KeyCode.Q)){
             Application.Quit();
         }
 
         float curTime = Time.time;
-        float diff = curTime - TimeCounter;
+        float diff = curTime - timeCounter;
         //Debug.Log("Time diff:" + diff);
         if(diff >= peoriod){
             
-            TimeCounter = curTime;
+            timeCounter = curTime;
             //int n = Random.Range(0, 1);
             if (!isSmart)
             {
-                generateSillyMeteor(true);
-                generateSillyMeteor(false);
+                generateSillyMeteor(Side.left);
+                generateSillyMeteor(Side.right);
             }else
             {
-                generateMeteor(true);
-                generateMeteor(false);
+                generateSmartMeteor(Side.left);
+                generateSmartMeteor(Side.right);
             }
         }
 	}
 
-    void generateSillyMeteor(bool side){
+    void generateSillyMeteor(Side side){
+        /*
+         Todo: Generate Meteors that does not go toward the player
+        */
         float x = Random.Range(0, maxX);
-        float y = Random.Range(0, 5);
-        if (side){
+        float y = Random.Range(0, maxY);
+
+        //If meteor is spawned on left, the maxX should be left side which is negative, if it is spawned on the right, velocity should point to left, which is negative
+        if (side == Side.left){
             x = -x;
         }else{
             velocity = -velocity;
@@ -73,12 +82,16 @@ public class MeteorSpawner : MonoBehaviour {
     }
 
 
-	void generateMeteor(bool side){
-
+    void generateSmartMeteor(Side side){
+        /*
+         Todo: Generate Meteors that goes toward the player
+        */
         float playerX = player.transform.position.x;
         float playerY = player.transform.position.y;
         float throwTime = Mathf.Abs(playerX - maxX)/velocity;
-        if(!side){
+
+        //If meteor is spawned on left, the maxX should be left side which is negative, if it is spawned on the right, velocity should point to left, which is negative
+        if(side == Side.left){
             maxX = -maxX;
         }else{
             velocity = -velocity;
@@ -97,4 +110,6 @@ public class MeteorSpawner : MonoBehaviour {
         rb.velocity = new Vector2(velocity, 0);
 
     }
+
+
 }

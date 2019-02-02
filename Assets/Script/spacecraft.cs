@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class spacecraft : MonoBehaviour {
 
@@ -9,7 +8,7 @@ public class spacecraft : MonoBehaviour {
     public int rotation_sensitivity;
     public float launch_speed;
 
-    public float enegy;
+    public float energy;
 
     public bool moving;
 
@@ -22,7 +21,7 @@ public class spacecraft : MonoBehaviour {
     public Vector3 rotation_center;
     public int rotating_dir;
 
-    public float enerdecSpeed;
+    public float egdecSpeed;
 
     public GameObject rotating_planet;
 
@@ -36,6 +35,7 @@ public class spacecraft : MonoBehaviour {
     private ParticleSystem energyLoss;
 	// Use this for initialization
 	void Start () {
+        energy = 100f;
 
         Vector3 dir = new Vector3(0, 0, direction);
         transform.parent.GetComponent<Rigidbody2D>().velocity = transform.right * start_velocity;
@@ -55,7 +55,7 @@ public class spacecraft : MonoBehaviour {
         //    transform.Rotate(0,0, -Time.deltaTime * rotation_sensitivity);
         //    direction = transform.eulerAngles.z;
         //} 
-        transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * enegy / 100f;
+        transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
         {
@@ -71,28 +71,30 @@ public class spacecraft : MonoBehaviour {
             float curTime = Time.time;
             if (!movingStart)
             {
+                Debug.Log("Energy starts Losing");
                 movingStart = true;
                 movingTime = curTime;
                 energyLoss.Play();
             }else{
-                float offset = ((curTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * enerdecSpeed;
+                float offset = ((curTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * egdecSpeed;
                 //Debug.Log("Distance:" + offset);
-                enegy -= offset;
-                transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = enegy / 100f;
+                Debug.Log("Energy keeps Losing offset:" + offset);
+                energy -= offset;
+                transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
 
                 movingTime = curTime;
                 //Debug.Log("Energy:" + enegy);
             }
 
         }else{
-            if(movingStart){
-                //Debug.Log("Moved:" + (Time.time - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude);
-            }
+            //if(movingStart){
+            //    //Debug.Log("Moved:" + (Time.time - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude);
+            //}
             if (energyLoss.isEmitting)
                 energyLoss.Stop();
         }
 
-        if (enegy <= 0 ||
+        if (energy <= 0 ||
             transform.position.x < -17f ||
             transform.position.x > 17 ||
             transform.position.y < -10f ||

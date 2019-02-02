@@ -28933,6 +28933,11 @@ Prefab:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 114573092075303064, guid: 4258a9add78fbd64aa0a58b59099ae96,
+        type: 2}
+      propertyPath: egdecSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
   m_IsPrefabAsset: 0

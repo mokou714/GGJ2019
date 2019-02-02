@@ -69,7 +69,7 @@ public class Planet : MonoBehaviour
 
 
                     //enegy
-                    sc.enegy += dustAmount;
+                    sc.energy += dustAmount;
                                                            
 
                     //landing sound
@@ -95,10 +95,10 @@ public class Planet : MonoBehaviour
 
 
                     // change
-                    if (sc.enegy > 100)
-                        sc.enegy = 100;
+                    if (sc.energy > 100)
+                        sc.energy = 100;
                     dustAmount = 0;
-                    ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.enegy / 100f;
+                    ob.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
                 }
                                                              
             }

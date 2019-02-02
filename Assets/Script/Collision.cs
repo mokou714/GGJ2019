@@ -40,8 +40,8 @@ public class Collision : MonoBehaviour {
         if (col.gameObject.tag == "aerolite")
         {
             col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-            transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<Aerolite>().damage;
-            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
+            transform.GetChild(0).GetComponent<spacecraft>().energy -= col.gameObject.GetComponent<Aerolite>().damage;
+            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
 
@@ -49,8 +49,8 @@ public class Collision : MonoBehaviour {
         else if (col.gameObject.tag == "orbaeroliteEc")
         {
             col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-            transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<orbAeroliteEclipse>().damage;
-            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
+            transform.GetChild(0).GetComponent<spacecraft>().energy -= col.gameObject.GetComponent<orbAeroliteEclipse>().damage;
+            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
 
@@ -58,15 +58,15 @@ public class Collision : MonoBehaviour {
         else if (col.gameObject.tag == "asteroid")
         {
             col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-            transform.GetChild(0).GetComponent<spacecraft>().enegy -= asteroidDamage;
-            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
+            transform.GetChild(0).GetComponent<spacecraft>().energy -= asteroidDamage;
+            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
         }
         else if (col.gameObject.tag == "orbaerolite")
         {
             col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-            transform.GetChild(0).GetComponent<spacecraft>().enegy -= col.gameObject.GetComponent<OrbitAerolite>().damage;
-            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().enegy / 100f;
+            transform.GetChild(0).GetComponent<spacecraft>().energy -= col.gameObject.GetComponent<OrbitAerolite>().damage;
+            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
         }

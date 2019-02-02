@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour
                     if (!sfxBackupSources[i].isPlaying)
                     {
                         src = sfxBackupSources[i];
-                        print("backupSource: " + i);
+                        //print("backupSource: " + i);
                         break;
                     }
                     
@@ -166,7 +166,7 @@ public class AudioManager : MonoBehaviour
                     //Set the pitch of the audio source to the randomly chosen pitch.                     
                     src.pitch = randomPitch;
 
-                    print("src.pitch: " + src.pitch);
+                    //print("src.pitch: " + src.pitch);
 
                     break;
                 }

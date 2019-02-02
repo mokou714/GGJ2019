@@ -44,7 +44,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
-            print("hit");
+            //print("hit");
         }
         else if (col.gameObject.tag == "orbaeroliteEc")
         {
@@ -53,7 +53,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
-            print("hit");
+            //print("hit");
 
 
         }
@@ -63,7 +63,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetComponent<spacecraft>().energy -= asteroidDamage;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
-            print("hit");
+            //print("hit");
 
         }
         else if (col.gameObject.tag == "orbaerolite")
@@ -73,7 +73,7 @@ public class Collision : MonoBehaviour {
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
             collided = true;
             AudioManager.instance.PlaySFX("being hit");
-            print("hit");
+            //print("hit");
 
         }
         else if (col.gameObject.tag == "Finish"){

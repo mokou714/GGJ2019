@@ -710,7 +710,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 3
+  apiCompatibilityLevel: 2
   cloudProjectId: c36670e9-b989-457d-9eff-0eb52e99689d
   projectName: GGJ2019
   organizationId: xzhoo7

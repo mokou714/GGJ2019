@@ -7,6 +7,8 @@ public class Aerolite : MonoBehaviour {
     private int[] dirs = {1, 0, -1};
     public int damage;
     public float maxStrength;
+
+    public float maxX, maxY;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,25 +21,25 @@ public class Aerolite : MonoBehaviour {
             Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
             Collider2D[] aroundColliders = Physics2D.OverlapCircleAll(myPos, EscapeRange);
             List<Vector2> escapeList = new List<Vector2>();
-            if (myPos.x >= 11)
+            if (myPos.x >= maxX)
             {
-                escapeList.Add(new Vector2(myPos.x - 11, 1));
-                escapeList.Add(new Vector2(myPos.x - 11, -1));
+                escapeList.Add(new Vector2(myPos.x - maxX, 1));
+                escapeList.Add(new Vector2(myPos.x - maxX, -1));
             }
-            if (myPos.x <= -11)
+            if (myPos.x <= -maxX)
             {
-                escapeList.Add(new Vector2(myPos.x + 11, 1));
-                escapeList.Add(new Vector2(myPos.x + 11, -1));
+                escapeList.Add(new Vector2(myPos.x + maxX, 1));
+                escapeList.Add(new Vector2(myPos.x + maxX, -1));
             }
-            if (myPos.y >= 8)
+            if (myPos.y >= maxY)
             {
-                escapeList.Add(new Vector2(1, myPos.y - 8));
-                escapeList.Add(new Vector2(-1, myPos.y - 8));
+                escapeList.Add(new Vector2(1, myPos.y - maxY));
+                escapeList.Add(new Vector2(-1, myPos.y - maxY));
             }
-            if (myPos.y <= -8)
+            if (myPos.y <= - maxY)
             {
-                escapeList.Add(new Vector2(1, myPos.y + 8));
-                escapeList.Add(new Vector2(-1, myPos.y + 8));
+                escapeList.Add(new Vector2(1, myPos.y + maxY));
+                escapeList.Add(new Vector2(-1, myPos.y + maxY));
             }
 
             foreach (Collider2D objAround in aroundColliders)

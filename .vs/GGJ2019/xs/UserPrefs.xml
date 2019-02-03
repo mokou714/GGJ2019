@@ -1,16 +1,14 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/orbAeroliteEclipse.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 Status">
     <Files>
-      <File FileName="Assets/Script/MeteorSpawner.cs" Line="109" Column="13" />
-      <File FileName="Assets/Script/ParticlesAbsorb.cs" Line="16" Column="27" />
-      <File FileName="Assets/Script/Init.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/spacecraft.cs" Line="106" Column="9" />
+      <File FileName="Assets/Script/MeteorSpawner.cs" Line="92" Column="28" />
+      <File FileName="Assets/Script/Init.cs" Line="30" Column="9" />
+      <File FileName="Assets/Script/spacecraft.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/StartParticles.cs" Line="5" Column="5" />
-      <File FileName="Assets/Script/Collision.cs" Line="36" Column="5" />
+      <File FileName="Assets/Script/Collision.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Planet.cs" Line="101" Column="1" />
-      <File FileName="Assets/Script/DestroyAsteroid.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/orbAeroliteEclipse.cs" Line="13" Column="1" />
+      <File FileName="GGJ2019 Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

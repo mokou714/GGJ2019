@@ -64,13 +64,13 @@
     <Compile Include="Assets\AudioController.cs" />
     <Compile Include="Assets\Script\ActivateAbsorb.cs" />
     <Compile Include="Assets\Script\Aerolite.cs" />
+    <Compile Include="Assets\Script\Asteroid.cs" />
     <Compile Include="Assets\Script\Audio\AudioManager.cs" />
     <Compile Include="Assets\Script\Catcher.cs" />
     <Compile Include="Assets\Script\Collision.cs" />
-    <Compile Include="Assets\Script\DestroyAsteroid.cs" />
+    <Compile Include="Assets\Script\Constants.cs" />
     <Compile Include="Assets\Script\Effect Script\DustParticles.cs" />
     <Compile Include="Assets\Script\Gravity.cs" />
-    <Compile Include="Assets\Script\GravitySource.cs" />
     <Compile Include="Assets\Script\Init.cs" />
     <Compile Include="Assets\Script\MeteorSpawner.cs" />
     <Compile Include="Assets\Script\orbAeroliteEclipse.cs" />
@@ -79,8 +79,6 @@
     <Compile Include="Assets\Script\Planet.cs" />
     <Compile Include="Assets\Script\RandomStars.cs" />
     <Compile Include="Assets\Script\Rotate.cs" />
-    <Compile Include="Assets\Script\SillyAsteroid.cs" />
-    <Compile Include="Assets\Script\SmartAsteroid.cs" />
     <Compile Include="Assets\Script\spacecraft.cs" />
     <Compile Include="Assets\Script\StartParticles.cs" />
     <Compile Include="Assets\Script\StopParticles.cs" />

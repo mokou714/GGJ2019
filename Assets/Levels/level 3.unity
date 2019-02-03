@@ -24001,6 +24001,8 @@ MonoBehaviour:
   EscapeRange: 10
   damage: 30
   maxStrength: 2
+  maxX: 0
+  maxY: 0
 --- !u!61 &500611893
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48245,13 +48247,12 @@ MonoBehaviour:
   spawnObject: {fileID: 1829894321720020, guid: 7292a5c86bc0843828b47bd34f80ca2e,
     type: 2}
   player: {fileID: 1842345911}
-  velocity: 2
-  maxX: 12
+  velocity: 4
+  maxX: 16
   maxY: 8
   mass: 0.1
   gravityScale: 0.2
   peoriod: 1
-  isSmart: 0
 --- !u!1 &1607293518
 GameObject:
   m_ObjectHideFlags: 0
@@ -58092,6 +58093,8 @@ MonoBehaviour:
   EscapeRange: 10
   damage: 30
   maxStrength: 2
+  maxX: 0
+  maxY: 0
 --- !u!61 &1913883725
 BoxCollider2D:
   m_ObjectHideFlags: 0

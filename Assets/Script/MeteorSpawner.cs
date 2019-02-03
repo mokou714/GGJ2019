@@ -21,12 +21,7 @@ public class MeteorSpawner : MonoBehaviour {
         
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-	//}
-
-	private void Update()
-	{
+	void Update() {
         if(Input.GetKeyDown(KeyCode.O)){
             SceneManager.LoadScene(0);
         }else if (Input.GetKeyDown(KeyCode.Q)){

@@ -15,14 +15,18 @@ public class Init : MonoBehaviour {
 	}
 
     void Awake(){
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("background");
+        /*
+        Todo: initialization for background music
+        */
+        GameObject[] audio_objs = GameObject.FindGameObjectsWithTag("background");
 
-        if (objs.Length > 1)
+        if (audio_objs.Length > 1)
         {
             Destroy(this.gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);
+
 
         GameObject[] playBGM = GameObject.FindGameObjectsWithTag("bgm");
         DontDestroyOnLoad(this.gameObject);

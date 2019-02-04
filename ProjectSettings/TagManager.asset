@@ -6,12 +6,14 @@ TagManager:
   tags:
   - spacecraft
   - planet
-  - aerolite
   - asteroid
-  - orbaerolite
-  - orbaeroliteEc
   - background
   - bgm
+  - orbasteroid
+  - orbasteroidEc
+  - orbaerolite
+  - dustPlanet
+  - squarePlanet
   layers:
   - Default
   - TransparentFX

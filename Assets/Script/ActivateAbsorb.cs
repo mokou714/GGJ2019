@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class ActivateAbsorb : MonoBehaviour {
 
-	bool startedAbsorb = false;
+    //we are not gonna use the collider of Dust to detect collision and absorption
 
-	private void OnTriggerEnter2D(Collider2D other) {
-		ParticlesAbsorb pA;
-		if (!startedAbsorb && (pA = other.GetComponent<ParticlesAbsorb>()) != null) {
-			StartCoroutine(pA.absorbParticles(GetComponent<ParticleSystem>()));
-			startedAbsorb = true;
-		}
-	}
+
+	//bool startedAbsorb = false;
+
+	//private void OnTriggerEnter2D(Collider2D other) {
+	//	ParticlesAbsorb pA;
+	//	if (!startedAbsorb && (pA = other.GetComponent<ParticlesAbsorb>()) != null) {
+	//		StartCoroutine(pA.absorbParticles(GetComponent<ParticleSystem>()));
+	//		startedAbsorb = true;
+	//	}
+	//}
 
 }

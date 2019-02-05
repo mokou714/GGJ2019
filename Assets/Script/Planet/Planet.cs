@@ -5,29 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class Planet : MonoBehaviour
 {
+    /*
+    This class is attached on planet units, responsible for attracting the player, audio playing when orbiting starts
+    */
 
     public int dustAmount;
     
-    public float catching_radius;
+    public float catchRadius;
 
     bool startedAbsorb = false;
 
     // Use this for initialization
     void Start()
-    {                
-
+    {
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkCatcing();
+        checkCatching();
     }
 
-    void checkCatcing()
+    void checkCatching()
     {
+        //Keep scanning around itself to find if player is around
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, catching_radius);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, catchRadius);
         int i = 0;
 
         while (i < hitColliders.Length)
@@ -36,9 +40,9 @@ public class Planet : MonoBehaviour
             //player catched
             if (ob != gameObject && ob.tag == "spacecraft")
             {
-                //Debug.Log("!!!!" +
-                          //"");
-                spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>(); 
+                spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
+
+                //Debug.Log("rotating planet: " + sc.rotating_planet);
 
                 //check if spacecraft is not orbiting the same planet after launch
                 if(sc.rotating_planet == null || sc.rotating_planet != gameObject)
@@ -63,9 +67,6 @@ public class Planet : MonoBehaviour
                     else
                         sc.rotating_dir = 1; //clockwise rotation 
 
-           
-
-
                     //enegy
                     sc.energy += dustAmount;
 
@@ -77,12 +78,14 @@ public class Planet : MonoBehaviour
                         startedAbsorb = true;
                     }
 
-
+                    //enegy
+                    sc.energy += dustAmount;
+                                                           
                     //landing sound
 
                     if (dustAmount > 0)
                     {
-                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Yihui2
+                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
                     }
                     else
                     {
@@ -99,7 +102,6 @@ public class Planet : MonoBehaviour
                         }
                     }
 
-
                     // change
                     if (sc.energy > 100)
                         sc.energy = 100;
@@ -108,8 +110,6 @@ public class Planet : MonoBehaviour
                 }
                                                              
             }
-
-
             ++i;
 
         }

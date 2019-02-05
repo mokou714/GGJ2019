@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustAmount: 50
-  catching_radius: 2
+  catchRadius: 2
 --- !u!114 &114908086109299252
 MonoBehaviour:
   m_ObjectHideFlags: 1

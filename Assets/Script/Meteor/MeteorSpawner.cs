@@ -22,9 +22,12 @@ public class MeteorSpawner : MonoBehaviour {
 	}
 	
 	void Update() {
+        
         if(Input.GetKeyDown(KeyCode.O)){
+            //Reload the scene
             SceneManager.LoadScene(0);
         }else if (Input.GetKeyDown(KeyCode.Q)){
+            //Quit the game
             Application.Quit();
         }
 
@@ -63,6 +66,8 @@ public class MeteorSpawner : MonoBehaviour {
 
         //Determine if the meteor is smart
         if(isSmart == 1){
+            if (player == null)
+                return;
             //Make the meteor be thrown toward player's position
             float playerX = player.transform.position.x;
             float playerY = player.transform.position.y;

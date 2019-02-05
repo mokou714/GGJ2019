@@ -6,8 +6,9 @@ public class Constants : MonoBehaviour {
     
     //The x,y bounds of scenes
     public static float maxX = 16;
-    public static float maxY = 8;
+    public static float maxY = 10;
 
+    public static float dustColiderRatio = 21.0f;
 
 	// Use this for initialization
 	void Start () {

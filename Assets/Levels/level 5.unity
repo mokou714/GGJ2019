@@ -529,11 +529,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -15.03
+      value: -17.03
       objectReference: {fileID: 0}
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.7
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.z
@@ -916,12 +916,12 @@ Prefab:
     - target: {fileID: 58377493323893112, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: m_Radius
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 198290117134269834, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: ShapeModule.radius.value
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}

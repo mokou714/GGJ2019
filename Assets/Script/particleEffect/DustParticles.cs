@@ -35,9 +35,9 @@ public class DustParticles : MonoBehaviour {
         Planet planetGrav;
         if ((planet == null) || (planetGrav = planet.GetComponent<Planet>()) == null)
 			return;
-        if (Mathf.Abs(savedPlanetGravityRad - planetGrav.catching_radius) < 1e-3)
+        if (Mathf.Abs(savedPlanetGravityRad - planetGrav.catchRadius) < 1e-3)
 			return;
-		savedPlanetGravityRad = planetGrav.catching_radius;
+        savedPlanetGravityRad = planetGrav.catchRadius;
 		var pShape = particles.shape;
 		pShape.radius = savedPlanetGravityRad;
 		CircleCollider2D coll;
@@ -45,7 +45,7 @@ public class DustParticles : MonoBehaviour {
 			coll.radius = savedPlanetGravityRad;
 		}
 		particles.Stop();
-		print("Changed");
+		//print("Changed");
 	}
 
 }

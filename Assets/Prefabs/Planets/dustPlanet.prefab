@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1958024634384188
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustAmount: 50
-  catching_radius: 2.5
+  catchRadius: 2
 --- !u!198 &198290117134269834
 ParticleSystem:
   m_ObjectHideFlags: 1

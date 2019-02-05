@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustAmount: 0
-  catching_radius: 1.71
+  catchRadius: 2
 --- !u!212 &212985511569675954
 SpriteRenderer:
   m_ObjectHideFlags: 1

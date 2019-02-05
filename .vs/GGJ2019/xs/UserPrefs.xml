@@ -1,23 +1,19 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Planet/Planet.cs">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 Status">
     <Files>
-      <File FileName="Assets/Script/Meteor/MeteorSpawner.cs" Line="92" Column="28" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/particleEffect/StartParticles.cs" Line="5" Column="1" />
-      <File FileName="Assets/Script/Collision.cs" Line="76" Column="28" />
-      <File FileName="Assets/Script/Planet/Planet.cs" Line="77" Column="46" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="9" Column="25" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroidEclipse.cs" Line="46" Column="63" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="5" Column="27" />
-      <File FileName="Assets/Script/particleEffect/DustParticles.cs" Line="31" Column="27" />
-      <File FileName="Assets/Script/particleEffect/ParticlesAbsorb.cs" Line="12" Column="1" />
+      <File FileName="Assets/Script/Constants.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="75" Column="6" />
+      <File FileName="Assets/Script/Planet/Planet.cs" Line="45" Column="53" />
+      <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="5" Column="14" />
+      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="14" Column="29" />
+      <File FileName="GGJ2019 Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

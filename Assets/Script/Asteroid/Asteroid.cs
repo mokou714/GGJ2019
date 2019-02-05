@@ -9,13 +9,33 @@ public class Asteroid : MonoBehaviour {
     public float maxStrength;
 
     public float maxX, maxY;
+    private Vector3 origPosition;
+    public bool movingBack = false;
+    private float speed = 50;
 	// Use this for initialization
 	void Start () {
-		
+        maxX = Constants.maxX;
+        maxY = Constants.maxY;
+        origPosition = transform.position;
+
 	}
-	
+
+	void Update()
+	{
+        if(movingBack){
+            float step = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
+            if(transform.position == origPosition){
+                movingBack = false;
+                transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+                transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            }
+        }
+
+	}
+
 	// Update is called once per frame
-    void FixedUpdate()
+	void FixedUpdate()
     {
         if(maxStrength > 0){
             Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
@@ -77,5 +97,6 @@ public class Asteroid : MonoBehaviour {
         int rand_y = Random.Range(-1, 1);
         return new Vector2(rand_x, rand_y);
     }
+
 
 }

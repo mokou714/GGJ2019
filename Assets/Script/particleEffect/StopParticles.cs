@@ -12,12 +12,22 @@ public class StopParticles : MonoBehaviour {
 
 	private ParticleSystem particles;
 
+    [SerializeField]
+    private float startInSeconds;
+
 	// Use this for initialization
 	void Start () {
-		particles = GetComponent<ParticleSystem>();
-		StartCoroutine(waitStopParticles());
+        startInSeconds = 0f;
+        particles = GetComponent<ParticleSystem>();
+        StartCoroutine(waitStopParticles());
 	}
 	
+
+    public void ParticleReStart(){
+        if(particles.isStopped)
+            StartCoroutine(waitStartParticles());
+    }
+
 	private IEnumerator waitStopParticles() {
 		float currTime = 0;
 		while (currTime < stopInSeconds) {
@@ -25,7 +35,20 @@ public class StopParticles : MonoBehaviour {
 			yield return 0;
 		}
 		particles.Stop();
-		Destroy(gameObject, destroyInAnother);
+		//Destroy(gameObject, destroyInAnother);
 	}
+
+    private IEnumerator waitStartParticles()
+    {
+        float currTime = 0;
+        while (currTime < startInSeconds)
+        {
+            currTime += Time.deltaTime;
+            yield return 0;
+        }
+        Debug.Log("Start beginning");
+        particles.Play();
+        StartCoroutine(waitStopParticles());
+    }
 	
 }

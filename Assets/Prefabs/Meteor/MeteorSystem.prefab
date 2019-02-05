@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbeaa9d4c52b468eb62b9b3498da486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 1829894321720020, guid: 7292a5c86bc0843828b47bd34f80ca2e,
+  spawnObject: {fileID: 1198341226503318, guid: c02c65af421b71343b5d5567beb132ef,
     type: 2}
   player: {fileID: 0}
   velocity: 2

@@ -4,16 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - spacecraft
-  - planet
-  - asteroid
-  - background
-  - bgm
-  - orbasteroid
-  - orbasteroidEc
   - orbaerolite
-  - dustPlanet
+  - orbasteroid
   - squarePlanet
+  - dustPlanet
+  - asteroid
+  - spacecraft
+  - begin
   layers:
   - Default
   - TransparentFX

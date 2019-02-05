@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114160609670969732}
   m_Layer: 0
   m_Name: LightSpawnBegin
-  m_TagString: Untagged
+  m_TagString: begin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopInSeconds: 3
   destroyInAnother: 5
+  startInSeconds: 0
 --- !u!198 &198110037956941964
 ParticleSystem:
   m_ObjectHideFlags: 1

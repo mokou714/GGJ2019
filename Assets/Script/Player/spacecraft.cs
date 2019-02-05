@@ -37,22 +37,20 @@ public class spacecraft : MonoBehaviour {
 
     private ParticleSystem energyLoss;
 
-    private Vector2 spawnPoint;
+    private Vector3 spawnPoint;
 
     public GameObject Player;
 
     private float currTime = 0;
-    private float startInSeconds = 2;
+    private float startInSeconds = 1.5f;
 
     private bool hide = false;
     private bool startHide = false;
     private bool changedBack = true;
 
+
 	// Use this for initialization
 	void Start () {
-        //Initialize();
-        //Debug.Log("New player: " + transform.position);
-        //transform.GetComponent<MeshRenderer>().enabled = true;
         energy = 100f;
         spawnPoint = transform.position;
         Vector3 dir = new Vector3(1, 0, 0);
@@ -61,14 +59,11 @@ public class spacecraft : MonoBehaviour {
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
     }
 
-    private void Reinitialize(){
-        //transform.gameObject.SetActive(true);
-
-    }
-
     private void ReinitPlayer(){
-        //transform.parent.transform.position = spawnPoint;
-        Debug.Log("Reinitialize player");
+        /*
+        Todo: this function reinitialize parameters of player when restarting the current level
+        */
+        energyLoss.Stop();
         transform.gameObject.SetActive(true);
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
@@ -81,12 +76,17 @@ public class spacecraft : MonoBehaviour {
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotating_planet = null;
+        //Debug.Log("Reinitialized player: " + transform.position);
     }
 	
     private void ReinitScene(){
+        /*
+        Todo: this function reinitialize the scene's other objects, pulling some of them back to their original positions
+        */
         object[] scene_obj = FindObjectsOfType(typeof(GameObject));
-        foreach (object obj in scene_obj)
-        {
+
+        foreach (object obj in scene_obj){
+            //Iterate through all the gameobject in this scene
             GameObject single_obj = (GameObject)obj;
             if(single_obj.tag == "begin"){
                 //Debug.Log("Begin point reinitialize " + single_obj);
@@ -101,8 +101,11 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        
+        //Check if the player should be visible or not
         modVisibility();
 
+        //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
@@ -157,6 +160,10 @@ public class spacecraft : MonoBehaviour {
     }
 
     void Rotate(){
+        /*
+        Todo: this function is for keeping the player rotating around a planet when it is around one
+        */
+
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
         float dis = Vector2.Distance(pos1, pos2);
@@ -164,27 +171,21 @@ public class spacecraft : MonoBehaviour {
         float sin = (pos1.y - pos2.y) / dis;
         float cos = (pos1.x - pos2.x) / dis;
 
-        //Vector2 x_y_dir = new Vector2(pos1.x - pos2.x, pos1.y - pos2.y);
-        //x_y_dir.Normalize();
-
-        //Debug.Log(sin);
-        //Debug.Log(cos);
         Vector2 new_v = new Vector2(sin, -cos) * rotating_dir * rotating_speed;
 
         Vector2 offset = pos2 - pos1;
         offset.Normalize();
 
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_v + offset * inwardVel;
-        //transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity =;
-
-
         Vector2 v_dir = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
         v_dir.Normalize();
-
         transform.up = new Vector3(v_dir.x, v_dir.y, 0);
     }
 
     void Launch(){
+        /*
+        Todo: This function makes the player derail when it is in an orbit 
+        */
         rotate_on = false;
 
         float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
@@ -207,9 +208,7 @@ public class spacecraft : MonoBehaviour {
             transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
             startHide = false;
             changedBack = false;
-            transform.parent.transform.position = spawnPoint;
-
-
+            //spawnPoint = transform.parent.transform.position;
         }
         if (hide){
             if (currTime < startInSeconds){
@@ -219,6 +218,7 @@ public class spacecraft : MonoBehaviour {
                 hide = false;
                 currTime = 0;
                 ReinitPlayer();
+                transform.parent.transform.position = spawnPoint;
             }
         }else{
             if (!changedBack){
@@ -230,26 +230,13 @@ public class spacecraft : MonoBehaviour {
     }
 
     void RespawnPlayer(){
-        
-        energyLoss.Stop();
-        StartCoroutine(waitStartReinit());
-
-        //transform.GetComponent<MeshRenderer>().enabled = false;
+        /*
+        Todo: this function triggers the reinitialization process when restarting game
+        */
         ReinitScene();
         hide = true;
         startHide = true;
-
-
     }
 
-    private IEnumerator waitStartReinit()
-    {
-        currTime = 0;
-        while (currTime < startInSeconds)
-        {
-            currTime += Time.deltaTime;
-            yield return 0;
-        }
-    }
 
 }

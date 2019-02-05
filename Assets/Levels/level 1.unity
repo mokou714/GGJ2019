@@ -335,7 +335,7 @@ Prefab:
     - target: {fileID: 114989099375806590, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: catchRadius
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
@@ -407,7 +407,7 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: egdecSpeed
-      value: 5
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc3365553a23e940817749142f72076, type: 2}
@@ -978,7 +978,7 @@ Prefab:
     - target: {fileID: 114989099375806590, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: catchRadius
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1639951780786376, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_IsActive
@@ -1068,7 +1068,7 @@ Prefab:
     - target: {fileID: 114989099375806590, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: catchRadius
-      value: 1.2
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}

@@ -213,6 +213,11 @@ Prefab:
       propertyPath: energy
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
+        type: 2}
+      propertyPath: egdecSpeed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc3365553a23e940817749142f72076, type: 2}
   m_IsPrefabAsset: 0
@@ -263,6 +268,16 @@ Prefab:
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_Name
       value: dustPlanet
+      objectReference: {fileID: 0}
+    - target: {fileID: 198290117134269834, guid: 35a08eab468714e23a3d3cbf62137068,
+        type: 2}
+      propertyPath: ShapeModule.radius.value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 58377493323893112, guid: 35a08eab468714e23a3d3cbf62137068,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}

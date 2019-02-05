@@ -154,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1530193286665622, guid: ba27921cd2fe54877aedee93c7f6cae5, type: 2}
       propertyPath: m_Name
-      value: squrePlanet (1)
+      value: squarePlanet (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4252071503283984, guid: ba27921cd2fe54877aedee93c7f6cae5, type: 2}
       propertyPath: m_LocalScale.x

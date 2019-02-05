@@ -10,7 +10,6 @@ public class spacecraft : MonoBehaviour {
     public float direction;
     public int rotation_sensitivity;
     public float launch_speed;
-
     public float energy;
 
     public bool moving;
@@ -25,18 +24,15 @@ public class spacecraft : MonoBehaviour {
     public int rotating_dir;
 
     public float egdecSpeed;
-
     public GameObject rotating_planet;
 
     private float movingTime = 0;
     public bool movingStart;
 
     public float inwardVel;
-
     private float originalWidth;
 
     private ParticleSystem energyLoss;
-
     private Vector3 spawnPoint;
 
     public GameObject Player;
@@ -47,7 +43,11 @@ public class spacecraft : MonoBehaviour {
     private bool hide = false;
     private bool startHide = false;
     private bool changedBack = true;
+    private Rigidbody2D parentRigidBody;
 
+    private float speedThreshold = 3.5f;
+
+    private float curMovingTime = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -57,22 +57,23 @@ public class spacecraft : MonoBehaviour {
         transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
         originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
     }
 
     private void ReinitPlayer(){
         /*
         Todo: this function reinitialize parameters of player when restarting the current level
         */
-        energyLoss.Stop();
+
         transform.gameObject.SetActive(true);
+        transform.parent.GetComponent<BoxCollider2D>().enabled = true;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
-        movingStart = false;
+        movingStart = true;
         Vector3 dir = new Vector3(1, 0, 0);
         transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
         moving = false;
-        movingStart = false;
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotating_planet = null;
@@ -84,15 +85,25 @@ public class spacecraft : MonoBehaviour {
         Todo: this function reinitialize the scene's other objects, pulling some of them back to their original positions
         */
         object[] scene_obj = FindObjectsOfType(typeof(GameObject));
-
         foreach (object obj in scene_obj){
             //Iterate through all the gameobject in this scene
             GameObject single_obj = (GameObject)obj;
-            if(single_obj.tag == "begin"){
-                //Debug.Log("Begin point reinitialize " + single_obj);
-                single_obj.gameObject.GetComponent<StopParticles>().ParticleReStart();
-            }else if(single_obj.tag == "asteroid"){
-                single_obj.gameObject.GetComponent<Asteroid>().movingBack = true;
+            string obj_tag = single_obj.tag;
+
+            switch(obj_tag){
+                case "begin":
+                    single_obj.gameObject.GetComponent<StopParticles>().ParticleReStart();
+                    break;
+                case "asteroid":
+                    single_obj.gameObject.GetComponent<Asteroid>().movingBack =  true;
+                    break;
+                case "orbasteroid":
+                    //For orbit asteroid, if the asteroid is already out of its orbit, it should go back when the scene restarts
+                    orbitAsteroid orb_obj = single_obj.gameObject.GetComponent<orbitAsteroid>();
+                    if(Vector3.Distance(single_obj.transform.position, orb_obj.orbitCenter.position) > (orb_obj.radius + 1f)){
+                        single_obj.gameObject.GetComponent<orbitAsteroid>().movingBack = true;
+                    }
+                    break;
             }
 
 
@@ -121,21 +132,27 @@ public class spacecraft : MonoBehaviour {
         }
         //Indicating wether the player is in orbit or flying straight
         if(moving){
-            float curTime = Time.time;
+            curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
             if (!movingStart)
             {
                 //Debug.Log("Energy starts Losing");
                 movingStart = true;
-                movingTime = curTime;
+                movingTime = curMovingTime;
+                //Debug.Log("start recording :" + movingTime);
                 energyLoss.Play();
             }else{
-                float offset = ((curTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * egdecSpeed;
+                float timeDuration = curMovingTime - movingTime;
+                //Debug.Log("Velocity: " + parentRigidBody.velocity.magnitude + ", " + curMovingTime + ", " + movingTime);
+                //if(parentRigidBody.velocity.magnitude < speedThreshold && timeDuration > 0.001f){
+                //    egdecSpeed = ((curTime - movingTime) / parentRigidBody.velocity.magnitude) * 2500;
+                //}
+                float offset = ((curMovingTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * egdecSpeed;
                 //Debug.Log("Distance:" + offset);
                 //Debug.Log("Energy keeps Losing offset:" + offset);
                 energy -= offset;
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
-                movingTime = curTime;
+                //movingTime = curMovingTime;
                 //Debug.Log("Energy:" + enegy);
             }
 
@@ -146,13 +163,15 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        if (energy <= 0 ||
+        if (energy <= 1 ||
             transform.position.x < -Constants.maxX - 10 ||
             transform.position.x > Constants.maxX ||
             transform.position.y < -Constants.maxY - 10 ||
             transform.position.y > Constants.maxY
            ){
             //Application.LoadLevel(Application.loadedLevel);
+            energyLoss.Stop();
+            transform.parent.GetComponent<BoxCollider2D>().enabled = false;
             RespawnPlayer();
         }
 

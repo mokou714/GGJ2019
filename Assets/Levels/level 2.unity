@@ -244,6 +244,8 @@ MonoBehaviour:
   speed: 5
   orbitCenter: {fileID: 1527128453}
   damage: 0
+  radius: 0
+  movingBack: 0
 --- !u!1001 &400791871
 Prefab:
   m_ObjectHideFlags: 0
@@ -983,7 +985,7 @@ Prefab:
     - target: {fileID: 114573092075303064, guid: 4258a9add78fbd64aa0a58b59099ae96,
         type: 2}
       propertyPath: egdecSpeed
-      value: 5
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}

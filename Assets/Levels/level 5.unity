@@ -583,6 +583,16 @@ Prefab:
       propertyPath: egdecSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 50972170335524046, guid: 4258a9add78fbd64aa0a58b59099ae96,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50972170335524046, guid: 4258a9add78fbd64aa0a58b59099ae96,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.03513031
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
   m_IsPrefabAsset: 0

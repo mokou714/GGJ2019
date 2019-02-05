@@ -41,10 +41,18 @@ public class spacecraft : MonoBehaviour {
 
     public GameObject Player;
 
+    private float currTime = 0;
+    private float startInSeconds = 2;
+
+    private bool hide = false;
+    private bool startHide = false;
+    private bool changedBack = true;
+
 	// Use this for initialization
 	void Start () {
         //Initialize();
         //Debug.Log("New player: " + transform.position);
+        //transform.GetComponent<MeshRenderer>().enabled = true;
         energy = 100f;
         spawnPoint = transform.position;
         Vector3 dir = new Vector3(1, 0, 0);
@@ -60,7 +68,8 @@ public class spacecraft : MonoBehaviour {
 
     private void ReinitPlayer(){
         //transform.parent.transform.position = spawnPoint;
-        //Debug.Log("Reinitialize player");
+        Debug.Log("Reinitialize player");
+        transform.gameObject.SetActive(true);
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
@@ -92,15 +101,8 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-        //if(Input.GetKey(KeyCode.LeftArrow)){
-        //    transform.Rotate(0,0, Time.deltaTime * rotation_sensitivity);
-        //    direction = transform.eulerAngles.z;
-        //}
-        //else if (Input.GetKey(KeyCode.RightArrow)){
-        //    transform.Rotate(0,0, -Time.deltaTime * rotation_sensitivity);
-        //    direction = transform.eulerAngles.z;
-        //} 
+        modVisibility();
+
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
@@ -196,27 +198,58 @@ public class spacecraft : MonoBehaviour {
 
     }
 
+    void modVisibility(){
+        /*
+        Todo:
+        This function is responsible for hiding the player for the moment of death.
+        */
+        if (startHide){
+            transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+            startHide = false;
+            changedBack = false;
+            transform.parent.transform.position = spawnPoint;
+
+
+        }
+        if (hide){
+            if (currTime < startInSeconds){
+                //Debug.Log(currTime);
+                currTime += Time.deltaTime;
+            }else{
+                hide = false;
+                currTime = 0;
+                ReinitPlayer();
+            }
+        }else{
+            if (!changedBack){
+                Debug.Log("Changed back");
+                transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+                changedBack = true;
+            }
+        }
+    }
 
     void RespawnPlayer(){
         
         energyLoss.Stop();
-        transform.parent.transform.position = spawnPoint;
-        ReinitScene();
         StartCoroutine(waitStartReinit());
+
+        //transform.GetComponent<MeshRenderer>().enabled = false;
+        ReinitScene();
+        hide = true;
+        startHide = true;
+
 
     }
 
     private IEnumerator waitStartReinit()
     {
-        float currTime = 0;
-        float startInSeconds = 2;
-
+        currTime = 0;
         while (currTime < startInSeconds)
         {
             currTime += Time.deltaTime;
             yield return 0;
         }
-        ReinitPlayer();
     }
 
 }

@@ -22,13 +22,19 @@ public class Asteroid : MonoBehaviour {
 
 	void Update()
 	{
+        //When the player dies, asteroid is supposed to move back to where it originally was
         if(movingBack){
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
+
+            //Disable the collider when moveing in case of hitting other asteroids
+            if(transform.GetComponent<BoxCollider2D>().enabled)
+                transform.GetComponent<BoxCollider2D>().enabled = false;
             if(transform.position == origPosition){
                 movingBack = false;
-                transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+                transform.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
 

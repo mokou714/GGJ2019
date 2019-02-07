@@ -53,6 +53,7 @@ public class Collision : MonoBehaviour
             case "Finish":
                 AudioManager.instance.PlaySFX("Next Level");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
                 return;
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;

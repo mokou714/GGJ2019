@@ -1,20 +1,20 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 状态">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 Status">
     <Files>
       <File FileName="Assets/Script/Constants.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Planet/Planet.cs" Line="47" Column="39" />
+      <File FileName="Assets/Script/Planet/Planet.cs" Line="29" Column="25" />
       <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="5" Column="14" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="38" Column="14" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="17" Column="66" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="270" Column="25" />
-      <File FileName="GGJ2019 状态" />
+      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="29" Column="13" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="133" Column="27" />
+      <File FileName="Assets/Script/Collision.cs" Line="50" Column="32" />
+      <File FileName="GGJ2019 Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

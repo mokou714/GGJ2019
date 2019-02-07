@@ -172,7 +172,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -244,7 +244,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -316,7 +316,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -430,7 +430,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -581,7 +581,7 @@ Prefab:
     - target: {fileID: 114573092075303064, guid: 4258a9add78fbd64aa0a58b59099ae96,
         type: 2}
       propertyPath: egdecSpeed
-      value: 0.058
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 50972170335524046, guid: 4258a9add78fbd64aa0a58b59099ae96,
         type: 2}
@@ -592,6 +592,11 @@ Prefab:
         type: 2}
       propertyPath: m_Mass
       value: 0.03513031
+      objectReference: {fileID: 0}
+    - target: {fileID: 114573092075303064, guid: 4258a9add78fbd64aa0a58b59099ae96,
+        type: 2}
+      propertyPath: inwardVel
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
@@ -655,7 +660,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -853,7 +858,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -995,7 +1000,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1137,7 +1142,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1209,7 +1214,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1281,7 +1286,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1353,7 +1358,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1425,7 +1430,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1497,7 +1502,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
@@ -1732,7 +1737,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1804,7 +1809,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name
@@ -1876,7 +1881,7 @@ Prefab:
     - target: {fileID: 114606687385764852, guid: 633bfad24833147f39f42d3fd39e071a,
         type: 2}
       propertyPath: damage
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_Name

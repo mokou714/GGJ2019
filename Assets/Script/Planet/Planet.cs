@@ -15,10 +15,15 @@ public class Planet : MonoBehaviour
 
     bool startedAbsorb = false;
 
+    private int origDustAmount;
+    private Transform origDust;
+
     // Use this for initialization
     void Start()
     {
-       
+        origDustAmount = dustAmount;
+        if(transform.childCount > 0)
+            origDust = transform.GetChild(0);
     }
 
     // Update is called once per frame
@@ -101,7 +106,6 @@ public class Planet : MonoBehaviour
                             }
                         }
                     }
-
                     // change
                     if (sc.energy > 100)
                         sc.energy = 100;
@@ -114,5 +118,12 @@ public class Planet : MonoBehaviour
 
         }
     }
+
+    public void Recover(){
+        dustAmount = origDustAmount;
+        //transform.GetChild(0)
+
+    }
+
 }
 

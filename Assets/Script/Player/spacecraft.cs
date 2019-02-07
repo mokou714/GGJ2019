@@ -65,8 +65,8 @@ public class spacecraft : MonoBehaviour {
         Todo: this function reinitialize parameters of player when restarting the current level
         */
 
-        transform.gameObject.SetActive(true);
-        transform.parent.GetComponent<BoxCollider2D>().enabled = true;
+        //transform.gameObject.SetActive(true);
+        //transform.parent.GetComponent<BoxCollider2D>().enabled = true;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
@@ -104,6 +104,14 @@ public class spacecraft : MonoBehaviour {
                         single_obj.gameObject.GetComponent<orbitAsteroid>().movingBack = true;
                     }
                     break;
+
+                case "dustPlanet":
+                    GameObject dust = single_obj.transform.GetChild(0).gameObject;
+                    Planet planet = single_obj.GetComponent<Planet>();
+                    if(dust != null){
+                        planet.Recover();
+                    }
+                    break;
             }
 
 
@@ -112,10 +120,6 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        
-        //Check if the player should be visible or not
-        //modVisibility();
-
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
@@ -125,7 +129,7 @@ public class spacecraft : MonoBehaviour {
             if (rotate_on)
                 Launch();
         }else if(Input.GetKeyDown(KeyCode.R)|| (Input.touchCount == 2)){
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(Application.loadedLevel);
         }else if(rotate_on){
             //If no valid input, keep rotating around the current planet
             Rotate();
@@ -134,26 +138,15 @@ public class spacecraft : MonoBehaviour {
         if(moving){
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
-            if (!movingStart)
-            {
-                //Debug.Log("Energy starts Losing");
+            if (!movingStart){
                 movingStart = true;
                 movingTime = curMovingTime;
-                //Debug.Log("start recording :" + movingTime);
                 energyLoss.Play();
             }else{
                 float timeDuration = curMovingTime - movingTime;
-                //Debug.Log("Velocity: " + parentRigidBody.velocity.magnitude + ", " + curMovingTime + ", " + movingTime);
-                //if(parentRigidBody.velocity.magnitude < speedThreshold && timeDuration > 0.001f){
-                //    egdecSpeed = ((curTime - movingTime) / parentRigidBody.velocity.magnitude) * 2500;
-                //}
                 float offset = ((curMovingTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * egdecSpeed;
-                //Debug.Log("Distance:" + offset);
-                //Debug.Log("Energy keeps Losing offset:" + offset);
                 energy -= offset;
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
-                //movingTime = curMovingTime;
-                //Debug.Log("Energy:" + enegy);
             }
 
         }else{
@@ -163,7 +156,7 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        if (energy <= 1 ||
+        if (energy <= 5 ||
             transform.position.x < -Constants.maxX - 10 ||
             transform.position.x > Constants.maxX ||
             transform.position.y < -Constants.maxY - 10 ||
@@ -171,10 +164,9 @@ public class spacecraft : MonoBehaviour {
            ){
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();
-            transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+            //transform.parent.GetComponent<BoxCollider2D>().enabled = false;
             //transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-            RespawnPlayer();
-            Debug.Log("hide!!!!!!!");
+            ReinitScene();
             StartCoroutine(waitInHiding());
         }
 
@@ -221,56 +213,17 @@ public class spacecraft : MonoBehaviour {
 
     }
 
-    void modVisibility(){
-        /*
-        Todo:
-        This function is responsible for hiding the player for the moment of death.
-        */
-        //if (startHide){
-        //    transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-        //    startHide = false;
-        //    changedBack = false;
-        //    //spawnPoint = transform.parent.transform.position;
-        //}
-        //if (hide){
-        //    if (currTime < startInSeconds){
-        //        //Debug.Log(currTime);
-        //        currTime += Time.deltaTime;
-        //    }else{
-        //        hide = false;
-        //        currTime = 0;
-        //        ReinitPlayer();
-        //        transform.parent.transform.position = spawnPoint;
-        //    }
-        //}else{
-        //    if (!changedBack){
-        //        Debug.Log("Changed back");
-        //        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
-        //        changedBack = true;
-        //    }
-        //}
-    }
-
-    void RespawnPlayer(){
-        /*
-        Todo: this function triggers the reinitialization process when restarting game
-        */
-        ReinitScene();
-        hide = true;
-        startHide = true;
-    }
-
     IEnumerator waitInHiding() {
         /*
         Todo: this coroutine is used to hide player for a tiny moment after death
         */
         transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-        ReinitPlayer();
         yield return new WaitForSeconds(0.1f);
-        Debug.Log("show!!!!!!!");
+        //Debug.Log("show!!!!!!!");
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         transform.parent.transform.position = spawnPoint;
+        ReinitPlayer();
 
     }
 

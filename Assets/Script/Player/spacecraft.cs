@@ -114,7 +114,7 @@ public class spacecraft : MonoBehaviour {
 	void Update () {
         
         //Check if the player should be visible or not
-        modVisibility();
+        //modVisibility();
 
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
@@ -172,7 +172,10 @@ public class spacecraft : MonoBehaviour {
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();
             transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+            //transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
             RespawnPlayer();
+            Debug.Log("hide!!!!!!!");
+            StartCoroutine(waitInHiding());
         }
 
 
@@ -223,29 +226,29 @@ public class spacecraft : MonoBehaviour {
         Todo:
         This function is responsible for hiding the player for the moment of death.
         */
-        if (startHide){
-            transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-            startHide = false;
-            changedBack = false;
-            //spawnPoint = transform.parent.transform.position;
-        }
-        if (hide){
-            if (currTime < startInSeconds){
-                //Debug.Log(currTime);
-                currTime += Time.deltaTime;
-            }else{
-                hide = false;
-                currTime = 0;
-                ReinitPlayer();
-                transform.parent.transform.position = spawnPoint;
-            }
-        }else{
-            if (!changedBack){
-                Debug.Log("Changed back");
-                transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
-                changedBack = true;
-            }
-        }
+        //if (startHide){
+        //    transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+        //    startHide = false;
+        //    changedBack = false;
+        //    //spawnPoint = transform.parent.transform.position;
+        //}
+        //if (hide){
+        //    if (currTime < startInSeconds){
+        //        //Debug.Log(currTime);
+        //        currTime += Time.deltaTime;
+        //    }else{
+        //        hide = false;
+        //        currTime = 0;
+        //        ReinitPlayer();
+        //        transform.parent.transform.position = spawnPoint;
+        //    }
+        //}else{
+        //    if (!changedBack){
+        //        Debug.Log("Changed back");
+        //        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+        //        changedBack = true;
+        //    }
+        //}
     }
 
     void RespawnPlayer(){
@@ -255,6 +258,20 @@ public class spacecraft : MonoBehaviour {
         ReinitScene();
         hide = true;
         startHide = true;
+    }
+
+    IEnumerator waitInHiding() {
+        /*
+        Todo: this coroutine is used to hide player for a tiny moment after death
+        */
+        transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
+        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+        ReinitPlayer();
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("show!!!!!!!");
+        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+        transform.parent.transform.position = spawnPoint;
+
     }
 
 

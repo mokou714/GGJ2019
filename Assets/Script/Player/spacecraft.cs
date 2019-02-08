@@ -92,6 +92,7 @@ public class spacecraft : MonoBehaviour {
 
             switch(obj_tag){
                 case "begin":
+                    //single_obj.gameObject.GetComponent<ParticleSystem>().Play();
                     single_obj.gameObject.GetComponent<StopParticles>().ParticleReStart();
                     break;
                 case "asteroid":
@@ -107,7 +108,7 @@ public class spacecraft : MonoBehaviour {
 
                 case "dustPlanet":
                     GameObject dust = single_obj.transform.GetChild(0).gameObject;
-                    Planet planet = single_obj.GetComponent<Planet>();
+                    dustPlanet planet = single_obj.GetComponent<dustPlanet>();
                     if(dust != null){
                         planet.Recover();
                     }
@@ -219,10 +220,14 @@ public class spacecraft : MonoBehaviour {
         */
         transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+
+        //move player to start position, make its velocity 0
+        transform.parent.transform.position = spawnPoint;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
         yield return new WaitForSeconds(0.1f);
         //Debug.Log("show!!!!!!!");
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
-        transform.parent.transform.position = spawnPoint;
         ReinitPlayer();
 
     }

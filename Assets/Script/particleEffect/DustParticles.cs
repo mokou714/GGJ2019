@@ -19,7 +19,7 @@ public class DustParticles : MonoBehaviour {
 		particles = GetComponent<ParticleSystem>();
 		savedPlanetGravityRad = particles.shape.radius;
 
-        if (planet.GetComponent<Planet>().dustAmount == 0)
+        if (planet.GetComponent<dustPlanet>().dustAmount == 0)
             savedPlanetGravityRad = 0f;
 
 	}
@@ -32,8 +32,8 @@ public class DustParticles : MonoBehaviour {
 	}
 
 	private void checkSetDustSize() {
-        Planet planetGrav;
-        if ((planet == null) || (planetGrav = planet.GetComponent<Planet>()) == null)
+        dustPlanet planetGrav;
+        if ((planet == null) || (planetGrav = planet.GetComponent<dustPlanet>()) == null)
 			return;
         if (Mathf.Abs(savedPlanetGravityRad - planetGrav.catchRadius) < 1e-3)
 			return;

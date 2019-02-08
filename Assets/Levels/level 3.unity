@@ -760,6 +760,10 @@ Prefab:
       propertyPath: start_velocity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1627115794115710, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114192810343441530, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}

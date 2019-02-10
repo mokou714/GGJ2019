@@ -22,11 +22,10 @@ public class dustPlanet : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
-
         if (transform.childCount > 0)
         {
-            //origDust = transform.GetChild(0);
             origDust = copyDust(transform.GetChild(0).gameObject);
         }
     }
@@ -105,24 +104,24 @@ public class dustPlanet : MonoBehaviour
                                                            
                     //landing sound  //comment for debug
 
-                    //if (dustAmount > 0)
-                    //{
-                    //    AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-                    //}
-                    //else
-                    //{
-                    //    if (SceneManager.GetActiveScene().buildIndex != 0)
-                    //    {
-                    //        //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
-                    //        AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+                    if (dustAmount > 0)
+                    {
+                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
+                    }
+                    else
+                    {
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
+                        {
+                            //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
-                    //        AudioManager.sfxNormalLandID++;
-                    //        if (AudioManager.sfxNormalLandID > 4)
-                    //        {
-                    //            AudioManager.sfxNormalLandID = 1;
-                    //        }
-                    //    }
-                    //}
+                            AudioManager.sfxNormalLandID++;
+                            if (AudioManager.sfxNormalLandID > 4)
+                            {
+                                AudioManager.sfxNormalLandID = 1;
+                            }
+                        }
+                    }
 
                     // change
                     if (sc.energy > 100f)
@@ -138,6 +137,9 @@ public class dustPlanet : MonoBehaviour
     }
 
     public void Recover(){
+        /*
+        Todo: set up the recover for dust planet when the player is being respawned
+        */ 
         if (!startedAbsorb)
             return;
         dustAmount = origDustAmount;
@@ -151,6 +153,9 @@ public class dustPlanet : MonoBehaviour
     }
 
     private GameObject copyDust(GameObject dust){
+        /* Todo: 
+        Clone a new dust before the current dust is absorbed for the next regeneration of the player.
+        */
         GameObject new_dust = Instantiate(dust);
         new_dust.transform.position = dust.transform.position;
         //Debug.Log(new_dust.transform.localScale + ", " + dust.transform.lossyScale);
@@ -158,10 +163,6 @@ public class dustPlanet : MonoBehaviour
         new_dust.transform.SetParent(transform);
         new_dust.SetActive(false);
         return new_dust;
-    }
-
-    private void emmitDust(){
-        
     }
 
 }

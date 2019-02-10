@@ -78,7 +78,7 @@ public class spacecraft : MonoBehaviour {
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotating_planet = null;
 
-        Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
+        //Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
     }
 	
     private void ReinitScene(){

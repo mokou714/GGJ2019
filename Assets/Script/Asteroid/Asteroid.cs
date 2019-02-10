@@ -19,10 +19,11 @@ public class Asteroid : MonoBehaviour {
         maxX = Constants.maxX;
         maxY = Constants.maxY;
         origPosition = transform.position;
+
+        //Cancel the collision between asteroid and end in case it blocks the end
         GameObject endObj = GameObject.FindWithTag("end");
         if (endObj != null)
             endCollider = endObj.transform.GetChild(2).GetComponent<CapsuleCollider2D>();
-
         if (endCollider != null)
             Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), endCollider);
 	}
@@ -44,6 +45,7 @@ public class Asteroid : MonoBehaviour {
                 transform.GetComponent<BoxCollider2D>().enabled = true;
             }
         }else{
+            //If the asteroids are out of the bound, then freeze it and cancel the collider
             if(Mathf.Abs(transform.position.x) > maxX + offset|| Mathf.Abs(transform.position.y) > maxY + offset){
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<BoxCollider2D>().enabled = false;

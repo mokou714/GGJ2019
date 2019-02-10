@@ -71,20 +71,21 @@ public class spacecraft : MonoBehaviour {
         /*
         Todo: this function reinitialize parameters of player when restarting the current level
         */
-
         //transform.gameObject.SetActive(true);
         //transform.parent.GetComponent<BoxCollider2D>().enabled = true;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
         movingStart = true;
+        parentRigidBody.velocity = Vector3.zero;
         Vector3 dir = new Vector3(1, 0, 0);
-        transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
+        parentRigidBody.velocity = dir * start_velocity;
         moving = false;
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotating_planet = null;
-        //Debug.Log("Reinitialized player: " + transform.position);
+
+        //Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
     }
 	
     private void ReinitScene(){
@@ -99,7 +100,6 @@ public class spacecraft : MonoBehaviour {
 
             switch(obj_tag){
                 case "begin":
-                    //single_obj.gameObject.GetComponent<ParticleSystem>().Play();
                     single_obj.gameObject.GetComponent<StopParticles>().ParticleReStart();
                     break;
                 case "asteroid":
@@ -112,12 +112,13 @@ public class spacecraft : MonoBehaviour {
                         single_obj.gameObject.GetComponent<orbitAsteroid>().movingBack = true;
                     }
                     break;
-
                 case "dustPlanet":
                     GameObject dust = single_obj.transform.GetChild(0).gameObject;
-                    dustPlanet planet = single_obj.GetComponent<dustPlanet>();
-                    if(dust != null){
-                        planet.Recover();
+                    dustPlanet dust_planet = single_obj.gameObject.GetComponent<dustPlanet>();
+                    //Debug.Log("Dust planet recover: "  + dust_planet);
+
+                    if(dust_planet != null && dust != null){
+                        dust_planet.Recover();
                     }
                     break;
             }
@@ -146,9 +147,12 @@ public class spacecraft : MonoBehaviour {
         if(moving){
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
-            if (!movingStart){
+            if (!movingStart)
+            {
+                //Debug.Log("Energy starts Losing");
                 movingStart = true;
                 movingTime = curMovingTime;
+                //Debug.Log("start recording :" + movingTime);
                 energyLoss.Play();
             }else{
                 float timeDuration = curMovingTime - movingTime;
@@ -164,12 +168,20 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
+<<<<<<< HEAD
         Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
         if (energy <= 5f ||
             viewportPos.x < -0.2f ||
             viewportPos.x > 1.2f||
             viewportPos.y < -0.2f ||
             viewportPos.y > 1.2f
+=======
+        if (energy <= 10 ||
+            transform.position.x < -Constants.maxX - 10 ||
+            transform.position.x > Constants.maxX ||
+            transform.position.y < -Constants.maxY - 10 ||
+            transform.position.y > Constants.maxY
+>>>>>>> a6a1bf1541dfb6a31e7f2add6504188f0d76fe0e
            ){
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();
@@ -228,14 +240,10 @@ public class spacecraft : MonoBehaviour {
         */
         transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-
-        //move player to start position, make its velocity 0
-        transform.parent.transform.position = spawnPoint;
-        transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
         yield return new WaitForSeconds(0.1f);
         //Debug.Log("show!!!!!!!");
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+        transform.parent.transform.position = spawnPoint;
         ReinitPlayer();
 
     }

@@ -46,7 +46,7 @@ public class StopParticles : MonoBehaviour {
             currTime += Time.deltaTime;
             yield return 0;
         }
-        Debug.Log("Start beginning");
+        //Debug.Log("Start beginning");
         particles.Play();
         StartCoroutine(waitStopParticles());
     }

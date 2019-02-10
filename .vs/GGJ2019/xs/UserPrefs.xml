@@ -1,16 +1,17 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/selectionEffect.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 状态">
     <Files>
       <File FileName="Assets/Script/Constants.cs" Line="12" Column="5" />
       <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="18" Column="32" />
-      <File FileName="Assets/Script/Collision.cs" Line="63" Column="1" />
+      <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Collision.cs" Line="6" Column="39" />
       <File FileName="Assets/levelSelection.cs" Line="82" Column="84" />
-      <File FileName="Assets/levelPlanet.cs" Line="36" Column="37" />
-      <File FileName="Assets/camController.cs" Line="114" Column="32" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="173" Column="33" />
-      <File FileName="Assets/selectionEffect.cs" Line="5" Column="47" />
+      <File FileName="Assets/levelPlanet.cs" Line="16" Column="31" />
+      <File FileName="Assets/camController.cs" Line="75" Column="57" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="1" Column="1" />
+      <File FileName="Assets/selectionEffect.cs" Line="20" Column="3" />
+      <File FileName="GGJ2019 状态" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

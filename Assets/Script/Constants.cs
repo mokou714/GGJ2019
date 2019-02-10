@@ -10,6 +10,8 @@ public class Constants : MonoBehaviour {
 
     public static float dustColiderRatio = 21.0f;
 
+    public static int maxNumOfLevel = 5;
+
 	// Use this for initialization
 	void Start () {
 		

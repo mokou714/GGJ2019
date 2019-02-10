@@ -52,8 +52,11 @@ public class Collision : MonoBehaviour
                 break;
             case "Finish":
                 AudioManager.instance.PlaySFX("Next Level");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+                int cur_scene = SceneManager.GetActiveScene().buildIndex;
+                if (cur_scene == Constants.maxNumOfLevel)
+                    SceneManager.LoadScene("end stage");
+                else
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 return;
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;

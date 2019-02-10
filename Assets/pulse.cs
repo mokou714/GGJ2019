@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class pulse : MonoBehaviour {
 
-    public float maxScale;
-    public float minScale;
+
     public float pulseSpeed;
 
     public float scaleFactor;
-    int scaleDir = 1;
     bool startPulse = false;
+    Vector3 defaultScale;
+
 
 
     float T = 0;
 
+    GameObject player;
 
 
 
     void Start(){
         scaleFactor = 1f;
+
+        defaultScale = transform.localScale;
 
         StartCoroutine(Scale());
         //StartCoroutine(Pulse());
@@ -39,9 +42,12 @@ public class pulse : MonoBehaviour {
         //else if(currentScale < minScale) {
         //    scaleDir = 1;
         //}
-        T += Time.deltaTime * pulseSpeed;
-        scaleFactor = Mathf.Sin(T) * 1/100 +1; 
-        
+        player = GetComponent<dustPlanet>().thePlayerOnPlanet;
+        if (player == null)
+        {
+            T += Time.deltaTime * pulseSpeed;
+            scaleFactor = Mathf.Cos(T) * 1 / 100 + 1;
+        }
 
 
 
@@ -49,24 +55,26 @@ public class pulse : MonoBehaviour {
 
     IEnumerator Scale() {
         while (true){
-            GameObject player = GetComponent<dustPlanet>().thePlayerOnPlanet;
+            if (player == null)
+            {
+                transform.GetChild(0).transform.localScale *= scaleFactor;
+                //dust exist, not been aborbed
+                if (transform.childCount > 1)
+                    transform.GetChild(1).transform.localScale *= scaleFactor;
+                transform.GetComponent<dustPlanet>().catchRadius *= scaleFactor;
+                if (player != null)
+                {
+                    //float _closeDistance = Vector3.Distance(player.transform.position, transform.position) - transform.GetComponent<dustPlanet>().catchRadius;
+                    //Vector3 _dir = (transform.position - player.transform.position).normalized;
 
-            transform.GetChild(0).transform.localScale *= scaleFactor;
-            //dust exist, not been aborbed
-            if(transform.childCount > 1)
-                transform.GetChild(1).transform.localScale *= scaleFactor;
-            transform.GetComponent<dustPlanet>().catchRadius *= scaleFactor;
-            if(player != null) {
-                //float _closeDistance = Vector3.Distance(player.transform.position, transform.position) - transform.GetComponent<dustPlanet>().catchRadius;
-                //Vector3 _dir = (transform.position - player.transform.position).normalized;
+                    Vector3 newPos = transform.position - (transform.position - player.transform.position) * scaleFactor;
 
-                Vector3 newPos = transform.position - (transform.position - player.transform.position) * scaleFactor;
-
-                player.transform.position = newPos;
+                    player.transform.position = newPos;
+                }
             }
             yield return new WaitForSeconds(0.01f);
 
-           
+
         }
 
     }

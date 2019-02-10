@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/pulse.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/selectionEffect.cs">
     <Files>
-      <File FileName="Assets/Script/Constants.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="95" Column="73" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="38" Column="14" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="17" Column="66" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="125" Column="112" />
-      <File FileName="Assets/Script/particleEffect/DustParticles.cs" Line="22" Column="1" />
-      <File FileName="Assets/absorbPlanet.cs" Line="123" Column="112" />
-      <File FileName="Assets/pulse.cs" Line="7" Column="5" />
+      <File FileName="Assets/Script/Constants.cs" Line="12" Column="5" />
+      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="18" Column="32" />
+      <File FileName="Assets/Script/Collision.cs" Line="63" Column="1" />
+      <File FileName="Assets/levelSelection.cs" Line="82" Column="84" />
+      <File FileName="Assets/levelPlanet.cs" Line="36" Column="37" />
+      <File FileName="Assets/camController.cs" Line="114" Column="32" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="173" Column="33" />
+      <File FileName="Assets/selectionEffect.cs" Line="5" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

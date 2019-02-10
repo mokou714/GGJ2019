@@ -12,6 +12,9 @@ public class spacecraft : MonoBehaviour {
     public float launch_speed;
     public float energy;
 
+    public GameObject camera;
+    Vector2 screenSize;
+
     public bool moving;
 
     public float start_velocity;
@@ -36,6 +39,7 @@ public class spacecraft : MonoBehaviour {
     private Vector3 spawnPoint;
 
     public GameObject Player;
+    
 
     private float currTime = 0;
     private float startInSeconds = 1.5f;
@@ -58,6 +62,9 @@ public class spacecraft : MonoBehaviour {
         originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
+
+      
+
     }
 
     private void ReinitPlayer(){
@@ -157,11 +164,12 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        if (energy <= 5 ||
-            transform.position.x < -Constants.maxX - 10 ||
-            transform.position.x > Constants.maxX ||
-            transform.position.y < -Constants.maxY - 10 ||
-            transform.position.y > Constants.maxY
+        Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
+        if (energy <= 5f ||
+            viewportPos.x < -0.2f ||
+            viewportPos.x > 1.2f||
+            viewportPos.y < -0.2f ||
+            viewportPos.y > 1.2f
            ){
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();

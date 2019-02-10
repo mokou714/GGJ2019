@@ -62,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\absorbPlanet.cs" />
+    <Compile Include="Assets\camController.cs" />
+    <Compile Include="Assets\levelPlanet.cs" />
+    <Compile Include="Assets\levelSelection.cs" />
     <Compile Include="Assets\pulse.cs" />
     <Compile Include="Assets\Script\ActivateAbsorb.cs" />
     <Compile Include="Assets\Script\Asteroid\Asteroid.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Assets\Script\Player\spacecraft.cs" />
     <Compile Include="Assets\Script\RandomStars.cs" />
     <Compile Include="Assets\Script\Rotate.cs" />
+    <Compile Include="Assets\selectionEffect.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/TonyXzh/GGJ2019/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

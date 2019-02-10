@@ -11,6 +11,7 @@ TagManager:
   - asteroid
   - spacecraft
   - begin
+  - levelPlanet
   layers:
   - Default
   - TransparentFX

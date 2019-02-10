@@ -502,6 +502,10 @@ Prefab:
       propertyPath: minZoomInFOV
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1291084088275296, guid: ae51e369719bc4ec78be5a2d8fde8031, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae51e369719bc4ec78be5a2d8fde8031, type: 2}
   m_IsPrefabAsset: 0

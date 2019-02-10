@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - dustPlanet
+  - levelPlanet
+  - begin
+  - squarePlanet
+  - asteroid
+  - spacecraft
+  - orbaerolite
+  - orbasteroid
+  - end
   layers:
   - Default
   - TransparentFX

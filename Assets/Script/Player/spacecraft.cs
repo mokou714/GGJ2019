@@ -222,13 +222,16 @@ public class spacecraft : MonoBehaviour {
         */
         rotate_on = false;
 
-        float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
-        float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
-        float origin_speed = Mathf.Sqrt(x_speed * x_speed + y_speed * y_speed);
+        //float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
+        //float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
+        Vector3 orig_vel = transform.parent.GetComponent<Rigidbody2D>().velocity;
+        float x_speed = orig_vel.x;
+        float y_speed = orig_vel.y;
+        float origin_speed = Mathf.Sqrt(Mathf.Abs(x_speed * x_speed) + Mathf.Abs(y_speed * y_speed));
 
         if (origin_speed < 0.1f)
             origin_speed = 1f;
-        transform.parent.GetComponent<Rigidbody2D>().velocity = transform.up * origin_speed * launch_speed;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
 
     }

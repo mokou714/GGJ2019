@@ -602,6 +602,11 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114573092075303064, guid: 4258a9add78fbd64aa0a58b59099ae96,
+        type: 2}
+      propertyPath: launch_speed
+      value: 0.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
   m_IsPrefabAsset: 0
@@ -941,6 +946,10 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radius.value
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}

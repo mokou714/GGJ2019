@@ -69,6 +69,8 @@ public class dustPlanet : MonoBehaviour
                 //check if spacecraft is not orbiting the same planet after launch
                 if(sc.rotating_planet == null || sc.rotating_planet != gameObject)
                 {
+                    if (sc.energy < Constants.deathHealthVal)
+                        return;
                     //rotate
                     sc.rotating_planet = gameObject;
                     sc.rotation_center = transform.position;
@@ -104,24 +106,24 @@ public class dustPlanet : MonoBehaviour
                                                            
                     //landing sound  //comment for debug
 
-                    //if (dustAmount > 0)
-                    //{
-                    //    AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-                    //}
-                    //else
-                    //{
-                    //    if (SceneManager.GetActiveScene().buildIndex != 0)
-                    //    {
-                    //        //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
-                    //        AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+                    if (dustAmount > 0)
+                    {
+                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
+                    }
+                    else
+                    {
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
+                        {
+                            //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
-                    //        AudioManager.sfxNormalLandID++;
-                    //        if (AudioManager.sfxNormalLandID > 4)
-                    //        {
-                    //            AudioManager.sfxNormalLandID = 1;
-                    //        }
-                    //    }
-                    //}
+                            AudioManager.sfxNormalLandID++;
+                            if (AudioManager.sfxNormalLandID > 4)
+                            {
+                                AudioManager.sfxNormalLandID = 1;
+                            }
+                        }
+                    }
 
                     // change
                     if (sc.energy > 100f)

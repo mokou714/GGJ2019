@@ -19,7 +19,6 @@ public class dustPlanet : MonoBehaviour
     private int origDustAmount;
     private GameObject origDust;
     private GameObject player;
-    private bool absorbed = false;
     // Use this for initialization
     void Start()
     {

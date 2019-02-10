@@ -12,12 +12,19 @@ public class Asteroid : MonoBehaviour {
     private Vector3 origPosition;
     public bool movingBack = false;
     private float speed = 50;
+    private int offset = 10;
+    private CapsuleCollider2D endCollider;
 	// Use this for initialization
 	void Start () {
         maxX = Constants.maxX;
         maxY = Constants.maxY;
         origPosition = transform.position;
+        GameObject endObj = GameObject.FindWithTag("end");
+        if (endObj != null)
+            endCollider = endObj.transform.GetChild(2).GetComponent<CapsuleCollider2D>();
 
+        if (endCollider != null)
+            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), endCollider);
 	}
 
 	void Update()
@@ -35,6 +42,11 @@ public class Asteroid : MonoBehaviour {
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }else{
+            if(Mathf.Abs(transform.position.x) > maxX + offset|| Mathf.Abs(transform.position.y) > maxY + offset){
+                transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                transform.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 

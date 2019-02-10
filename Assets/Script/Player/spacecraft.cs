@@ -64,20 +64,21 @@ public class spacecraft : MonoBehaviour {
         /*
         Todo: this function reinitialize parameters of player when restarting the current level
         */
-
         //transform.gameObject.SetActive(true);
         //transform.parent.GetComponent<BoxCollider2D>().enabled = true;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
         movingStart = true;
+        parentRigidBody.velocity = Vector3.zero;
         Vector3 dir = new Vector3(1, 0, 0);
-        transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
+        parentRigidBody.velocity = dir * start_velocity;
         moving = false;
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotating_planet = null;
-        //Debug.Log("Reinitialized player: " + transform.position);
+
+        Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
     }
 	
     private void ReinitScene(){
@@ -160,7 +161,7 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        if (energy <= 5 ||
+        if (energy <= 10 ||
             transform.position.x < -Constants.maxX - 10 ||
             transform.position.x > Constants.maxX ||
             transform.position.y < -Constants.maxY - 10 ||

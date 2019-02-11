@@ -624,18 +624,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-=======
-    - target: {fileID: 114251427152332322, guid: ae51e369719bc4ec78be5a2d8fde8031,
-        type: 2}
-      propertyPath: minZoomInFOV
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1291084088275296, guid: ae51e369719bc4ec78be5a2d8fde8031, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
->>>>>>> 892cca311966b9081586d44b50fef104a1c4bada
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae51e369719bc4ec78be5a2d8fde8031, type: 2}
   m_IsPrefabAsset: 0

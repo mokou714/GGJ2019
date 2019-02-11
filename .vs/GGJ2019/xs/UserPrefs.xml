@@ -9,8 +9,7 @@
       <File FileName="Assets/levelPlanet.cs" Line="16" Column="31" />
       <File FileName="Assets/camController.cs" Line="75" Column="57" />
       <File FileName="Assets/Script/Player/spacecraft.cs" Line="1" Column="1" />
-      <File FileName="Assets/selectionEffect.cs" Line="15" Column="43" />
-      <File FileName="Assets/levelNumber.cs" Line="42" Column="10" />
+      <File FileName="Assets/selectionEffect.cs" Line="1" Column="1" />
       <File FileName="GGJ2019 Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>

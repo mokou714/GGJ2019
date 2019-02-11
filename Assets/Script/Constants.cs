@@ -12,6 +12,8 @@ public class Constants : MonoBehaviour {
 
     public static int maxNumOfLevel = 5;
 
+    public static float deathHealthVal = 10;
+
 	// Use this for initialization
 	void Start () {
 		

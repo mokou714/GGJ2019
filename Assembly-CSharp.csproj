@@ -61,22 +61,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\absorbPlanet.cs" />
-    <Compile Include="Assets\camController.cs" />
     <Compile Include="Assets\fade.cs" />
     <Compile Include="Assets\Giant1.cs" />
-    <Compile Include="Assets\giantPlanet.cs" />
-    <Compile Include="Assets\levelNumber.cs" />
-    <Compile Include="Assets\levelPlanet.cs" />
-    <Compile Include="Assets\levelSelection.cs" />
-    <Compile Include="Assets\pulse.cs" />
-    <Compile Include="Assets\rotationPlanet.cs" />
     <Compile Include="Assets\Script\ActivateAbsorb.cs" />
     <Compile Include="Assets\Script\Asteroid\Asteroid.cs" />
     <Compile Include="Assets\Script\Asteroid\orbitAsteroid.cs" />
     <Compile Include="Assets\Script\Asteroid\orbitAsteroidEclipse.cs" />
     <Compile Include="Assets\Script\Audio\AudioController.cs" />
     <Compile Include="Assets\Script\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Script\Camera\camController.cs" />
     <Compile Include="Assets\Script\Collision.cs" />
     <Compile Include="Assets\Script\Constants.cs" />
     <Compile Include="Assets\Script\Init.cs" />
@@ -85,9 +78,16 @@
     <Compile Include="Assets\Script\particleEffect\ParticlesAbsorb.cs" />
     <Compile Include="Assets\Script\particleEffect\StartParticles.cs" />
     <Compile Include="Assets\Script\particleEffect\StopParticles.cs" />
+    <Compile Include="Assets\Script\Planet\absorbPlanet.cs" />
     <Compile Include="Assets\Script\Planet\Catcher.cs" />
     <Compile Include="Assets\Script\Planet\dustPlanet.cs" />
+    <Compile Include="Assets\Script\Planet\giantPlanet.cs" />
     <Compile Include="Assets\Script\Planet\Gravity.cs" />
+    <Compile Include="Assets\Script\Planet\levelNumber.cs" />
+    <Compile Include="Assets\Script\Planet\levelPlanet.cs" />
+    <Compile Include="Assets\Script\Planet\levelSelection.cs" />
+    <Compile Include="Assets\Script\Planet\pulse.cs" />
+    <Compile Include="Assets\Script\Planet\rotationPlanet.cs" />
     <Compile Include="Assets\Script\Player\spacecraft.cs" />
     <Compile Include="Assets\Script\RandomStars.cs" />
     <Compile Include="Assets\Script\Rotate.cs" />

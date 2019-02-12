@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class orbitAsteroid : MonoBehaviour {
-    public int speed;
+    public float speed;
     public Rigidbody2D orbitCenter;
     public float damage;
     private Vector3 origPosition;
@@ -17,8 +17,8 @@ public class orbitAsteroid : MonoBehaviour {
 	void Start () {
         origPosition = transform.position;
         radius = Vector3.Distance(transform.position, orbitCenter.position);
-        maxX = Constants.maxX;
-        maxY = Constants.maxY;
+        maxX = 100f;
+        maxY = 100f;
 	}
 	
 	// Update is called once per frame

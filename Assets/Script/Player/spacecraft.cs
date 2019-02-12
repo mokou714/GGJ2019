@@ -177,19 +177,12 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        //Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
-        //if (energy <= 5f ||
-            //viewportPos.x < -0.2f ||
-            //viewportPos.x > 1.2f||
-            //viewportPos.y < -0.2f ||
-            //viewportPos.y > 1.2f
-
-        if (energy <= 10 ||
-            transform.position.x < -Constants.maxX - 10 ||
-            transform.position.x > Constants.maxX ||
-            transform.position.y < -Constants.maxY - 10 ||
-            transform.position.y > Constants.maxY
-//>>>>>>> Stashed changes
+        Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
+        if (energy <= 5f ||
+            viewportPos.x < -0.2f ||
+            viewportPos.x > 1.2f||
+            viewportPos.y < -0.2f ||
+            viewportPos.y > 1.2
            ){
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();

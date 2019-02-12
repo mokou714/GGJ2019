@@ -16,8 +16,12 @@ public class Asteroid : MonoBehaviour {
     private CapsuleCollider2D endCollider;
 	// Use this for initialization
 	void Start () {
-        maxX = Constants.maxX;
-        maxY = Constants.maxY;
+        //maxX/maxY unassigned value(==0)
+        if(Mathf.Abs(maxX) <= Mathf.Epsilon)
+            maxX = 30f;
+        if(Mathf.Abs(maxY) <= Mathf.Epsilon)
+            maxY = 20f;
+
         origPosition = transform.position;
 
         //Cancel the collision between asteroid and end in case it blocks the end

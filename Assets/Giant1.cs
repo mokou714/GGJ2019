@@ -10,6 +10,7 @@ public class Giant1 : MonoBehaviour {
     public GameObject player;
     public float moveSpeed;
     public bool moving;
+    public GameObject end;
 
 
 
@@ -27,12 +28,13 @@ public class Giant1 : MonoBehaviour {
             newPos.x += moveSpeed * Time.deltaTime;
             newPos2.x += moveSpeed * Time.deltaTime;
 
-
+            //level starts here
             if (newPos.x > endX)
             {
                 moving = false;
                 newPos.x = endX;
                 player.transform.GetChild(0).GetComponent<spacecraft>().enabled = true;
+                end.GetComponent<StartParticles>().enabled = true;
             }
             transform.position = newPos;
             player.transform.position = newPos2;

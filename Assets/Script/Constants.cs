@@ -10,7 +10,7 @@ public class Constants : MonoBehaviour {
 
     public static float dustColiderRatio = 21.0f;
 
-    public static int maxNumOfLevel = 5;
+    public static int maxNumOfLevel = 6;
 
     public static float deathHealthVal = 10;
 

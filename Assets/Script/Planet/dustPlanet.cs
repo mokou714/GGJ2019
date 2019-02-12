@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,9 +61,12 @@ public class dustPlanet : MonoBehaviour
                 //check if spacecraft is not orbiting the same planet after launch
                 if( sc.prevRotatingPlanet == null ||  sc.prevRotatingPlanet != gameObject)
                 {
+<<<<<<< HEAD
                     //store player reference
                     thePlayerOnPlanet = ob;
 
+=======
+>>>>>>> 9f673bb... New level designed
                     if (sc.energy < Constants.deathHealthVal)
                         return;
                     //rotate
@@ -101,24 +104,24 @@ public class dustPlanet : MonoBehaviour
                                                            
                     //landing sound  //comment for debug
 
-                    //if (dustAmount > 0)
-                    //{
-                    //    AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-                    //}
-                    //else
-                    //{
-                    //    if (SceneManager.GetActiveScene().buildIndex != 0)
-                    //    {
-                    //        //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
-                    //        AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+                    if (dustAmount > 0)
+                    {
+                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
+                    }
+                    else
+                    {
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
+                        {
+                            //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
-                    //        AudioManager.sfxNormalLandID++;
-                    //        if (AudioManager.sfxNormalLandID > 4)
-                    //        {
-                    //            AudioManager.sfxNormalLandID = 1;
-                    //        }
-                    //    }
-                    //}
+                            AudioManager.sfxNormalLandID++;
+                            if (AudioManager.sfxNormalLandID > 4)
+                            {
+                                AudioManager.sfxNormalLandID = 1;
+                            }
+                        }
+                    }
 
                     // change
                     if (sc.energy > 100f)

@@ -158,9 +158,16 @@ public class spacecraft : MonoBehaviour {
                 energyLoss.Play();
             }else{
                 float timeDuration = curMovingTime - movingTime;
-                float offset = ((curMovingTime - movingTime) * transform.parent.GetComponent<Rigidbody2D>().velocity.magnitude) * egdecSpeed;
+                float offset = 0;
+                if (parentRigidBody.velocity.magnitude < speedThreshold)
+                {
+                    offset = (curMovingTime - movingTime) / parentRigidBody.velocity.magnitude * 10;
+                }else{
+                    offset = ((curMovingTime - movingTime) * parentRigidBody.velocity.magnitude) * egdecSpeed;
+                }
                 energy -= offset;
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
+
             }
 
         }else{
@@ -170,12 +177,19 @@ public class spacecraft : MonoBehaviour {
         }
 
         // Death detection
-        Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
-        if (energy <= 10f ||
-            viewportPos.x < -0.2f ||
-            viewportPos.x > 1.2f||
-            viewportPos.y < -0.2f ||
-            viewportPos.y > 1.2f
+        //Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
+        //if (energy <= 5f ||
+            //viewportPos.x < -0.2f ||
+            //viewportPos.x > 1.2f||
+            //viewportPos.y < -0.2f ||
+            //viewportPos.y > 1.2f
+
+        if (energy <= 10 ||
+            transform.position.x < -Constants.maxX - 10 ||
+            transform.position.x > Constants.maxX ||
+            transform.position.y < -Constants.maxY - 10 ||
+            transform.position.y > Constants.maxY
+//>>>>>>> Stashed changes
            ){
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();

@@ -3,12 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags:
   - level
   - levelPlanet
   - dustPlanet
   - begin
   - end
+=======
+  tags: []
+>>>>>>> 9f673bb... New level designed
   layers:
   - Default
   - TransparentFX

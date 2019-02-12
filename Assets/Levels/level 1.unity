@@ -412,14 +412,11 @@ Prefab:
       propertyPath: launch_speed
       value: 0.9
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: camera
       value: 
       objectReference: {fileID: 899310404}
-=======
->>>>>>> 9f673bb... New level designed
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc3365553a23e940817749142f72076, type: 2}
   m_IsPrefabAsset: 0

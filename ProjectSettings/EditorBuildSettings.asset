@@ -24,12 +24,9 @@ EditorBuildSettings:
     path: Assets/Levels/level 5.unity
     guid: d0b12c57d3b1a412c960b77a7f6927bb
   - enabled: 1
-<<<<<<< HEAD
-=======
     path: Assets/Levels/level 6.unity
     guid: 00647bee8b953463f9dc56d2c850624f
   - enabled: 1
->>>>>>> 9f673bb... New level designed
     path: Assets/Levels/end stage.unity
     guid: f5d96667a44ba45a9a7ca385a2d02c3a
   m_configObjects: {}

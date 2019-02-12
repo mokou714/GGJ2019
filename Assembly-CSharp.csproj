@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>4</LangVersion>
@@ -86,9 +86,10 @@
     <Compile Include="Assets\Script\Planet\levelNumber.cs" />
     <Compile Include="Assets\Script\Planet\levelPlanet.cs" />
     <Compile Include="Assets\Script\Planet\levelSelection.cs" />
+    <Compile Include="Assets\Script\Planet\movePlanet.cs" />
+    <Compile Include="Assets\Script\Planet\Planet.cs" />
     <Compile Include="Assets\Script\Planet\pulse.cs" />
     <Compile Include="Assets\Script\Planet\rotationPlanet.cs" />
-
     <Compile Include="Assets\Script\Player\spacecraft.cs" />
     <Compile Include="Assets\Script\RandomStars.cs" />
     <Compile Include="Assets\Script\Rotate.cs" />

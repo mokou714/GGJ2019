@@ -1,22 +1,22 @@
-﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Planet/rotationPlanet.cs">
+<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
+
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Asteroid/Asteroid.cs">
     <Files>
-      <File FileName="GGJ2019 Status" />
-      <File FileName="Assets/Script/Planet/giantPlanet.cs" Line="21" Column="50" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="39" Column="38" />
-      <File FileName="Assets/Script/Planet/rotationPlanet.cs" Line="35" Column="9" />
-      <File FileName="Assets/Giant1.cs" Line="37" Column="67" />
-      <File FileName="Assets/fade.cs" Line="21" Column="23" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="6" Column="24" />
-      <File FileName="Assets/Script/particleEffect/StartParticles.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/RandomStars.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="31" Column="15" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="113" Column="1" />
+      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="112" Column="44" />
+      <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="31" Column="13" />
+      <File FileName="Assets/Script/Constants.cs" Line="13" Column="40" />
+      <File FileName="Assets/levelPlanet.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Planet/movePlanet.cs" Line="28" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

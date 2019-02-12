@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,12 +61,8 @@ public class dustPlanet : MonoBehaviour
                 //check if spacecraft is not orbiting the same planet after launch
                 if( sc.prevRotatingPlanet == null ||  sc.prevRotatingPlanet != gameObject)
                 {
-<<<<<<< HEAD
                     //store player reference
                     thePlayerOnPlanet = ob;
-
-=======
->>>>>>> 9f673bb... New level designed
                     if (sc.energy < Constants.deathHealthVal)
                         return;
                     //rotate

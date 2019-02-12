@@ -14,8 +14,6 @@ public class Constants : MonoBehaviour {
 
     public static float deathHealthVal = 10;
 
-    public static float deathHealthVal = 10;
-
 	// Use this for initialization
 	void Start () {
 		

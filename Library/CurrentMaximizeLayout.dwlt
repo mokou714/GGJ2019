@@ -28,11 +28,15 @@ MonoBehaviour:
 =======
     width: 1440
     height: 760
-  m_MinSize: {x: 681, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 681, y: 342}
+  m_MaxSize: {x: 12006, y: 8042}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 8676
 >>>>>>> 9f673bb... New level designed
+=======
+  controlID: 9063
+>>>>>>> Stashed changes
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -132,14 +136,18 @@ MonoBehaviour:
     y: 0
     width: 1148
     height: 760
-  m_MinSize: {x: 404, y: 492}
-  m_MaxSize: {x: 10002, y: 14042}
+  m_MinSize: {x: 404, y: 342}
+  m_MaxSize: {x: 8004, y: 8042}
   vertical: 1
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   controlID: 227
 =======
   controlID: 8677
 >>>>>>> 9f673bb... New level designed
+=======
+  controlID: 9030
+>>>>>>> Stashed changes
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,11 +171,15 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   controlID: 209
 =======
   controlID: 8678
 >>>>>>> 9f673bb... New level designed
+=======
+  controlID: 8993
+>>>>>>> Stashed changes
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,8 +245,8 @@ MonoBehaviour:
     m_ExpandedIDs: e6fbffff000000009e2e0000
 =======
     scrollPos: {x: 0, y: 26}
-    m_SelectedIDs: 4aa1f7ff
-    m_LastClickedID: -548534
+    m_SelectedIDs: 
+    m_LastClickedID: 0
     m_ExpandedIDs: 4ea1f7ff6e58ffff8458ffff3865ffff7265ffffb065ffff8a69ffff44f2ffff58f2ffff82f2ffffe6fbffff00000000
 >>>>>>> 9f673bb... New level designed
     m_RenameOverlay:
@@ -432,15 +444,21 @@ MonoBehaviour:
     y: 460
     width: 1148
     height: 300
+<<<<<<< Updated upstream
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
 >>>>>>> 9f673bb... New level designed
   m_ActualView: {fileID: 11}
+=======
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 12}
+>>>>>>> Stashed changes
   m_Panes:
   - {fileID: 11}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -555,6 +573,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     m_SelectedInstanceIDs: e4fbffff
     m_LastClickedInstanceID: -1052
@@ -564,6 +583,11 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 4aa1f7ff
     m_LastClickedInstanceID: -548534
     m_HadKeyboardFocusLastEvent: 0
+=======
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+>>>>>>> Stashed changes
     m_ExpandedInstanceIDs: c6230000
 >>>>>>> 9f673bb... New level designed
     m_RenameOverlay:

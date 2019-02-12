@@ -1,17 +1,19 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GGJ2019 Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Asteroid/Asteroid.cs">
     <Files>
       <File FileName="Assets/Script/Constants.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="63" Column="18" />
+      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="96" Column="1" />
       <File FileName="Assets/Script/particleEffect/StopParticles.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Collision.cs" Line="62" Column="1" />
       <File FileName="Assets/levelSelection.cs" Line="82" Column="84" />
       <File FileName="Assets/levelPlanet.cs" Line="39" Column="33" />
       <File FileName="Assets/camController.cs" Line="112" Column="55" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="88" Column="35" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="173" Column="37" />
       <File FileName="Assets/selectionEffect.cs" Line="1" Column="1" />
       <File FileName="Assets/absorbPlanet.cs" Line="63" Column="44" />
       <File FileName="GGJ2019 Status" />
+      <File FileName="Assets/giantPlanet.cs" Line="31" Column="45" />
+      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

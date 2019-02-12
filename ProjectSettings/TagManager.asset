@@ -9,6 +9,12 @@ TagManager:
   - dustPlanet
   - begin
   - end
+  - asteroid
+  - orbaerolite
+  - orbasteroid
+  - squarePlanet
+  - spacecraft
+  - gaintPlanet
   layers:
   - Default
   - TransparentFX

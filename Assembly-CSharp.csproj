@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\absorbPlanet.cs" />
     <Compile Include="Assets\camController.cs" />
+    <Compile Include="Assets\giantPlanet.cs" />
     <Compile Include="Assets\levelNumber.cs" />
     <Compile Include="Assets\levelPlanet.cs" />
     <Compile Include="Assets\levelSelection.cs" />

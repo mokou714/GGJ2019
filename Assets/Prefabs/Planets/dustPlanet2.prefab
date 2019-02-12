@@ -65,7 +65,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1764809486259844
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123991577966308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7, y: -4.76, z: 0}
+  m_LocalPosition: {x: -10.260727, y: -0.78551006, z: 0}
   m_LocalScale: {x: 0.6125, y: 0.6375, z: 1}
   m_Children:
   - {fileID: 4399635066605586}
@@ -195,13 +195,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123991577966308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dustAmount: 50
   catchRadius: 2
+  thePlayerOnPlanet: {fileID: 0}
 --- !u!114 &114908086109299252
 MonoBehaviour:
   m_ObjectHideFlags: 1

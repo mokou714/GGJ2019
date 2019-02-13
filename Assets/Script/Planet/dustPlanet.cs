@@ -19,6 +19,8 @@ public class dustPlanet : MonoBehaviour
     private int origDustAmount;
     private GameObject origDust;
     private GameObject player;
+    private bool canPlaySound = true;
+
     // Use this for initialization
     void Start()
     {
@@ -100,27 +102,30 @@ public class dustPlanet : MonoBehaviour
                                                            
                     //landing sound  //comment for debug
 
-                    if (dustAmount > 0)
-                    {
-                        print("plays harp charge");
-
-                        AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-                    }
-                    else
-                    {
-                        if (SceneManager.GetActiveScene().buildIndex != 0)
+                    if(canPlaySound){
+                        if (dustAmount > 0)
                         {
-                            print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
-                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+                            print("plays harp charge");
 
-                            AudioManager.sfxNormalLandID++;
-                            if (AudioManager.sfxNormalLandID > 4)
+                            AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
+                        }
+                        else
+                        {
+                            if (SceneManager.GetActiveScene().buildIndex != 0)
                             {
-                                AudioManager.sfxNormalLandID = 1;
+                                Debug.Log("Sound played");
+                                AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+
+                                AudioManager.sfxNormalLandID++;
+                                if (AudioManager.sfxNormalLandID > 4)
+                                {
+                                    AudioManager.sfxNormalLandID = 1;
+                                }
                             }
                         }
-                    }
 
+                        canPlaySound = false;
+                    }
                     // change
                     if (sc.energy > 100f)
                         sc.energy = 100f;

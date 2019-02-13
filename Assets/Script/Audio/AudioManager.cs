@@ -183,112 +183,113 @@ public class AudioManager : MonoBehaviour
     }
 
     //Used to play a sound clip with the options to fade out and fade in
-    public void PlaySFX(string name, float fadeOutDuration = 0.2f, float fadeInDuration = 0.2f)
-    {
-        int si = 0;
-        int ci = 0;
-        AudioSource src;
+    //public void PlaySFX(string name, float fadeOutDuration = 0.3f, float fadeInDuration = 0.2f)
+    //{
+    //    int si = 0;
+    //    int ci = 0;
+    //    AudioSource src;
+    //    Debug.Log("Sound being played");
 
-        // find the primary audioSource registered for playing this clip
-        if (sfxSourceMap.TryGetValue(name, out si))
-        {
-            // if the primary audioSource is busy playing the same clip,
-            // find an idle backup source to play it
-            if (sfxSources[si].isPlaying)
-            {
-                // fade out it
-                StartCoroutine(FadeOut(sfxSources[si], fadeOutDuration));
+    //    // find the primary audioSource registered for playing this clip
+    //    if (sfxSourceMap.TryGetValue(name, out si))
+    //    {
+    //        // if the primary audioSource is busy playing the same clip,
+    //        // find an idle backup source to play it
+    //        if (sfxSources[si].isPlaying)
+    //        {
+    //            // fade out it
+    //            StartCoroutine(FadeOut(sfxSources[si], fadeOutDuration));
 
-                src = sfxBackupSources[sfxBackupSources.Count-1]; // get the last one by default
-                for (int i=0; i<sfxBackupSources.Count; i++)
-                {
-                    if(!sfxBackupSources[i].isPlaying)
-                    {
+    //            src = sfxBackupSources[sfxBackupSources.Count-1]; // get the last one by default
+    //            for (int i=0; i<sfxBackupSources.Count; i++)
+    //            {
+    //                if(!sfxBackupSources[i].isPlaying)
+    //                {
 
-                        src = sfxBackupSources[i];
-                        //print("backupSource: " + i);
-                        break;
-                    }
-                    else
-                    {
-                        // fade out the one currently playing 
-                        StartCoroutine(FadeOut(sfxBackupSources[i], fadeOutDuration));
-                    }
-                }
+    //                    src = sfxBackupSources[i];
+    //                    //print("backupSource: " + i);
+    //                    break;
+    //                }
+    //                else
+    //                {
+    //                    // fade out the one currently playing 
+    //                    StartCoroutine(FadeOut(sfxBackupSources[i], fadeOutDuration));
+    //                }
+    //            }
                 
-            }
-            else
-            {
-                // play the clip with the primary audioSource
-                src = sfxSources[si];
+    //        }
+    //        else
+    //        {
+    //            // play the clip with the primary audioSource
+    //            src = sfxSources[si];
 
-                // if a backup is playing the same clip at the same time, fade it out
-                for (int i = 0; i < sfxBackupSources.Count; i++)
-                {
-                    if (sfxBackupSources[i].isPlaying && sfxBackupSources[i].clip.name == name)
-                    {
-                        StartCoroutine(FadeOut(sfxBackupSources[i], fadeOutDuration));
+    //            // if a backup is playing the same clip at the same time, fade it out
+    //            for (int i = 0; i < sfxBackupSources.Count; i++)
+    //            {
+    //                if (sfxBackupSources[i].isPlaying && sfxBackupSources[i].clip.name == name)
+    //                {
+    //                    StartCoroutine(FadeOut(sfxBackupSources[i], fadeOutDuration));
 
-                        //print("fade out backupSource: " + i);
-                        break;
-                    }
+    //                    //print("fade out backupSource: " + i);
+    //                    break;
+    //                }
                     
-                }
-            }
+    //            }
+    //        }
 
-            // find the clip id from the sfxList by name
-            for (int i = 0; i < sfxList.Count; i++)
-            {
-                if (sfxList[i].name == name)
-                {
-                    ci = i;
-                    break;
-                }
-            }
+    //        // find the clip id from the sfxList by name
+    //        for (int i = 0; i < sfxList.Count; i++)
+    //        {
+    //            if (sfxList[i].name == name)
+    //            {
+    //                ci = i;
+    //                break;
+    //            }
+    //        }
 
 
-            // before switching clips, if the audioSource is playing something, fade it out
+    //        // before switching clips, if the audioSource is playing something, fade it out
 
-            if (fadeOutDuration != 0)
-            {
-                if (src.isPlaying)
-                {
-                    StartCoroutine(FadeOut(src, fadeOutDuration));
-                }
-            }
+    //        if (fadeOutDuration != 0)
+    //        {
+    //            if (src.isPlaying)
+    //            {
+    //                StartCoroutine(FadeOut(src, fadeOutDuration));
+    //            }
+    //        }
 
-            //Load the clip
-            src.clip = sfxList[ci];
+    //        //Load the clip
+    //        src.clip = sfxList[ci];
 
-            // varies its pitch if pitchVariation is applied to this clip in the inspector
-            foreach (string s in pitchVariationSFX)
-            {
-                if (s == name)
-                {
-                    RandomizePitch();
+    //        // varies its pitch if pitchVariation is applied to this clip in the inspector
+    //        foreach (string s in pitchVariationSFX)
+    //        {
+    //            if (s == name)
+    //            {
+    //                RandomizePitch();
 
-                    //Set the pitch of the audio source to the randomly chosen pitch.                     
-                    src.pitch = randomPitch;
+    //                //Set the pitch of the audio source to the randomly chosen pitch.                     
+    //                src.pitch = randomPitch;
 
-                    //print("src.pitch: " + src.pitch);
-                    break;
-                }
-            }
+    //                //print("src.pitch: " + src.pitch);
+    //                break;
+    //            }
+    //        }
 
-            //Play or Fade in.
-            if (fadeInDuration != 0)
-                StartCoroutine(FadeIn(src, fadeInDuration, 1f));
-            else
-                src.Play();
+    //        //Play or Fade in.
+    //        if (fadeInDuration != 0)
+    //            StartCoroutine(FadeIn(src, fadeInDuration, 1f));
+    //        else
+    //            src.Play();
                 
 
-        }
-        else
-        {
-            print("please specify which sfx source to play this sfx clip in AudioManager.sfxSourceMap");
-        }
+    //    }
+    //    else
+    //    {
+    //        print("please specify which sfx source to play this sfx clip in AudioManager.sfxSourceMap");
+    //    }
 
-    }
+    //}
 
 
 

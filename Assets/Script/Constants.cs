@@ -14,6 +14,8 @@ public class Constants : MonoBehaviour {
 
     public static float deathHealthVal = 10;
 
+    public static float energy2dis = 0.25f; //100 energy is 25 units
+
 	// Use this for initialization
 	void Start () {
 		

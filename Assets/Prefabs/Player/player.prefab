@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962804579093592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.13, y: -6.35, z: 0}
+  m_LocalPosition: {x: -13.93, y: 6.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4593579404404072}
@@ -297,7 +297,7 @@ TrailRenderer:
   m_Time: 1
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.2
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -372,17 +372,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   rotation_sensitivity: 80
-  launch_speed: 3
-  energy: 0
+  launch_speed: 0.9
+  energy: 100
+  camera: {fileID: 0}
   moving: 0
-  start_velocity: 5
+  start_velocity: 2
   end: {fileID: 0}
   rotating_speed: 3
   rotate_on: 0
   rotation_center: {x: 0, y: 0, z: 0}
   rotating_dir: 0
-  egdecSpeed: 0
-  rotating_planet: {fileID: 0}
+  egdecSpeed: 0.05
+  rotatingPlanet: {fileID: 0}
+  prevRotatingPlanet: {fileID: 0}
   movingStart: 0
   inwardVel: 0
   Player: {fileID: 0}
@@ -400,7 +402,7 @@ MonoBehaviour:
   collide_strengh: 3
   collided: 0
   asteroidDamage: 10
-  energyLossOnCollide: {fileID: 0}
+  energyLossOnCollide: {fileID: 198349327152283078}
 --- !u!114 &114246045861408196
 MonoBehaviour:
   m_ObjectHideFlags: 1

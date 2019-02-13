@@ -10,9 +10,11 @@ public class Constants : MonoBehaviour {
 
     public static float dustColiderRatio = 21.0f;
 
-    public static int maxNumOfLevel = 8;
+    public static int maxNumOfLevel = 10;
 
     public static float deathHealthVal = 10;
+
+    //public static float energy2dis = 0.2f; //100 energy is 25 units
 
 	// Use this for initialization
 	void Start () {

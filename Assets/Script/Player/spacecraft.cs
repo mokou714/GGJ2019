@@ -7,7 +7,11 @@ public class spacecraft : MonoBehaviour {
     This is the script executed in the player, responsible for player control and basic behaviors
     */
 
-    public float direction;
+    // postion when player launch from a planet, used an initial to calculate energy loss
+    Vector2 launchPos;
+    float maxDistance;
+    float launchEnergy; 
+
     public int rotation_sensitivity;
     public float launch_speed;
     public float energy;
@@ -25,11 +29,7 @@ public class spacecraft : MonoBehaviour {
     public bool rotate_on;
     public Vector3 rotation_center;
     public int rotating_dir;
-
-    /// <summary>
-    /// How fast player's life decreases when flying
-    /// </summary>
-    public float egdecSpeed;
+      
     public GameObject rotatingPlanet;
     public GameObject prevRotatingPlanet;
 
@@ -56,6 +56,8 @@ public class spacecraft : MonoBehaviour {
     private float speedThreshold = 3.5f;
 
     private float curMovingTime = 0;
+
+    public float energy2dis;
 
 	// Use this for initialization
 	void Start () {
@@ -149,6 +151,7 @@ public class spacecraft : MonoBehaviour {
             Rotate();
         }
         //Indicating wether the player is in orbit or flying straight
+        
         if(moving){
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
@@ -160,21 +163,25 @@ public class spacecraft : MonoBehaviour {
                 //Debug.Log("start recording :" + movingTime);
                 energyLoss.Play();
             }else{
-                float timeDuration = curMovingTime - movingTime;
-                float offset = 0;
                 if (parentRigidBody.velocity.magnitude < speedThreshold)
                 {
-                    offset = (curMovingTime - movingTime) / parentRigidBody.velocity.magnitude * 10;
-                }else{
-                    offset = ((curMovingTime - movingTime) * parentRigidBody.velocity.magnitude) * egdecSpeed;
+                    float dec = (curMovingTime - movingTime) / (parentRigidBody.velocity.magnitude + 0.1f);
+                    energy -= dec; // fast decrease
                 }
-                energy -= offset;
+                else
+                {
+                    // scale energy with distance
+                    float distance = Vector2.Distance((Vector2)transform.parent.position, launchPos);
+
+                    energy = launchEnergy * (1 - distance / maxDistance);
+                }
+                
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
 
             }
 
         }else{
-            //If the player is in orbit, stop lossing energy
+            //If the player is in orbit, stop lossing energy particles
             if (energyLoss.isEmitting)
                 energyLoss.Stop();
         }
@@ -227,6 +234,15 @@ public class spacecraft : MonoBehaviour {
         */
         rotate_on = false;
 
+        // update launch position
+        launchPos = transform.parent.position;
+
+        // update maximum distance that player can travel with the current energy
+        maxDistance = energy * energy2dis;
+
+        // record launchEnergy for later scaling player's energy with distance
+        launchEnergy = energy;
+
         //float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
         //float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
         Vector3 orig_vel = transform.parent.GetComponent<Rigidbody2D>().velocity;
@@ -238,7 +254,8 @@ public class spacecraft : MonoBehaviour {
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
-        rotatingPlanet.GetComponent<dustPlanet>().canPlaySound = true;
+        if(rotatingPlanet)
+            rotatingPlanet.GetComponent<dustPlanet>().canPlaySound = true;
         prevRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
 

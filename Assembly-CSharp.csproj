@@ -71,6 +71,7 @@
     <Compile Include="Assets\Script\Camera\camController.cs" />
     <Compile Include="Assets\Script\Collision.cs" />
     <Compile Include="Assets\Script\Constants.cs" />
+    <Compile Include="Assets\Script\GameStates.cs" />
     <Compile Include="Assets\Script\Init.cs" />
     <Compile Include="Assets\Script\Meteor\MeteorSpawner.cs" />
     <Compile Include="Assets\Script\particleEffect\DustParticles.cs" />

@@ -56,7 +56,17 @@ public class Collision : MonoBehaviour
                 if (cur_scene == Constants.maxNumOfLevel)
                     SceneManager.LoadScene("end stage");
                 else
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                {
+                    int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
+                    
+                    // load next level
+                    SceneManager.LoadScene(nextLevelID);
+
+                    // update level records
+                    GameStates.curLevelID = nextLevelID;
+                    GameStates.unlockedLevelID = nextLevelID;
+                }
+                    
                 return;
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;

@@ -105,7 +105,7 @@ public class dustPlanet : MonoBehaviour
                     if(canPlaySound){
                         if (dustAmount > 0)
                         {
-                            print("plays harp charge");
+                            //print("plays harp charge");
 
                             AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
                         }
@@ -113,7 +113,6 @@ public class dustPlanet : MonoBehaviour
                         {
                             if (SceneManager.GetActiveScene().buildIndex != 0)
                             {
-                                Debug.Log("Sound played");
                                 AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
                                 AudioManager.sfxNormalLandID++;

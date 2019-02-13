@@ -8,15 +8,9 @@ public class AudioManager : MonoBehaviour
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
     public List<AudioSource> sfxSources;
-
-    // Some sfx like "being hit" will be called frequently, 
-    // Need two or more audio sources to avoid noise in between two "being hit" plays
-    // reference: https://forum.unity.com/threads/problem-with-audio-crackling.482086/
-    public List<AudioSource> sfxBackupSources;
-
-
+    
     public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
-    public static AudioManager instance = null;     //Allows other scripts to call functions from SoundManager.             
+    public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
     float randomPitch;
@@ -119,16 +113,21 @@ public class AudioManager : MonoBehaviour
         // find the primary audioSource registered for playing this clip
         if (sfxSourceMap.TryGetValue(name, out si))
         {
+            // Some sfx like "being hit" will be called frequently, 
+            // Need two or more audio sources to avoid noise in between two "being hit" plays
+            // reference: https://forum.unity.com/threads/problem-with-audio-crackling.482086/
+
             // if the primary audioSource is busy playing the same clip,
-            // find an idle backup source to play it
+            // find an idle backup source (in its children) to play it
             if (sfxSources[si].isPlaying)
             {
-                src = sfxBackupSources[sfxBackupSources.Count - 1]; // get the last one by default
-                for (int i = 0; i < sfxBackupSources.Count; i++)
+                AudioSource[] backupSources = sfxSources[si].gameObject.GetComponentsInChildren<AudioSource>();
+                src = backupSources[backupSources.Length - 1]; // get the last one by default
+                for (int i = 0; i < backupSources.Length; i++)
                 {
-                    if (!sfxBackupSources[i].isPlaying)
+                    if (!backupSources[i].isPlaying)
                     {
-                        src = sfxBackupSources[i];
+                        src = backupSources[i];
                         //print("backupSource: " + i);
                         break;
                     }

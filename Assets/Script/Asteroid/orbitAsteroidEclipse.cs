@@ -31,9 +31,6 @@ public class orbitAsteroidEclipse : MonoBehaviour {
     void checkGravity()
     {
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, gravityRadius);
-        int i = 0;
-
         Vector2 pos1 = center.position;
 
         Vector2 pos2 = transform.position;

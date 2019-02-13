@@ -26,6 +26,9 @@ public class spacecraft : MonoBehaviour {
     public Vector3 rotation_center;
     public int rotating_dir;
 
+    /// <summary>
+    /// How fast player's life decreases when flying
+    /// </summary>
     public float egdecSpeed;
     public GameObject rotatingPlanet;
     public GameObject prevRotatingPlanet;

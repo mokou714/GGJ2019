@@ -238,10 +238,9 @@ public class spacecraft : MonoBehaviour {
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
+        rotatingPlanet.GetComponent<dustPlanet>().canPlaySound = true;
         prevRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
-
-
 
 
     }

@@ -19,7 +19,7 @@ public class dustPlanet : MonoBehaviour
     private int origDustAmount;
     private GameObject origDust;
     private GameObject player;
-    private bool canPlaySound = true;
+    public bool canPlaySound = true;
 
     // Use this for initialization
     void Start()

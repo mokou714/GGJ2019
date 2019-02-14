@@ -9,11 +9,11 @@ public class rotationPlanet : MonoBehaviour
     This class is attached on planet units, responsible for attracting the player, audio playing when orbiting starts
     */
 
+   
     public float catchRadius;
     public GameObject thePlayerOnPlanet;
+    public bool canPlaySound = true;
 
-
- 
     // Use this for initialization
     void Start()
     {
@@ -77,21 +77,22 @@ public class rotationPlanet : MonoBehaviour
                         sc.rotating_dir = 1; //clockwise rotation 
 
 
-                    //landing sound  //comment for debug
-
-                   
-                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                    if (canPlaySound)
                     {
-                        //print("sfxNormalLand id: " + AudioManager.sfxNormalLandID);
-                        AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
-
-                        AudioManager.sfxNormalLandID++;
-                        if (AudioManager.sfxNormalLandID > 4)
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
                         {
-                            AudioManager.sfxNormalLandID = 1;
-                        }
-                    }
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
+                            AudioManager.sfxNormalLandID++;
+                            if (AudioManager.sfxNormalLandID > 4)
+                            {
+                                AudioManager.sfxNormalLandID = 1;
+                            }
+                        }
+                        
+
+                        canPlaySound = false;
+                    }
                 }
 
             }
@@ -103,11 +104,11 @@ public class rotationPlanet : MonoBehaviour
     public void Recover()
     {
         /*
-        Todo: none for now
+        Todo: none
         */
-
     }
 
+  
 
 }
 

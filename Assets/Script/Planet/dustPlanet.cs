@@ -25,7 +25,7 @@ public class dustPlanet : Planet
     // Use this for initialization
     void Start()
     {
-        Debug.Log(tag);
+        //Debug.Log(tag);
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
         //Debug.Log(transform.GetChild(0).lossyScale);
@@ -49,7 +49,7 @@ public class dustPlanet : Planet
         */
         if (!startedAbsorb)
             return;
-        Debug.Log("Recover, " + startedAbsorb);
+        //Debug.Log("Recover, " + startedAbsorb);
         dustAmount = origDustAmount;
         origDust.SetActive(true);
         startedAbsorb = false;

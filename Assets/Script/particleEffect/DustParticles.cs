@@ -12,23 +12,24 @@ public class DustParticles : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (!transform.parent)
-			return;
-		planet = transform.parent.gameObject;
+		//if (!transform.parent)
+		//	return;
+		//planet = transform.parent.gameObject;
 
-		particles = GetComponent<ParticleSystem>();
-		savedPlanetGravityRad = particles.shape.radius;
+		//particles = GetComponent<ParticleSystem>();
+		//savedPlanetGravityRad = particles.shape.radius;
 
-        if (planet.GetComponent<dustPlanet>().dustAmount == 0)
-            savedPlanetGravityRad = 0f;
-
+        //if (planet.GetComponent<dustPlanet>().dustAmount == 0)
+            //savedPlanetGravityRad = 0f;
+        if (Application.isEditor)
+        {
+            checkSetDustSize();
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Application.isEditor) {
-			checkSetDustSize();
-		}
+
 	}
 
 	private void checkSetDustSize() {

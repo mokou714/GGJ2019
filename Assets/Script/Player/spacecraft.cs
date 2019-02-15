@@ -134,18 +134,21 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (requiredStop){
-            return;
-        }
-           
+
+
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
-        {
+
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1)){
+
             //Derail when the input is detected and player is in an orbit
-            if (rotate_on)
-                Launch();
+            if (!requiredStop){ //requiredStop is for pause request out of the player object
+                if (rotate_on)
+                    Launch();
+            }
+
+            
         }else if(Input.GetKeyDown(KeyCode.R)|| (Input.touchCount == 2)){
             SceneManager.LoadScene(Application.loadedLevel);
         }else if(rotate_on){
@@ -264,8 +267,6 @@ public class spacecraft : MonoBehaviour {
             rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
         prevRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
-
-
     }
 
     IEnumerator waitInHiding() {

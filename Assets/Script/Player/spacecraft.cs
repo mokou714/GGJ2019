@@ -39,25 +39,22 @@ public class spacecraft : MonoBehaviour {
     public float inwardVel;
     private float originalWidth;
 
-    private ParticleSystem energyLoss;
+    public ParticleSystem energyLoss;
     private Vector3 spawnPoint;
 
     public GameObject Player;
-    
 
     private float currTime = 0;
     private float startInSeconds = 1.5f;
-
     private bool hide = false;
     private bool startHide = false;
     private bool changedBack = true;
     private Rigidbody2D parentRigidBody;
-
     private float speedThreshold = 3.5f;
-
     private float curMovingTime = 0;
-
     public float energy2dis;
+
+    public bool requiredStop = false;
 
 	// Use this for initialization
 	void Start () {
@@ -126,6 +123,7 @@ public class spacecraft : MonoBehaviour {
 
                     if(dust_planet != null && dust != null){
                         dust_planet.Recover();
+                        //if(!dust_planet.transform.GetChild(0).gameObject.activeSelf)
                     }
                     break;
             }
@@ -136,6 +134,10 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (requiredStop){
+            return;
+        }
+           
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
@@ -192,8 +194,12 @@ public class spacecraft : MonoBehaviour {
             viewportPos.x < -0.2f ||
             viewportPos.x > 1.2f||
             viewportPos.y < -0.2f ||
-            viewportPos.y > 1.2
-           ){
+             viewportPos.y > 1.2){
+            //if (!reinited)
+            //{
+
+
+            //}
             //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();
             //transform.parent.GetComponent<BoxCollider2D>().enabled = false;
@@ -228,7 +234,7 @@ public class spacecraft : MonoBehaviour {
         transform.up = new Vector3(v_dir.x, v_dir.y, 0);
     }
 
-    void Launch(){
+    public void Launch(){
         /*
         Todo: This function makes the player derail when it is in an orbit 
         */
@@ -254,8 +260,8 @@ public class spacecraft : MonoBehaviour {
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
-        if(rotatingPlanet && rotatingPlanet.tag == "dustPlanet")
-            rotatingPlanet.GetComponent<dustPlanet>().canPlaySound = true;
+        if(rotatingPlanet)
+            rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
         prevRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
 

@@ -16,10 +16,13 @@ public class GameStates : MonoBehaviour {
     // audio
     public static bool isAudio = true;
 
-    [Range(0, 100f)] 
+    [Range(0, 1f)]
+    public static float masterVolume = 1.0f;
+
+    [Range(0, 1f)] 
     public static float bgmVolume = 1.0f;
 
-    [Range(0, 100f)]
+    [Range(0, 1f)]
     public static float sfxVolume = 1.0f;
 
 

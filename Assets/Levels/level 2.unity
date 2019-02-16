@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  catch_radius: 2
+  catch_radius: 1.5
 --- !u!1001 &731366920
 Prefab:
   m_ObjectHideFlags: 0

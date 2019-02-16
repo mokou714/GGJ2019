@@ -22,7 +22,7 @@ public class pulse : MonoBehaviour {
     void Start(){
         scaleFactor = 1f;
 
-        defaultScale = transform.localScale;
+        defaultScale = transform.lossyScale;
 
         StartCoroutine(Scale());
         //StartCoroutine(Pulse());
@@ -31,17 +31,7 @@ public class pulse : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-
-
-        //sc += pulseSpeed * Time.deltaTime * scaleDir;
-
-        //if (currentScale > maxScale) {
-        //    scaleDir = -1;
-        //}
-        //else if(currentScale < minScale) {
-        //    scaleDir = 1;
-        //}
+        
         player = GetComponent<dustPlanet>().thePlayerOnPlanet;
         if (player == null)
         {
@@ -64,17 +54,11 @@ public class pulse : MonoBehaviour {
                 transform.GetComponent<dustPlanet>().catchRadius *= scaleFactor;
                 if (player != null)
                 {
-                    //float _closeDistance = Vector3.Distance(player.transform.position, transform.position) - transform.GetComponent<dustPlanet>().catchRadius;
-                    //Vector3 _dir = (transform.position - player.transform.position).normalized;
-
                     Vector3 newPos = transform.position - (transform.position - player.transform.position) * scaleFactor;
-
                     player.transform.position = newPos;
                 }
             }
             yield return new WaitForSeconds(0.01f);
-
-
         }
 
     }

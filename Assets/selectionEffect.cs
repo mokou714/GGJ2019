@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class selectionEffect : MonoBehaviour {
+using UnityEngine.EventSystems;
+//ref https://stackoverflow.com/questions/41391708/how-to-detect-click-touch-events-on-ui-and-gameobjects
+
+public class selectionEffect : MonoBehaviour, 
+    IPointerEnterHandler, IPointerExitHandler
+{
 
 
     public float largeScale;
@@ -11,13 +16,26 @@ public class selectionEffect : MonoBehaviour {
   
 
 	// Use this for initialization
-	void Start () {
+
+    void Start()
+    {
         originScale = transform.GetChild(0).localScale;
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        // automatically add Physics2DRaycaster to maincamera to make EventSystem work
+        addPhysics2DRaycaster();
+    }
+
+    void addPhysics2DRaycaster()
+    {
+        Physics2DRaycaster physicsRaycaster = GameObject.FindObjectOfType<Physics2DRaycaster>();
+        if (physicsRaycaster == null)
+        {
+            Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -57,21 +75,16 @@ public class selectionEffect : MonoBehaviour {
         }
     }
 
-
-
-
-    private void OnMouseEnter()
+    // use these for both mouse and touch
+    public void OnPointerEnter(PointerEventData eventData)
     {
         transform.GetChild(0).localScale = new Vector3(largeScale, largeScale, 0f);
-
-
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-
         transform.GetChild(0).localScale = originScale;
-
     }
 
+  
 }

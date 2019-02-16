@@ -221,9 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &198490412
 Prefab:
   m_ObjectHideFlags: 0
@@ -430,9 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &386727316
 Prefab:
   m_ObjectHideFlags: 0
@@ -654,9 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.3
 --- !u!1001 &619132716
 Prefab:
   m_ObjectHideFlags: 0
@@ -765,9 +756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &712312783
 Prefab:
   m_ObjectHideFlags: 0
@@ -1028,9 +1016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &1087529491
 Prefab:
   m_ObjectHideFlags: 0
@@ -1740,7 +1725,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4179590927986564, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -15.6
       objectReference: {fileID: 0}
     - target: {fileID: 4179590927986564, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1761,11 +1746,6 @@ Prefab:
     - target: {fileID: 4179590927986564, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 81589547551874116, guid: fa6b071a557be408ba28087e367e2dfe,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}

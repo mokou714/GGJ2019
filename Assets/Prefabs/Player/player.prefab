@@ -217,7 +217,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58896924396041170
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -370,7 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000350fd68d4e4a6db7d151734e6d150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
   rotation_sensitivity: 80
   launch_speed: 0.9
   energy: 100
@@ -382,12 +381,14 @@ MonoBehaviour:
   rotate_on: 0
   rotation_center: {x: 0, y: 0, z: 0}
   rotating_dir: 0
-  egdecSpeed: 0.05
   rotatingPlanet: {fileID: 0}
   prevRotatingPlanet: {fileID: 0}
   movingStart: 0
   inwardVel: 0
+  energyLoss: {fileID: 0}
   Player: {fileID: 0}
+  energy2dis: 0
+  requiredStop: 0
 --- !u!114 &114211800358767892
 MonoBehaviour:
   m_ObjectHideFlags: 1

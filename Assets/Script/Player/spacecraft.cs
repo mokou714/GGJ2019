@@ -88,8 +88,6 @@ public class spacecraft : MonoBehaviour {
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotatingPlanet = null;
         prevRotatingPlanet = null;
-        transform.parent.rotation = Quaternion.Euler(0, 0, 0);//spaceship's parent rotation should be (0,0,0)
-        //Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
     }
 	
     private void ReinitScene(){
@@ -134,7 +132,6 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
@@ -184,7 +181,6 @@ public class spacecraft : MonoBehaviour {
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
 
             }
-
         }else{
             //If the player is in orbit, stop lossing energy particles
             if (energyLoss.isEmitting)
@@ -198,12 +194,6 @@ public class spacecraft : MonoBehaviour {
             viewportPos.x > 1.2f||
             viewportPos.y < -0.2f ||
              viewportPos.y > 1.2){
-            //if (!reinited)
-            //{
-
-
-            //}
-            //Application.LoadLevel(Application.loadedLevel);
             energyLoss.Stop();
             //transform.parent.GetComponent<BoxCollider2D>().enabled = false;
             //transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;

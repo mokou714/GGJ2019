@@ -12,15 +12,19 @@ public class DustParticles : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//if (!transform.parent)
-		//	return;
-		//planet = transform.parent.gameObject;
+		if (!transform.parent)
+			return;
+		planet = transform.parent.gameObject;
 
-		//particles = GetComponent<ParticleSystem>();
-		//savedPlanetGravityRad = particles.shape.radius;
+		particles = GetComponent<ParticleSystem>();
+		savedPlanetGravityRad = particles.shape.radius;
 
-        //if (planet.GetComponent<dustPlanet>().dustAmount == 0)
-            //savedPlanetGravityRad = 0f;
+        Debug.Log("savedgravityRad: " + transform.parent.gameObject + ", " + savedPlanetGravityRad);
+        if (planet.GetComponent<dustPlanet>().dustAmount == 0)
+            savedPlanetGravityRad = 0f;
+
+
+
         if (Application.isEditor)
         {
             checkSetDustSize();
@@ -41,11 +45,12 @@ public class DustParticles : MonoBehaviour {
         savedPlanetGravityRad = planetGrav.catchRadius;
 		var pShape = particles.shape;
 		pShape.radius = savedPlanetGravityRad;
+
 		CircleCollider2D coll;
 		if ((coll = GetComponent<CircleCollider2D>()) != null) {
 			coll.radius = savedPlanetGravityRad;
 		}
-		particles.Stop();
+		//particles.Stop();
 		//print("Changed");
 	}
 

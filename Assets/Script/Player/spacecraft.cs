@@ -88,7 +88,7 @@ public class spacecraft : MonoBehaviour {
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotatingPlanet = null;
         prevRotatingPlanet = null;
-
+        transform.parent.rotation = Quaternion.Euler(0, 0, 0);//spaceship's parent rotation should be (0,0,0)
         //Debug.Log("Reinitialized player: " + parentRigidBody.velocity);
     }
 	

@@ -65,7 +65,10 @@ public class GameStates : MonoBehaviour {
     private void OnApplicationQuit()
     {
         if (isSaving)
+        {
             SaveLevel();
+            SaveSettings();
+        }
         else
             // clear keys
             PlayerPrefs.DeleteAll();
@@ -93,12 +96,13 @@ public class GameStates : MonoBehaviour {
     public void SaveSettings()
     {
         PlayerPrefs.SetInt("hasSavedSettings", 1);
+        PlayerPrefs.SetFloat("masterVolume", masterVolume);
 
         PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
         PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
         PlayerPrefs.Save();
 
-        print("save settings");
+        print("saved settings");
 
     }
 
@@ -129,11 +133,16 @@ public class GameStates : MonoBehaviour {
         // check if it is the first time playing
         if (PlayerPrefs.HasKey("hasSavedSettings"))
         {
+
+            masterVolume = PlayerPrefs.GetFloat("masterVolume");
             bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
- 
+
 
             // to do: apply settings 
+
+            // load audio volume player has set last time;
+            UIManager.instance.audioSlider.value = masterVolume * 100f;
         }
     }
 

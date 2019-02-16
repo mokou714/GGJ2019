@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 //ref https://stackoverflow.com/questions/41391708/how-to-detect-click-touch-events-on-ui-and-gameobjects
 
 public class selectionEffect : MonoBehaviour, 
-    IPointerEnterHandler, IPointerExitHandler
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
 
@@ -86,5 +86,8 @@ public class selectionEffect : MonoBehaviour,
         transform.GetChild(0).localScale = originScale;
     }
 
-  
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
 }

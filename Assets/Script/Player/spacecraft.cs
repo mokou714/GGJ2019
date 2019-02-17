@@ -219,7 +219,7 @@ public class spacecraft : MonoBehaviour {
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
         Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;
-        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV;
+        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * 1/(10*rotatingPlanet.GetComponent<Planet>().catchRadius);
 
     }
 

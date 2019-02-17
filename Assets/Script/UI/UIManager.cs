@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    public void Start () {
 
         homeButton.onClick.AddListener(OnHomeButtonClicked);
         audioButton.onClick.AddListener(OnAudioButtonClicked);
@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour {
         audioSlider.maxValue = 100f;
         audioSlider.minValue = 0f;
         audioSlider.onValueChanged.AddListener(delegate { OnAudioSliderValueChanged(); });
+
+
     }
 
     private void OnAudioButtonClicked()
@@ -55,7 +57,12 @@ public class UIManager : MonoBehaviour {
 
     void OnAudioSliderValueChanged()
     {
-        GameStates.masterVolume = audioSlider.value / 100f;
+        float vol = audioSlider.value / 100f;
+
+        GameStates.masterVolume = vol; // for saving system settings
+
+        AudioManager.instance.ChangeMasterVolume(vol); // change vol
+
     }
 
     // Update is called once per frame

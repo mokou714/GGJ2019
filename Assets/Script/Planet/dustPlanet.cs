@@ -95,7 +95,7 @@ public class dustPlanet : Planet
         //dust absorbed
         ParticlesAbsorb pA;
 
-        if (!startedAbsorb && (pA = playerObj.GetComponent<ParticlesAbsorb>()) != null && tag == "dustPlanet"){
+        if (!startedAbsorb && (pA = playerObj.GetComponent<ParticlesAbsorb>()) != null && (tag == "dustPlanet") ){
             StartCoroutine(pA.absorbParticles(transform.GetChild(0).GetComponent<ParticleSystem>()));
 
             transform.GetChild(transform.childCount - 1).SetSiblingIndex(0);

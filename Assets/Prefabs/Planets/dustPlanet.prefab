@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1697982102439400
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,10 +74,10 @@ GameObject:
   - component: {fileID: 212132039997899586}
   - component: {fileID: 50251985316420246}
   - component: {fileID: 58520335255964302}
-  - component: {fileID: 114989099375806590}
+  - component: {fileID: 114734457374709920}
   m_Layer: 0
   m_Name: dustPlanet
-  m_TagString: dustPlanet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 1025441664496002}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 4402324675037206}
   m_RootOrder: 2
@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958024634384188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.4, y: 5.52, z: 0}
+  m_LocalPosition: {x: -0.25, y: -2.7199998, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children:
   - {fileID: 4258329000448986}
@@ -171,7 +171,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.003130436, y: 0.00019043684}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2
 --- !u!58 &58520335255964302
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0db34722f9ed4789963b75472b6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114989099375806590
+--- !u!114 &114734457374709920
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,8 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dustAmount: 50
-  catchRadius: 2
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  dustAmount: 0
+  catchRadius: 1.4
 --- !u!198 &198290117134269834
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -865,7 +867,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2.5
+      value: 2
       mode: 0
       spread: 0
       speed:

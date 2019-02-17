@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using UnityEngine.EventSystems;
 //ref https://stackoverflow.com/questions/41391708/how-to-detect-click-touch-events-on-ui-and-gameobjects
 
 public class selectionEffect : MonoBehaviour, 
-    IPointerEnterHandler, IPointerExitHandler
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
 
@@ -86,5 +87,15 @@ public class selectionEffect : MonoBehaviour,
         transform.GetChild(0).localScale = originScale;
     }
 
-  
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        string levelName = gameObject.name;
+        print(levelName);
+
+        int levelID = System.Array.IndexOf(GameStates.instance.levels, levelName);
+
+        // load level
+        SceneManager.LoadScene(levelID);
+        UIManager.instance.Start();
+    }
 }

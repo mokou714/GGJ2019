@@ -19,7 +19,7 @@ public class DustParticles : MonoBehaviour {
 		particles = GetComponent<ParticleSystem>();
 		savedPlanetGravityRad = particles.shape.radius;
 
-        Debug.Log("savedgravityRad: " + transform.parent.gameObject + ", " + savedPlanetGravityRad);
+        //Debug.Log("savedgravityRad: " + transform.parent.gameObject + ", " + savedPlanetGravityRad);
         if (planet.GetComponent<dustPlanet>().dustAmount == 0)
             savedPlanetGravityRad = 0f;
 

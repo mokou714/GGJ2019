@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     // sometimes we will have more than one sfx clip playing at the same time
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
-    public List<AudioSource> sfxSources;
+    public AudioSource[] sfxSources;
     
     public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
@@ -19,10 +19,10 @@ public class AudioManager : MonoBehaviour
     public static int sfxNormalLandID = 1;
 
     // Music clip List
-    public List<AudioClip> musicList;
+    public AudioClip[] musicList;
 
     // SFX clip List
-    public List<AudioClip> sfxList;
+    public AudioClip[] sfxList;
 
     // specifies which sfx clip (name) will be played primarily on which sfx source (id in sfxSources list)
     public Dictionary<string, int> sfxSourceMap;
@@ -77,6 +77,7 @@ public class AudioManager : MonoBehaviour
         //    print(key + " = " + val);
         //}
 
+
     }
 
     // Update is called once per frame
@@ -85,7 +86,6 @@ public class AudioManager : MonoBehaviour
 
 
     }
-
 
     //Used to play a bgm music clip by its name
     public void PlayMusic(string name, bool isLoop = true)
@@ -142,7 +142,7 @@ public class AudioManager : MonoBehaviour
             }
 
             // find the clip id from the sfxList by name
-            for (int i = 0; i < sfxList.Count; i++)
+            for (int i = 0; i < sfxList.Length; i++)
             {
                 if (sfxList[i].name == name)
                 {
@@ -170,7 +170,7 @@ public class AudioManager : MonoBehaviour
                     break;
                 }
             }
-
+            
             src.Play();
             
         }
@@ -181,6 +181,21 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    public void ChangeMasterVolume(float v)
+    {
+        ChangeBGMVolume(v);
+        ChangeSFXVolume(v);
+    }
+
+    public void ChangeBGMVolume(float v)
+    {
+        musicSource.volume = v;
+    }
+    public void ChangeSFXVolume(float v)
+    {
+        foreach (AudioSource a in sfxSources)
+            a.volume = v;
+    }
     //Used to play a sound clip with the options to fade out and fade in
     //public void PlaySFX(string name, float fadeOutDuration = 0.3f, float fadeInDuration = 0.2f)
     //{
@@ -215,7 +230,7 @@ public class AudioManager : MonoBehaviour
     //                    StartCoroutine(FadeOut(sfxBackupSources[i], fadeOutDuration));
     //                }
     //            }
-                
+
     //        }
     //        else
     //        {
@@ -232,7 +247,7 @@ public class AudioManager : MonoBehaviour
     //                    //print("fade out backupSource: " + i);
     //                    break;
     //                }
-                    
+
     //            }
     //        }
 
@@ -280,7 +295,7 @@ public class AudioManager : MonoBehaviour
     //            StartCoroutine(FadeIn(src, fadeInDuration, 1f));
     //        else
     //            src.Play();
-                
+
 
     //    }
     //    else

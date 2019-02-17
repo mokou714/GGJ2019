@@ -14,7 +14,7 @@ public class normalPlanet : Planet {
         checkCatching();
 	}
 
-    public override void catchedAction(spacecraft sc)
+	public override void catchedAction(spacecraft sc)
 	{
         return;
 	}

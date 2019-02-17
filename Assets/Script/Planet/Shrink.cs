@@ -29,6 +29,7 @@ public class Shrink : MonoBehaviour {
 
         defaultScale = transform.localScale;
 
+        //Record the original scale for each component for later resizing
         origScale = transform.GetChild(0).transform.localScale;
         origChildScale = transform.GetChild(1).transform.localScale;
         origCatchRadius = transform.GetComponent<dustPlanet>().catchRadius;

@@ -57,6 +57,8 @@ public class spacecraft : MonoBehaviour {
 
     public bool requiredStop = false;
 
+    private float _angle;
+
 	// Use this for initialization
 	void Start () {
         energy = 100f;
@@ -210,14 +212,16 @@ public class spacecraft : MonoBehaviour {
         Todo: this function is for keeping the player rotating around a planet when it is around one
         */
 
+        //transform.RotateAround(rotation_center, Vector3.forward, rotating_speed * Time.deltaTime);
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
-     
-        Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
+        float dis = Vector2.Distance(pos1, pos2);
+        Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
         Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
+
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * 1/(10*rotatingPlanet.GetComponent<Planet>().catchRadius);
 
@@ -249,8 +253,13 @@ public class spacecraft : MonoBehaviour {
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
-        if(rotatingPlanet)
+
+        if(rotatingPlanet){
+            //Dereference the player on the current planet
             rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
+            rotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
+        }
+            
         prevRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
     }

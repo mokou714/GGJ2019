@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,10 +31,18 @@ public abstract class Planet : MonoBehaviour
 
     public void checkCatching()
     {
+        if (thePlayerOnPlanet != null){
+            return;
+        }
+
+        //Debug.Log("Catched step 1" + name);
+
         //Keep scanning around itself to find if player is around
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, catchRadius);
         int i = 0;
+
+
 
         //if player leaves the planet, delete the reference
         if (thePlayerOnPlanet != null)
@@ -49,6 +57,7 @@ public abstract class Planet : MonoBehaviour
             //player catched
             if (ob != gameObject && ob.tag == "Player" && Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
             {
+
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
                 Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
@@ -65,6 +74,7 @@ public abstract class Planet : MonoBehaviour
                 {
                     //store player reference
                     thePlayerOnPlanet = ob;
+
                     if (sc.energy < Constants.deathHealthVal)
                         return;
 

@@ -13,9 +13,6 @@ public abstract class Planet : MonoBehaviour
     protected GameObject playerObj;
     public float catchRadius;
     public int dustAmount;
-    public float rotatingCheckTime;
-    public bool isSwitching;
-    private float checkTimeInterval = 0.1f;
 
     // Use this for initialization
     void Start()
@@ -34,6 +31,7 @@ public abstract class Planet : MonoBehaviour
     public void checkCatching()
     {
         if (thePlayerOnPlanet != null){
+            //If the planet already has the player, do not checkCatching until it leaves
             return;
         }
 
@@ -62,14 +60,14 @@ public abstract class Planet : MonoBehaviour
                 //Conditions of automatic switch of planets: the current rotatingPlanet is not null and not equal to the attracting planet
                 if(sc.rotatingPlanet != null && sc.rotatingPlanet != gameObject){
                     Debug.Log("Slow response");
-                    //When it is switching to a new planet automatically, the responding time show be longer
+                    //When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
                     transferCenter(ob, sc, 1f);
                 }else{
                     //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
-                    if(sc.rotatingPlanet == null || (sc.rotatingPlanet != gameObject)){
+                    if((sc.rotatingPlanet == null && sc.preTempPlanet != gameObject)){
                         Debug.Log("Quick response");
-                        //When it is switching to a new planet manually, the responding time show be shorter
-                        transferCenter(ob, sc, 0.1f);
+                        //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
+                        transferCenter(ob, sc);
                     }
                 }
             }
@@ -78,7 +76,7 @@ public abstract class Planet : MonoBehaviour
         }
     }
 
-    private void transferCenter(GameObject ob ,spacecraft sc, float checkInterval){
+    private void transferCenter(GameObject ob ,spacecraft sc, float checkInterval = 0){
 
         Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
                                      transform.position.y - sc.transform.position.y);
@@ -87,7 +85,7 @@ public abstract class Planet : MonoBehaviour
         float angle = Vector2.SignedAngle(v1, v2);
 
         //check if spacecraft is not orbiting the same planet after launch
-        Debug.Log(sc.rotatingPlanet + ", " + (Time.time - sc.checkRotatingTime));
+        //Debug.Log(sc.rotatingPlanet + ", " + (Time.time - sc.checkRotatingTime));
         if (Time.time - sc.checkRotatingTime > checkInterval)
         ////&& angle <= 90f && angle >= -90f )//&& 
         {
@@ -95,7 +93,6 @@ public abstract class Planet : MonoBehaviour
 
             if (sc.energy < Constants.deathHealthVal)
                 return;
-
             //rotate
             if (!sc.moving)
             { //player did not launch
@@ -118,29 +115,24 @@ public abstract class Planet : MonoBehaviour
             else
                 sc.rotating_dir = 1; //clockwise rotation 
 
-            sc.prevRotatingPlanet = sc.preTemp;
-
+            sc.prevRotatingPlanet = sc.preTempPlanet;
+            sc.preTempPlanet = null;
             catchedAction(sc);
-            Debug.Log("Switched");
+            //Debug.Log("Switched");
 
-            //landing sound  //comment for debug
-            if (canPlaySound)
-            {
-                if (dustAmount > 0)
-                {
+            //landing sound 
+            if (canPlaySound){
+                //Indicate if the sound should be played so that it doesn't play repeatedly
+                if (dustAmount > 0){
                     //print("plays harp charge");
-
                     AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
                 }
-                else
-                {
-                    if (SceneManager.GetActiveScene().buildIndex != 0)
-                    {
+                else{
+                    if (SceneManager.GetActiveScene().buildIndex != 0){
                         AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
                         AudioManager.sfxNormalLandID++;
-                        if (AudioManager.sfxNormalLandID > 4)
-                        {
+                        if (AudioManager.sfxNormalLandID > 4){
                             AudioManager.sfxNormalLandID = 1;
                         }
                     }

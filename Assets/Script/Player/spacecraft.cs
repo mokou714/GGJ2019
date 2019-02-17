@@ -32,12 +32,11 @@ public class spacecraft : MonoBehaviour {
       
     public GameObject rotatingPlanet;
     public GameObject prevRotatingPlanet;
-    public GameObject preTemp;
+    public GameObject preTempPlanet;
 
     private float movingTime = 0;
     public bool movingStart;
 
-    public float inwardVel;
     private float originalWidth;
 
     public ParticleSystem energyLoss;
@@ -88,8 +87,7 @@ public class spacecraft : MonoBehaviour {
         moving = false;
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
-        rotatingPlanet = null;
-        prevRotatingPlanet = null;
+        rotatingPlanet = prevRotatingPlanet = preTempPlanet = null;
     }
 	
     private void ReinitScene(){
@@ -98,7 +96,7 @@ public class spacecraft : MonoBehaviour {
         */
         object[] scene_obj = FindObjectsOfType(typeof(GameObject));
         foreach (object obj in scene_obj){
-            //Iterate through all the gameobject in this scene
+            //Iterate through all the gameobject in this scene to execute their reinitializations
             GameObject single_obj = (GameObject)obj;
             string obj_tag = single_obj.tag;
 
@@ -121,6 +119,7 @@ public class spacecraft : MonoBehaviour {
                     dustPlanet dust_planet = single_obj.gameObject.GetComponent<dustPlanet>();
                     //Debug.Log("Dust planet recover: "  + dust_planet);
 
+                    //Determine if it actually has dust
                     if(dust_planet != null && dust != null){
                         dust_planet.Recover();
                         //if(!dust_planet.transform.GetChild(0).gameObject.activeSelf)
@@ -133,21 +132,17 @@ public class spacecraft : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void FixedUpdate () {
-
+	void Update () {
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
-
 
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1)){
 
             //Derail when the input is detected and player is in an orbit
-            if (!requiredStop){ //requiredStop is for pause request out of the player object
+            if (!requiredStop){ //requiredStop is for pause request out of the player object such as from tutorial manager
                 if (rotate_on)
                     Launch();
             }
-
-            
         }else if(Input.GetKeyDown(KeyCode.R)|| (Input.touchCount == 2)){
             SceneManager.LoadScene(Application.loadedLevel);
         }else if(rotate_on){
@@ -189,7 +184,7 @@ public class spacecraft : MonoBehaviour {
                 energyLoss.Stop();
         }
 
-        // Death detection
+        // Death detection, when the player is out of the camera view
         Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
         if (energy <= 5f ||
             viewportPos.x < -0.2f ||
@@ -211,20 +206,21 @@ public class spacecraft : MonoBehaviour {
         Todo: this function is for keeping the player rotating around a planet when it is around one
         */
 
-        Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
-        Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
+        Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position
+        Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position
      
         Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
         Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
-        Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;
+        Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;//Get the tangent line 
+
+        //Set up a proper inward velocity depending on the planet's catchRadius to prevent the player rotating outward
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * 1/(10*rotatingPlanet.GetComponent<Planet>().catchRadius);
 
     }
 
-    public void Launch(float speed = 0.9f){
+    public void Launch(){
         /*
         Todo: This function makes the player derail when it is in an orbit 
         */
@@ -249,15 +245,18 @@ public class spacecraft : MonoBehaviour {
 
         if (origin_speed < 0.1f)
             origin_speed = 1f;
-        transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * speed;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
+
         if(rotatingPlanet){
+            //Ajust parameter of the current planet
             rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
             rotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
         }
         checkRotatingTime = Time.time;
-        //prevRotatingPlanet = rotatingPlanet;
-        preTemp = rotatingPlanet;
+
+        //Do not assign this planet to preRotatingPlanet until it lands on another planet
+        preTempPlanet = rotatingPlanet;
         rotatingPlanet = null;
     }
 
@@ -268,7 +267,6 @@ public class spacecraft : MonoBehaviour {
         transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
         yield return new WaitForSeconds(0.1f);
-        //Debug.Log("show!!!!!!!");
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         transform.parent.transform.position = spawnPoint;
         ReinitPlayer();

@@ -20,7 +20,9 @@ public class dustPlanet : Planet
     private int origDustAmount;
     private GameObject origDust;
     private GameObject player;
-    //public bool canPlaySound = true;
+    private Vector3 origSizeRatio;
+
+    private int index_planet = 1;//Find out the index of planet component so that the dust can be correctly resized when respawn
 
     // Use this for initialization
     void Start()
@@ -29,10 +31,16 @@ public class dustPlanet : Planet
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
         //Debug.Log(transform.GetChild(0).lossyScale);
+        //Debug.Log("Planet ref," + index);
+        while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
+            index_planet++;
+        //Debug.Log("Planet ref," + planetRef);
         if (transform.childCount > 0)
         {
             origDust = copyDust(transform.GetChild(0).gameObject);
         }
+
+
     }
 
     // Update is called once per frame
@@ -51,6 +59,8 @@ public class dustPlanet : Planet
             return;
         //Debug.Log("Recover, " + startedAbsorb);
         dustAmount = origDustAmount;
+        origDust.transform.localScale = new Vector3(origSizeRatio.x/transform.GetChild(index_planet).localScale.x, origSizeRatio.y/transform.GetChild(index_planet).localScale.y, origSizeRatio.z/transform.GetChild(index_planet).localScale.z);
+        Debug.Log(origDust.transform.localScale);
         origDust.SetActive(true);
         startedAbsorb = false;
         if (transform.childCount > 0)
@@ -69,7 +79,8 @@ public class dustPlanet : Planet
         GameObject new_dust = Instantiate(dust);
         new_dust.transform.position = dust.transform.position;
         //Debug.Log(new_dust.transform.localScale + ", " + dust.transform.lossyScale);
-        new_dust.transform.localScale = dust.transform.lossyScale;
+        origSizeRatio = Vector3.Scale(transform.GetChild(index_planet).localScale, dust.transform.localScale);
+
         new_dust.transform.SetParent(transform);
         new_dust.SetActive(false);
         return new_dust;

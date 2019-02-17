@@ -88,6 +88,7 @@
     <Compile Include="Assets\Script\Planet\levelPlanet.cs" />
     <Compile Include="Assets\Script\Planet\levelSelection.cs" />
     <Compile Include="Assets\Script\Planet\movePlanet.cs" />
+    <Compile Include="Assets\Script\Planet\normalPlanet.cs" />
     <Compile Include="Assets\Script\Planet\Planet.cs" />
     <Compile Include="Assets\Script\Planet\pulse.cs" />
     <Compile Include="Assets\Script\Planet\rotationPlanet.cs" />

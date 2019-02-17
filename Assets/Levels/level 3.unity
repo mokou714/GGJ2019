@@ -186,12 +186,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 104214630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  catch_radius: 1.2
+  catchRadius: 1.2
+  dustAmount: 0
 --- !u!1 &275000343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1544194739302932, guid: fa6b071a557be408ba28087e367e2dfe,
@@ -272,6 +273,21 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catch_radius: 1.1
+--- !u!114 &354569150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354569148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 1.2
+  dustAmount: 0
 --- !u!1001 &483016432
 Prefab:
   m_ObjectHideFlags: 0
@@ -1646,12 +1662,12 @@ Prefab:
     - target: {fileID: 198271666226290142, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: ShapeModule.radius.value
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 58854046470986496, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4845388147621012, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalScale.x

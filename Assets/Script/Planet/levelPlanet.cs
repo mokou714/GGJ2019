@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class levelPlanet : Planet {
 
-    public float catchRadius;
+    //public float catchRadius;
     public int level;
 
     public bool showingSelection;
@@ -24,7 +24,6 @@ public class levelPlanet : Planet {
 	// Update is called once per frame
 	void Update () {
 
-        checkCatching(catchRadius, 0);
         if (showingSelection) {
             //store a copy of showlevels coroutine
             showLevel = showLevels();

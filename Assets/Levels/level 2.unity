@@ -349,8 +349,13 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1639951780786376, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114989099375806590, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+    - {fileID: 114734457374709920, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &514511678
@@ -395,25 +400,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585bcc8554b2a3d4db81dddbf0d35826, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &527779859 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1530193286665622, guid: ba27921cd2fe54877aedee93c7f6cae5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1114331508}
---- !u!114 &527779860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 527779859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 2
 --- !u!1 &691824295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
@@ -430,9 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &731366920
 Prefab:
   m_ObjectHideFlags: 0
@@ -803,8 +786,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  dustAmount: 40
   catchRadius: 2
+  dustAmount: 40
 --- !u!1001 &1114331508
 Prefab:
   m_ObjectHideFlags: 0
@@ -853,6 +836,26 @@ Prefab:
     - {fileID: 114044126834636180, guid: ba27921cd2fe54877aedee93c7f6cae5, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: ba27921cd2fe54877aedee93c7f6cae5, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1114331509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1530193286665622, guid: ba27921cd2fe54877aedee93c7f6cae5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1114331508}
+--- !u!114 &1114331510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1114331509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 2
+  dustAmount: 0
 --- !u!1001 &1448453909
 Prefab:
   m_ObjectHideFlags: 0
@@ -1222,9 +1225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catch_radius: 1.5
 --- !u!1001 &1905384835
 Prefab:
   m_ObjectHideFlags: 0
@@ -1290,9 +1290,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917408603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50290c91db1534ca28477a54f35cd3f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  catch_radius: 2
+  catchRadius: 1.2
+  dustAmount: 0

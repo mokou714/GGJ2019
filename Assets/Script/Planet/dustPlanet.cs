@@ -9,9 +9,9 @@ public class dustPlanet : Planet
     This class is attached on planet units, responsible for attracting the player, audio playing when orbiting starts
     */
 
-    public int dustAmount;
+    //public int dustAmount;
     
-    public float catchRadius;
+    //public float catchRadius;
     //public GameObject thePlayerOnPlanet;
 
     bool startedAbsorb = false;
@@ -27,11 +27,8 @@ public class dustPlanet : Planet
     // Use this for initialization
     void Start()
     {
-        //Debug.Log(tag);
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
-        //Debug.Log(transform.GetChild(0).lossyScale);
-        //Debug.Log("Planet ref," + index);
         while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
             index_planet++;
         //Debug.Log("Planet ref," + planetRef);
@@ -46,8 +43,7 @@ public class dustPlanet : Planet
     // Update is called once per frame
     void Update()
     {
-        checkCatching(catchRadius, dustAmount);
-
+        checkCatching();
     }
 
 

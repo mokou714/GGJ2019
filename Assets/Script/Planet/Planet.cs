@@ -11,7 +11,8 @@ public abstract class Planet : MonoBehaviour
     public GameObject thePlayerOnPlanet;
     public bool canPlaySound = true;
     protected GameObject playerObj;
-
+    public float catchRadius;
+    public int dustAmount;
 
     // Use this for initialization
     void Start()
@@ -21,13 +22,14 @@ public abstract class Planet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkCatching();
     }
 
-    /*Abstract class to be implemented in child class, being called after catching the plaer, 
+    /*Abstract class to be implemented in child class, being called after catching the planet, 
     parameter is reference to spacecraft element on the player*/
     public abstract void catchedAction(spacecraft sc);
 
-    public void checkCatching(float catchRadius, int dustAmount)
+    public void checkCatching()
     {
         //Keep scanning around itself to find if player is around
         Vector2 position = new Vector2(transform.position.x, transform.position.y);

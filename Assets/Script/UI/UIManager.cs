@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    public void Start () {
 
         homeButton.onClick.AddListener(OnHomeButtonClicked);
         audioButton.onClick.AddListener(OnAudioButtonClicked);

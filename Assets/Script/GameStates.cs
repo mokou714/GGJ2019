@@ -25,6 +25,9 @@ public class GameStates : MonoBehaviour {
     [Range(0, 1f)]
     public static float sfxVolume = 1.0f;
 
+    public string[] bigLevelNames;
+    public string[] levels;
+
 
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class GameStates : MonoBehaviour {
 
         
     }
-
+    
 
     // Use this for initialization
     void Start()
@@ -52,6 +55,10 @@ public class GameStates : MonoBehaviour {
             LoadLevel();
             LoadSettings();
         }
+
+
+        levels = new string[] {"start page", "tutorial-1" , "1-1", "1-2", "1-3", "1-4",
+            "2-1", "2-2", "2-3", "2-4" };
 
     }
 

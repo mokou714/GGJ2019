@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class levelPlanet : MonoBehaviour {
+public class levelPlanet : Planet {
 
-
-
+    public float catchRadius;
     public int level;
 
     public bool showingSelection;
@@ -25,6 +24,7 @@ public class levelPlanet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        checkCatching(catchRadius, 0);
         if (showingSelection) {
             //store a copy of showlevels coroutine
             showLevel = showLevels();
@@ -60,6 +60,11 @@ public class levelPlanet : MonoBehaviour {
 
         //}
 
+    }
+
+    public override void catchedAction(spacecraft sc)
+    {
+        return;
     }
 
     IEnumerator showLevels() {

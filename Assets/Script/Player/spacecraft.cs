@@ -132,7 +132,7 @@ public class spacecraft : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
@@ -212,20 +212,15 @@ public class spacecraft : MonoBehaviour {
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
-        float dis = Vector2.Distance(pos1, pos2);
+     
+        Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-        float sin = (pos1.y - pos2.y) / dis;
-        float cos = (pos1.x - pos2.x) / dis;
 
-        Vector2 new_v = new Vector2(sin, -cos) * rotating_dir * rotating_speed;
+        float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
+        Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
+        Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;
+        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV;
 
-        Vector2 offset = pos2 - pos1;
-        offset.Normalize();
-
-        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_v + offset * inwardVel;
-        Vector2 v_dir = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
-        v_dir.Normalize();
-        transform.up = new Vector3(v_dir.x, v_dir.y, 0);
     }
 
     public void Launch(){

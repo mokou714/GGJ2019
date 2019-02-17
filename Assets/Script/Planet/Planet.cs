@@ -55,14 +55,12 @@ public abstract class Planet : MonoBehaviour
                                              transform.position.y - sc.transform.position.y);
                
                 Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
-               
-
                 float angle = Vector2.SignedAngle(v1, v2);
 
                 //check if spacecraft is not orbiting the same planet after launch
-                if ( (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject)
-                    && Vector3.Distance(transform.position,ob.transform.position) >= catchRadius
-                    && angle <= 90f && angle >= -90f && Time.time > sc.checkRotatingTime + 0.15f)
+                if ( (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject))
+                    //&& Vector3.Distance(transform.position,ob.transform.position) >= catchRadius
+                    //&& angle <= 90f && angle >= -90f )//&& Time.time > sc.checkRotatingTime + 0.1f)
                 {
                     //store player reference
                     thePlayerOnPlanet = ob;

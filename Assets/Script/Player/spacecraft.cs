@@ -53,6 +53,7 @@ public class spacecraft : MonoBehaviour {
     private float speedThreshold = 3.5f;
     private float curMovingTime = 0;
     public float energy2dis;
+    public float checkRotatingTime;
 
     public bool requiredStop = false;
 

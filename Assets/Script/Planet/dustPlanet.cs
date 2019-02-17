@@ -43,7 +43,13 @@ public class dustPlanet : Planet
     // Update is called once per frame
     void Update()
     {
-        checkCatching();
+
+    }
+
+    private void FixedUpdate()
+    {
+        if (thePlayerOnPlanet == null)
+            checkCatching();
     }
 
 

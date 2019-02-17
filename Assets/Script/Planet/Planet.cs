@@ -13,6 +13,7 @@ public abstract class Planet : MonoBehaviour
     protected GameObject playerObj;
     public float catchRadius;
     public int dustAmount;
+    public float rotatingCheckTime;
 
     // Use this for initialization
     void Start()
@@ -22,7 +23,6 @@ public abstract class Planet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkCatching();
     }
 
     /*Abstract class to be implemented in child class, being called after catching the planet, 
@@ -51,9 +51,18 @@ public abstract class Planet : MonoBehaviour
             {
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
+                Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
+                                             transform.position.y - sc.transform.position.y);
+               
+                Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
+               
+
+                float angle = Vector2.SignedAngle(v1, v2);
 
                 //check if spacecraft is not orbiting the same planet after launch
-                if (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject)
+                if ( (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject)
+                    && Vector3.Distance(transform.position,ob.transform.position) >= catchRadius
+                    && angle <= 90f && angle >= -90f && Time.time > sc.checkRotatingTime + 0.15f)
                 {
                     //store player reference
                     thePlayerOnPlanet = ob;
@@ -65,14 +74,9 @@ public abstract class Planet : MonoBehaviour
                     sc.rotate_on = true;
                     sc.moving = false;
                     sc.movingStart = false;
+                    sc.checkRotatingTime = Time.time;
 
-                    Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
-                                             transform.position.y - sc.transform.position.y);
-                    //v1.Normalize();
-                    Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
-                    //v2.Normalize();
 
-                    float angle = Vector2.SignedAngle(v1, v2);
 
                     if (angle < 0f && angle < 90f)
                         sc.rotating_dir = -1; //counterclockwise rotation

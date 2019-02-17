@@ -28,9 +28,13 @@ public class absorbPlanet : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    { 
+        checkAbsorbing();
+    }
+
+    private void FixedUpdate()
     {
         checkCatching();
-        checkAbsorbing();
     }
 
     void checkCatching()

@@ -48,7 +48,7 @@ public class dustPlanet : Planet
 
     private void FixedUpdate()
     {
-        if (thePlayerOnPlanet == null)
+        if(thePlayerOnPlanet == null)
             checkCatching();
     }
 

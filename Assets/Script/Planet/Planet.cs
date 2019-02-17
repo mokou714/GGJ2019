@@ -47,7 +47,7 @@ public abstract class Planet : MonoBehaviour
         {
             GameObject ob = hitColliders[i].gameObject;
             //player catched
-            if (ob != gameObject && ob.tag == "Player")
+            if (ob != gameObject && ob.tag == "Player" && Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
             {
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
@@ -58,21 +58,34 @@ public abstract class Planet : MonoBehaviour
                 float angle = Vector2.SignedAngle(v1, v2);
 
                 //check if spacecraft is not orbiting the same planet after launch
-                if ( (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject))
-                    //&& Vector3.Distance(transform.position,ob.transform.position) >= catchRadius
-                    //&& angle <= 90f && angle >= -90f )//&& Time.time > sc.checkRotatingTime + 0.1f)
+                if ( (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject)&& 
+
+                    //&& angle <= 90f && angle >= -90f )//&& 
+                    Time.time > sc.checkRotatingTime + 0.1f)
                 {
                     //store player reference
                     thePlayerOnPlanet = ob;
                     if (sc.energy < Constants.deathHealthVal)
                         return;
+
                     //rotate
+                    if (!sc.moving)
+                    { //player did not launch
+                        sc.prevRotatingPlanet = sc.rotatingPlanet;
+                        if (sc.prevRotatingPlanet != null)
+                            sc.prevRotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
+
+                    }
                     sc.rotatingPlanet = gameObject;
+
                     sc.rotation_center = transform.position;
                     sc.rotate_on = true;
                     sc.moving = false;
                     sc.movingStart = false;
                     sc.checkRotatingTime = Time.time;
+
+
+                    
 
 
 

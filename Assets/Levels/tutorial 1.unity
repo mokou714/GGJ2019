@@ -875,11 +875,6 @@ Transform:
   m_Father: {fileID: 1653000331}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1261946807 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1123991577966308, guid: e1724f0471fd141a794dc6a17bdd73da,
-    type: 2}
-  m_PrefabInternal: {fileID: 1322684999}
 --- !u!1 &1291937306 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1962804579093592, guid: bdc3365553a23e940817749142f72076,
@@ -985,6 +980,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1322685000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1123991577966308, guid: e1724f0471fd141a794dc6a17bdd73da,
+    type: 2}
+  m_PrefabInternal: {fileID: 1322684999}
 --- !u!1 &1350963494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1031,7 @@ MonoBehaviour:
   dustIntro: {fileID: 388354131}
   firstPlanet: {fileID: 1538166917}
   secondPlanet: {fileID: 2138946817}
-  thirdPlanet: {fileID: 1261946807}
+  thirdPlanet: {fileID: 1322685000}
   hints: {fileID: 1653000330}
   hint3: {fileID: 1783813326}
   tangent: {fileID: 856889494}

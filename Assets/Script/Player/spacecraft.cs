@@ -32,6 +32,7 @@ public class spacecraft : MonoBehaviour {
       
     public GameObject rotatingPlanet;
     public GameObject prevRotatingPlanet;
+    public GameObject preTemp;
 
     private float movingTime = 0;
     public bool movingStart;
@@ -53,11 +54,9 @@ public class spacecraft : MonoBehaviour {
     private float speedThreshold = 3.5f;
     private float curMovingTime = 0;
     public float energy2dis;
-    public float checkRotatingTime;
+    public float checkRotatingTime = 0;
 
     public bool requiredStop = false;
-
-    private float _angle;
 
 	// Use this for initialization
 	void Start () {
@@ -212,25 +211,24 @@ public class spacecraft : MonoBehaviour {
         Todo: this function is for keeping the player rotating around a planet when it is around one
         */
 
-        //transform.RotateAround(rotation_center, Vector3.forward, rotating_speed * Time.deltaTime);
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);
-
-        float dis = Vector2.Distance(pos1, pos2);
+     
         Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
+
 
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
         Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
-
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * 1/(10*rotatingPlanet.GetComponent<Planet>().catchRadius);
 
     }
 
-    public void Launch(){
+    public void Launch(float speed = 0.9f){
         /*
         Todo: This function makes the player derail when it is in an orbit 
         */
+        //Debug.Log("Shoot");
         rotate_on = false;
 
         // update launch position
@@ -251,16 +249,15 @@ public class spacecraft : MonoBehaviour {
 
         if (origin_speed < 0.1f)
             origin_speed = 1f;
-        transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
+        transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * speed;
         moving = true;
-
         if(rotatingPlanet){
-            //Dereference the player on the current planet
             rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
             rotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
         }
-            
-        prevRotatingPlanet = rotatingPlanet;
+        checkRotatingTime = Time.time;
+        //prevRotatingPlanet = rotatingPlanet;
+        preTemp = rotatingPlanet;
         rotatingPlanet = null;
     }
 

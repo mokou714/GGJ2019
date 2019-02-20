@@ -52,10 +52,16 @@ public class spacecraft : MonoBehaviour {
     private Rigidbody2D parentRigidBody;
     private float speedThreshold = 3.5f;
     private float curMovingTime = 0;
+    private float origSpeed;
+
     public float energy2dis;
     public float checkRotatingTime = 0;
 
     public bool requiredStop = false;
+    public bool requiredSleep = false;
+    public float inwardVel;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -66,9 +72,7 @@ public class spacecraft : MonoBehaviour {
         originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
-
-      
-
+        origSpeed = rotating_speed;
     }
 
     private void ReinitPlayer(){
@@ -133,6 +137,8 @@ public class spacecraft : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (requiredSleep)
+            return;
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
@@ -201,6 +207,7 @@ public class spacecraft : MonoBehaviour {
 
     }
 
+
     void Rotate(){
         /*
         Todo: this function is for keeping the player rotating around a planet when it is around one
@@ -216,8 +223,7 @@ public class spacecraft : MonoBehaviour {
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;//Get the tangent line 
 
         //Set up a proper inward velocity depending on the planet's catchRadius to prevent the player rotating outward
-        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * 1/(10*rotatingPlanet.GetComponent<Planet>().catchRadius);
-
+        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * inwardVel;
     }
 
     public void Launch(){
@@ -236,9 +242,12 @@ public class spacecraft : MonoBehaviour {
         // record launchEnergy for later scaling player's energy with distance
         launchEnergy = energy;
 
+        if (Mathf.Abs(rotating_speed - origSpeed) > 0.1)
+            rotating_speed = origSpeed;
+
         //float x_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.x);
         //float y_speed = Mathf.Abs(transform.parent.GetComponent<Rigidbody2D>().velocity.y);
-        Vector3 orig_vel = transform.parent.GetComponent<Rigidbody2D>().velocity;
+        Vector3 orig_vel = transform.parent.GetComponent<Rigidbody2D>().velocity.normalized * rotating_speed;
         float x_speed = orig_vel.x;
         float y_speed = orig_vel.y;
         float origin_speed = Mathf.Sqrt(Mathf.Abs(x_speed * x_speed) + Mathf.Abs(y_speed * y_speed));
@@ -248,11 +257,8 @@ public class spacecraft : MonoBehaviour {
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
         moving = true;
 
-        if(rotatingPlanet){
-            //Ajust parameter of the current planet
-            rotatingPlanet.GetComponent<Planet>().canPlaySound = true;
-            rotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
-        }
+        rotatingPlanet.GetComponent<Planet>().playerLeave();
+
         checkRotatingTime = Time.time;
 
         //Do not assign this planet to preRotatingPlanet until it lands on another planet
@@ -273,5 +279,7 @@ public class spacecraft : MonoBehaviour {
 
     }
 
-
+    public void landOn(){
+        inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
+    }
 }

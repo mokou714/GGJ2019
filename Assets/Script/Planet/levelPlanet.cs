@@ -23,6 +23,7 @@ public class levelPlanet : Planet {
 	
 	// Update is called once per frame
 	void Update () {
+        checkCatching();
 
         if (showingSelection) {
             //store a copy of showlevels coroutine
@@ -40,24 +41,6 @@ public class levelPlanet : Planet {
             Destroy(levelLine);
             hidingSelection = false;
         }
-
-
-
-
-
-        //playe enters
-        //if(GetComponent<dustPlanet>().thePlayerOnPlanet != null && showingSelection) {
-
-        //    canvas.transform.GetChild(0).GetComponent<levelSelection>().startSelecting = true;
-        //    showingSelection = false;
-        //}
-        //player leaves
-        //else if(GetComponent<dustPlanet>().thePlayerOnPlanet == null && !showingSelection) {
-        //    canvas.transform.GetChild(0).GetComponent<levelSelection>().startSelecting = false;
-        //    showingSelection = true;
-        //    canvas.transform.GetChild(0).GetComponent<levelSelection>().startDeselecting = true;
-
-        //}
 
     }
 
@@ -107,5 +90,7 @@ public class levelPlanet : Planet {
         //showingSelection = false;
     }
 
-
+    public override void playerLeaveChild(){
+        return;
+    }
 }

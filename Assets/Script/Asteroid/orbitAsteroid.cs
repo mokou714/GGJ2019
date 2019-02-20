@@ -16,7 +16,8 @@ public class orbitAsteroid : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         origPosition = transform.position;
-        radius = Vector3.Distance(transform.position, orbitCenter.position);
+        if(orbitCenter != null)
+            radius = Vector3.Distance(transform.position, orbitCenter.position);
         maxX = 100f;
         maxY = 100f;
 	}

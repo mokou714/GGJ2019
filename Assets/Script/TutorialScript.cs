@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialScript : MonoBehaviour {
+    public int tutorialNum;
     public GameObject player;
+    public GameObject playerIntro;
     public GameObject finger;
     public GameObject thumbup;
     public GameObject dustIntro;
@@ -16,7 +18,7 @@ public class TutorialScript : MonoBehaviour {
     public GameObject tangent;
     private float dist_ratio;
 
-    public GameObject obstable;
+    public GameObject obstacle;
 
     //Indicate if the current game is frozen
     private bool stopped =false;
@@ -31,25 +33,33 @@ public class TutorialScript : MonoBehaviour {
     //CheckedList is to mark the steps that are already done, so next to it won't repeat
     private bool []checkedList;
     private int checkCursor = 0;
-    private int tutorialNum = 0;
+
+
 
 	// Use this for initialization
 	void Start () {
         savedTimeScale = Time.timeScale;
         player_sc = player.transform.GetChild(0).GetComponent<spacecraft>();
-        if(finger != null && thumbup != null){
-            dist_ratio = (secondPlanet.transform.position.y - firstPlanet.transform.position.y) / (secondPlanet.transform.position.x - firstPlanet.transform.position.x);
-            checkedList = new bool[4];
-            for (int i = 0; i < checkedList.Length; i++)
-            {
-                checkedList[i] = false;
-            } 
-        }else{
-            tutorialNum = 1;
-            StartCoroutine(waitToShowObstable());
+        switch(tutorialNum){
+            case 0:
+                //Start page
+                checkedList = new bool[2];
+                for (int i = 0; i < checkedList.Length; i++)
+                    checkedList[i] = false;
+                StartCoroutine(waitToShowStuff(playerIntro, 1f));
+                break;
+            case 1:
+                //Tutorial level 1
+                dist_ratio = (secondPlanet.transform.position.y - firstPlanet.transform.position.y) / (secondPlanet.transform.position.x - firstPlanet.transform.position.x);
+                checkedList = new bool[4];
+                for (int i = 0; i < checkedList.Length; i++)
+                    checkedList[i] = false;
+                break;
+            case 2:
+                //Tutorial level 2
+                StartCoroutine(waitToShowStuff(obstacle, 1f));
+                break;
         }
-
-
 
 	}
 	
@@ -58,10 +68,33 @@ public class TutorialScript : MonoBehaviour {
         float player_ratio = player.GetComponent<Rigidbody2D>().velocity.y/player.GetComponent<Rigidbody2D>().velocity.x;
 
         //Debug.Log(dist_ratio + ", " + player_ratio);
-        if ( Input.GetKeyDown(KeyCode.Space))
-        {
+        if ( Input.GetKeyDown(KeyCode.Space) || (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended)){
             if(stopped){
                 if(tutorialNum == 0){
+                    if(playerIntro.activeSelf){
+                        playerIntro.SetActive(false);
+                        resume();
+                    }
+                    if (0 < hintNum && hintNum < hints.transform.childCount)
+                    {
+                        //Actions for after each small step in the second step
+                        stopped = true;
+                        showHints();
+                        return;
+                    }
+
+                    if (hintNum >= hints.transform.childCount)
+                    {
+                        //Actions for after the second step
+                        //Debug.Log("Unlock hints" + hints.transform.childCount);
+                        hints.transform.GetChild(hintNum - 1).gameObject.SetActive(false);
+                        resume();
+
+                        StartCoroutine(waitToEnableTap());
+                    }
+
+
+                }else if(tutorialNum == 1){
                     if (finger.activeSelf)
                     {
                         //Actions for the first step
@@ -103,9 +136,9 @@ public class TutorialScript : MonoBehaviour {
                     }
                     Debug.Log("Check " + checkCursor);
 
-                }else if(tutorialNum == 1){
-                    if (obstable.activeSelf)
-                        obstable.SetActive(false);
+                }else if(tutorialNum == 2){
+                    if (obstacle.activeSelf)
+                        obstacle.SetActive(false);
                     resume();
                 }
                 stopped = false;
@@ -114,21 +147,19 @@ public class TutorialScript : MonoBehaviour {
 
         if(player_sc.rotatingPlanet != null){
             if(tutorialNum == 0){
-                if (player_sc.rotatingPlanet.name == secondPlanet.name && !thumbup.activeSelf && !checkedList[1])
-                {
-                    //Detect when the player lands on the second planet
+                 if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0]){
+                    Debug.Log("roatating " + player_sc.rotatingPlanet + " " + checkedList[0] + finger.activeSelf);
                     checkedList[checkCursor] = true;
                     checkCursor++;
-                    StartCoroutine(waitToHints());
-                    //thumbup.SetActive(true);
-                    //pause();
-                    //stopped = true;
-                    //player_sc.requiredStop = true;
-                    //showHints(hintNum);
-                    //waitToHints();
+                    StartCoroutine(waitToHints(2f));
                 }
-                else if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0])
+
+            }else if(tutorialNum == 1){
+                if ((player_sc.rotatingPlanet != secondPlanet || player_sc.rotatingPlanet == null) && thumbup.activeSelf)
                 {
+                    //After the player leaves the second planet
+                    thumbup.SetActive(false);
+                }else if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0]){
                     //Detect when the player on the first planet is on a good position to shoot onto the second planet
                     if (Mathf.Abs(-(player_ratio - dist_ratio)) < 0.01f)
                     {
@@ -139,19 +170,20 @@ public class TutorialScript : MonoBehaviour {
                         stopped = true;
                         //Debug.Log("Show hint");
                     }
-                }
-                if ((player_sc.rotatingPlanet != secondPlanet || player_sc.rotatingPlanet == null) && thumbup.activeSelf)
-                {
-                    //After the player leaves the second planet
-                    thumbup.SetActive(false);
-                }
-                else if (player_sc.rotatingPlanet == thirdPlanet && !dustIntro.activeSelf && !checkedList[2])
-                {
+                }else if (player_sc.rotatingPlanet == thirdPlanet && !dustIntro.activeSelf && !checkedList[2]){
                     pause();
                     stopped = true;
                     dustIntro.SetActive(true);
                     player_sc.requiredStop = true;
                 }
+            } 
+            if (player_sc.rotatingPlanet == secondPlanet && !thumbup.activeSelf && !checkedList[1]){
+                if (!thumbup.activeSelf)
+                    thumbup.SetActive(true);
+                //Detect when the player lands on the second planet
+                checkedList[checkCursor] = true;
+                checkCursor++;
+                StartCoroutine(waitToHints(0.5f));
             }
 
         }
@@ -170,26 +202,26 @@ public class TutorialScript : MonoBehaviour {
         hintNum++;
     }
 
-    IEnumerator waitToHints()
+    IEnumerator waitToHints(float time)
     {
         /*
         Todo: this coroutine to show instruction after the player lands on the second planet
         */
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(time);
         stopped = true;
         player_sc.requiredStop = true;
         pause();
         showHints();
     }
 
-    IEnumerator waitToShowObstable()
+    IEnumerator waitToShowStuff(GameObject obj, float time)
     {
         /*
-        Todo: this coroutine is used wait to show warning for obstables
+        Todo: this coroutine is used wait to show warning for obstacles
         */
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(time);
         pause();
-        obstable.SetActive(true);
+        obj.SetActive(true);
         stopped = true;
     }
 

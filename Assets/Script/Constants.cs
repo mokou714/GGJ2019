@@ -13,7 +13,7 @@ public class Constants : MonoBehaviour {
     public static int maxNumOfLevel = 10;
 
     public static float deathHealthVal = 10;
-
+    public static float screenRatio = 17.77f;
     //public static float energy2dis = 0.2f; //100 energy is 25 units
 
 	// Use this for initialization

@@ -27,6 +27,13 @@ public abstract class Planet : MonoBehaviour
     /*Abstract class to be implemented in child class, being called after catching the planet, 
     parameter is reference to spacecraft element on the player*/
     public abstract void catchedAction(spacecraft sc);
+    public abstract void playerLeaveChild();
+
+    public void playerLeave(){
+        playerLeaveChild();
+        canPlaySound = true;
+        thePlayerOnPlanet = null;
+    }
 
     public void checkCatching()
     {
@@ -110,6 +117,7 @@ public abstract class Planet : MonoBehaviour
             sc.movingStart = false;
             sc.checkRotatingTime = Time.time;
 
+
             if (angle < 0f && angle < 90f)
                 sc.rotating_dir = -1; //counterclockwise rotation
             else
@@ -119,7 +127,7 @@ public abstract class Planet : MonoBehaviour
             sc.preTempPlanet = null;
             catchedAction(sc);
             //Debug.Log("Switched");
-
+            sc.landOn();
             //landing sound 
             if (canPlaySound){
                 //Indicate if the sound should be played so that it doesn't play repeatedly

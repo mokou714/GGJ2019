@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,21 +29,21 @@ public class dustPlanet : Planet
     {
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
-        while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
-            index_planet++;
-        //Debug.Log("Planet ref," + planetRef);
-        if (transform.childCount > 0)
-        {
-            origDust = copyDust(transform.GetChild(0).gameObject);
+        if(transform.childCount > 0){
+            while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
+                index_planet++;
+            //Debug.Log("Planet ref," + planetRef);
+            if (transform.childCount > 0)
+            {
+                origDust = copyDust(transform.GetChild(0).gameObject);
+            } 
         }
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkCatching();
+
     }
 
     private void FixedUpdate()
@@ -111,5 +111,8 @@ public class dustPlanet : Planet
         return;
     }
 
+    public override void playerLeaveChild(){
+        return;
+    }
 }
 

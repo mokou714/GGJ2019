@@ -9,7 +9,9 @@ public class colorInverter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+        Debug.Log(Screen.width + "," + Screen.height + "," + (float)Screen.width/Screen.height);
+        transform.parent.gameObject.GetComponent<Camera>().orthographicSize =(int)((float)Screen.height / Screen.width * Constants.screenRatio) + 1;
 	}
 	
 	// Update is called once per frame

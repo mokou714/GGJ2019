@@ -49,24 +49,12 @@ public class Collision : MonoBehaviour
 
             case "orbaerolite":
                 damage = col.gameObject.GetComponent<orbitAsteroid>().damage;
-                break;
-            case "Finish":
-                AudioManager.instance.PlaySFX("Next Level");
-                int cur_scene = SceneManager.GetActiveScene().buildIndex;
-                if (cur_scene == Constants.maxNumOfLevel)
-                    SceneManager.LoadScene("end stage");
-                else
-                {
-                    int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
-                    
-                    // load next level
-                    SceneManager.LoadScene(nextLevelID);
+                break;   
 
-                    // update level records
-                    GameStates.curLevelID = nextLevelID;
-                    GameStates.unlockedLevelID = nextLevelID;
+            case "Finish":
+                if(!col.collider.isTrigger){
+                    col.collider.isTrigger = true;
                 }
-                    
                 return;
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
@@ -74,5 +62,42 @@ public class Collision : MonoBehaviour
         transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
         collided = true;
         AudioManager.instance.PlaySFX("being hit");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Finish"){
+            AudioManager.instance.PlaySFX("Next Level");
+            transform.GetChild(0).GetComponent<spacecraft>().requiredSleep = true;
+            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = 0.5f;
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            StartCoroutine(waitToNext(1f));
+        }
+        return;
+    }
+
+    IEnumerator waitToNext(float time)
+    {
+        /*
+        Todo: this coroutine to show instruction after the player lands on the second planet
+        */
+        yield return new WaitForSeconds(time);
+        startNewLevel();
+    }
+
+    private void startNewLevel(){
+        int cur_scene = SceneManager.GetActiveScene().buildIndex;
+        if (cur_scene == Constants.maxNumOfLevel)
+            SceneManager.LoadScene("end stage");
+        else
+        {
+            int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
+            // load next level
+            SceneManager.LoadScene(nextLevelID);
+
+            // update level records
+            GameStates.curLevelID = nextLevelID;
+            GameStates.unlockedLevelID = nextLevelID;
+        }
     }
 }

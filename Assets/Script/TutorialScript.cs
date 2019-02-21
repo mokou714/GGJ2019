@@ -151,7 +151,7 @@ public class TutorialScript : MonoBehaviour {
                     Debug.Log("roatating " + player_sc.rotatingPlanet + " " + checkedList[0] + finger.activeSelf);
                     checkedList[checkCursor] = true;
                     checkCursor++;
-                    StartCoroutine(waitToHints(2f));
+                    StartCoroutine(waitToHints(0.5f));
                 }
 
             }else if(tutorialNum == 1){

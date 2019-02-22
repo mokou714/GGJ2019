@@ -122,9 +122,11 @@ public class spacecraft : MonoBehaviour {
                     GameObject dust = single_obj.transform.GetChild(0).gameObject;
                     dustPlanet dust_planet = single_obj.gameObject.GetComponent<dustPlanet>();
                     //Debug.Log("Dust planet recover: "  + dust_planet);
-
                     //Determine if it actually has dust
+                    if (dust_planet.thePlayerOnPlanet != null)
+                        dust_planet.thePlayerOnPlanet = null;
                     if(dust_planet != null && dust != null){
+                        
                         dust_planet.Recover();
                         //if(!dust_planet.transform.GetChild(0).gameObject.activeSelf)
                     }

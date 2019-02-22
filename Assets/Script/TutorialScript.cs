@@ -51,6 +51,7 @@ public class TutorialScript : MonoBehaviour {
             case 1:
                 //Tutorial level 1
                 dist_ratio = (secondPlanet.transform.position.y - firstPlanet.transform.position.y) / (secondPlanet.transform.position.x - firstPlanet.transform.position.x);
+                //Debug.Log(dist_ratio);
                 checkedList = new bool[4];
                 for (int i = 0; i < checkedList.Length; i++)
                     checkedList[i] = false;
@@ -65,7 +66,6 @@ public class TutorialScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float player_ratio = player.GetComponent<Rigidbody2D>().velocity.y/player.GetComponent<Rigidbody2D>().velocity.x;
 
         //Debug.Log(dist_ratio + ", " + player_ratio);
         if ( Input.GetKeyDown(KeyCode.Space) || (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended)){
@@ -161,7 +161,9 @@ public class TutorialScript : MonoBehaviour {
                     thumbup.SetActive(false);
                 }else if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0]){
                     //Detect when the player on the first planet is on a good position to shoot onto the second planet
-                    if (Mathf.Abs(-(player_ratio - dist_ratio)) < 0.01f)
+                    float player_ratio = player.GetComponent<Rigidbody2D>().velocity.y / player.GetComponent<Rigidbody2D>().velocity.x;
+                    Debug.Log(player_ratio + "," + dist_ratio);
+                    if (Mathf.Abs((player_ratio - dist_ratio)) < 0.05f)
                     {
                         finger.SetActive(true);
                         tangent.SetActive(true);

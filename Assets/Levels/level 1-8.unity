@@ -1654,7 +1654,7 @@ Prefab:
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: dustAmount
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1368573932293566, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_IsActive

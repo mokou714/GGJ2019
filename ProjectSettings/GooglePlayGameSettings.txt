@@ -1,0 +1,9 @@
+lastUpgrade=00961
+proj.pluginVersion=0.9.61
+proj.AppId=895001015757
+and.BundleId=com.stargazers.stargazing
+proj.classDir=Assets%2fScript
+proj.ConstantsClassName=Achievements
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0a%3cresources%3e%0a++%3c%21--+app_id+--%3e%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e895001015757%3c%2fstring%3e%0a++%3c%21--+package_name+--%3e%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.stargazers.stargazing%3c%2fstring%3e%0a++%3c%21--+achievement+Passed+Tutorial+--%3e%0a++%3cstring+name%3d%22achievement_passed_tutorial%22+translatable%3d%22false%22%3eCgkIzevekYYaEAIQAQ%3c%2fstring%3e%0a%3c%2fresources%3e%0a
+and.ClientId=
+android.SetupDone=true

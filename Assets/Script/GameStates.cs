@@ -40,12 +40,26 @@ public class GameStates : MonoBehaviour {
             //Destroy this, this enforces our singleton pattern so there can only be one instance
             Destroy(gameObject);
 
-        //Set AudioManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
+        //Set GameStates to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
-        
+        //if(Application.platform == RuntimePlatform.Android){
+        //}
+        Login();
+
     }
-    
+
+
+    //Connecting to google play game account for android user
+    public void Login(){
+        Social.localUser.Authenticate((bool success) => {
+            if(success){
+                ((GooglePlayGames.PlayGamesPlatform)Social.Active).SetGravityForPopups(GooglePlayGames.BasicApi.Gravity.CENTER_HORIZONTAL);
+            }else{
+                Debug.Log("Login failed");
+            }
+        });
+    }
 
     // Use this for initialization
     void Start()

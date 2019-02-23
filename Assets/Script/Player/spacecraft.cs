@@ -39,6 +39,7 @@ public class spacecraft : MonoBehaviour {
     private float originalWidth;
 
     public ParticleSystem energyLoss;
+    private Vector2 energyLossLocalOffset;
     private Vector3 spawnPoint;
 
     public GameObject Player;
@@ -61,7 +62,6 @@ public class spacecraft : MonoBehaviour {
     public float inwardVel;
 
 
-
 	// Use this for initialization
 	void Start () {
         energy = 100f;
@@ -70,6 +70,7 @@ public class spacecraft : MonoBehaviour {
         transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
         originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        energyLossLocalOffset = energyLoss.transform.localPosition;
         parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
         origSpeed = rotating_speed;
     }
@@ -174,6 +175,17 @@ public class spacecraft : MonoBehaviour {
                 movingStart = true;
                 movingTime = curMovingTime;
                 //Debug.Log("start recording :" + movingTime);
+                Vector2 playerVelocity = transform.parent.GetComponent<Rigidbody2D>().velocity;
+                Vector2 newEnergyLossLocalPos = energyLossLocalOffset.magnitude * playerVelocity.normalized;
+                float angleBetween = Mathf.Atan2(newEnergyLossLocalPos.y, newEnergyLossLocalPos.x) * Mathf.Rad2Deg;
+                print("ANgle: " + angleBetween);
+                Vector3 energyLossRotation = new Vector3(
+                    0, 
+                    0, 
+                    angleBetween - 90
+                );
+                energyLoss.transform.rotation = Quaternion.Euler(energyLossRotation);
+                energyLoss.transform.localPosition = newEnergyLossLocalPos;
                 energyLoss.Play();
             }else{
                 if (parentRigidBody.velocity.magnitude < speedThreshold)

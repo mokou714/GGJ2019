@@ -24,7 +24,5 @@ public class normalPlanet : Planet {
 	{
         return;
 	}
-    public override void playerLeaveChild(){
-        return;
-    }
+
 }

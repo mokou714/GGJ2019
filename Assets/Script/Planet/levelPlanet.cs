@@ -90,7 +90,5 @@ public class levelPlanet : Planet {
         //showingSelection = false;
     }
 
-    public override void playerLeaveChild(){
-        return;
-    }
+  
 }

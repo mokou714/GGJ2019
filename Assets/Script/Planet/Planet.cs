@@ -12,7 +12,6 @@ public class Planet : MonoBehaviour
     public bool canPlaySound = true;
     protected GameObject playerObj;
     public float catchRadius;
-    public int dustAmount;
 
     // Use this for initialization
     void Start()
@@ -35,6 +34,20 @@ public class Planet : MonoBehaviour
     parameter is reference to spacecraft element on the player*/
     public virtual void catchedAction(spacecraft sc) { }
     public virtual void playerLeaveChild(){ }
+
+    public virtual void playLandingSound() {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+
+            AudioManager.sfxNormalLandID++;
+            if (AudioManager.sfxNormalLandID > 4)
+            {
+                AudioManager.sfxNormalLandID = 1;
+            }
+        }
+        
+    }
 
     public void playerLeave(){
         playerLeaveChild();
@@ -114,10 +127,18 @@ public class Planet : MonoBehaviour
             //player did not launch
             if (!sc.launched)
             { 
-                sc.preRotatingPlanet = sc.rotatingPlanet;
+
                 sc.checkRotatingTime = Time.time;
-                if (sc.preRotatingPlanet != null)
-                    sc.preRotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
+
+                sc.preRotatingPlanet = sc.rotatingPlanet;
+                if (sc.rotatingPlanet != null)
+                {
+                    Debug.Log("!!!!!!!!");
+                    sc.rotatingPlanet.GetComponent<Planet>().playerLeave();
+                    Debug.Log(sc.rotatingPlanet.name);
+                }
+
+                sc.rotatingPlanet = null;
 
             }
             sc.rotatingPlanet = gameObject;
@@ -139,22 +160,7 @@ public class Planet : MonoBehaviour
             sc.landOn();
             //landing sound 
             if (canPlaySound){
-                //Indicate if the sound should be played so that it doesn't play repeatedly
-                if (dustAmount > 0){
-                    //print("plays harp charge");
-                    AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-                }
-                else{
-                    if (SceneManager.GetActiveScene().buildIndex != 0){
-                        AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
-
-                        AudioManager.sfxNormalLandID++;
-                        if (AudioManager.sfxNormalLandID > 4){
-                            AudioManager.sfxNormalLandID = 1;
-                        }
-                    }
-                }
-
+                playLandingSound();
                 canPlaySound = false;
             }
         }

@@ -9,13 +9,11 @@ public class dustPlanet : Planet
     This class is attached on planet units, responsible for attracting the player, audio playing when orbiting starts
     */
 
-    //public int dustAmount;
-    
-    //public float catchRadius;
-    //public GameObject thePlayerOnPlanet;
+    public int dustAmount;
 
     bool startedAbsorb = false;
     bool absorbed = false;
+
 
     private int origDustAmount;
     private GameObject origDust;
@@ -79,9 +77,8 @@ public class dustPlanet : Planet
 
     public override void catchedAction(spacecraft sc){
 
-            //enegy
+        //enegy
         sc.energy += dustAmount;
-        //Debug.Log("absorbing");
 
         //dust absorbed
         ParticlesAbsorb pA;
@@ -95,13 +92,37 @@ public class dustPlanet : Planet
         // change
         if (sc.energy > 100f)
             sc.energy = 100f;
-        dustAmount = 0;playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
+        dustAmount = 0;
+        playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
 
         return;
     }
 
     public override void playerLeaveChild(){
         return;
+    }
+
+    public override void playLandingSound()
+    {
+        //Indicate if the sound should be played so that it doesn't play repeatedly
+        if (dustAmount > 0)
+        {
+            //print("plays harp charge");
+            AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+
+                AudioManager.sfxNormalLandID++;
+                if (AudioManager.sfxNormalLandID > 4)
+                {
+                    AudioManager.sfxNormalLandID = 1;
+                }
+            }
+        }
     }
 }
 

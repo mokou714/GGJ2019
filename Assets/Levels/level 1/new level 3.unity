@@ -228,7 +228,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.4
-  dustAmount: 0
   chang_rate: 0.1
   maxSpeed: 0
   origTime: 0
@@ -266,7 +265,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!4 &348957435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4513070116562336, guid: b2f1256239f224497a2d22e6a1673574,
@@ -1571,6 +1569,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198958195531313648, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
+        type: 2}
+      propertyPath: ShapeModule.radius.value
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 58157277976776258, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
+        type: 2}
+      propertyPath: m_Radius
+      value: 1.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
   m_IsPrefabAsset: 0
@@ -1585,7 +1593,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1066209647}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
   m_Name: 
@@ -1593,7 +1601,35 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.4
-  dustAmount: 40
+--- !u!114 &1066209649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1066209647}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b47043bd74f24e1cb92a524ba889136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 0
+--- !u!114 &1066209655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1066209647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 1.4
+  dustAmount: 50
 --- !u!1001 &1089513726
 Prefab:
   m_ObjectHideFlags: 0
@@ -2228,7 +2264,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!1001 &1483370660
 Prefab:
   m_ObjectHideFlags: 0
@@ -3081,7 +3116,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!4 &2080899136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561006901795806, guid: 633bfad24833147f39f42d3fd39e071a,
@@ -3148,4 +3182,3 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0

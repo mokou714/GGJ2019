@@ -205,7 +205,7 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962804579093592}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -383,12 +383,15 @@ MonoBehaviour:
   rotating_dir: 0
   rotatingPlanet: {fileID: 0}
   prevRotatingPlanet: {fileID: 0}
+  preTempPlanet: {fileID: 0}
   movingStart: 0
-  inwardVel: 0
   energyLoss: {fileID: 0}
   Player: {fileID: 0}
   energy2dis: 0
+  checkRotatingTime: 0
   requiredStop: 0
+  requiredSleep: 0
+  inwardVel: 0
 --- !u!114 &114211800358767892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -403,6 +406,7 @@ MonoBehaviour:
   collide_strengh: 3
   collided: 0
   asteroidDamage: 10
+  UIeffect: {fileID: 0}
   energyLossOnCollide: {fileID: 198349327152283078}
 --- !u!114 &114246045861408196
 MonoBehaviour:

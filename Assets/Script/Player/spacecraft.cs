@@ -19,7 +19,7 @@ public class spacecraft : MonoBehaviour {
     public GameObject camera;
     Vector2 screenSize;
 
-    public bool moving;
+    public bool launched;
 
     public float start_velocity;
     public GameObject end;
@@ -31,8 +31,7 @@ public class spacecraft : MonoBehaviour {
     public int rotating_dir;
       
     public GameObject rotatingPlanet;
-    public GameObject prevRotatingPlanet;
-    public GameObject preTempPlanet;
+    public GameObject preRotatingPlanet;
 
     private float movingTime = 0;
     public bool movingStart;
@@ -88,10 +87,10 @@ public class spacecraft : MonoBehaviour {
         parentRigidBody.velocity = Vector3.zero;
         Vector3 dir = new Vector3(1, 0, 0);
         parentRigidBody.velocity = dir * start_velocity;
-        moving = false;
+        launched = false;
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
-        rotatingPlanet = prevRotatingPlanet = preTempPlanet = null;
+        rotatingPlanet = preRotatingPlanet = null;
     }
 	
     private void ReinitScene(){
@@ -166,7 +165,7 @@ public class spacecraft : MonoBehaviour {
         }
         //Indicating wether the player is in orbit or flying straight
         
-        if(moving){
+        if(launched){
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
             if (!movingStart)
@@ -264,14 +263,13 @@ public class spacecraft : MonoBehaviour {
         if (origin_speed < 0.1f)
             origin_speed = 1f;
         transform.parent.GetComponent<Rigidbody2D>().velocity = orig_vel * origin_speed * launch_speed;
-        moving = true;
-
-        rotatingPlanet.GetComponent<Planet>().playerLeave();
+        launched = true;
 
         checkRotatingTime = Time.time;
 
-        //Do not assign this planet to preRotatingPlanet until it lands on another planet
-        preTempPlanet = rotatingPlanet;
+        //player left, update player&planet references
+        rotatingPlanet.GetComponent<Planet>().playerLeave();
+        preRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
     }
 

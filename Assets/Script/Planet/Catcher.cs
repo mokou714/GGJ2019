@@ -37,7 +37,7 @@ public class Catcher : MonoBehaviour
             {
                 ob.transform.GetChild(0).GetComponent<spacecraft>().rotation_center = transform.position;
                 ob.transform.GetChild(0).GetComponent<spacecraft>().rotate_on = true;
-                ob.transform.GetChild(0).GetComponent<spacecraft>().moving = false;
+                ob.transform.GetChild(0).GetComponent<spacecraft>().launched = false;
 
             }
             ++i;

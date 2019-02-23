@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class Planet : MonoBehaviour
+public class Planet : MonoBehaviour
 {
     /*
     Parent class for all kinds of planets
@@ -24,10 +24,17 @@ public abstract class Planet : MonoBehaviour
     {
     }
 
+    void FixedUpdate()
+    {
+        //If the planet already has the player, do not checkCatching until it leaves
+        if (thePlayerOnPlanet == null)
+            checkCatching();
+    }
+
     /*Abstract class to be implemented in child class, being called after catching the planet, 
     parameter is reference to spacecraft element on the player*/
-    public abstract void catchedAction(spacecraft sc);
-    public abstract void playerLeaveChild();
+    public virtual void catchedAction(spacecraft sc) { }
+    public virtual void playerLeaveChild(){ }
 
     public void playerLeave(){
         playerLeaveChild();
@@ -35,12 +42,9 @@ public abstract class Planet : MonoBehaviour
         thePlayerOnPlanet = null;
     }
 
-    public void checkCatching()
+    public virtual void checkCatching()
     {
-        if (thePlayerOnPlanet != null){
-            //If the planet already has the player, do not checkCatching until it leaves
-            return;
-        }
+
 
         //Debug.Log("Catched step 1" + name);
 
@@ -48,34 +52,32 @@ public abstract class Planet : MonoBehaviour
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, catchRadius);
         int i = 0;
-        //if player leaves the planet, delete the reference
-        if (thePlayerOnPlanet != null)
-        {
-            if (thePlayerOnPlanet.transform.GetChild(0).GetComponent<spacecraft>().moving == true)
-                thePlayerOnPlanet = null;
-        }
 
         while (i < hitColliders.Length)
         {
             GameObject ob = hitColliders[i].gameObject;
             //player catched
-            if (ob != gameObject && ob.tag == "Player" )//&& Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
+            if (ob != gameObject && ob.tag == "Player" && Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
             {
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
 
                 //Conditions of automatic switch of planets: the current rotatingPlanet is not null and not equal to the attracting planet
-                if(sc.rotatingPlanet != null && sc.rotatingPlanet != gameObject){
-                    Debug.Log("Slow response");
-                    //When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
-                    transferCenter(ob, sc, 1f);
+                if(!sc.launched){
+                    if (sc.rotatingPlanet != gameObject)//When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
+                    {
+                        Debug.Log("Slow response");
+                        transferCenter(ob, sc, 1f);
+                    }
                 }else{
-                    //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
-                    if((sc.rotatingPlanet == null && sc.preTempPlanet != gameObject)){
+                    if (sc.preRotatingPlanet != gameObject)
+                    {
+                        //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
                         Debug.Log("Quick response");
                         //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
                         transferCenter(ob, sc);
                     }
+
                 }
             }
             ++i;
@@ -87,7 +89,6 @@ public abstract class Planet : MonoBehaviour
 
         Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
                                      transform.position.y - sc.transform.position.y);
-
         Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
         float angle = Vector2.SignedAngle(v1, v2);
 
@@ -98,27 +99,31 @@ public abstract class Planet : MonoBehaviour
         if (Time.time - sc.checkRotatingTime > checkInterval)
         ////&& angle <= 90f && angle >= -90f )//&& 
         {
+            
+
             //position fix
-            sc.transform.position = (sc.transform.position - transform.position).normalized * catchRadius + transform.position;
+            ob.transform.position = (ob.transform.position - transform.position).normalized * catchRadius + transform.position;
 
             thePlayerOnPlanet = ob;
 
             if (sc.energy < Constants.deathHealthVal)
                 return;
+
             //rotate
-            if (!sc.moving)
-            { //player did not launch
-                sc.prevRotatingPlanet = sc.rotatingPlanet;
+
+            //player did not launch
+            if (!sc.launched)
+            { 
+                sc.preRotatingPlanet = sc.rotatingPlanet;
                 sc.checkRotatingTime = Time.time;
-                if (sc.prevRotatingPlanet != null)
-                    sc.prevRotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
+                if (sc.preRotatingPlanet != null)
+                    sc.preRotatingPlanet.GetComponent<Planet>().thePlayerOnPlanet = null;
 
             }
             sc.rotatingPlanet = gameObject;
-
             sc.rotation_center = transform.position;
             sc.rotate_on = true;
-            sc.moving = false;
+            sc.launched = false;
             sc.movingStart = false;
             sc.checkRotatingTime = Time.time;
 
@@ -128,8 +133,7 @@ public abstract class Planet : MonoBehaviour
             else
                 sc.rotating_dir = 1; //clockwise rotation 
 
-            sc.prevRotatingPlanet = sc.preTempPlanet;
-            sc.preTempPlanet = null;
+         
             catchedAction(sc);
             //Debug.Log("Switched");
             sc.landOn();

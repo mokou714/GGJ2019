@@ -29,27 +29,16 @@ public class dustPlanet : Planet
     {
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
-        if(transform.childCount > 0){
+        if (transform.childCount > 0)
+        {
             while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
                 index_planet++;
             //Debug.Log("Planet ref," + planetRef);
             if (transform.childCount > 0)
             {
                 origDust = copyDust(transform.GetChild(0).gameObject);
-            } 
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if(thePlayerOnPlanet == null)
-            checkCatching();
     }
 
 

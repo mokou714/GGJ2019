@@ -272,6 +272,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4513070116562336, guid: b2f1256239f224497a2d22e6a1673574,
     type: 2}
   m_PrefabInternal: {fileID: 840778304}
+--- !u!114 &364211726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114286066294746048, guid: 45daf6f1a76af42659137b236fde115c,
+    type: 2}
+  m_PrefabInternal: {fileID: 368554722}
+  m_Script: {fileID: 11500000, guid: 8da4db96483e84fc08cbdce842d88b4c, type: 3}
 --- !u!1001 &368554722
 Prefab:
   m_ObjectHideFlags: 0
@@ -710,6 +716,11 @@ Prefab:
       propertyPath: rotating_speed
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 114211800358767892, guid: bdc3365553a23e940817749142f72076,
+        type: 2}
+      propertyPath: UIeffect
+      value: 
+      objectReference: {fileID: 364211726}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc3365553a23e940817749142f72076, type: 2}
   m_IsPrefabAsset: 0
@@ -1026,7 +1037,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4179590927986564, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -15.3
       objectReference: {fileID: 0}
     - target: {fileID: 4179590927986564, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1052,6 +1063,11 @@ Prefab:
         type: 2}
       propertyPath: orthographic size
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114542375690609100, guid: fa6b071a557be408ba28087e367e2dfe,
+        type: 2}
+      propertyPath: invertingSpeed
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa6b071a557be408ba28087e367e2dfe, type: 2}

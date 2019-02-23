@@ -55,7 +55,7 @@ public class absorbPlanet : MonoBehaviour
                 //Debug.Log("rotating planet: " + sc.rotating_planet);
 
                 //check if spacecraft is not orbiting the same planet after launch
-                if (sc.rotatingPlanet == null || sc.prevRotatingPlanet != gameObject)
+                if (sc.rotatingPlanet == null || sc.preRotatingPlanet != gameObject)
                 {
                     //store player reference
                     player = ob;
@@ -66,7 +66,7 @@ public class absorbPlanet : MonoBehaviour
                     sc.rotatingPlanet = gameObject;
                     sc.rotation_center = transform.position;
                     sc.rotate_on = true;
-                    sc.moving = false;
+                    sc.launched = false;
                     sc.movingStart = false;
 
                     Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
@@ -127,7 +127,7 @@ public class absorbPlanet : MonoBehaviour
             player.transform.GetChild(1).GetComponent<ParticleSystem>().SetParticles(newParticlesList.ToArray(), newParticlesList.Count);
 
             //stop absorbing when player leaves
-            if(player.transform.GetChild(0).GetComponent<spacecraft>().moving == true) {
+            if(player.transform.GetChild(0).GetComponent<spacecraft>().launched == true) {
                 absorbing = false;
                 player.transform.GetChild(1).GetComponent<ParticleSystem>().Clear();
                 pshape.radius = 0.0001f;

@@ -36,7 +36,7 @@ public class rotationPlanet : MonoBehaviour
         //if player leaves the planet, delete the reference
         if (thePlayerOnPlanet != null)
         {
-            if (thePlayerOnPlanet.transform.GetChild(0).GetComponent<spacecraft>().moving == true)
+            if (thePlayerOnPlanet.transform.GetChild(0).GetComponent<spacecraft>().launched == true)
                 thePlayerOnPlanet = null;
         }
 
@@ -50,7 +50,7 @@ public class rotationPlanet : MonoBehaviour
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
 
                 //check if spacecraft is not orbiting the same planet after launch
-                if (sc.prevRotatingPlanet == null || sc.prevRotatingPlanet != gameObject)
+                if (sc.preRotatingPlanet == null || sc.preRotatingPlanet != gameObject)
                 {
                     //store player reference
                     thePlayerOnPlanet = ob;
@@ -60,7 +60,7 @@ public class rotationPlanet : MonoBehaviour
                     sc.rotatingPlanet = gameObject;
                     sc.rotation_center = transform.position;
                     sc.rotate_on = true;
-                    sc.moving = false;
+                    sc.launched = false;
                     sc.movingStart = false;
 
                     Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Levels/level 1/new level speed.unity
+=======
+- path: Assets/Levels/level 1/new level 4.unity
+>>>>>>> 4f4d50f3c7279e6f6c0223b909d746c2eec7a1ab
   isLoaded: 1
   isActive: 1

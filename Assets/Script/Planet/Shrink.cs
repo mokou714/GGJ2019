@@ -21,11 +21,12 @@ public class Shrink : MonoBehaviour
     public float period;
     private float waitTime = 0.01f;
 
-    private bool stop = false;
+    private bool startShrink;
     private Transform child;
 
     void Start()
     {
+        startShrink = true;
         scaleFactor = 1f;
 
         defaultScale = transform.localScale;
@@ -52,9 +53,10 @@ public class Shrink : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && !stop)
+
+        if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && startShrink)
         {
-            stop = true;
+            startShrink = false;
             StartCoroutine(Scale());
         }
     }
@@ -89,7 +91,7 @@ public class Shrink : MonoBehaviour
 
         }
 
-        stop = false;
+        startShrink = true;
     }
 
 

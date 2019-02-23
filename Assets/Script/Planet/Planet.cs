@@ -30,10 +30,12 @@ public class Planet : MonoBehaviour
             checkCatching();
     }
 
-    /*Abstract class to be implemented in child class, being called after catching the planet, 
-    parameter is reference to spacecraft element on the player*/
     public virtual void catchedAction(spacecraft sc) { }
-    public virtual void playerLeaveChild(){ }
+
+    public virtual void playerLeave(){
+        canPlaySound = true;
+        thePlayerOnPlanet = null;
+    }
 
     public virtual void playLandingSound() {
         if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -49,11 +51,6 @@ public class Planet : MonoBehaviour
         
     }
 
-    public void playerLeave(){
-        playerLeaveChild();
-        canPlaySound = true;
-        thePlayerOnPlanet = null;
-    }
 
     public virtual void checkCatching()
     {

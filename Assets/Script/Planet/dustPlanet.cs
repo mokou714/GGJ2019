@@ -98,9 +98,7 @@ public class dustPlanet : Planet
         return;
     }
 
-    public override void playerLeaveChild(){
-        return;
-    }
+  
 
     public override void playLandingSound()
     {

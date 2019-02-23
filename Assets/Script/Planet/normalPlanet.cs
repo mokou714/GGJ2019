@@ -11,10 +11,16 @@ public class normalPlanet : Planet {
 	
 	// Update is called once per frame
 	void Update () {
-        checkCatching();
+
 	}
 
-	public override void catchedAction(spacecraft sc)
+    void FixedUpdate()
+    {
+        if(thePlayerOnPlanet == null)
+            checkCatching();
+    }
+
+    public override void catchedAction(spacecraft sc)
 	{
         return;
 	}

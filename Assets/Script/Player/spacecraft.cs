@@ -136,24 +136,31 @@ public class spacecraft : MonoBehaviour {
 
         }
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
+        {
+            //Derail when the input is detected and player is in an orbit
+            if (!requiredStop)
+            { //requiredStop is for pause request out of the player object such as from tutorial manager
+                if (rotate_on)
+                    Launch();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
+        {
+            SceneManager.LoadScene(Application.loadedLevel);
+        }
+    }
 
-	// Update is called once per frame
-	void Update () {
+    void FixedUpdate () {
         if (requiredSleep)
             return;
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1)){
 
-            //Derail when the input is detected and player is in an orbit
-            if (!requiredStop){ //requiredStop is for pause request out of the player object such as from tutorial manager
-                if (rotate_on)
-                    Launch();
-            }
-        }else if(Input.GetKeyDown(KeyCode.R)|| (Input.touchCount == 2)){
-            SceneManager.LoadScene(Application.loadedLevel);
-        }else if(rotate_on){
+        if(rotate_on){
             //If no valid input, keep rotating around the current planet
             Rotate();
         }

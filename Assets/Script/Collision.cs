@@ -9,6 +9,7 @@ public class Collision : MonoBehaviour
     public float collide_strengh;
     public bool collided;
     public float asteroidDamage;
+    public UIEffect UIeffect;
 
     public ParticleSystem energyLossOnCollide;
 
@@ -40,22 +41,23 @@ public class Collision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col){
         float damage = 0;
         string hit_obj = col.gameObject.tag;
-    // Debug.Log("Collision:" + col.gameObject.tag);
         switch (hit_obj)
         {
             case "asteroid":
                 damage = col.gameObject.GetComponent<Asteroid>().damage;
+                StartCoroutine(playerBlink());
+                //UIeffect.blink = true;
                 break;
 
             case "orbaerolite":
                 damage = col.gameObject.GetComponent<orbitAsteroid>().damage;
-                break;   
+                StartCoroutine(playerBlink());
+                //UIeffect.blink = true;
+                break;
 
-            case "Finish":
-                if(!col.collider.isTrigger){
-                    col.collider.isTrigger = true;
-                }
+            default:
                 return;
+
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
         transform.GetChild(0).GetComponent<spacecraft>().energy -= damage;
@@ -99,5 +101,11 @@ public class Collision : MonoBehaviour
             GameStates.curLevelID = nextLevelID;
             GameStates.unlockedLevelID = nextLevelID;
         }
+    }
+
+    IEnumerator playerBlink() {
+        transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().enabled = true;
     }
 }

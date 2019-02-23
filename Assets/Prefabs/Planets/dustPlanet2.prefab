@@ -157,7 +157,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58479062247721414
 CircleCollider2D:
@@ -173,7 +173,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10.18
+  m_Radius: 1
 --- !u!58 &58854046470986496
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  dustAmount: 50
   catchRadius: 2
+  dustAmount: 50
 --- !u!114 &114908086109299252
 MonoBehaviour:
   m_ObjectHideFlags: 1

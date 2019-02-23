@@ -126,7 +126,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58157277976776258
 CircleCollider2D:
@@ -169,8 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904af64ddc2b34551bf05ca741e89067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: 3
-  minScale: 1
   pulseSpeed: 1
   scaleFactor: 0
 --- !u!114 &114459308295407876
@@ -195,9 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dustAmount: 50
-  catchRadius: 2
   thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 2
+  dustAmount: 50
 --- !u!198 &198440217941965678
 ParticleSystem:
   m_ObjectHideFlags: 1

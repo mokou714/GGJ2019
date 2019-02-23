@@ -59,7 +59,7 @@ public abstract class Planet : MonoBehaviour
         {
             GameObject ob = hitColliders[i].gameObject;
             //player catched
-            if (ob != gameObject && ob.tag == "Player" && Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
+            if (ob != gameObject && ob.tag == "Player" )//&& Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
             {
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
@@ -91,11 +91,16 @@ public abstract class Planet : MonoBehaviour
         Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
         float angle = Vector2.SignedAngle(v1, v2);
 
+
+
         //check if spacecraft is not orbiting the same planet after launch
         //Debug.Log(sc.rotatingPlanet + ", " + (Time.time - sc.checkRotatingTime));
         if (Time.time - sc.checkRotatingTime > checkInterval)
         ////&& angle <= 90f && angle >= -90f )//&& 
         {
+            //position fix
+            sc.transform.position = (sc.transform.position - transform.position).normalized * catchRadius + transform.position;
+
             thePlayerOnPlanet = ob;
 
             if (sc.energy < Constants.deathHealthVal)

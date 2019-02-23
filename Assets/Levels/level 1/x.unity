@@ -141,8 +141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 15
   catchRadius: 1.4
+  dustAmount: 15
 --- !u!4 &137561770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561006901795806, guid: 633bfad24833147f39f42d3fd39e071a,
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.1
+  dustAmount: 0
 --- !u!1001 &599447762
 Prefab:
   m_ObjectHideFlags: 0
@@ -321,8 +321,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1320105232188994, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114094284884244652, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
+    - {fileID: 114880979910019692, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &626917792 stripped
@@ -1695,8 +1700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.1
+  dustAmount: 0
 --- !u!1 &1598941085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,8 +1906,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.1
+  dustAmount: 0
 --- !u!1 &1826452729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
@@ -1926,8 +1931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.4
+  dustAmount: 0
 --- !u!1 &1936686976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1320105232188994, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
@@ -1948,6 +1953,21 @@ MonoBehaviour:
   lowerBound: 0
   change_rate: 0.008
   period: 1
+--- !u!114 &1936686978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1936686976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 1.4
+  dustAmount: 40
 --- !u!1 &1976135894 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
@@ -1971,8 +1991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.1
+  dustAmount: 0
 --- !u!1 &2024783482 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
@@ -1991,8 +2011,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 626917792}
   canPlaySound: 1
-  dustAmount: 0
   catchRadius: 1.3
+  dustAmount: 0
 --- !u!4 &2024783487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4402324675037206, guid: 35a08eab468714e23a3d3cbf62137068,

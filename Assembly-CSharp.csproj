@@ -275,6 +275,7 @@
     <Compile Include="Assets\Script\RandomStars.cs" />
     <Compile Include="Assets\Script\ResAdaptor.cs" />
     <Compile Include="Assets\Script\Rotate.cs" />
+    <Compile Include="Assets\Script\Startup.cs" />
     <Compile Include="Assets\Script\TutorialScript.cs" />
     <Compile Include="Assets\Script\UI\UIManager.cs" />
     <Compile Include="Assets\selectionEffect.cs" />

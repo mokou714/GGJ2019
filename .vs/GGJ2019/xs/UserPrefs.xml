@@ -18,6 +18,8 @@
       <File FileName="Assets/Script/Planet/rotationPlanet.cs" Line="65" Column="21" />
       <File FileName="Assets/Script/GameStates.cs" Line="57" Column="1" />
       <File FileName="Assets/Script/RandomStars.cs" Line="26" Column="39" />
+
+
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
@@ -26,6 +28,7 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/TonyXzh/GGJ2019/Assets/Script/Player/spacecraft.cs" relfile="Assets/Script/Player/spacecraft.cs" line="227" column="1" />
+      <Breakpoint file="/Users/silverzhang/Documents/Games/GGJ2019/Assets/Script/Player/spacecraft.cs" relfile="Assets/Script/Player/spacecraft.cs" line="222" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

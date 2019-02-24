@@ -31,36 +31,41 @@ public class TutorialScript : MonoBehaviour {
     private int hintNum = 0;
 
     //CheckedList is to mark the steps that are already done, so next to it won't repeat
-    private bool []checkedList;
+    private int checkedMark = 0;
     private int checkCursor = 0;
+    private string saveName = "";
 
-
+    private bool init = true;
 
 	// Use this for initialization
 	void Start () {
         savedTimeScale = Time.timeScale;
         player_sc = player.transform.GetChild(0).GetComponent<spacecraft>();
+        //Debug.Log(player_sc);
+        saveName = "tu" + (tutorialNum + 1).ToString();
+        checkedMark = GameStates.instance.GetTutorialData(saveName);
+
         switch(tutorialNum){
             case 0:
                 //Start page
-                checkedList = new bool[2];
-                for (int i = 0; i < checkedList.Length; i++)
-                    checkedList[i] = false;
-                StartCoroutine(waitToShowStuff(playerIntro, 1f));
+                //printList();
+                if(checkedMark < 1){
+                    StartCoroutine(waitToShowStuff(playerIntro, 1f));
+                }
                 break;
             case 1:
                 //Tutorial level 1
                 dist_ratio = (secondPlanet.transform.position.y - firstPlanet.transform.position.y) / (secondPlanet.transform.position.x - firstPlanet.transform.position.x);
                 //Debug.Log(dist_ratio);
-                checkedList = new bool[4];
-                for (int i = 0; i < checkedList.Length; i++)
-                    checkedList[i] = false;
                 break;
             case 2:
                 //Tutorial level 2
                 StartCoroutine(waitToShowStuff(obstacle, 1f));
                 break;
         }
+
+
+
 
 	}
 	
@@ -75,16 +80,14 @@ public class TutorialScript : MonoBehaviour {
                         playerIntro.SetActive(false);
                         resume();
                     }
-                    if (0 < hintNum && hintNum < hints.transform.childCount)
-                    {
+                    if (0 < hintNum && hintNum < hints.transform.childCount){
                         //Actions for after each small step in the second step
                         stopped = true;
                         showHints();
                         return;
                     }
 
-                    if (hintNum >= hints.transform.childCount)
-                    {
+                    if (hintNum >= hints.transform.childCount){
                         //Actions for after the second step
                         //Debug.Log("Unlock hints" + hints.transform.childCount);
                         hints.transform.GetChild(hintNum - 1).gameObject.SetActive(false);
@@ -103,16 +106,18 @@ public class TutorialScript : MonoBehaviour {
                         stopped = false;
                         resume();
                         player_sc.requiredStop = false;
-                        checkedList[checkCursor] = true;
-                        checkCursor++;
+
+                        checkedMark++;
+                        //checkCursor++;
                     }
                     else if (dustIntro.activeSelf)
                     {
                         //Actions for the third step
                         resume();
                         dustIntro.SetActive(false);
-                        checkedList[checkCursor] = true;
-                        checkCursor++;
+
+                        checkedMark++;
+                        //checkCursor++;
                         StartCoroutine(waitToEnableTap());
 
                     }
@@ -131,10 +136,11 @@ public class TutorialScript : MonoBehaviour {
                         //Debug.Log("Unlock hints" + hints.transform.childCount);
                         hints.transform.GetChild(hintNum - 1).gameObject.SetActive(false);
                         resume();
-
+                        checkedMark++;
+                        //checkCursor++;
                         StartCoroutine(waitToEnableTap());
                     }
-                    Debug.Log("Check " + checkCursor);
+                    //Debug.Log("Check " + checkCursor);
 
                 }else if(tutorialNum == 2){
                     if (obstacle.activeSelf)
@@ -147,22 +153,21 @@ public class TutorialScript : MonoBehaviour {
 
         if(player_sc.rotatingPlanet != null){
             if(tutorialNum == 0){
-                 if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0]){
-                    Debug.Log("roatating " + player_sc.rotatingPlanet + " " + checkedList[0] + finger.activeSelf);
-                    checkedList[checkCursor] = true;
-                    checkCursor++;
+                if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && checkedMark < 2){
+                    //Debug.Log("roatating " + player_sc.rotatingPlanet + " " + checkedList[0] + finger.activeSelf);
+                    //printList();
+                    checkedMark++;
                     StartCoroutine(waitToHints(0.5f));
+                    GameStates.instance.SaveTutorialData(checkedMark, saveName);
                 }
-
             }else if(tutorialNum == 1){
-                if ((player_sc.rotatingPlanet != secondPlanet || player_sc.rotatingPlanet == null) && thumbup.activeSelf)
-                {
+                if ((player_sc.rotatingPlanet != secondPlanet || player_sc.rotatingPlanet == null) && thumbup.activeSelf && checkedMark >= 2){
                     //After the player leaves the second planet
                     thumbup.SetActive(false);
-                }else if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && !checkedList[0]){
+                }else if (player_sc.rotatingPlanet == firstPlanet && !finger.activeSelf && checkedMark < 1){
                     //Detect when the player on the first planet is on a good position to shoot onto the second planet
                     float player_ratio = player.GetComponent<Rigidbody2D>().velocity.y / player.GetComponent<Rigidbody2D>().velocity.x;
-                    Debug.Log(player_ratio + "," + dist_ratio);
+                    //Debug.Log(player_ratio + "," + dist_ratio);
                     if (Mathf.Abs((player_ratio - dist_ratio)) < 0.05f)
                     {
                         finger.SetActive(true);
@@ -171,21 +176,28 @@ public class TutorialScript : MonoBehaviour {
                         pause();
                         stopped = true;
                         //Debug.Log("Show hint");
+                        checkedMark++;
+                        GameStates.instance.SaveTutorialData(checkedMark, saveName);
                     }
-                }else if (player_sc.rotatingPlanet == thirdPlanet && !dustIntro.activeSelf && !checkedList[2]){
+                }else if (player_sc.rotatingPlanet == thirdPlanet && !dustIntro.activeSelf && checkedMark < 3){
                     pause();
                     stopped = true;
                     dustIntro.SetActive(true);
                     player_sc.requiredStop = true;
+                    checkedMark++;
+                    GameStates.instance.SaveTutorialData(checkedMark, saveName);
+                    //checkCursor++;
                 }
             } 
-            if (player_sc.rotatingPlanet == secondPlanet && !thumbup.activeSelf && !checkedList[1]){
-                if (!thumbup.activeSelf)
+            if (player_sc.rotatingPlanet == secondPlanet && !thumbup.activeSelf && checkedMark < 2){
+                if (!thumbup.activeSelf){
                     thumbup.SetActive(true);
-                //Detect when the player lands on the second planet
-                checkedList[checkCursor] = true;
-                checkCursor++;
-                StartCoroutine(waitToHints(0.5f));
+                    //Detect when the player lands on the second planet
+                    //checkCursor++;
+                    checkedMark++;
+                    StartCoroutine(waitToHints(0.5f));
+                    GameStates.instance.SaveTutorialData(checkedMark, saveName);
+                }
             }
 
         }
@@ -225,6 +237,7 @@ public class TutorialScript : MonoBehaviour {
         pause();
         obj.SetActive(true);
         stopped = true;
+        checkedMark++;
     }
 
 
@@ -250,8 +263,7 @@ public class TutorialScript : MonoBehaviour {
         Time.timeScale = savedTimeScale;
     }
 
-    public static bool TouchRelease()
-    {
+    public static bool TouchRelease(){
         bool b = false;
         for (int i = 0; i < Input.touches.Length; i++)
         {
@@ -261,4 +273,12 @@ public class TutorialScript : MonoBehaviour {
         }
         return b;
     }
+
+
+	public void OnApplicationQuit(){
+        //Save the progress of current tutorial level
+        GameStates.instance.SaveTutorialData(checkedMark, saveName);
+        //Debug.Log("instance: " + saveName + "," + GameStates.instance.GetTutorialData(saveName));
+        GameStates.instance.CommitSaving();
+	}
 }

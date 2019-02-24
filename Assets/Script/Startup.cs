@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Startup : MonoBehaviour {
-
-
+    
 	private void Awake()
 	{
         Debug.Log("Awake");
 	}
+
 	// Use this for initialization
 	void Start () {
 		

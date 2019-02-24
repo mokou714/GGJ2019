@@ -142,7 +142,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 2.4
-  dustAmount: 0
 --- !u!1001 &515889066
 Prefab:
   m_ObjectHideFlags: 0
@@ -401,7 +400,7 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: energy2dis
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc3365553a23e940817749142f72076, type: 2}

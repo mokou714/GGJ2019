@@ -786,7 +786,7 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: energy2dis
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 50495923506891348, guid: bdc3365553a23e940817749142f72076,
         type: 2}
@@ -1866,7 +1866,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0
 --- !u!1001 &1483370660
 Prefab:
   m_ObjectHideFlags: 0
@@ -2712,7 +2711,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0
 --- !u!4 &2080899136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561006901795806, guid: 633bfad24833147f39f42d3fd39e071a,
@@ -2737,7 +2735,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0
 --- !u!1 &2142527583 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
@@ -2762,4 +2759,3 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0

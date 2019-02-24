@@ -11,6 +11,11 @@ TagManager:
   - squarePlanet
   - spacecraft
   - gaintPlanet
+  - dustPlanet
+  - begin
+  - level
+  - levelPlanet
+  - absPlanet
   layers:
   - Default
   - TransparentFX

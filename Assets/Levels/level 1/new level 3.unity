@@ -177,7 +177,7 @@ Prefab:
     - target: {fileID: 114094284884244652, guid: b2f1256239f224497a2d22e6a1673574,
         type: 2}
       propertyPath: pulseSpeed
-      value: 0.7
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 4013598107956690, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
       propertyPath: m_LocalScale.x
@@ -528,11 +528,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.4
+      value: -15.93
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.42
+      value: -7.31
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.z
@@ -571,7 +571,7 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: energy2dis
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 50495923506891348, guid: bdc3365553a23e940817749142f72076,
         type: 2}
@@ -808,7 +808,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_TagString
-      value: dustPlanet
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 114734457374709920, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
@@ -1126,6 +1126,10 @@ Prefab:
       propertyPath: scaleFactor
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1320105232188994, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
   m_IsPrefabAsset: 0
@@ -1274,7 +1278,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_TagString
-      value: dustPlanet
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_IsActive
@@ -1359,6 +1363,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1.9000002
       objectReference: {fileID: 0}
+    - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
   m_IsPrefabAsset: 0
@@ -1409,11 +1417,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.14
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.28
+      value: 4.46
       objectReference: {fileID: 0}
     - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1451,12 +1459,25 @@ Prefab:
     - target: {fileID: 58157277976776258, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: m_Radius
-      value: 1.4
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 198958195531313648, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: ShapeModule.radius.value
-      value: 1.4
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114509778348078406, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
+        type: 2}
+      propertyPath: catchRadius
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
@@ -1512,6 +1533,10 @@ Prefab:
     - target: {fileID: 4561006901795806, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 13.111001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
@@ -1669,7 +1694,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_TagString
-      value: dustPlanet
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_IsActive
@@ -2240,7 +2265,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_TagString
-      value: dustPlanet
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_IsActive
@@ -2632,7 +2657,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_TagString
-      value: dustPlanet
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_IsActive
@@ -2808,14 +2833,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1685860821}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  catchRadius: 1.4
+  catchRadius: 1.5
   dustAmount: 0
 --- !u!1001 &1739602079
 Prefab:
@@ -2864,6 +2889,10 @@ Prefab:
         type: 2}
       propertyPath: damage
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336526077890694, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633bfad24833147f39f42d3fd39e071a, type: 2}

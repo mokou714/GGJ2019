@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50133776876493482}
   - component: {fileID: 58507888911739478}
   - component: {fileID: 114880979910019692}
+  - component: {fileID: 114509778348078406}
   m_Layer: 0
   m_Name: shrinkDustPlanet
   m_TagString: dustPlanet
@@ -99,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320105232188994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.93, y: 1.92, z: 0}
+  m_LocalPosition: {x: -1.64, y: 4.28, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children:
   - {fileID: 4305263511712316}
@@ -141,7 +142,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.003130436, y: 0.00019043684}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.4
 --- !u!58 &58507888911739478
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -168,6 +169,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0db34722f9ed4789963b75472b6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114509778348078406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320105232188994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayerOnPlanet: {fileID: 0}
+  canPlaySound: 1
+  catchRadius: 1.4
+  dustAmount: 50
 --- !u!114 &114880979910019692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d6cff974cdd4be9851f3c034f3689f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFactor: 0
+  scaleFactor: 1
   lowerBound: 0
   change_rate: 0.005
   period: 1
@@ -5379,7 +5395,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2
+      value: 1.4
       mode: 0
       spread: 0
       speed:

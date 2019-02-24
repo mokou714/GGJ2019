@@ -25,6 +25,9 @@ public class RandomStars : MonoBehaviour {
 	[SerializeField] [Range(-5, 5)]
 	private float maxPositionChange = 1f;
 
+    public bool blinkStars;
+    private List<GameObject> starList = new List<GameObject>();
+
 	// Use this for initialization
 	void Start () {
 		maxScaleChange = Mathf.Max(minScaleChange, maxScaleChange);
@@ -34,9 +37,14 @@ public class RandomStars : MonoBehaviour {
 		GameObject star = transform.GetChild(0).gameObject;
 		formStars(numberOfStars, star);
 		offsetTransform();
+
+        if (blinkStars)
+            StartCoroutine(blink());
 	}
 
-	private void offsetTransform() {
+
+
+    private void offsetTransform() {
 		foreach (Transform star in transform) {
 			star.localScale *= Random.Range(minScaleChange, maxScaleChange);
 			star.localRotation = offsetRotation(star);
@@ -70,6 +78,29 @@ public class RandomStars : MonoBehaviour {
                 Random.Range(-heightEx, heightEx)
 			);
 			newStar.transform.position = starPos;
+            starList.Add(newStar);
 		} while (numberOfStars-- > 0);
 	}
+
+    IEnumerator blink()
+    {
+        List<int> allStarsIdx = new List<int>();
+        while (true)
+        {
+            int numStars = numberOfStars;
+
+            foreach (int i in allStarsIdx)
+            {
+                starList[i].GetComponent<SpriteRenderer>().enabled = true;
+            }
+            allStarsIdx = new List<int>();
+            while (numStars > numberOfStars / 2) {
+                int starIdx = Random.Range(0, numberOfStars);
+                allStarsIdx.Add(starIdx);
+                starList[starIdx].GetComponent<SpriteRenderer>().enabled = false;
+                numStars--;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
 }

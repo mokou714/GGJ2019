@@ -118,6 +118,7 @@ MonoBehaviour:
   maxRotationChange: 360
   minPositionChange: -1
   maxPositionChange: 1
+  blinkStars: 1
 --- !u!212 &212198777365174136
 SpriteRenderer:
   m_ObjectHideFlags: 1

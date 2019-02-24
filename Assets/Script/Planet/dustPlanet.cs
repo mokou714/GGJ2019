@@ -10,10 +10,12 @@ public class dustPlanet : Planet
     */
 
     public int dustAmount;
+    
+    //public float catchRadius;
+    //public GameObject thePlayerOnPlanet;
 
     bool startedAbsorb = false;
     bool absorbed = false;
-
 
     private int origDustAmount;
     private GameObject origDust;
@@ -27,16 +29,27 @@ public class dustPlanet : Planet
     {
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
-        if (transform.childCount > 0)
-        {
+        if(transform.childCount > 0){
             while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
                 index_planet++;
             //Debug.Log("Planet ref," + planetRef);
             if (transform.childCount > 0)
             {
                 origDust = copyDust(transform.GetChild(0).gameObject);
-            }
+            } 
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void FixedUpdate()
+    {
+        if(thePlayerOnPlanet == null)
+            checkCatching();
     }
 
 
@@ -77,8 +90,9 @@ public class dustPlanet : Planet
 
     public override void catchedAction(spacecraft sc){
 
-        //enegy
+            //enegy
         sc.energy += dustAmount;
+        //Debug.Log("absorbing");
 
         //dust absorbed
         ParticlesAbsorb pA;
@@ -92,13 +106,11 @@ public class dustPlanet : Planet
         // change
         if (sc.energy > 100f)
             sc.energy = 100f;
-        dustAmount = 0;
-        playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
+        dustAmount = 0;playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
 
         return;
     }
-
-  
+      
 
     public override void playLandingSound()
     {
@@ -121,6 +133,7 @@ public class dustPlanet : Planet
                 }
             }
         }
+
     }
 }
 

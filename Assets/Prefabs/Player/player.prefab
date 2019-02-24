@@ -205,7 +205,7 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962804579093592}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
   launch_speed: 0.9
   energy: 100
   camera: {fileID: 0}
-  moving: 0
+  launched: 0
   start_velocity: 2
   end: {fileID: 0}
   rotating_speed: 3
@@ -382,8 +382,7 @@ MonoBehaviour:
   rotation_center: {x: 0, y: 0, z: 0}
   rotating_dir: 0
   rotatingPlanet: {fileID: 0}
-  prevRotatingPlanet: {fileID: 0}
-  preTempPlanet: {fileID: 0}
+  preRotatingPlanet: {fileID: 0}
   movingStart: 0
   energyLoss: {fileID: 0}
   Player: {fileID: 0}

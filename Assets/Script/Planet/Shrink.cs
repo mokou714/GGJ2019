@@ -34,28 +34,17 @@ public class Shrink : MonoBehaviour
         //Record the original scale for each component for later resizing
         origScale = transform.GetChild(0).transform.localScale;
 
-        //if (tag == "dustPlanet")
-        //{
-        //    origChildScale = transform.GetChild(2).transform.localScale;
-        //    child = transform.GetChild(2);
-        //}
-        //else
-        //{
         origChildScale = transform.GetChild(1).transform.localScale;
         child = transform.GetChild(1);
-        //}
 
-
-        origCatchRadius = transform.gameObject.GetComponent<dustPlanet>().catchRadius;
+        origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
-        if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && startShrink)
-        {
+        if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && startShrink){
             startShrink = false;
             StartCoroutine(Scale());
         }
@@ -65,7 +54,7 @@ public class Shrink : MonoBehaviour
     //rescale every 0.01 second 
     IEnumerator Scale()
     {
-        while (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null)
+        while (transform.GetComponent<Planet>().thePlayerOnPlanet == null)
         {
 
             //Debug.Log("Shrink");
@@ -73,7 +62,7 @@ public class Shrink : MonoBehaviour
             //dust exist, not been aborbed
             //if (transform.childCount > 1)
             child.localScale = origChildScale * scaleFactor;
-            transform.GetComponent<dustPlanet>().catchRadius = origCatchRadius * scaleFactor;
+            transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
 
             //If the size reaches bounds then change the direction
             if ((scaleFactor <= lowerBound || scaleFactor >= 1))

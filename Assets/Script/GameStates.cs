@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameStates : MonoBehaviour {
 
     public static GameStates instance = null;
@@ -46,7 +45,7 @@ public class GameStates : MonoBehaviour {
 
         //if(Application.platform == RuntimePlatform.Android){
         //}
-        //Login();
+        Login();
 
     }
 
@@ -77,8 +76,6 @@ public class GameStates : MonoBehaviour {
             "1-1", "1-2", "1-3", "1-4",
             "2-1", "2-2", "2-3", "2-4" };
 
-        //PlayerPrefs.SetString("checkedList", null);
-        //Debug.Log(PlayerPrefs.GetString("checkedList"));
     }
 
     // Update is called once per frame
@@ -95,11 +92,9 @@ public class GameStates : MonoBehaviour {
             SaveLevel();
             SaveSettings();
         }
-        else{
+        else
             // clear keys
             PlayerPrefs.DeleteAll();
-        }
-           
     }
 
 
@@ -121,21 +116,6 @@ public class GameStates : MonoBehaviour {
 
     }
 
-    public void SaveTutorialData(int checkMark, string saveName){
-        PlayerPrefs.SetInt(saveName, checkMark);
-    }
-
-    public int GetTutorialData(string saveName){
-        Debug.Log("Loading " + saveName + " " + PlayerPrefs.HasKey(saveName));
-        if (!PlayerPrefs.HasKey(saveName))
-            return 0;
-        return PlayerPrefs.GetInt(saveName);
-    }
-
-
-    public void CommitSaving(){
-        PlayerPrefs.Save();
-    }
     public void SaveSettings()
     {
         PlayerPrefs.SetInt("hasSavedSettings", 1);
@@ -163,7 +143,6 @@ public class GameStates : MonoBehaviour {
 
             print("load level: " + curLevelID);
 
-            //
 
             // go to curLevel
             SceneManager.LoadScene(curLevelID);
@@ -190,4 +169,14 @@ public class GameStates : MonoBehaviour {
         }
     }
 
+
+    public int GetTutorialData(string saveName){
+        if (!PlayerPrefs.HasKey(saveName))
+            return 0;
+        return PlayerPrefs.GetInt(saveName);
+    }
+
+    public void SaveTutorialData(int checkedMark, string saveName){
+        PlayerPrefs.SetInt(saveName, checkedMark);
+    }
 }

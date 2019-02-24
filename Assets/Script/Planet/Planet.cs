@@ -76,14 +76,14 @@ public class Planet : MonoBehaviour
                 if(!sc.launched){
                     if (sc.rotatingPlanet != gameObject)//When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
                     {
-                        Debug.Log("Slow response");
+                        //Debug.Log("Slow response");
                         transferCenter(ob, sc, 1f);
                     }
                 }else{
                     if (sc.preRotatingPlanet != gameObject)
                     {
                         //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
-                        Debug.Log("Quick response");
+                        //Debug.Log("Quick response");
                         //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
                         transferCenter(ob, sc);
                     }

@@ -1,4 +1,4 @@
-﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
+<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/RandomStars.cs">
     <Files>
       <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="101" Column="3" />
@@ -20,16 +20,14 @@
       <File FileName="Assets/Script/RandomStars.cs" Line="26" Column="39" />
 
 
-    </Files>
+   </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/TonyXzh/GGJ2019/Assets/Script/Player/spacecraft.cs" relfile="Assets/Script/Player/spacecraft.cs" line="227" column="1" />
       <Breakpoint file="/Users/silverzhang/Documents/Games/GGJ2019/Assets/Script/Player/spacecraft.cs" relfile="Assets/Script/Player/spacecraft.cs" line="222" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

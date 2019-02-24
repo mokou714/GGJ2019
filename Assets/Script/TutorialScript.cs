@@ -42,7 +42,7 @@ public class TutorialScript : MonoBehaviour {
         savedTimeScale = Time.timeScale;
         player_sc = player.transform.GetChild(0).GetComponent<spacecraft>();
         //Debug.Log(player_sc);
-        saveName = "tu" + (tutorialNum + 1).ToString();
+        saveName = "tutorialData";
         checkedMark = GameStates.instance.GetTutorialData(saveName);
 
         switch(tutorialNum){
@@ -50,6 +50,7 @@ public class TutorialScript : MonoBehaviour {
                 //Start page
                 //printList();
                 if(checkedMark < 1){
+                    checkedMark++;
                     StartCoroutine(waitToShowStuff(playerIntro, 1f));
                 }
                 break;
@@ -60,6 +61,7 @@ public class TutorialScript : MonoBehaviour {
                 break;
             case 2:
                 //Tutorial level 2
+                checkedMark++;
                 StartCoroutine(waitToShowStuff(obstacle, 1f));
                 break;
         }
@@ -237,7 +239,7 @@ public class TutorialScript : MonoBehaviour {
         pause();
         obj.SetActive(true);
         stopped = true;
-        checkedMark++;
+        //checkedMark++;
     }
 
 
@@ -275,10 +277,10 @@ public class TutorialScript : MonoBehaviour {
     }
 
 
-	public void OnApplicationQuit(){
-        //Save the progress of current tutorial level
-        GameStates.instance.SaveTutorialData(checkedMark, saveName);
-        //Debug.Log("instance: " + saveName + "," + GameStates.instance.GetTutorialData(saveName));
-        GameStates.instance.CommitSaving();
-	}
+	//public void OnApplicationQuit(){
+ //       //Save the progress of current tutorial level
+ //       GameStates.instance.SaveTutorialData(checkedMark, saveName);
+ //       //Debug.Log("instance: " + saveName + "," + GameStates.instance.GetTutorialData(saveName));
+ //       GameStates.instance.CommitSaving();
+	//}
 }

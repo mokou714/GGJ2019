@@ -67,7 +67,7 @@ public class Planet : MonoBehaviour
         {
             GameObject ob = hitColliders[i].gameObject;
             //player catched
-            if (ob != gameObject && ob.tag == "Player" && Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
+            if (ob != gameObject && ob.tag == "Player")//&& Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
             {
                 playerObj = ob;
                 spacecraft sc = ob.transform.GetChild(0).GetComponent<spacecraft>();
@@ -77,7 +77,7 @@ public class Planet : MonoBehaviour
                     if (sc.rotatingPlanet != gameObject)//When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
                     {
                         Debug.Log("Slow response");
-                        transferCenter(ob, sc, 1f);
+                        transferCenter(ob, sc, 0.3f);
                     }
                 }else{
                     if (sc.preRotatingPlanet != gameObject)
@@ -87,7 +87,6 @@ public class Planet : MonoBehaviour
                         //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
                         transferCenter(ob, sc);
                     }
-
                 }
             }
             ++i;

@@ -10,8 +10,8 @@ public class pulse : MonoBehaviour {
     public float scaleFactor;
     bool startPulse = false;
     Vector3 defaultScale;
-
-
+    public bool stop = false;
+    public float time = 0.01f;
 
     float T = 0;
 
@@ -58,61 +58,66 @@ public class pulse : MonoBehaviour {
                     player.transform.position = newPos;
                 }
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(time);
         }
 
     }
 
-    IEnumerator Pulse() {
-        bool _pulsing = true;
-        bool _rollBack = false;
-        float _initScaleFactor = scaleFactor;
-        while (true)
-        {
-            //Every x second, pulse
-            if (startPulse)
-            {
-                //speed up
-                if (_pulsing)
-                {
-                    if (scaleFactor < 0)
-                        scaleFactor = _initScaleFactor;
+    //IEnumerator Pulse() {
+    //    bool _pulsing = true;
+    //    bool _rollBack = false;
+    //    float _initScaleFactor = scaleFactor;
+    //    while (true)
+    //    {
+    //        //Every x second, pulse
+    //        if (startPulse)
+    //        {
+    //            //speed up
+    //            if (_pulsing)
+    //            {
+    //                if (scaleFactor < 0)
+    //                    scaleFactor = _initScaleFactor;
 
-                    scaleFactor += 0.1f;
-                    _pulsing = false;
-                }
+    //                scaleFactor += 0.1f;
+    //                _pulsing = false;
+    //            }
 
-                yield return new WaitForSeconds(0.1f);
-
-
-
-
-                //speed down/rollback
-                if (!_pulsing)
-                {
-                    scaleFactor -= 0.1f;
-                    Debug.Log("half");
-                    yield return new WaitForSeconds(0.05f);
-
-
-                    scaleFactor -= 0.05f;
-                    yield return new WaitForSeconds(0.1f);
-                    scaleFactor += 0.05f;
-                    _pulsing = true;
-                }
+    //            yield return new WaitForSeconds(0.1f);
 
 
 
-                startPulse = false;
 
-            }
-            else {
-                yield return new WaitForSeconds(3f);
-                startPulse = true;
+    //            //speed down/rollback
+    //            if (!_pulsing)
+    //            {
+    //                scaleFactor -= 0.1f;
+    //                Debug.Log("half");
+    //                yield return new WaitForSeconds(0.05f);
+
+
+    //                scaleFactor -= 0.05f;
+    //                yield return new WaitForSeconds(0.1f);
+    //                scaleFactor += 0.05f;
+    //                _pulsing = true;
+    //            }
+
+
+
+    //            startPulse = false;
+
+    //        }
+    //        else {
+    //            yield return new WaitForSeconds(3f);
+    //            startPulse = true;
                     
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
+
+    //IEnumerator pauseforSec(float time){
+    //    yield return new WaitForSeconds(time);
+
+    //}
 
 
 }

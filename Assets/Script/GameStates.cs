@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 
 public class GameStates : MonoBehaviour {
@@ -29,6 +31,7 @@ public class GameStates : MonoBehaviour {
     public string[] bigLevelNames;
     public string[] levels;
 
+    public string showContent;
 
     private void Awake()
     {
@@ -46,21 +49,42 @@ public class GameStates : MonoBehaviour {
 
         //if(Application.platform == RuntimePlatform.Android){
         //}
-        //Login();
+        Login();
 
     }
 
+    //GUI log on screen to debug on phones
+	private void OnGUI()
+	{
+        //Debug.Log("GUI start");
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        GUIContent gUI = new GUIContent();
+        style.fontSize = 30;
+        gUI.text = showContent;
+        GUI.Label(new Rect(0, 0, 50, 50), gUI,style);
+	}
 
-    //Connecting to google play game account for android user
-    public void Login(){
+	//Connecting to google play game account for android user
+	public void Login(){
+        Debug.Log("Ready to Log in");
+        PlayGamesPlatform.Activate();
         Social.localUser.Authenticate((bool success) => {
             if(success){
-                ((GooglePlayGames.PlayGamesPlatform)Social.Active).SetGravityForPopups(GooglePlayGames.BasicApi.Gravity.CENTER_HORIZONTAL);
+                try{
+                    ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
+                }catch(System.InvalidCastException e){
+                    showContent = e.ToString();
+                }
             }else{
                 Debug.Log("Login failed");
             }
         });
     }
+
+    //private GUI(string text){
+    //    GUI.Label()
+    //}
 
     // Use this for initialization
     void Start()
@@ -186,7 +210,8 @@ public class GameStates : MonoBehaviour {
             // to do: apply settings 
 
             // load audio volume player has set last time;
-            UIManager.instance.audioSlider.value = masterVolume * 100f;
+            if(UIManager.instance != null)
+                UIManager.instance.audioSlider.value = masterVolume * 100f;
         }
     }
 

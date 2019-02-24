@@ -11,46 +11,46 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/start page.unity
     guid: 7fceff3349c304f269a67a37e7c198cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/tutorial 1.unity
     guid: b05d8ab7dcc294df5b678acbb3e05ea9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/tutorial 2.unity
     guid: 6351305f1ecc8419fb6fe8fb485f2b7b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-1.unity
     guid: 92fe6a669c07341c0b8702f40b27e473
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-2.unity
     guid: 0a1a9793bce3d491b8f691da753b6c6b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-3.unity
     guid: 8d9b15d6804db42059cb36ccd57c7da1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-4.unity
     guid: 7b08fc578e0364a96b028ed378335ea0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-5.unity
     guid: 859a60c02bd4c43248af99e3ecb073b9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-6.unity
     guid: 00647bee8b953463f9dc56d2c850624f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-7.unity
     guid: d0b12c57d3b1a412c960b77a7f6927bb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-8.unity
     guid: 652f04685295046c1a688b43077d1e69
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-9.unity
     guid: 9a30e00f06f4341a5a0e87dc9eeb3bfa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/level 1-10.unity
     guid: 4033fef7078cd450cacffe6bb6404f02
   - enabled: 0
-    path: Assets/Levels/level 9.unity
-    guid: 35275508546fe4b778965c26578fabbe
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Levels/end stage.unity
     guid: f5d96667a44ba45a9a7ca385a2d02c3a
   m_configObjects: {}

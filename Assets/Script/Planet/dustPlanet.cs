@@ -20,7 +20,7 @@ public class dustPlanet : Planet
     private int origDustAmount;
     private GameObject origDust;
     private GameObject player;
-    private Vector3 origSizeRatio;
+    public Vector3 origSizeRatio;
 
     private int index_planet = 1;//Find out the index of planet component so that the dust can be correctly resized when respawn
 
@@ -33,9 +33,15 @@ public class dustPlanet : Planet
             while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
                 index_planet++;
             //Debug.Log("Planet ref," + planetRef);
+
             if (transform.childCount > 0)
             {
+                Vector3 planet_scale = transform.GetChild(index_planet).localScale;
+                GameObject dust = transform.GetChild(0).gameObject;
+                origSizeRatio = new Vector3(dust.transform.localScale.x / planet_scale.x, dust.transform.localScale.y / planet_scale.y, dust.transform.localScale.z / planet_scale.z);
                 origDust = copyDust(transform.GetChild(0).gameObject);
+                Debug.Log(name + " dust scale: " + origDust.transform.localScale + ", planet scale" + transform.GetChild(index_planet).localScale);
+
             } 
         }
     }
@@ -59,17 +65,33 @@ public class dustPlanet : Planet
         */
         if (!startedAbsorb)
             return;
+        
+
         //Debug.Log("Recover, " + startedAbsorb);
         dustAmount = origDustAmount;
-        origDust.transform.localScale = new Vector3(origSizeRatio.x/transform.GetChild(index_planet).localScale.x, origSizeRatio.y/transform.GetChild(index_planet).localScale.y, origSizeRatio.z/transform.GetChild(index_planet).localScale.z);
-        Debug.Log(origDust.transform.localScale);
+        Debug.Log(name + " dust scale ratio: " + origSizeRatio);
+        Debug.Log(name + " dust scale: " + origDust.transform.localScale + ", planet scale" + transform.GetChild(index_planet).localScale);
         origDust.SetActive(true);
+        origDust.transform.localScale = new Vector3(origSizeRatio.x * transform.GetChild(index_planet).localScale.x, 
+                                                    origSizeRatio.y * transform.GetChild(index_planet).localScale.y, 
+                                                    origSizeRatio.z * transform.GetChild(index_planet).localScale.z);
         startedAbsorb = false;
+
+        if (GetComponent<pulse>() != null && GetComponent<pulse>().isActiveAndEnabled)
+        {
+            GetComponent<pulse>().time = 1f;
+            GetComponent<pulse>().scaleFactor = 1f;
+            StartCoroutine(pulseBackSpeed());
+        }
+
+
         if (transform.childCount > 0)
         {
             //origDust = transform.GetChild(0);
             origDust = copyDust(transform.GetChild(0).gameObject);
         }
+
+
     }
 
     private GameObject copyDust(GameObject dust){
@@ -81,10 +103,9 @@ public class dustPlanet : Planet
         GameObject new_dust = Instantiate(dust);
         new_dust.transform.position = dust.transform.position;
         //Debug.Log(new_dust.transform.localScale + ", " + dust.transform.lossyScale);
-        origSizeRatio = Vector3.Scale(transform.GetChild(index_planet).localScale, dust.transform.localScale);
-
+        Debug.Log("Orig Size Ratio: " + origSizeRatio);
         new_dust.transform.SetParent(transform);
-        new_dust.SetActive(false);
+        //new_dust.SetActive(false);
         return new_dust;
     }
 
@@ -135,5 +156,11 @@ public class dustPlanet : Planet
         }
 
     }
+
+    IEnumerator pulseBackSpeed(){
+        yield return new WaitForSeconds(1f);
+        GetComponent<pulse>().time = 0.01f;
+    }
+
 }
 

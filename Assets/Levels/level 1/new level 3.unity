@@ -201,6 +201,23 @@ Prefab:
       propertyPath: ShapeModule.radius.value
       value: 1.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4305263511712316, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305263511712316, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305263511712316, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114094284884244652, guid: b2f1256239f224497a2d22e6a1673574,
+        type: 2}
+      propertyPath: stop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f1256239f224497a2d22e6a1673574, type: 2}
   m_IsPrefabAsset: 0
@@ -528,11 +545,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -15.93
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.31
+      value: -2.62
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2842,6 +2859,7 @@ MonoBehaviour:
   canPlaySound: 1
   catchRadius: 1.5
   dustAmount: 0
+  origSizeRatio: 0
 --- !u!1001 &1739602079
 Prefab:
   m_ObjectHideFlags: 0

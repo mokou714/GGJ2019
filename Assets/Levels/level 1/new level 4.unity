@@ -528,11 +528,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9.27
+      value: -17.81
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.51
+      value: -7.04
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2797,27 +2797,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26dc28081aff30d469d0161d48d8ba8f, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1685860821 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1320105232188994, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1065482720}
---- !u!114 &1685860822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1685860821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thePlayerOnPlanet: {fileID: 0}
-  canPlaySound: 1
-  catchRadius: 1.4
-  dustAmount: 0
-  origSizeRatio: {x: 0, y: 0, z: 0}
 --- !u!1001 &1739602079
 Prefab:
   m_ObjectHideFlags: 0

@@ -83,5 +83,4 @@ public class Shrink : MonoBehaviour
         startShrink = true;
     }
 
-
 }

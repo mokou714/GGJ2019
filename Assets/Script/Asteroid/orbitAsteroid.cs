@@ -50,4 +50,9 @@ public class orbitAsteroid : MonoBehaviour {
         }
 
 	}
+
+
+    public void Recover(){
+        movingBack = true;
+    }
 }

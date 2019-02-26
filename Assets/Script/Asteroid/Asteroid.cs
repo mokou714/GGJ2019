@@ -58,6 +58,10 @@ public class Asteroid : MonoBehaviour {
 
 	}
 
+    public void Recover(){
+        movingBack = true;
+    }
+
 	// Update is called once per frame
 	void FixedUpdate()
     {

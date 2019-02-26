@@ -149,8 +149,6 @@ public class Planet : MonoBehaviour
                 sc.rotating_dir = -1; //counterclockwise rotation
             else
                 sc.rotating_dir = 1; //clockwise rotation 
-
-         
             catchedAction(sc);
             //Debug.Log("Switched");
             sc.landOn();
@@ -160,6 +158,11 @@ public class Planet : MonoBehaviour
                 canPlaySound = false;
             }
         }
+    }
+
+    public void Recover(){
+        if (thePlayerOnPlanet != null)
+            thePlayerOnPlanet = null;
     }
 
 

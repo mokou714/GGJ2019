@@ -34,7 +34,7 @@ public class spacecraft : MonoBehaviour {
     public GameObject preRotatingPlanet;
 
     private float movingTime = 0;
-    public bool movingStart;
+    public bool movingStart = false;
 
     private float originalWidth;
 
@@ -61,32 +61,32 @@ public class spacecraft : MonoBehaviour {
     public bool requiredSleep = false;
     public float inwardVel;
 
-
 	// Use this for initialization
 	void Start () {
-        energy = 100f;
-        spawnPoint = transform.position;
-        Vector3 dir = new Vector3(1, 0, 0);
-        transform.parent.GetComponent<Rigidbody2D>().velocity = dir * start_velocity;
-        originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
-        energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
-        energyLossLocalOffset = energyLoss.transform.localPosition;
-        parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
-        origSpeed = rotating_speed;
-        launched = true;
+        InitPlayer(false);//Init player with reinit parameter being false
     }
 
-    private void ReinitPlayer(){
+    private void InitPlayer(bool reinit = true){
         /*
-        Todo: this function reinitialize parameters of player when restarting the current level
+        Todo: this function initialize parameters of player when starting/restarting the current level
         */
-        //transform.gameObject.SetActive(true);
-        //transform.parent.GetComponent<BoxCollider2D>().enabled = true;
+        if(reinit)
+            parentRigidBody.velocity = Vector3.zero;//If it's not the first time init, stop the rigidbody speed for restarting
+        else{
+            //If it is the first time to initialize, store some the initial values.
+            parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
+            energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+            energyLossLocalOffset = energyLoss.transform.localPosition;
+            originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
+            spawnPoint = transform.position;
+            origSpeed = rotating_speed;
+        }
+
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
         movingStart = true;
-        parentRigidBody.velocity = Vector3.zero;
+
         Vector3 dir = new Vector3(1, 0, 0);
         parentRigidBody.velocity = dir * start_velocity;
         launched = false;
@@ -100,35 +100,43 @@ public class spacecraft : MonoBehaviour {
         Todo: this function reinitialize the scene's other objects, pulling some of them back to their original positions
         */
         object[] scene_obj = FindObjectsOfType(typeof(GameObject));
+
         foreach (object obj in scene_obj){
             //Iterate through all the gameobject in this scene to execute their reinitializations
             GameObject single_obj = (GameObject)obj;
-            string obj_tag = single_obj.tag;
+            //Debug.Log("Dust planet detected " + single_obj.GetComponent<Planet>());
 
+            //Execute basic recovering code for all kinds of planet
+            if(single_obj.GetComponent<Planet>() != null){
+                single_obj.GetComponent<Planet>().Recover();
+            }
+
+            string obj_tag = single_obj.tag;
             switch(obj_tag){
                 case "begin":
+                    //Add one more check to prevent the mis-tagging causing errors, same as following ones
+                    if (single_obj.gameObject.GetComponent<StopParticles>() == null)
+                        break;
+                    //Begin point redo the showup
                     single_obj.gameObject.GetComponent<StopParticles>().ParticleReStart();
                     break;
                 case "asteroid":
-                    single_obj.gameObject.GetComponent<Asteroid>().movingBack =  true;
+                    if (single_obj.gameObject.GetComponent<Asteroid>() == null)
+                        break;
+                    //Asteroids move back to original positions
+                    single_obj.gameObject.GetComponent<Asteroid>().Recover();
                     break;
                 case "orbasteroid":
+                    if (single_obj.gameObject.GetComponent<orbitAsteroid>() == null)
+                        break;
                     //For orbit asteroid, if the asteroid is already out of its orbit, it should go back when the scene restarts
-                    orbitAsteroid orb_obj = single_obj.gameObject.GetComponent<orbitAsteroid>();
-                    if(Vector3.Distance(single_obj.transform.position, orb_obj.orbitCenter.position) > (orb_obj.radius + 1f)){
-                        single_obj.gameObject.GetComponent<orbitAsteroid>().movingBack = true;
-                    }
+                    single_obj.gameObject.GetComponent<orbitAsteroid>().Recover();
                     break;
                 case "dustPlanet":
-                    GameObject dust = single_obj.transform.GetChild(0).gameObject;
-                    dustPlanet dust_planet = single_obj.gameObject.GetComponent<dustPlanet>();
+                    if (single_obj.gameObject.GetComponent<dustPlanet>() == null)
+                        break;
                     //Determine if it actually has dust
-                    if(dust_planet != null && dust != null){
-                        dust_planet.Recover();
-                        if (dust_planet.thePlayerOnPlanet != null)
-                            dust_planet.thePlayerOnPlanet = null;
-                        //if(!dust_planet.transform.GetChild(0).gameObject.activeSelf)
-                    }
+                    single_obj.gameObject.GetComponent<dustPlanet>().Recover();
                     break;
             }
 
@@ -164,7 +172,6 @@ public class spacecraft : MonoBehaviour {
             Rotate();
         }
         //Indicating wether the player is in orbit or flying straight
-        
         if(launched){
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
@@ -177,7 +184,7 @@ public class spacecraft : MonoBehaviour {
                 Vector2 playerVelocity = transform.parent.GetComponent<Rigidbody2D>().velocity;
                 Vector2 newEnergyLossLocalPos = energyLossLocalOffset.magnitude * playerVelocity.normalized;
                 float angleBetween = Mathf.Atan2(newEnergyLossLocalPos.y, newEnergyLossLocalPos.x) * Mathf.Rad2Deg;
-                print("ANgle: " + angleBetween);
+                //print("ANgle: " + angleBetween);
                 Vector3 energyLossRotation = new Vector3(
                     0, 
                     0, 
@@ -217,15 +224,16 @@ public class spacecraft : MonoBehaviour {
             viewportPos.y < -0.2f ||
              viewportPos.y > 1.2){
             energyLoss.Stop();
-            //transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-            //transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+
+            //This is for the condition when the player hits the end point but the death is detected at the same time, then we do not restart
+            if (requiredStop)
+                return;
             ReinitScene();
             StartCoroutine(waitInHiding());
         }
 
 
     }
-
 
     void Rotate(){
         /*
@@ -293,7 +301,7 @@ public class spacecraft : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         transform.parent.transform.position = spawnPoint;
-        ReinitPlayer();
+        InitPlayer();
 
     }
 

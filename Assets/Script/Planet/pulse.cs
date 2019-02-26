@@ -21,7 +21,6 @@ public class pulse : MonoBehaviour {
 
     void Start(){
         scaleFactor = 1f;
-
         defaultScale = transform.lossyScale;
 
         StartCoroutine(Scale());
@@ -36,20 +35,24 @@ public class pulse : MonoBehaviour {
         {
             T += Time.deltaTime * pulseSpeed;
             scaleFactor = Mathf.Cos(T) * 1 / 100 + 1;
+            if (Mathf.Abs(Mathf.Cos(T)-1f) < 0.0001f)
+                Debug.Log("scaleFactor " + scaleFactor);
         }
 
     }
 
     IEnumerator Scale() {
         while (true){
+
             if (player == null)
             {
+
                 //They all change at the same time
                 if (transform.childCount > 1){
                     transform.GetChild(0).transform.localScale *= scaleFactor;
                     transform.GetChild(1).transform.localScale *= scaleFactor;
+                    transform.GetComponent<dustPlanet>().catchRadius = transform.GetComponent<dustPlanet>().catchRadius * scaleFactor;
                 }
-                transform.GetComponent<dustPlanet>().catchRadius = transform.GetComponent<dustPlanet>().catchRadius * scaleFactor;
                 if (player != null)
                 {
                     Vector3 newPos = transform.position - (transform.position - player.transform.position) * scaleFactor;
@@ -60,4 +63,7 @@ public class pulse : MonoBehaviour {
         }
 
     }
+
+
+
 }

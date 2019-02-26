@@ -68,7 +68,7 @@ public class dustPlanet : Planet
         /*
         Todo: set up the recover for dust planet when the player is being respawned
         */
-        if (!startedAbsorb)
+        if (!startedAbsorb || origDust == null)
             return;
         dustAmount = origDustAmount;
         float planet_size = planetRef.localScale.x;

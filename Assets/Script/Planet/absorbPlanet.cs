@@ -10,8 +10,6 @@ public class absorbPlanet : Planet
     This class is attached on planet units, responsible for attracting the player, audio playing when orbiting starts
     */
 
-
-
     public float aborbingSpeed;
     private bool absorbing;
     private bool startAbsorbing;
@@ -41,8 +39,6 @@ public class absorbPlanet : Planet
         }
     }
 
-
-
     void checkAbsorbing()
     {
 
@@ -56,11 +52,8 @@ public class absorbPlanet : Planet
 
             Debug.Log("absorbing");
 
-
             var pshape = thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().shape;
             pshape.radius = 0.4f;
-
-
 
             for (int i = 0; i < numAlive; i++)
             {
@@ -76,13 +69,8 @@ public class absorbPlanet : Planet
                     newParticlesList.Add(particles[i]);
                 }
             }
-
-
             thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().Clear();
             thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().SetParticles(newParticlesList.ToArray(), newParticlesList.Count);
-
-
-
             //player.transform.GetChild(0).GetComponent<spacecraft>().energy -= Time.deltaTime * aborbingSpeed;
 
         }

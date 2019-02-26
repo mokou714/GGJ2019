@@ -45,9 +45,9 @@ public class pulse : MonoBehaviour {
             if (player == null)
             {
                 //They all change at the same time
-                if (transform.childCount > 1){
-                    transform.GetChild(0).transform.localScale *= scaleFactor;
-                    transform.GetChild(1).transform.localScale *= scaleFactor;
+                for(int childIdx = 0; childIdx<transform.childCount;++childIdx)
+                {
+                    transform.GetChild(childIdx).localScale *= scaleFactor;
                 }
                 transform.GetComponent<dustPlanet>().catchRadius = transform.GetComponent<dustPlanet>().catchRadius * scaleFactor;
                 if (player != null)

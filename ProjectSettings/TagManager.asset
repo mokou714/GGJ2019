@@ -16,6 +16,8 @@ TagManager:
   - level
   - levelPlanet
   - absPlanet
+  - background
+  - audio
   layers:
   - Default
   - TransparentFX

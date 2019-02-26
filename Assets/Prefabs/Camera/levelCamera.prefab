@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7874779ddec1419aa7689d3d8b9eb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invertingSpeed: 3
+  invertingSpeed: 100
   inverting: 0
 --- !u!212 &212575099518028314
 SpriteRenderer:

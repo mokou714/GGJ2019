@@ -73,7 +73,7 @@ public class spacecraft : MonoBehaviour {
         energyLossLocalOffset = energyLoss.transform.localPosition;
         parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
         origSpeed = rotating_speed;
-        launched = true;
+
     }
 
     private void ReinitPlayer(){

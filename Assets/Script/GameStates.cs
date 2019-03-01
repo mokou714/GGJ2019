@@ -49,7 +49,7 @@ public class GameStates : MonoBehaviour {
 
         //if(Application.platform == RuntimePlatform.Android){
         //}
-        Login();
+        //Login();
 
     }
 
@@ -66,20 +66,20 @@ public class GameStates : MonoBehaviour {
 	}
 
 	//Connecting to google play game account for android user
-	public void Login(){
-        PlayGamesPlatform.Activate();
-        Social.localUser.Authenticate((bool success) => {
-            if(success){
-                try{
-                    ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
-                }catch(System.InvalidCastException e){
-                    showContent = e.ToString();
-                }
-            }else{
-                Debug.Log("Login failed");
-            }
-        });
-    }
+	//public void Login(){
+    //    PlayGamesPlatform.Activate();
+    //    Social.localUser.Authenticate((bool success) => {
+    //        if(success){
+    //            try{
+    //                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
+    //            }catch(System.InvalidCastException e){
+    //                showContent = e.ToString();
+    //            }
+    //        }else{
+    //            Debug.Log("Login failed");
+    //        }
+    //    });
+    //}
 
     //private GUI(string text){
     //    GUI.Label()

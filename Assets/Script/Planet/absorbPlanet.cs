@@ -11,8 +11,10 @@ public class absorbPlanet : Planet
     */
 
     public float aborbingSpeed;
+    public float rotatingSpeed;
     private bool absorbing;
     private bool startAbsorbing;
+    private float playerRotationSpeed;
 
     Particle[] particles;
     int numAlive;
@@ -71,7 +73,8 @@ public class absorbPlanet : Planet
             }
             thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().Clear();
             thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().SetParticles(newParticlesList.ToArray(), newParticlesList.Count);
-            //player.transform.GetChild(0).GetComponent<spacecraft>().energy -= Time.deltaTime * aborbingSpeed;
+
+            thePlayerOnPlanet.transform.GetChild(0).GetComponent<spacecraft>().energy -= Time.deltaTime * aborbingSpeed;
 
         }
 
@@ -81,14 +84,19 @@ public class absorbPlanet : Planet
     public override void catchedAction(spacecraft sc)
     {
         absorbing = true;
+        playerRotationSpeed = sc.rotating_speed;
+        sc.rotating_speed = rotatingSpeed;
     }
 
     public override void playerLeave()
     {
         thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().Clear();
+        thePlayerOnPlanet.transform.GetChild(0).GetComponent<spacecraft>().rotating_speed = playerRotationSpeed;
+        playerRotationSpeed = 0;
         var pshape = thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().shape;
         pshape.radius = 0.0001f;
         absorbing = false;
+        
         base.playerLeave();
 
     }

@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Splash.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Asteroid/orbitAsteroidEclipse.cs">
     <Files>
       <File FileName="Assets/Script/Planet/Shrink.cs" Line="84" Column="6" />
       <File FileName="Assets/Script/Collision.cs" Line="96" Column="75" />
@@ -9,7 +9,9 @@
       <File FileName="Assets/Script/Planet/Accelerator.cs" Line="37" Column="1" />
       <File FileName="Assets/Script/Constants.cs" Line="13" Column="41" />
       <File FileName="Assets/Script/Splash.cs" Line="65" Column="42" />
-      <File FileName="Assets/Script/GameStates.cs" Line="56" Column="1" />
+      <File FileName="Assets/Script/GameStates.cs" Line="85" Column="22" />
+      <File FileName="Assets/Script/Planet/absorbPlanet.cs" Line="78" Column="1" />
+      <File FileName="Assets/Script/Asteroid/orbitAsteroidEclipse.cs" Line="40" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Levels/splash page.unity
+=======
+- path: Assets/Scenes/new level speed.unity
+>>>>>>> f3ce8ee2ac9beaa0ced488eccd3e7608d588779e
   isLoaded: 1
   isActive: 1

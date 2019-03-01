@@ -67,7 +67,6 @@ public class GameStates : MonoBehaviour {
 
 	//Connecting to google play game account for android user
 	public void Login(){
-        Debug.Log("Ready to Log in");
         PlayGamesPlatform.Activate();
         Social.localUser.Authenticate((bool success) => {
             if(success){

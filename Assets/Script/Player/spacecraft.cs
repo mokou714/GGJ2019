@@ -64,6 +64,7 @@ public class spacecraft : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         InitPlayer(false);//Init player with reinit parameter being false
+
     }
 
     private void InitPlayer(bool reinit = true){

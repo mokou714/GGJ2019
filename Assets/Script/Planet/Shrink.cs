@@ -23,6 +23,7 @@ public class Shrink : MonoBehaviour
 
     private bool startShrink;
     private Transform child;
+    private Transform grow;
 
     void Start()
     {
@@ -36,6 +37,12 @@ public class Shrink : MonoBehaviour
 
         origChildScale = transform.GetChild(1).transform.localScale;
         child = transform.GetChild(1);
+        
+        if (transform.childCount > 1) {
+            grow = transform.GetChild(2);
+        } else {
+            grow = null;
+        }
 
         origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
     }
@@ -46,6 +53,7 @@ public class Shrink : MonoBehaviour
     {
         if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && startShrink){
             startShrink = false;
+            child.GetComponent<ParticleSystem>().Play();
             StartCoroutine(Scale());
         }
     }
@@ -61,13 +69,22 @@ public class Shrink : MonoBehaviour
             transform.GetChild(0).transform.localScale = origScale * scaleFactor;
             //dust exist, not been aborbed
             //if (transform.childCount > 1)
-            child.localScale = origChildScale * scaleFactor;
+            foreach (Transform particles in transform) {
+                particles.localScale = origChildScale * scaleFactor;
+            }
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
 
             //If the size reaches bounds then change the direction
             if ((scaleFactor <= lowerBound || scaleFactor >= 1))
             {
                 //When reaching bounds, stay there for a while
+                if (change_rate > 0) { // Start shrinking
+                    grow.GetComponent<ParticleSystem>().Stop();
+                    child.GetComponent<ParticleSystem>().Play();
+                } else {
+                    child.GetComponent<ParticleSystem>().Stop();
+                    grow.GetComponent<ParticleSystem>().Play();
+                }
                 change_rate = -change_rate;
                 float num = Random.Range(0.2f, period);
                 //Debug.Log(num);

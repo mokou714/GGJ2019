@@ -69,6 +69,8 @@ public class Collision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Finish"){
+            if (transform.GetChild(0).GetComponent<spacecraft>().dead)
+                return;
             AudioManager.instance.PlaySFX("Next Level");
             transform.GetChild(0).GetComponent<spacecraft>().requiredSleep = true;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = 0.5f;

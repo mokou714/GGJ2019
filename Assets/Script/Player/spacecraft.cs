@@ -60,6 +60,11 @@ public class spacecraft : MonoBehaviour {
     public bool requiredSleep = false;
     public float inwardVel;
 
+    private Vector3 landPos;
+    public int numRotateCircle = 0;
+
+    public bool dead;
+
 	// Use this for initialization
 	void Start () {
         InitPlayer(false);//Init player with reinit parameter being false
@@ -96,6 +101,7 @@ public class spacecraft : MonoBehaviour {
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotatingPlanet = preRotatingPlanet = null;
         rotate_on = false;
+        dead = false;
 
         //Reinitialize dust particle system on player
         if(transform.parent.childCount > 1){
@@ -121,7 +127,6 @@ public class spacecraft : MonoBehaviour {
             if(single_obj.GetComponent<Planet>() != null){
                 single_obj.GetComponent<Planet>().Recover();
             }
-
             string obj_tag = single_obj.tag;
             switch(obj_tag){
                 case "begin":
@@ -150,19 +155,21 @@ public class spacecraft : MonoBehaviour {
                     single_obj.gameObject.GetComponent<dustPlanet>().Recover();
                     break;
             }
-
-
         }
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
+        if(touchHold()){
+            rotating_speed = 1.5f;
+            inwardVel = inwardVel / 2;
+        }else if (touchRelease())
         {
             //Derail when the input is detected and player is in an orbit
             if (!requiredSleep)
             { //requiredStop is for pause request out of the player object such as from tutorial manager
                 if (rotate_on)
                     Launch();
+                rotating_speed = origSpeed;
             }
         }
         else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
@@ -177,10 +184,12 @@ public class spacecraft : MonoBehaviour {
         //Set up the original width of player
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
 
-
         if(rotate_on){
             //If no valid input, keep rotating around the current planet
             Rotate();
+            if(approximateSame(transform.parent.position, landPos)){
+                numRotateCircle += 1;
+            }
         }
         //Indicating wether the player is in orbit or flying straight
         if(launched){
@@ -217,7 +226,6 @@ public class spacecraft : MonoBehaviour {
 
                     energy = launchEnergy * (1 - distance / maxDistance);
                 }
-                
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
             }
         }else{
@@ -235,9 +243,9 @@ public class spacecraft : MonoBehaviour {
              viewportPos.y > 1.2){
             energyLoss.Stop();
 
-            //This is for the condition when the player hits the end point but the death is detected at the same time, then we do not restart
-            if (requiredSleep)
-                return;
+            /* This is for the condition when the player hits the end point but the death is detected at the same time,
+            if the player is already dead, then the end point is not triggered */
+            dead = true;
             ReinitScene();
             StartCoroutine(waitInHiding());
         }
@@ -318,5 +326,20 @@ public class spacecraft : MonoBehaviour {
     public void landOn(){
         inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
         //inwardVel = 1 / (30 * rotatingPlanet.GetComponent<Planet>().catchRadius);
+        landPos = transform.parent.position;
     }
+
+    private bool approximateSame(Vector3 pos1, Vector3 pos2){
+        //Debug.Log(pos1 + ", " + pos2);
+        return Vector3.Distance(pos1, pos2) <= 0.1f;
+    }
+
+    bool touchHold(){
+        return (Input.GetKey(KeyCode.Space) || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)));
+    }
+
+    bool touchRelease(){
+        return (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended));
+    }
+
 }

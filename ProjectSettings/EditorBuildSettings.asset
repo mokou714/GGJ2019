@@ -60,8 +60,20 @@ EditorBuildSettings:
     path: Assets/Levels/level 1/new level 3.unity
     guid: d25e32914c126f846af974391c8251b0
   - enabled: 1
-    path: Assets/Levels/level 1/new level 4.unity
-    guid: 6240318ba4f77714b9d730ae54a2b546
+    path: Assets/Levels/level 2 disorder/level 2-1.unity
+    guid: e4f1604cfebd77a4e913321a8694e3f5
+  - enabled: 1
+    path: Assets/Levels/level 2 disorder/level 2-2.unity
+    guid: 5463af4e47f157c41b2bd38e503e1c74
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/lv1.unity
+    guid: 3b6a0e4d2f318407795037bbe4dcd884
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/lv2.unity
+    guid: 2e157ea58d95e40d183eeff56e4c716f
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

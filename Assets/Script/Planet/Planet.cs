@@ -12,10 +12,12 @@ public class Planet : MonoBehaviour
     public bool canPlaySound = true;
     protected GameObject playerObj;
     public float catchRadius;
+    public float slowRespTime;
 
     // Use this for initialization
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -52,10 +54,7 @@ public class Planet : MonoBehaviour
     }
 
 
-    public virtual void checkCatching()
-    {
-
-
+    public virtual void checkCatching(){
         //Debug.Log("Catched step 1" + name);
 
         //Keep scanning around itself to find if player is around
@@ -63,8 +62,7 @@ public class Planet : MonoBehaviour
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, catchRadius);
         int i = 0;
 
-        while (i < hitColliders.Length)
-        {
+        while (i < hitColliders.Length){
             GameObject ob = hitColliders[i].gameObject;
             //player catched
             if (ob != gameObject && ob.tag == "Player")//&& Mathf.Abs(Vector3.Distance(transform.position,ob.transform.position) - catchRadius) < 0.1f)
@@ -77,7 +75,7 @@ public class Planet : MonoBehaviour
                     if (sc.rotatingPlanet != gameObject)//When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
                     {
                         Debug.Log("Slow response");
-                        transferCenter(ob, sc, 0.3f);
+                        transferCenter(ob, sc, slowRespTime);
                     }
                 }else{
                     if (sc.preRotatingPlanet != gameObject)
@@ -90,7 +88,6 @@ public class Planet : MonoBehaviour
                 }
             }
             ++i;
-
         }
     }
 
@@ -101,15 +98,11 @@ public class Planet : MonoBehaviour
         Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
         float angle = Vector2.SignedAngle(v1, v2);
 
-
-
         //check if spacecraft is not orbiting the same planet after launch
         //Debug.Log(sc.rotatingPlanet + ", " + (Time.time - sc.checkRotatingTime));
         if (Time.time - sc.checkRotatingTime > checkInterval)
         ////&& angle <= 90f && angle >= -90f )//&& 
         {
-            
-
             //position fix
             ob.transform.position = (ob.transform.position - transform.position).normalized * catchRadius + transform.position;
 
@@ -119,7 +112,6 @@ public class Planet : MonoBehaviour
                 return;
 
             //rotate
-
             //player did not launch
             if (!sc.launched)
             { 
@@ -129,7 +121,7 @@ public class Planet : MonoBehaviour
                 sc.preRotatingPlanet = sc.rotatingPlanet;
                 if (sc.rotatingPlanet != null)
                 {
-                    Debug.Log("!!!!!!!!");
+                    //Debug.Log("!!!!!!!!");
                     sc.rotatingPlanet.GetComponent<Planet>().playerLeave();
                     Debug.Log(sc.rotatingPlanet.name);
                 }

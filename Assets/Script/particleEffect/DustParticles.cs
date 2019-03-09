@@ -22,9 +22,7 @@ public class DustParticles : MonoBehaviour {
         //Debug.Log("savedgravityRad: " + transform.parent.gameObject + ", " + savedPlanetGravityRad);
         if (planet.GetComponent<dustPlanet>().dustAmount == 0)
             savedPlanetGravityRad = 0f;
-
-
-
+        
         if (Application.isEditor)
         {
             checkSetDustSize();

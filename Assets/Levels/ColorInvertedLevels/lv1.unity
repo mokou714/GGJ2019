@@ -954,6 +954,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 2
+  slowRespTime: 0
 --- !u!1001 &558684883
 Prefab:
   m_ObjectHideFlags: 0
@@ -6523,7 +6524,7 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: energy2dis
-      value: 0.4
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}

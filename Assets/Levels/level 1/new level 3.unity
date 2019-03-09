@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89a779a17158745b3813171ca065006b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.4
@@ -277,8 +277,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
@@ -334,7 +334,7 @@ Prefab:
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: thePlayerOnPlanet
-      value: 
+      value:
       objectReference: {fileID: 626917792}
     - target: {fileID: 4845388147621012, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalScale.x
@@ -545,19 +545,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
       value: -16.67
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.y
       value: -6.98
-=======
-      value: -17.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -7.19
->>>>>>> f3ce8ee2ac9beaa0ced488eccd3e7608d588779e
       objectReference: {fileID: 0}
     - target: {fileID: 4708440052071268, guid: bdc3365553a23e940817749142f72076, type: 2}
       propertyPath: m_LocalPosition.z
@@ -586,12 +578,12 @@ Prefab:
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: camera
-      value: 
+      value:
       objectReference: {fileID: 394312287}
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
       propertyPath: end
-      value: 
+      value:
       objectReference: {fileID: 1527315641}
     - target: {fileID: 114036992429109818, guid: bdc3365553a23e940817749142f72076,
         type: 2}
@@ -682,7 +674,7 @@ Prefab:
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: thePlayerOnPlanet
-      value: 
+      value:
       objectReference: {fileID: 0}
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
@@ -1776,7 +1768,7 @@ Prefab:
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: thePlayerOnPlanet
-      value: 
+      value:
       objectReference: {fileID: 626917792}
     - target: {fileID: 4845388147621012, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalScale.x
@@ -2140,8 +2132,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
@@ -2583,8 +2575,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcbeaa9d4c52b468eb62b9b3498da486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   spawnObject: {fileID: 1198341226503318, guid: c02c65af421b71343b5d5567beb132ef,
     type: 2}
   player: {fileID: 726686263}
@@ -2743,7 +2735,7 @@ Prefab:
     - target: {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da,
         type: 2}
       propertyPath: thePlayerOnPlanet
-      value: 
+      value:
       objectReference: {fileID: 0}
     - target: {fileID: 4845388147621012, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalScale.x
@@ -2861,8 +2853,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd5c2e126c50a4fa7acb04afdd7a93cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.5
@@ -3017,8 +3009,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
@@ -3041,8 +3033,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02d0b2dd54449c8ab26aed0e3f0758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1

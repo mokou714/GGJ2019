@@ -57,7 +57,6 @@ public class spacecraft : MonoBehaviour {
     public float energy2dis;
     public float checkRotatingTime = 0;
 
-    public bool requiredStop = false;
     public bool requiredSleep = false;
     public float inwardVel;
 
@@ -71,6 +70,8 @@ public class spacecraft : MonoBehaviour {
         /*
         Todo: this function initialize parameters of player when starting/restarting the current level
         */
+        if (requiredSleep)
+            return;
         if(reinit)
             parentRigidBody.velocity = Vector3.zero;//If it's not the first time init, stop the rigidbody speed for restarting
         else{
@@ -82,7 +83,7 @@ public class spacecraft : MonoBehaviour {
             spawnPoint = transform.position;
             origSpeed = rotating_speed;
         }
-
+        rotating_speed = 3f;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth;
@@ -94,6 +95,15 @@ public class spacecraft : MonoBehaviour {
         movingTime = 0;
         energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         rotatingPlanet = preRotatingPlanet = null;
+        rotate_on = false;
+
+        //Reinitialize dust particle system on player
+        if(transform.parent.childCount > 1){
+            transform.parent.GetChild(1).GetComponent<ParticleSystem>().Clear();
+            var pshap = transform.parent.GetChild(1).GetComponent<ParticleSystem>().shape;
+            pshap.radius = 0.0001f;
+        }
+
     }
 	
     private void ReinitScene(){
@@ -149,7 +159,7 @@ public class spacecraft : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount == 1))
         {
             //Derail when the input is detected and player is in an orbit
-            if (!requiredStop)
+            if (!requiredSleep)
             { //requiredStop is for pause request out of the player object such as from tutorial manager
                 if (rotate_on)
                     Launch();
@@ -209,7 +219,6 @@ public class spacecraft : MonoBehaviour {
                 }
                 
                 transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
-
             }
         }else{
             //If the player is in orbit, stop lossing energy particles
@@ -227,7 +236,7 @@ public class spacecraft : MonoBehaviour {
             energyLoss.Stop();
 
             //This is for the condition when the player hits the end point but the death is detected at the same time, then we do not restart
-            if (requiredStop)
+            if (requiredSleep)
                 return;
             ReinitScene();
             StartCoroutine(waitInHiding());
@@ -299,7 +308,7 @@ public class spacecraft : MonoBehaviour {
         */
         transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         transform.parent.transform.position = spawnPoint;
         InitPlayer();
@@ -308,5 +317,6 @@ public class spacecraft : MonoBehaviour {
 
     public void landOn(){
         inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
+        //inwardVel = 1 / (30 * rotatingPlanet.GetComponent<Planet>().catchRadius);
     }
 }

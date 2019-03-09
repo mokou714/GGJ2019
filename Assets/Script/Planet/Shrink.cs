@@ -16,13 +16,14 @@ public class Shrink : MonoBehaviour
     private Vector3 origScale;
     private Vector3 origChildScale;
     private float origCatchRadius;
+    private float origSlowResTime;
 
     public float change_rate = 0.005f;
     public float period;
     private float waitTime = 0.01f;
 
     private bool startShrink;
-    private Transform child;
+    private Transform childPlanet;
 
     void Start()
     {
@@ -35,9 +36,10 @@ public class Shrink : MonoBehaviour
         origScale = transform.GetChild(0).transform.localScale;
 
         origChildScale = transform.GetChild(1).transform.localScale;
-        child = transform.GetChild(1);
+        childPlanet = transform.GetChild(1);
 
         origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
+        origSlowResTime = gameObject.GetComponent<Planet>().slowRespTime;
     }
 
 
@@ -60,9 +62,15 @@ public class Shrink : MonoBehaviour
             //Debug.Log("Shrink");
             transform.GetChild(0).transform.localScale = origScale * scaleFactor;
             //dust exist, not been aborbed
-            //if (transform.childCount > 1)
-            child.localScale = origChildScale * scaleFactor;
+            childPlanet.localScale = origChildScale * scaleFactor;
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
+            transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
+            //Make sure when it shrinks to some extremely small scale it should not catch player 
+            if (childPlanet.localScale.x < 0.2f && transform.GetComponent<Planet>().isActiveAndEnabled)
+                transform.GetComponent<Planet>().enabled = false;
+            else if(!transform.GetComponent<Planet>().isActiveAndEnabled)
+                transform.GetComponent<Planet>().enabled = true;
+
 
             //If the size reaches bounds then change the direction
             if ((scaleFactor <= lowerBound || scaleFactor >= 1))

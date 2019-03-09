@@ -15,6 +15,7 @@ public class orbitAsteroid : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
+        radius = Vector3.Distance(transform.position, orbitCenter.position);
         origPosition = transform.position;
         if(orbitCenter != null)
             radius = Vector3.Distance(transform.position, orbitCenter.position);
@@ -24,21 +25,24 @@ public class orbitAsteroid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(!movingBack && orbitCenter != null)
-            transform.RotateAround(orbitCenter.position, Vector3.forward, speed * Time.deltaTime);
-        if(movingBack == true){
+        if (!movingBack && orbitCenter != null && Vector3.Distance(transform.position, orbitCenter.position) < radius + 0.5f){
+            transform.RotateAround(orbitCenter.position, Vector3.forward, speed * 0.01f);
+        }
+            
+        if(movingBack){         
             float step = backSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
 
             //Disable the collider when moveing in case of hitting other asteroids
             if (transform.GetComponent<BoxCollider2D>().enabled)
                 transform.GetComponent<BoxCollider2D>().enabled = false;
             if (transform.position == origPosition)
             {
-                movingBack = false;
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<BoxCollider2D>().enabled = true;
+                StartCoroutine(startToMove());
+            }else{
+                transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
             }
         }else
         {
@@ -51,8 +55,14 @@ public class orbitAsteroid : MonoBehaviour {
 
 	}
 
-
     public void Recover(){
         movingBack = true;
     }
+
+    IEnumerator startToMove(){
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("start move");
+        movingBack = false;
+    }
+
 }

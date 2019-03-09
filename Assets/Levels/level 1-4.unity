@@ -192,7 +192,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!1 &275000343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1544194739302932, guid: fa6b071a557be408ba28087e367e2dfe,
@@ -284,7 +283,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!1001 &483016432
 Prefab:
   m_ObjectHideFlags: 0
@@ -616,7 +614,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!1001 &642553762
 Prefab:
   m_ObjectHideFlags: 0
@@ -683,11 +680,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -17.31
+      value: -9.26
       objectReference: {fileID: 0}
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -6.51
+      value: -4.73
       objectReference: {fileID: 0}
     - target: {fileID: 4718135416392654, guid: 4258a9add78fbd64aa0a58b59099ae96, type: 2}
       propertyPath: m_LocalPosition.z
@@ -972,7 +969,6 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
-  dustAmount: 0
 --- !u!1001 &1005768590
 Prefab:
   m_ObjectHideFlags: 0
@@ -1396,6 +1392,16 @@ Prefab:
     - target: {fileID: 1038245169643138, guid: 87068cefba692495f8569d79383fc19d, type: 2}
       propertyPath: m_TagString
       value: orbasteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: 50802021227623394, guid: 87068cefba692495f8569d79383fc19d,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114230541101891340, guid: 87068cefba692495f8569d79383fc19d,
+        type: 2}
+      propertyPath: speed
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87068cefba692495f8569d79383fc19d, type: 2}

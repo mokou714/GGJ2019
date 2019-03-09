@@ -48,8 +48,8 @@ public class Accelerator : Planet {
     }
 
     public override void playerLeave(){
-        base.playerLeave();
         thePlayerOnPlanet.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = origTime;
         origSpeed = 0;
+        base.playerLeave();
     }
 }

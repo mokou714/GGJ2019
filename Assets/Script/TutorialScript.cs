@@ -105,7 +105,7 @@ public class TutorialScript : MonoBehaviour {
                         tangent.SetActive(false);
                         stopped = false;
                         resume();
-                        player_sc.requiredStop = false;
+                        player_sc.requiredSleep = false;
 
                         checkedMark++;
                         //checkCursor++;
@@ -183,7 +183,7 @@ public class TutorialScript : MonoBehaviour {
                     pause();
                     stopped = true;
                     dustIntro.SetActive(true);
-                    player_sc.requiredStop = true;
+                    player_sc.requiredSleep = true;
                     checkedMark++;
                     GameStates.instance.SaveTutorialData(checkedMark, saveName);
                     //checkCursor++;
@@ -223,7 +223,7 @@ public class TutorialScript : MonoBehaviour {
         */
         yield return new WaitForSeconds(time);
         stopped = true;
-        player_sc.requiredStop = true;
+        player_sc.requiredSleep = true;
         pause();
         showHints();
     }
@@ -248,7 +248,7 @@ public class TutorialScript : MonoBehaviour {
         */
         Debug.Log("Wait to hint");
         yield return new WaitForSeconds(0.4f);
-        player_sc.requiredStop = false;
+        player_sc.requiredSleep = false;
     }
 
     public void pause()

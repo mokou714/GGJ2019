@@ -52,8 +52,6 @@ public class absorbPlanet : Planet
 
             List<Particle> newParticlesList = new List<Particle>();
 
-            Debug.Log("absorbing");
-
             var pshape = thePlayerOnPlanet.transform.GetChild(1).GetComponent<ParticleSystem>().shape;
             pshape.radius = 0.4f;
 

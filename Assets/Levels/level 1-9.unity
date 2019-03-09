@@ -318,7 +318,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.3
-  dustAmount: 0
+  slowRespTime: 0.5
   chang_rate: 0.1
   maxSpeed: 8
   origTime: 0
@@ -706,7 +706,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.3
-  dustAmount: 0
+  slowRespTime: 0
 --- !u!1001 &693709220
 Prefab:
   m_ObjectHideFlags: 0
@@ -847,7 +847,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
-  dustAmount: 0
+  slowRespTime: 0
 --- !u!1001 &712312783
 Prefab:
   m_ObjectHideFlags: 0

@@ -162,10 +162,10 @@ public class GameStates : MonoBehaviour {
     public void SaveSettings()
     {
         PlayerPrefs.SetInt("hasSavedSettings", 1);
-        PlayerPrefs.SetFloat("masterVolume", masterVolume);
+        //PlayerPrefs.SetFloat("masterVolume", masterVolume);
 
-        PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
-        PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
+        //PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
+        //PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
         PlayerPrefs.Save();
 
         print("saved settings");
@@ -201,16 +201,20 @@ public class GameStates : MonoBehaviour {
         if (PlayerPrefs.HasKey("hasSavedSettings"))
         {
 
-            masterVolume = PlayerPrefs.GetFloat("masterVolume");
-            bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
-            sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
+            //masterVolume = PlayerPrefs.GetFloat("masterVolume");
+            //bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
+            //sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
 
 
             // to do: apply settings 
 
             // load audio volume player has set last time;
             if(UIManager.instance != null)
-                UIManager.instance.audioSlider.value = masterVolume * 100f;
+            {
+
+
+            }
+
         }
     }
 

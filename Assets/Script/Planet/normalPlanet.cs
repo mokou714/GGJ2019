@@ -6,7 +6,7 @@ public class normalPlanet : Planet {
     //public float catch_radius;
 	// Use this for initialization
 	void Start () {
-		
+        setup();
 	}
 	
 	// Update is called once per frame

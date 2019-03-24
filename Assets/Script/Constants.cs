@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Constants : MonoBehaviour {
+public class Constants{
     
     //The x,y bounds of scenes
     public static float maxX = 16;
@@ -16,13 +16,6 @@ public class Constants : MonoBehaviour {
     public static float screenRatio = 17.77f;
     //public static float energy2dis = 0.2f; //100 energy is 25 units
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static float playerGlowSizeMax = 0.6f;
+
 }

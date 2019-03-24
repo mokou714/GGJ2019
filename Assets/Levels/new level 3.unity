@@ -228,6 +228,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.4
+  slowRespTime: 0
   chang_rate: 0.1
   maxSpeed: 0
   origTime: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
+  slowRespTime: 0
 --- !u!4 &348957435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4513070116562336, guid: b2f1256239f224497a2d22e6a1673574,
@@ -1578,12 +1580,12 @@ Prefab:
     - target: {fileID: 198958195531313648, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: ShapeModule.radius.value
-      value: 1.6
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 58157277976776258, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: m_Radius
-      value: 1.6
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
@@ -2223,6 +2225,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
+  slowRespTime: 0
 --- !u!1001 &1442029439
 Prefab:
   m_ObjectHideFlags: 0
@@ -3148,6 +3151,7 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.2
+  slowRespTime: 0
 --- !u!4 &2080899136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561006901795806, guid: 633bfad24833147f39f42d3fd39e071a,
@@ -3214,3 +3218,4 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1
+  slowRespTime: 0

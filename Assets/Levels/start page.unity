@@ -339,7 +339,7 @@ Prefab:
     - target: {fileID: 114308548204841196, guid: 2543ece1b81581c41aa712eb2c9ee5d0,
         type: 2}
       propertyPath: isSaving
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
@@ -531,7 +531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -44.165}
 --- !u!1 &592389832 stripped
 GameObject:
@@ -633,7 +633,7 @@ Transform:
   - {fileID: 1611912824}
   - {fileID: 1549918870}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &812802036
 Prefab:
@@ -812,7 +812,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116482601
 GameObject:
@@ -865,7 +865,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1194172172
 Prefab:
@@ -1093,6 +1093,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1958024634384188, guid: 35a08eab468714e23a3d3cbf62137068,
     type: 2}
   m_PrefabInternal: {fileID: 489009262}
+--- !u!1001 &1363600028
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.74699
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.520013
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589606841309800, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813374357329124, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+      propertyPath: m_Name
+      value: Depressed Jupiter (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dcb449322755ca94ebeca03f52d446ef, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1454190536
 Prefab:
   m_ObjectHideFlags: 0
@@ -1364,7 +1410,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2110641223 stripped
 GameObject:
@@ -1444,5 +1490,5 @@ Transform:
   m_LocalScale: {x: 2.7331, y: 2.7331, z: 2.7331}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -282,6 +282,7 @@
     <Compile Include="Assets\Script\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\Rotate.cs" />
     <Compile Include="Assets\selectionEffect.cs" />
+    <Compile Include="Assets\SizeAjust.cs" />
     <Compile Include="Assets\UIEffect.cs" />
     <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
     <None Include="Assets\StreamingAssets\build_info.txt" />

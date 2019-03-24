@@ -9,8 +9,14 @@ public class UIManager : MonoBehaviour {
 
     public Button homeButton;
     public Button audioButton;
-    public Slider audioSlider;
-    public GameObject audioPanel;
+
+    //public Slider audioSlider;
+    //public GameObject audioPanel;
+
+    public GameObject musicIcon;
+    public GameObject muteIcon;
+
+    bool isAudio = true;
 
     public static UIManager instance = null;
 
@@ -36,18 +42,28 @@ public class UIManager : MonoBehaviour {
         homeButton.onClick.AddListener(OnHomeButtonClicked);
         audioButton.onClick.AddListener(OnAudioButtonClicked);
 
-        audioPanel.SetActive(false);
+        //audioPanel.SetActive(false);
 
-        audioSlider.maxValue = 100f;
-        audioSlider.minValue = 0f;
-        audioSlider.onValueChanged.AddListener(delegate { OnAudioSliderValueChanged(); });
+        //audioSlider.maxValue = 100f;
+        //audioSlider.minValue = 0f;
+        //audioSlider.onValueChanged.AddListener(delegate { OnAudioSliderValueChanged(); });
 
+        isAudio = GameStates.isAudio;
+
+        musicIcon.SetActive(isAudio);
+        muteIcon.SetActive(!isAudio);
 
     }
 
     private void OnAudioButtonClicked()
     {
-        audioPanel.SetActive(!audioPanel.activeSelf);
+        //audioPanel.SetActive(!audioPanel.activeSelf);
+        isAudio = !isAudio;
+        musicIcon.SetActive(isAudio);
+        muteIcon.SetActive(!isAudio);
+        GameStates.isAudio = isAudio;
+        GameStates.bgmVolume = isAudio? 1.0f : 0f;
+        AudioManager.instance.ChangeMasterVolume(GameStates.bgmVolume);
     }
 
     private void OnHomeButtonClicked()
@@ -57,11 +73,11 @@ public class UIManager : MonoBehaviour {
 
     void OnAudioSliderValueChanged()
     {
-        float vol = audioSlider.value / 100f;
+        //float vol = audioSlider.value / 100f;
 
-        GameStates.masterVolume = vol; // for saving system settings
+        //GameStates.masterVolume = vol; // for saving system settings
 
-        AudioManager.instance.ChangeMasterVolume(vol); // change vol
+        //AudioManager.instance.ChangeMasterVolume(vol); // change vol
 
     }
 

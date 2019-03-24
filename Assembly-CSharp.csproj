@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ASMaterialIcon\Scripts\MaterialVectorIcon.cs" />
     <Compile Include="Assets\colorInverter.cs" />
     <Compile Include="Assets\Giant1.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
@@ -284,7 +285,10 @@
     <Compile Include="Assets\selectionEffect.cs" />
     <Compile Include="Assets\SizeAjust.cs" />
     <Compile Include="Assets\UIEffect.cs" />
+    <None Include="Assets\Resources\ASMaterialIcon\Fonts\LICENSE.txt" />
+    <None Include="Assets\ASMaterialIcon\Documentation\Documentation.txt" />
     <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
+    <None Include="Assets\Resources\ASMaterialIcon\Fonts\MaterialIcons.txt" />
     <None Include="Assets\StreamingAssets\build_info.txt" />
     <None Include="Assets\Art\colorInverter.shader" />
     <Reference Include="UnityEditor.StandardEvents">

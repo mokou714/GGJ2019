@@ -49,16 +49,22 @@ public class Planet : MonoBehaviour
         planetBottom = transform.Find("Bottom");
         lightController = GetComponent<Light>();
 
+        catchRadius = planetSprite.localScale.x * 0.9f;
+
+        //planetBottom.localScale = transform.Find("Planet2").localScale * 0.5f;
+        if (planetBottom != null)
+        {
+            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
+        }
+
         if (lightController != null)
         {
-            lightController.range = catchRadius + 0.5f;
+            lightController.range = planetBottom.localScale.x * 2;
             origGlowSize = lightController.range;
         }
 
 
-        if(planetBottom != null){
-            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
-        }
+
         //Make sure the planet glow's increment is consistent with the player's 
         glowIncre = 0.06f * ((catchRadius * 2.5f - origGlowSize) / 1.5f);
     }

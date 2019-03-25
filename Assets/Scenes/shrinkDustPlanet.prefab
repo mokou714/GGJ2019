@@ -230,6 +230,9 @@ MonoBehaviour:
   canPlaySound: 1
   catchRadius: 1.8
   slowRespTime: 0
+  lightController: {fileID: 0}
+  origGlowSize: 0
+  planetBottom: {fileID: 0}
   dustAmount: 40
   origSizeRatio: 0
 --- !u!122 &122837211052876054

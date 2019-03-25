@@ -82,8 +82,10 @@ public class absorbPlanet : Planet
     public override void catchedAction(spacecraft sc)
     {
         absorbing = true;
-        playerRotationSpeed = sc.rotating_speed;
-        sc.rotating_speed = rotatingSpeed;
+        if(rotatingSpeed != 0){
+            playerRotationSpeed = sc.rotating_speed;
+            sc.rotating_speed = rotatingSpeed;
+        }
     }
 
     public override void playerLeave()

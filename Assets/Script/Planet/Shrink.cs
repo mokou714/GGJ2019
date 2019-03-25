@@ -41,6 +41,9 @@ public class Shrink : MonoBehaviour
         origScale = transform.GetChild(0).transform.localScale;
         origChildScale = transform.GetChild(1).transform.localScale;
         childPlanet = transform.GetChild(1);
+        //Debug.Log(gameObject.GetComponent<Planet>().lightController.range);
+
+
         origHaloSize = gameObject.GetComponent<Planet>().lightController.range;
 
 
@@ -69,6 +72,15 @@ public class Shrink : MonoBehaviour
         while (transform.GetComponent<Planet>().thePlayerOnPlanet == null)
         {
 
+            if(bottomSprite == null){
+                bottomSprite = gameObject.GetComponent<Planet>().planetBottom;
+                origBottomScale = bottomSprite.localScale;
+
+                origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
+                origSlowResTime = gameObject.GetComponent<Planet>().slowRespTime;
+                origGlowSizeShrink = gameObject.GetComponent<Planet>().origGlowSize;
+            }
+
             //Debug.Log("Shrink");
             transform.GetChild(0).transform.localScale = origScale * scaleFactor;
             //dust exist, not been aborbed
@@ -76,6 +88,7 @@ public class Shrink : MonoBehaviour
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
             transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
             bottomSprite.localScale = origBottomScale * scaleFactor;
+            Debug.Log(bottomSprite);
 
             gameObject.GetComponent<Planet>().lightController.range = origHaloSize * scaleFactor;
             gameObject.GetComponent<Planet>().origGlowSize = origGlowSizeShrink * scaleFactor;

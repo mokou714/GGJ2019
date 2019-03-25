@@ -1,20 +1,16 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Asteroid/Asteroid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Planet/Shrink.cs">
     <Files>
-      <File FileName="Assets/Script/Planet/Shrink.cs" Line="82" Column="1" />
-      <File FileName="Assets/Script/Planet/Planet.cs" Line="60" Column="37" />
-      <File FileName="Assets/Script/Tutorials/TutorialScript.cs" Line="88" Column="1" />
-      <File FileName="Assets/Script/Collision.cs" Line="82" Column="44" />
-      <File FileName="Assets/Script/Camera/camController.cs" Line="50" Column="1" />
-      <File FileName="Assets/GooglePlayGames/Platforms/Android/AndroidTokenClient.cs" Line="256" Column="1" />
+      <File FileName="Assets/Script/Planet/Shrink.cs" Line="44" Column="31" />
+      <File FileName="Assets/Script/Planet/Planet.cs" Line="23" Column="22" />
       <File FileName="Assets/Script/Planet/levelPlanet.cs" Line="20" Column="1" />
       <File FileName="Assets/Script/Player/spacecraft.cs" Line="363" Column="28" />
       <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="17" Column="8" />
       <File FileName="Assets/Script/Constants.cs" Line="19" Column="45" />
       <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="18" Column="1" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="43" Column="1" />
+      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="58" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

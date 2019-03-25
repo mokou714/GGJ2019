@@ -48,13 +48,13 @@ public class Planet : MonoBehaviour
 
         planetBottom = transform.Find("Bottom");
         lightController = GetComponent<Light>();
-
+        Debug.Log(name  + ", " +lightController);
         catchRadius = planetSprite.localScale.x * 0.9f;
 
         //planetBottom.localScale = transform.Find("Planet2").localScale * 0.5f;
         if (planetBottom != null)
         {
-            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
+            planetBottom.localScale = planetSprite.localScale * (float)(0.35f);
         }
 
         if (lightController != null)

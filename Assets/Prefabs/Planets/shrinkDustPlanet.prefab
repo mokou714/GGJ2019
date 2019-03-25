@@ -183,7 +183,12 @@ MonoBehaviour:
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
   catchRadius: 1.4
+  slowRespTime: 0
+  lightController: {fileID: 0}
+  origGlowSize: 0
+  planetBottom: {fileID: 0}
   dustAmount: 50
+  origSizeRatio: 0
 --- !u!114 &114880979910019692
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 50462130407322606}
   - component: {fileID: 58391958448732530}
   - component: {fileID: 114416718694504432}
-  - component: {fileID: 122233230291304474}
+  - component: {fileID: 108498582291755618}
   m_Layer: 0
   m_Name: dustPlanet2
   m_TagString: dustPlanet
@@ -218,6 +218,43 @@ CircleCollider2D:
   m_Offset: {x: -0.0238983, y: 0.00019036088}
   serializedVersion: 2
   m_Radius: 1.2
+--- !u!108 &108498582291755618
+Light:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1432671173315460}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 5
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114416718694504432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +270,7 @@ MonoBehaviour:
   canPlaySound: 1
   catchRadius: 1.2
   slowRespTime: 0
+  lightController: {fileID: 0}
   origGlowSize: 0
   planetBottom: {fileID: 0}
   dustAmount: 40
@@ -248,17 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0db34722f9ed4789963b75472b6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!122 &122233230291304474
-Halo:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1432671173315460}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 0.59
 --- !u!198 &198490287708429100
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -41,7 +41,7 @@ public class Shrink : MonoBehaviour
         origScale = transform.GetChild(0).transform.localScale;
         origChildScale = transform.GetChild(1).transform.localScale;
         childPlanet = transform.GetChild(1);
-        origHaloSize = gameObject.GetComponent<Planet>().haloController.FindProperty("m_Size").floatValue;
+        origHaloSize = gameObject.GetComponent<Planet>().lightController.range;
 
 
         bottomSprite = gameObject.GetComponent<Planet>().planetBottom;
@@ -77,9 +77,8 @@ public class Shrink : MonoBehaviour
             transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
             bottomSprite.localScale = origBottomScale * scaleFactor;
 
-            gameObject.GetComponent<Planet>().haloController.FindProperty("m_Size").floatValue = origHaloSize * scaleFactor;
+            gameObject.GetComponent<Planet>().lightController.range = origHaloSize * scaleFactor;
             gameObject.GetComponent<Planet>().origGlowSize = origGlowSizeShrink * scaleFactor;
-            gameObject.GetComponent<Planet>().haloController.ApplyModifiedProperties();
 
             //Make sure when it shrinks to some extremely small scale it should not catch player 
             if (childPlanet.localScale.x < 0.2f && transform.GetComponent<Planet>().isActiveAndEnabled)

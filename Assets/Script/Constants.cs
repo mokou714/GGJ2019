@@ -16,6 +16,6 @@ public class Constants{
     public static float screenRatio = 17.77f;
     //public static float energy2dis = 0.2f; //100 energy is 25 units
 
-    public static float playerGlowSizeMax = 0.6f;
+    public static float playerGlowSizeMax = 1.5f;
 
 }

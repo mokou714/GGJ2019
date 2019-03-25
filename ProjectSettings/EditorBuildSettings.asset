@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Levels/splash page.unity
     guid: e54213990032741659304b0d46cd0b98
   - enabled: 1
+    path: Assets/Levels/pre_tutorial.unity
+    guid: cc7f5194b270e4fb2aa4b869e7d0cde3
+  - enabled: 1
     path: Assets/Levels/start page.unity
     guid: 7fceff3349c304f269a67a37e7c198cf
   - enabled: 1

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class Planet : MonoBehaviour
 {
@@ -15,12 +14,15 @@ public class Planet : MonoBehaviour
     public float catchRadius;
     public float slowRespTime;
 
+    public Light lightController;
 
-    public SerializedObject haloController;
     private float glowIncre;
+
     public float origGlowSize;
     private Transform planetSprite;
     public Transform planetBottom;
+
+
 
     // Use this for initialization
     public void Start()
@@ -42,22 +44,23 @@ public class Planet : MonoBehaviour
     public void setup(){
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
-        haloController = new SerializedObject(gameObject.GetComponent("Halo"));
         planetSprite = transform.Find("Planet2");
-        planetBottom = transform.Find("Bottom");
 
-        if(haloController != null){
-            haloController.FindProperty("m_Size").floatValue = 0.5f * planetSprite.localScale.x;
-            origGlowSize = haloController.FindProperty("m_Size").floatValue;
-            haloController.ApplyModifiedProperties();
+        planetBottom = transform.Find("Bottom");
+        lightController = GetComponent<Light>();
+
+        if (lightController != null)
+        {
+            lightController.range = catchRadius + 0.5f;
+            origGlowSize = lightController.range;
         }
 
-        Debug.Log(haloController);
+
         if(planetBottom != null){
             planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
         }
         //Make sure the planet glow's increment is consistent with the player's 
-        glowIncre = 0.03f * ((catchRadius + 0.4f - origGlowSize) / 0.6f);
+        glowIncre = 0.06f * ((catchRadius * 2.5f - origGlowSize) / 1.5f);
     }
 
     public virtual void catchedAction(spacecraft sc) { }
@@ -180,11 +183,8 @@ public class Planet : MonoBehaviour
 
     public void PlanetBlink()
     {
-        if (haloController != null)
-        {
-            haloController.FindProperty("m_Enabled").boolValue = true;
-            haloController.ApplyModifiedProperties();
-        }
+        if (lightController != null)
+            lightController.enabled = true;
         StartCoroutine(turnoffHalo());
     }
 
@@ -192,19 +192,21 @@ public class Planet : MonoBehaviour
     {
         while (true)
         {
-            if(haloController != null){
-                haloController.FindProperty("m_Size").floatValue += glowIncre;
-                haloController.ApplyModifiedProperties();
-                yield return new WaitForSeconds(0.001f);
+            if(lightController != null){
+                lightController.range += glowIncre;
+                //haloController.FindProperty("m_Size").floatValue += glowIncre;
+                //haloController.ApplyModifiedProperties();
+                yield return new WaitForSeconds(0.005f);
 
-                if (haloController.FindProperty("m_Size").floatValue > catchRadius + 0.4f)
+                if (lightController.range > catchRadius * 2.5f)
                 {
                     glowIncre = -glowIncre;
                 }
-                else if (haloController.FindProperty("m_Size").floatValue <= origGlowSize)
+                else if (lightController.range < origGlowSize)
                 {
-                    haloController.FindProperty("m_Enabled").boolValue = false;
-                    haloController.ApplyModifiedProperties();
+                    //haloController.FindProperty("m_Enabled").boolValue = false;
+                    //haloController.ApplyModifiedProperties();
+                    lightController.enabled = false;
                     glowIncre = -glowIncre;
                     break;
                 }

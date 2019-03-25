@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEditor;
 
 public class spacecraft : MonoBehaviour {
     /*
@@ -12,6 +11,7 @@ public class spacecraft : MonoBehaviour {
     Vector2 launchPos;
     float maxDistance;
     float launchEnergy; 
+
 
     public int rotation_sensitivity;
     public float launch_speed;
@@ -65,10 +65,12 @@ public class spacecraft : MonoBehaviour {
     public int numRotateCircle = 0;
 
     public bool dead;
-    SerializedObject haloController;
+    private Light haloController;
 
     private Transform arrow;
     public bool showArrow = false;
+
+    public bool won = false;
 
 	// Use this for initialization
 	void Start () {
@@ -94,7 +96,7 @@ public class spacecraft : MonoBehaviour {
             origSpeed = rotating_speed;
 
             //Initialize the referrence of the halo on the player
-            haloController = new SerializedObject(transform.parent.gameObject.GetComponent("Halo"));
+            haloController = GetComponentInParent<Light>();
             arrow = transform.parent.GetChild(2);
         }
         rotating_speed = 3f;
@@ -170,7 +172,7 @@ public class spacecraft : MonoBehaviour {
 
     void Update()
     {
-        if(touchHold()){
+        if(touchHold() && rotate_on){
             //rotating_speed = 1.5f;
             //inwardVel = inwardVel / 2;
             Time.timeScale = 0.5f;
@@ -351,25 +353,22 @@ public class spacecraft : MonoBehaviour {
 
     public void blink(){
         //Todo: Enable the halo
-        haloController.FindProperty("m_Enabled").boolValue = true;
-        haloController.ApplyModifiedProperties();
+        haloController.enabled = true;
         if(!dead)
             StartCoroutine(turnoffHalo());
     }
 
     IEnumerator turnoffHalo(){
         //Todo: Boucing the halo for a round
-        float offset = 0.03f;
+        float offset = 0.06f;
         while(true){
-            haloController.FindProperty("m_Size").floatValue += offset;
-            haloController.ApplyModifiedProperties();
+            haloController.range += offset;
             yield return new WaitForSeconds(0.001f);
 
-            if (haloController.FindProperty("m_Size").floatValue > Constants.playerGlowSizeMax){
+            if (haloController.range > Constants.playerGlowSizeMax){
                 offset = -offset;
-            }else if(haloController.FindProperty("m_Size").floatValue <= 0){
-                haloController.FindProperty("m_Enabled").boolValue = false;
-                haloController.ApplyModifiedProperties();
+            }else if(haloController.range <= 0){
+                haloController.enabled = false;
                 break;
             }
                 
@@ -381,11 +380,11 @@ public class spacecraft : MonoBehaviour {
         return Vector3.Distance(pos1, pos2) <= 0.1f;
     }
 
-    bool touchHold(){
+    public bool touchHold(){
         return (Input.GetKey(KeyCode.Space) || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)));
     }
 
-    bool touchRelease(){
+    public bool touchRelease(){
         return (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended));
     }
 

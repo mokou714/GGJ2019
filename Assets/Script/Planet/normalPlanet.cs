@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class normalPlanet : Planet {
     //public float catch_radius;
 	// Use this for initialization

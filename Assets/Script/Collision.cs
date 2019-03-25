@@ -68,14 +68,18 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Finish"){
+        if(collision.gameObject.tag == "Finish" || collision.gameObject.tag == "preTutorial"){
             if (transform.GetChild(0).GetComponent<spacecraft>().dead)
                 return;
+            transform.GetChild(0).GetComponent<spacecraft>().won = true;
             AudioManager.instance.PlaySFX("Next Level");
             transform.GetChild(0).GetComponent<spacecraft>().requiredSleep = true;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = 0.5f;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-            StartCoroutine(waitToNext(1f));
+            if (collision.gameObject.tag == "Finish")
+                StartCoroutine(waitToNext(1f));
+            else if(collision.gameObject.tag == "preTutorial")
+                StartCoroutine(waitToNext(4f));
         }
         return;
     }

@@ -279,7 +279,8 @@
     <Compile Include="Assets\Script\ResAdaptor.cs" />
     <Compile Include="Assets\Script\Splash.cs" />
     <Compile Include="Assets\Script\Startup.cs" />
-    <Compile Include="Assets\Script\TutorialScript.cs" />
+    <Compile Include="Assets\Script\Tutorials\Part_1.cs" />
+    <Compile Include="Assets\Script\Tutorials\TutorialScript.cs" />
     <Compile Include="Assets\Script\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\Rotate.cs" />
     <Compile Include="Assets\selectionEffect.cs" />

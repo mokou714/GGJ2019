@@ -18,6 +18,7 @@ TagManager:
   - absPlanet
   - background
   - audio
+  - preTutorial
   layers:
   - Default
   - TransparentFX

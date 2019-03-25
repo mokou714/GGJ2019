@@ -162,7 +162,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0238983, y: 0.00019036088}
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 2
 --- !u!114 &40767240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,7 +888,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.2
+      value: 2
       mode: 0
       spread: 0
       speed:
@@ -4983,6 +4983,23 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114734457374709920, guid: 35a08eab468714e23a3d3cbf62137068,
+        type: 2}
+      propertyPath: catchRadius
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
   m_IsPrefabAsset: 0
@@ -5462,7 +5479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerOnPlanet: {fileID: 0}
   canPlaySound: 1
-  catchRadius: 1.2
+  catchRadius: 2
   slowRespTime: 0
   origGlowSize: 0
   planetBottom: {fileID: 0}
@@ -5779,7 +5796,7 @@ Transform:
   m_GameObject: {fileID: 1750225943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 681689294}
   m_RootOrder: 2
@@ -10462,11 +10479,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4402324675037206, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.75
+      value: -10.47
       objectReference: {fileID: 0}
     - target: {fileID: 4402324675037206, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -6.3
+      value: -5.62
       objectReference: {fileID: 0}
     - target: {fileID: 4402324675037206, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalPosition.z
@@ -10635,7 +10652,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalScale.y
@@ -10643,12 +10660,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4075812080583530, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114734457374709920, guid: 35a08eab468714e23a3d3cbf62137068,
         type: 2}
       propertyPath: catchRadius
-      value: 1.3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

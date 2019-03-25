@@ -912,6 +912,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 122031484000720988, guid: 35a08eab468714e23a3d3cbf62137068,
+        type: 2}
+      propertyPath: m_Size
+      value: 1.3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114989099375806590, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 35a08eab468714e23a3d3cbf62137068, type: 2}
@@ -1589,12 +1594,12 @@ Prefab:
     - target: {fileID: 58157277976776258, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: m_Radius
-      value: 2.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198958195531313648, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: ShapeModule.radius.value
-      value: 2.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4513070116562336, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}
       propertyPath: m_LocalScale.x
@@ -1607,7 +1612,7 @@ Prefab:
     - target: {fileID: 114509778348078406, guid: 21b594c80b6a74d888a3ce1d2d35ca0b,
         type: 2}
       propertyPath: catchRadius
-      value: 2.3
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21b594c80b6a74d888a3ce1d2d35ca0b, type: 2}

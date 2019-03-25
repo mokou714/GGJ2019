@@ -5,13 +5,19 @@ using UnityEngine;
 public class invertPlant : Planet {
 
 
-
+    public bool invBack;
 
     public override void catchedAction(spacecraft sc)
     {
         base.catchedAction(sc);
-        sc.camera.transform.GetChild(0).GetComponent<colorInverter>().inverting = true;
-        StartCoroutine(invertActions(sc));
+        if(!invBack)
+        {
+            sc.camera.transform.GetChild(0).GetComponent<colorInverter>().inverting = true;
+            StartCoroutine(invertActions(sc));
+        }
+        else{
+            sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack = true;
+        }
     }
 
     IEnumerator invertActions(spacecraft sc)
@@ -29,9 +35,6 @@ public class invertPlant : Planet {
             }
         }
         sc.camera.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-             
-
-        
 
 
     }

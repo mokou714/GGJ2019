@@ -6,6 +6,7 @@ public class colorInverter : MonoBehaviour {
 
     public float invertingSpeed;
     public bool inverting;
+    public bool invertingBack;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,12 @@ public class colorInverter : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0f, 0f, transform.position.z), Time.deltaTime * invertingSpeed);
             if (transform.position == new Vector3(0f, 0f, transform.position.z))
                 inverting = false;
+        }
+        else if(invertingBack)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(-45f, 45f, transform.position.z), Time.deltaTime * invertingSpeed);
+            if (transform.position == new Vector3(-45f, 45f, transform.position.z))
+                invertingBack = false;
         }
 
     }

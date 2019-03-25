@@ -14,7 +14,9 @@ public class Shrink : MonoBehaviour
     public float lowerBound;
 
     private Vector3 origScale;
+    private Vector3 origBottomScale;
     private Vector3 origChildScale;
+    private float origHaloSize;
     private float origCatchRadius;
     private float origSlowResTime;
 
@@ -24,6 +26,9 @@ public class Shrink : MonoBehaviour
 
     private bool startShrink;
     private Transform childPlanet;
+    private Transform bottomSprite;
+    private float origGlowSizeShrink;
+
 
     void Start()
     {
@@ -34,12 +39,17 @@ public class Shrink : MonoBehaviour
 
         //Record the original scale for each component for later resizing
         origScale = transform.GetChild(0).transform.localScale;
-
         origChildScale = transform.GetChild(1).transform.localScale;
         childPlanet = transform.GetChild(1);
+        origHaloSize = gameObject.GetComponent<Planet>().haloController.FindProperty("m_Size").floatValue;
+
+
+        bottomSprite = gameObject.GetComponent<Planet>().planetBottom;
+        origBottomScale = bottomSprite.localScale;
 
         origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
         origSlowResTime = gameObject.GetComponent<Planet>().slowRespTime;
+        origGlowSizeShrink = gameObject.GetComponent<Planet>().origGlowSize;
     }
 
 
@@ -65,6 +75,12 @@ public class Shrink : MonoBehaviour
             childPlanet.localScale = origChildScale * scaleFactor;
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
             transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
+            bottomSprite.localScale = origBottomScale * scaleFactor;
+
+            gameObject.GetComponent<Planet>().haloController.FindProperty("m_Size").floatValue = origHaloSize * scaleFactor;
+            gameObject.GetComponent<Planet>().origGlowSize = origGlowSizeShrink * scaleFactor;
+            gameObject.GetComponent<Planet>().haloController.ApplyModifiedProperties();
+
             //Make sure when it shrinks to some extremely small scale it should not catch player 
             if (childPlanet.localScale.x < 0.2f && transform.GetComponent<Planet>().isActiveAndEnabled)
                 transform.GetComponent<Planet>().enabled = false;

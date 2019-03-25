@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class Planet : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class Planet : MonoBehaviour
     public float catchRadius;
     public float slowRespTime;
 
-    // Use this for initialization
-    void Start()
-    {
 
+    public SerializedObject haloController;
+    private float glowIncre;
+    public float origGlowSize;
+    private Transform planetSprite;
+    public Transform planetBottom;
+
+    // Use this for initialization
+    public void Start()
+    {
     }
 
     // Update is called once per frame
@@ -32,6 +39,27 @@ public class Planet : MonoBehaviour
             checkCatching();
     }
 
+    public void setup(){
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+        haloController = new SerializedObject(gameObject.GetComponent("Halo"));
+        planetSprite = transform.Find("Planet2");
+        planetBottom = transform.Find("Bottom");
+
+        if(haloController != null){
+            haloController.FindProperty("m_Size").floatValue = 0.5f * planetSprite.localScale.x;
+            origGlowSize = haloController.FindProperty("m_Size").floatValue;
+            haloController.ApplyModifiedProperties();
+        }
+
+        Debug.Log(haloController);
+        if(planetBottom != null){
+            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
+        }
+        //Make sure the planet glow's increment is consistent with the player's 
+        glowIncre = 0.03f * ((catchRadius + 0.4f - origGlowSize) / 0.6f);
+    }
+
     public virtual void catchedAction(spacecraft sc) { }
 
     public virtual void playerLeave(){
@@ -40,19 +68,15 @@ public class Planet : MonoBehaviour
     }
 
     public virtual void playLandingSound() {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
+        if (SceneManager.GetActiveScene().buildIndex != 0){
             AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
             AudioManager.sfxNormalLandID++;
-            if (AudioManager.sfxNormalLandID > 4)
-            {
+            if (AudioManager.sfxNormalLandID > 4){
                 AudioManager.sfxNormalLandID = 1;
             }
         }
-        
     }
-
 
     public virtual void checkCatching(){
         //Debug.Log("Catched step 1" + name);
@@ -78,8 +102,7 @@ public class Planet : MonoBehaviour
                         transferCenter(ob, sc, slowRespTime);
                     }
                 }else{
-                    if (sc.preRotatingPlanet != gameObject)
-                    {
+                    if (sc.preRotatingPlanet != gameObject){
                         //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
                         Debug.Log("Quick response");
                         //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
@@ -92,7 +115,9 @@ public class Planet : MonoBehaviour
     }
 
     private void transferCenter(GameObject ob ,spacecraft sc, float checkInterval = 0){
-
+        if (!sc.dead){
+            PlanetBlink();
+        }
         Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
                                      transform.position.y - sc.transform.position.y);
         Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
@@ -136,11 +161,12 @@ public class Planet : MonoBehaviour
             sc.movingStart = false;
             sc.checkRotatingTime = Time.time;
 
-
             if (angle < 0f && angle < 90f)
                 sc.rotating_dir = -1; //counterclockwise rotation
             else
                 sc.rotating_dir = 1; //clockwise rotation 
+
+
             catchedAction(sc);
             //Debug.Log("Switched");
             sc.landOn();
@@ -148,6 +174,40 @@ public class Planet : MonoBehaviour
             if (canPlaySound){
                 playLandingSound();
                 canPlaySound = false;
+            }
+        }
+    }
+
+    public void PlanetBlink()
+    {
+        if (haloController != null)
+        {
+            haloController.FindProperty("m_Enabled").boolValue = true;
+            haloController.ApplyModifiedProperties();
+        }
+        StartCoroutine(turnoffHalo());
+    }
+
+    IEnumerator turnoffHalo()
+    {
+        while (true)
+        {
+            if(haloController != null){
+                haloController.FindProperty("m_Size").floatValue += glowIncre;
+                haloController.ApplyModifiedProperties();
+                yield return new WaitForSeconds(0.001f);
+
+                if (haloController.FindProperty("m_Size").floatValue > catchRadius + 0.4f)
+                {
+                    glowIncre = -glowIncre;
+                }
+                else if (haloController.FindProperty("m_Size").floatValue <= origGlowSize)
+                {
+                    haloController.FindProperty("m_Enabled").boolValue = false;
+                    haloController.ApplyModifiedProperties();
+                    glowIncre = -glowIncre;
+                    break;
+                }
             }
         }
     }

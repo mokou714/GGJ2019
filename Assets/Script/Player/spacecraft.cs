@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor;
 
 public class spacecraft : MonoBehaviour {
     /*
@@ -64,6 +65,10 @@ public class spacecraft : MonoBehaviour {
     public int numRotateCircle = 0;
 
     public bool dead;
+    SerializedObject haloController;
+
+    private Transform arrow;
+    public bool showArrow = false;
 
 	// Use this for initialization
 	void Start () {
@@ -87,6 +92,10 @@ public class spacecraft : MonoBehaviour {
             originalWidth = transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier;
             spawnPoint = transform.position;
             origSpeed = rotating_speed;
+
+            //Initialize the referrence of the halo on the player
+            haloController = new SerializedObject(transform.parent.gameObject.GetComponent("Halo"));
+            arrow = transform.parent.GetChild(2);
         }
         rotating_speed = 3f;
         energy = 100f;
@@ -102,6 +111,7 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet = preRotatingPlanet = null;
         rotate_on = false;
         dead = false;
+        arrow.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
 
         //Reinitialize dust particle system on player
         if(transform.parent.childCount > 1){
@@ -157,19 +167,21 @@ public class spacecraft : MonoBehaviour {
             }
         }
     }
+
     void Update()
     {
         if(touchHold()){
-            rotating_speed = 1.5f;
-            inwardVel = inwardVel / 2;
-        }else if (touchRelease())
-        {
+            //rotating_speed = 1.5f;
+            //inwardVel = inwardVel / 2;
+            Time.timeScale = 0.5f;
+        }else if (touchRelease()){
             //Derail when the input is detected and player is in an orbit
             if (!requiredSleep)
             { //requiredStop is for pause request out of the player object such as from tutorial manager
                 if (rotate_on)
                     Launch();
-                rotating_speed = origSpeed;
+                //rotating_speed = origSpeed;
+                Time.timeScale = 1;
             }
         }
         else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
@@ -208,8 +220,7 @@ public class spacecraft : MonoBehaviour {
                 Vector3 energyLossRotation = new Vector3(
                     0, 
                     0, 
-                    angleBetween - 90
-                );
+                    angleBetween - 90);
                 energyLoss.transform.rotation = Quaternion.Euler(energyLossRotation);
                 energyLoss.transform.localPosition = newEnergyLossLocalPos;
                 energyLoss.Play();
@@ -250,7 +261,6 @@ public class spacecraft : MonoBehaviour {
             StartCoroutine(waitInHiding());
         }
 
-
     }
 
     void Rotate(){
@@ -268,7 +278,10 @@ public class spacecraft : MonoBehaviour {
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;//Get the tangent line 
 
         //Set up a proper inward velocity depending on the planet's catchRadius to prevent the player rotating outward
-        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = newV + (pos2-pos1).normalized * inwardVel;
+        Vector2 new_vel = newV + (pos2 - pos1).normalized * inwardVel;
+        transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_vel;
+        if(arrow.gameObject.activeSelf)
+            arrow.Rotate(0, 0, Vector2.SignedAngle(currentVelocity, new_vel));
     }
 
     public void Launch(){
@@ -308,6 +321,8 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet.GetComponent<Planet>().playerLeave();
         preRotatingPlanet = rotatingPlanet;
         rotatingPlanet = null;
+        if (arrow.gameObject.activeSelf)
+            arrow.gameObject.SetActive(false);
     }
 
     IEnumerator waitInHiding() {
@@ -320,13 +335,45 @@ public class spacecraft : MonoBehaviour {
         transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         transform.parent.transform.position = spawnPoint;
         InitPlayer();
-
     }
 
     public void landOn(){
         inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
         //inwardVel = 1 / (30 * rotatingPlanet.GetComponent<Planet>().catchRadius);
         landPos = transform.parent.position;
+        if(!dead)
+            blink();
+
+        if (!arrow.gameObject.activeSelf && showArrow)
+            arrow.gameObject.SetActive(true);
+        
+    }
+
+    public void blink(){
+        //Todo: Enable the halo
+        haloController.FindProperty("m_Enabled").boolValue = true;
+        haloController.ApplyModifiedProperties();
+        if(!dead)
+            StartCoroutine(turnoffHalo());
+    }
+
+    IEnumerator turnoffHalo(){
+        //Todo: Boucing the halo for a round
+        float offset = 0.03f;
+        while(true){
+            haloController.FindProperty("m_Size").floatValue += offset;
+            haloController.ApplyModifiedProperties();
+            yield return new WaitForSeconds(0.001f);
+
+            if (haloController.FindProperty("m_Size").floatValue > Constants.playerGlowSizeMax){
+                offset = -offset;
+            }else if(haloController.FindProperty("m_Size").floatValue <= 0){
+                haloController.FindProperty("m_Enabled").boolValue = false;
+                haloController.ApplyModifiedProperties();
+                break;
+            }
+                
+        }
     }
 
     private bool approximateSame(Vector3 pos1, Vector3 pos2){

@@ -32,8 +32,10 @@ public class dustPlanet : Planet
     // Use this for initialization
     void Start()
     {
+        setup();
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
+
         if(transform.childCount > 0){
             while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
                 index_planet++;
@@ -50,6 +52,8 @@ public class dustPlanet : Planet
             } 
         }
     }
+
+
 
     // Update is called once per frame
     void Update()

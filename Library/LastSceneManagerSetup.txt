@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Levels/level 1-3.unity
-=======
-- path: Assets/Levels/level 1/new level 3.unity
->>>>>>> cd3e4398744ef80d498224046051d85a6cd2b630
+- path: Assets/Levels/level 2 disorder/level 2-1.unity
   isLoaded: 1
   isActive: 1

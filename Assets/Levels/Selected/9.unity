@@ -412,7 +412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1167276487081648, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
       propertyPath: m_TagString
-      value: asteroid
+      value: orbaerolite
       objectReference: {fileID: 0}
     - target: {fileID: 50175723289346174, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
@@ -437,7 +437,7 @@ Prefab:
     - target: {fileID: 114956110784024436, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
       propertyPath: damage
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114768502411190954, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
@@ -1126,7 +1126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1167276487081648, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
       propertyPath: m_TagString
-      value: asteroid
+      value: orbaerolite
       objectReference: {fileID: 0}
     - target: {fileID: 50175723289346174, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
@@ -1151,7 +1151,7 @@ Prefab:
     - target: {fileID: 114956110784024436, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
       propertyPath: damage
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114768502411190954, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
@@ -1245,7 +1245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1167276487081648, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
       propertyPath: m_TagString
-      value: asteroid
+      value: orbaerolite
       objectReference: {fileID: 0}
     - target: {fileID: 50175723289346174, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
@@ -1265,7 +1265,7 @@ Prefab:
     - target: {fileID: 114956110784024436, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
       propertyPath: damage
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114768502411190954, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
@@ -1401,7 +1401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1167276487081648, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
       propertyPath: m_TagString
-      value: asteroid
+      value: orbaerolite
       objectReference: {fileID: 0}
     - target: {fileID: 50175723289346174, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
@@ -1421,7 +1421,7 @@ Prefab:
     - target: {fileID: 114956110784024436, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
       propertyPath: damage
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114768502411190954, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
@@ -1690,7 +1690,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1167276487081648, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}
       propertyPath: m_TagString
-      value: asteroid
+      value: orbaerolite
       objectReference: {fileID: 0}
     - target: {fileID: 50175723289346174, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
@@ -1715,7 +1715,7 @@ Prefab:
     - target: {fileID: 114956110784024436, guid: 2b52bd830712f69438c6433edeb5540c,
         type: 2}
       propertyPath: damage
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114768502411190954, guid: 2b52bd830712f69438c6433edeb5540c, type: 2}

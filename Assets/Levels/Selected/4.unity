@@ -300,11 +300,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4500971692508148, guid: d09fa4a73325f8f4885efd300329bbc9, type: 2}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD:Assets/Levels/level 1-3.unity
-      value: -13.32
-=======
       value: -12.5
->>>>>>> cd3e4398744ef80d498224046051d85a6cd2b630:Assets/Levels/Selected/level 1-3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4500971692508148, guid: d09fa4a73325f8f4885efd300329bbc9, type: 2}
       propertyPath: m_LocalPosition.y
@@ -382,19 +378,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4319096975339966, guid: c9861cc320703444aa6e54af5d9b4979, type: 2}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD:Assets/Levels/level 1-3.unity
-      value: -17.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 4319096975339966, guid: c9861cc320703444aa6e54af5d9b4979, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.22
-=======
       value: -11.92
       objectReference: {fileID: 0}
     - target: {fileID: 4319096975339966, guid: c9861cc320703444aa6e54af5d9b4979, type: 2}
       propertyPath: m_LocalPosition.y
       value: -3.92
->>>>>>> cd3e4398744ef80d498224046051d85a6cd2b630:Assets/Levels/Selected/level 1-3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4319096975339966, guid: c9861cc320703444aa6e54af5d9b4979, type: 2}
       propertyPath: m_LocalPosition.z

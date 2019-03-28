@@ -15,10 +15,12 @@ public class orbitAsteroid : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        radius = Vector3.Distance(transform.position, orbitCenter.position);
-        origPosition = transform.position;
-        if(orbitCenter != null)
+        if (orbitCenter != null){
             radius = Vector3.Distance(transform.position, orbitCenter.position);
+            origPosition = transform.position;
+            radius = Vector3.Distance(transform.position, orbitCenter.position);
+        }
+
         maxX = 100f;
         maxY = 100f;
 	}

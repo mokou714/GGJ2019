@@ -22,13 +22,13 @@ public class absorbPlanet : Planet
     // Use this for initialization
     void Start()
     {
-
+        setup();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     private void FixedUpdate()
@@ -82,8 +82,8 @@ public class absorbPlanet : Planet
     public override void catchedAction(spacecraft sc)
     {
         absorbing = true;
+        playerRotationSpeed = sc.rotating_speed;
         if(rotatingSpeed != 0){
-            playerRotationSpeed = sc.rotating_speed;
             sc.rotating_speed = rotatingSpeed;
         }
     }

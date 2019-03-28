@@ -19,7 +19,7 @@ public class Planet : MonoBehaviour
     private float glowIncre;
 
     public float origGlowSize;
-    private Transform planetSprite;
+    public Transform planetSprite;
     public Transform planetBottom;
 
 
@@ -48,13 +48,12 @@ public class Planet : MonoBehaviour
 
         planetBottom = transform.Find("Bottom");
         lightController = GetComponent<Light>();
-        Debug.Log(name  + ", " +lightController);
-        catchRadius = planetSprite.localScale.x * 0.9f;
+        catchRadius = planetSprite.localScale.x;
 
         //planetBottom.localScale = transform.Find("Planet2").localScale * 0.5f;
         if (planetBottom != null)
         {
-            planetBottom.localScale = planetSprite.localScale * (float)(0.35f);
+            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
         }
 
         if (lightController != null)
@@ -107,13 +106,13 @@ public class Planet : MonoBehaviour
                 if(!sc.launched){
                     if (sc.rotatingPlanet != gameObject)//When it is switching to a new planet automatically, the responding time(checkInterval) show be longer so that it will not switch back
                     {
-                        Debug.Log("Slow response");
+                        //Debug.Log("Slow response");
                         transferCenter(ob, sc, slowRespTime);
                     }
                 }else{
                     if (sc.preRotatingPlanet != gameObject){
                         //Conditions of manual switch of planets: the current rotatingPlanet null or it is not equal to the attracting planet
-                        Debug.Log("Quick response");
+                        //Debug.Log("Quick response");
                         //When it is switching to a new planet manually, the responding time should be 0(player can shoot right after it lands)
                         transferCenter(ob, sc);
                     }
@@ -124,9 +123,7 @@ public class Planet : MonoBehaviour
     }
 
     private void transferCenter(GameObject ob ,spacecraft sc, float checkInterval = 0){
-        if (!sc.dead){
-            PlanetBlink();
-        }
+
         Vector2 v1 = new Vector2(transform.position.x - sc.transform.position.x,
                                      transform.position.y - sc.transform.position.y);
         Vector2 v2 = sc.transform.parent.GetComponent<Rigidbody2D>().velocity;
@@ -137,6 +134,10 @@ public class Planet : MonoBehaviour
         if (Time.time - sc.checkRotatingTime > checkInterval)
         ////&& angle <= 90f && angle >= -90f )//&& 
         {
+            if (!sc.dead)
+            {
+                PlanetBlink();
+            }
             //position fix
             ob.transform.position = (ob.transform.position - transform.position).normalized * catchRadius + transform.position;
 
@@ -174,9 +175,7 @@ public class Planet : MonoBehaviour
                 sc.rotating_dir = -1; //counterclockwise rotation
             else
                 sc.rotating_dir = 1; //clockwise rotation 
-
-
-            catchedAction(sc);
+            
             //Debug.Log("Switched");
             sc.landOn();
             //landing sound 
@@ -184,6 +183,9 @@ public class Planet : MonoBehaviour
                 playLandingSound();
                 canPlaySound = false;
             }
+
+            catchedAction(sc);
+
         }
     }
 
@@ -212,7 +214,7 @@ public class Planet : MonoBehaviour
                 {
                     //haloController.FindProperty("m_Enabled").boolValue = false;
                     //haloController.ApplyModifiedProperties();
-                    lightController.enabled = false;
+                    //lightController.enabled = false;
                     glowIncre = -glowIncre;
                     break;
                 }

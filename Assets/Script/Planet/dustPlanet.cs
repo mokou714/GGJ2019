@@ -46,11 +46,16 @@ public class dustPlanet : Planet
                 //Initilization for dust planet, saving the initial values
                 planetRef = transform.GetChild(index_planet);
                 origPlanetSize = planetRef.localScale.x;
+
+                Debug.Log("About to check size");
                 GameObject dust = transform.GetChild(0).gameObject;
+
+                dust.GetComponent<DustParticles>().checkSetDustSize(this);
                 origDustSize = transform.GetChild(0).localScale.x;
                 origDust = copyDust(transform.GetChild(0).gameObject);
             } 
         }
+
     }
 
 
@@ -127,7 +132,8 @@ public class dustPlanet : Planet
         // change
         if (sc.energy > 100f)
             sc.energy = 100f;
-        dustAmount = 0;playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
+        dustAmount = 0;
+        playerObj.transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = sc.energy / 100f;
 
         return;
     }
@@ -156,7 +162,5 @@ public class dustPlanet : Planet
         }
 
     }
-
-
 }
 

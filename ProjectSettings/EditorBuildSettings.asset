@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Levels/splash page.unity
     guid: e54213990032741659304b0d46cd0b98
@@ -23,64 +20,76 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/tutorial 2.unity
     guid: 6351305f1ecc8419fb6fe8fb485f2b7b
-  - enabled: 0
-    path: Assets/Levels/level 1-1.unity
+  - enabled: 1
+    path: Assets/Levels/Selected/1.unity
     guid: 92fe6a669c07341c0b8702f40b27e473
-  - enabled: 0
-    path: Assets/Levels/level 1-2.unity
+  - enabled: 1
+    path: Assets/Levels/Selected/2.unity
     guid: 0a1a9793bce3d491b8f691da753b6c6b
-  - enabled: 0
-    path: Assets/Levels/level 1-3.unity
+  - enabled: 1
+    path: Assets/Levels/Selected/3.unity
+    guid: 935c64ffe5392c540a0cd2bfe0e1d53b
+  - enabled: 1
+    path: Assets/Levels/Selected/4.unity
     guid: 8d9b15d6804db42059cb36ccd57c7da1
-  - enabled: 0
-    path: Assets/Levels/level 1-4.unity
+  - enabled: 1
+    path: Assets/Levels/Selected/5.unity
     guid: 7b08fc578e0364a96b028ed378335ea0
-  - enabled: 0
-    path: Assets/Levels/level 1-5.unity
-    guid: 859a60c02bd4c43248af99e3ecb073b9
-  - enabled: 0
-    path: Assets/Levels/level 1-6.unity
+  - enabled: 1
+    path: Assets/Levels/Selected/6.unity
     guid: 00647bee8b953463f9dc56d2c850624f
+  - enabled: 1
+    path: Assets/Levels/Selected/7.unity
+    guid: d25e32914c126f846af974391c8251b0
+  - enabled: 1
+    path: Assets/Levels/Selected/8.unity
+    guid: 4f0442d336d894402bba3375fd9884ee
+  - enabled: 1
+    path: Assets/Levels/Selected/9.unity
+    guid: 4033fef7078cd450cacffe6bb6404f02
+  - enabled: 1
+    path: Assets/Levels/Selected/10.unity
+    guid: 041eb5c57cca14b6fb584bb94018fab3
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-0.unity
+    guid: 30083d6cf22cd4875a46e3025870903d
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-1.unity
+    guid: daae24a31c3084149b76de0784ecbe65
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-2.unity
+    guid: e88e65c47f78c4a369d19c67e6b0342f
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-3.unity
+    guid: 3a3ae8d26a83c4ce9987ed6daf61742c
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-4.unity
+    guid: 3b6a0e4d2f318407795037bbe4dcd884
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-5.unity
+    guid: 2e157ea58d95e40d183eeff56e4c716f
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-6.unity
+    guid: 5e2f6aa261212a2499c79effbff8e0a8
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/2-7.unity
+    guid: 7bd1f0c9aaa80e24abaf840bc9267b68
   - enabled: 0
     path: Assets/Levels/level 1-7.unity
     guid: d0b12c57d3b1a412c960b77a7f6927bb
   - enabled: 0
-    path: Assets/Levels/level 1-8.unity
-    guid: 652f04685295046c1a688b43077d1e69
-  - enabled: 0
     path: Assets/Levels/level 1-9.unity
     guid: 9a30e00f06f4341a5a0e87dc9eeb3bfa
-  - enabled: 0
-    path: Assets/Levels/level 1-10.unity
-    guid: 4033fef7078cd450cacffe6bb6404f02
   - enabled: 0
     path: Assets/Levels/level 1/new level 1.unity
     guid: 76b3a3db62900f247bf92f210c65a895
   - enabled: 0
-    path: Assets/Levels/level 1/new level 2.unity
-    guid: 935c64ffe5392c540a0cd2bfe0e1d53b
-  - enabled: 0
-    path: Assets/Levels/level 1/new level 3.unity
-    guid: d25e32914c126f846af974391c8251b0
-  - enabled: 0
     path: Assets/Levels/level 2 disorder/level 2-1.unity
     guid: e4f1604cfebd77a4e913321a8694e3f5
   - enabled: 0
-    path: Assets/Levels/level 2 disorder/level 2-2.unity
+    path: Assets/Levels/level 2 disorder/bug.unity
     guid: 5463af4e47f157c41b2bd38e503e1c74
   - enabled: 0
-    path: Assets/Levels/ColorInvertedLevels/lv1.unity
-    guid: 3b6a0e4d2f318407795037bbe4dcd884
-  - enabled: 0
-    path: Assets/Levels/ColorInvertedLevels/lv2.unity
-    guid: 2e157ea58d95e40d183eeff56e4c716f
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/Levels/end stage.unity
     guid: f5d96667a44ba45a9a7ca385a2d02c3a
   m_configObjects: {}

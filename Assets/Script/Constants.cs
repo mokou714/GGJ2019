@@ -17,5 +17,6 @@ public class Constants{
     //public static float energy2dis = 0.2f; //100 energy is 25 units
 
     public static float playerGlowSizeMax = 1.5f;
+    public int deviceType = 0;
 
 }

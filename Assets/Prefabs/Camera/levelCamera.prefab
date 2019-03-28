@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4179590927986564}
   - component: {fileID: 20387339173960342}
   - component: {fileID: 81589547551874116}
+  - component: {fileID: 114811538149650212}
   m_Layer: 0
   m_Name: levelCamera
   m_TagString: MainCamera
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544194739302932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -15.6}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4080869745833554}
@@ -132,6 +133,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invertingSpeed: 100
   inverting: 0
+  invertingBack: 0
+--- !u!114 &114811538149650212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544194739302932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e188ee899633d0b49870a5ae38b7359d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ratio: {x: 16, y: 9}
+  forceRatioOnAwake: 1
+  listenForWindowChanges: 1
+  createCameraForLetterBoxRendering: 1
+  findCamerasAutomatically: 1
+  letterBoxCameraColor: {r: 0, g: 0, b: 0, a: 1}
+  cameras: []
+  letterBoxCamera: {fileID: 0}
 --- !u!212 &212575099518028314
 SpriteRenderer:
   m_ObjectHideFlags: 1

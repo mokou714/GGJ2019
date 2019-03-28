@@ -7,6 +7,12 @@ public class invertPlant : Planet {
 
     public bool invBack;
 
+    void Start(){
+        setup();
+
+        catchRadius = catchRadius * 3 + 0.3f;
+    }
+
     public override void catchedAction(spacecraft sc)
     {
         base.catchedAction(sc);

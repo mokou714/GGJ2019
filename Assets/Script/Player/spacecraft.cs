@@ -61,15 +61,17 @@ public class spacecraft : MonoBehaviour {
     public bool requiredSleep = false;
     public float inwardVel;
 
-    private Vector3 landPos;
-    public int numRotateCircle = 0;
+    private Vector3 landAxis;
+    private bool halfCircle = false;
+    public int numRotateCircle = -1;
+    private int continousJump = 0;
+
 
     public bool dead;
     private Light haloController;
 
     private Transform arrow;
     public bool showArrow = false;
-
     public bool won = false;
 
 	// Use this for initialization
@@ -84,9 +86,12 @@ public class spacecraft : MonoBehaviour {
         */
         if (requiredSleep)
             return;
-        if(reinit)
+        if(reinit){
             parentRigidBody.velocity = Vector3.zero;//If it's not the first time init, stop the rigidbody speed for restarting
-        else{
+            numRotateCircle = -1;
+            halfCircle = false;
+            continousJump = 0;
+        }else{
             //If it is the first time to initialize, store some the initial values.
             parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
             energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
@@ -98,6 +103,7 @@ public class spacecraft : MonoBehaviour {
             //Initialize the referrence of the halo on the player
             haloController = GetComponentInParent<Light>();
             arrow = transform.parent.GetChild(2);
+
         }
         rotating_speed = 3f;
         energy = 100f;
@@ -113,7 +119,7 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet = preRotatingPlanet = null;
         rotate_on = false;
         dead = false;
-        arrow.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
+        //arrow.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
 
         //Reinitialize dust particle system on player
         if(transform.parent.childCount > 1){
@@ -176,6 +182,9 @@ public class spacecraft : MonoBehaviour {
             //rotating_speed = 1.5f;
             //inwardVel = inwardVel / 2;
             Time.timeScale = 0.5f;
+            if (showArrow)
+                arrow.gameObject.SetActive(true);
+
         }else if (touchRelease()){
             //Derail when the input is detected and player is in an orbit
             if (!requiredSleep)
@@ -201,9 +210,9 @@ public class spacecraft : MonoBehaviour {
         if(rotate_on){
             //If no valid input, keep rotating around the current planet
             Rotate();
-            if(approximateSame(transform.parent.position, landPos)){
-                numRotateCircle += 1;
-            }
+            //if(approximateSame(transform.parent.position, landPos)){
+            //    numRotateCircle += 1;
+            //}
         }
         //Indicating wether the player is in orbit or flying straight
         if(launched){
@@ -272,7 +281,15 @@ public class spacecraft : MonoBehaviour {
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position
-     
+
+        float rotated_angle = Vector3.Angle(pos2 - pos1, landAxis);
+        if(rotated_angle >= 160 && !halfCircle){
+            halfCircle = true;
+        }else if(rotated_angle <= 20 && halfCircle){
+            halfCircle = false;
+            numRotateCircle += 1;
+        }
+
         Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
@@ -282,8 +299,10 @@ public class spacecraft : MonoBehaviour {
         //Set up a proper inward velocity depending on the planet's catchRadius to prevent the player rotating outward
         Vector2 new_vel = newV + (pos2 - pos1).normalized * inwardVel;
         transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new_vel;
-        if(arrow.gameObject.activeSelf)
-            arrow.Rotate(0, 0, Vector2.SignedAngle(currentVelocity, new_vel));
+
+        float rot = Vector2.SignedAngle(new_vel, Vector2.right);
+        Vector3 newRot = new Vector3(0, 0, -rot);
+        arrow.rotation = Quaternion.Euler(newRot);;
     }
 
     public void Launch(){
@@ -325,6 +344,12 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet = null;
         if (arrow.gameObject.activeSelf)
             arrow.gameObject.SetActive(false);
+        if(numRotateCircle == 0)
+            numRotateCircle = 0;
+        else
+            numRotateCircle = -1;
+        halfCircle = false;
+        arrow.gameObject.SetActive(false);
     }
 
     IEnumerator waitInHiding() {
@@ -342,13 +367,24 @@ public class spacecraft : MonoBehaviour {
     public void landOn(){
         inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
         //inwardVel = 1 / (30 * rotatingPlanet.GetComponent<Planet>().catchRadius);
-        landPos = transform.parent.position;
+
         if(!dead)
             blink();
-
-        if (!arrow.gameObject.activeSelf && showArrow)
-            arrow.gameObject.SetActive(true);
         
+        if (numRotateCircle == 0)
+            continousJump += 1;
+        else
+            numRotateCircle = 0;
+
+        if(continousJump == 4){
+            Debug.Log("Continuous Jump!");
+            GameStates.instance.setAchievement(Achievements.achievement_four_continuousJump);
+        }
+            
+
+        Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position
+        Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position
+        landAxis = pos2 - pos1;
     }
 
     public void blink(){

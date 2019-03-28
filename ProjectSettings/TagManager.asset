@@ -19,6 +19,8 @@ TagManager:
   - background
   - audio
   - preTutorial
+  - LandPoint
+  - compaign
   layers:
   - Default
   - TransparentFX
@@ -55,4 +57,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 80142327
+    locked: 0
+  - name: trail
+    uniqueID: 259403215
     locked: 0

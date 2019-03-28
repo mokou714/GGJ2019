@@ -35,8 +35,8 @@ public class pulse : MonoBehaviour {
         {
             T += Time.deltaTime * pulseSpeed;
             scaleFactor = Mathf.Cos(T) * 1 / 100 + 1;
-            if (Mathf.Abs(Mathf.Cos(T)-1f) < 0.0001f)
-                Debug.Log("scaleFactor " + scaleFactor);
+            //if (Mathf.Abs(Mathf.Cos(T)-1f) < 0.0001f)
+                //Debug.Log("scaleFactor " + scaleFactor);
         }
 
     }

@@ -94,7 +94,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &61327632005612412
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -134,6 +134,8 @@ MonoBehaviour:
   speed: 20
   orbitCenter: {fileID: 0}
   damage: 50
+  radius: 0
+  movingBack: 0
 --- !u!114 &114833757852048224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +152,7 @@ MonoBehaviour:
   maxStrength: 1
   maxX: 0
   maxY: 0
+  movingBack: 0
 --- !u!198 &198200323596732106
 ParticleSystem:
   m_ObjectHideFlags: 1

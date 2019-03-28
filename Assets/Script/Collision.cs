@@ -12,6 +12,8 @@ public class Collision : MonoBehaviour
     public UIEffect UIeffect;
 
     public ParticleSystem energyLossOnCollide;
+    public ParticleSystem burstEnergy;
+
 
     // Use this for initialization
     void Start()
@@ -38,7 +40,8 @@ public class Collision : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col){
+    void OnCollisionEnter2D(Collision2D col)
+    {
         float damage = 0;
         string hit_obj = col.gameObject.tag;
         switch (hit_obj)
@@ -60,7 +63,12 @@ public class Collision : MonoBehaviour
 
         }
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-        transform.GetChild(0).GetComponent<spacecraft>().energy -= damage;
+        float left_health = transform.GetChild(0).GetComponent<spacecraft>().energy - damage;
+        if (left_health <= 0)
+        {
+            burstEnergy.Play();
+        }
+        transform.GetChild(0).GetComponent<spacecraft>().energy = left_health;
         transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
         collided = true;
         AudioManager.instance.PlaySFX("being hit");
@@ -68,7 +76,9 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Finish" || collision.gameObject.tag == "preTutorial"){
+        Debug.Log("Tag: " + collision.gameObject.tag);
+        if (collision.gameObject.tag == "Finish" || collision.gameObject.tag == "preTutorial" || collision.gameObject.tag == "compaign")
+        {
             if (transform.GetChild(0).GetComponent<spacecraft>().dead)
                 return;
             transform.GetChild(0).GetComponent<spacecraft>().won = true;
@@ -76,30 +86,51 @@ public class Collision : MonoBehaviour
             transform.GetChild(0).GetComponent<spacecraft>().requiredSleep = true;
             transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = 0.5f;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+
+
             if (collision.gameObject.tag == "Finish")
-                StartCoroutine(waitToNext(1f));
-            else if(collision.gameObject.tag == "preTutorial")
-                StartCoroutine(waitToNext(4f));
+            {
+                if (SceneManager.GetActiveScene().buildIndex == 4)
+                {
+                    GameStates.instance.setAchievement(Achievements.achievement_passed_tutorial);
+                    GameStates.instance.setAchievement(Achievements.unlock_whirlpool);
+                }else if (SceneManager.GetActiveScene().buildIndex == 14)
+                {
+                    GameStates.instance.setAchievement(Achievements.unlock_whirlpool);
+                }
+                StartCoroutine(waitToNext(1f, false));
+            }else if (collision.gameObject.tag == "preTutorial"){
+                StartCoroutine(waitToNext(4f, false));
+                GameStates.instance.SaveTutorialData(1,"pre");
+            }else if (collision.gameObject.tag == "compaign"){
+                Debug.Log("load");
+                StartCoroutine(waitToNext(1f, true));
+            }
+                
+                
         }
         return;
     }
 
-    IEnumerator waitToNext(float time)
+    IEnumerator waitToNext(float time, bool load)
     {
         /*
         Todo: this coroutine to show instruction after the player lands on the second planet
         */
         yield return new WaitForSeconds(time);
-        startNewLevel();
+        if (!load)
+            startNewLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            GameStates.instance.LoadLevel();
     }
 
-    private void startNewLevel(){
+    private void startNewLevel(int nextLevelID){
         int cur_scene = SceneManager.GetActiveScene().buildIndex;
-        if (cur_scene == Constants.maxNumOfLevel)
+        if (cur_scene == SceneManager.sceneCount - 2)
             SceneManager.LoadScene("end stage");
         else
         {
-            int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
+            //int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
             // load next level
             SceneManager.LoadScene(nextLevelID);
 

@@ -33,6 +33,8 @@ public class GameStates : MonoBehaviour {
 
     public string showContent;
 
+    public int deviceId = -1;
+
     private void Awake()
     {
         //Check if there is already an instance 
@@ -49,38 +51,8 @@ public class GameStates : MonoBehaviour {
 
         //if(Application.platform == RuntimePlatform.Android){
         //}
-        //Login();
 
     }
-
-    //GUI log on screen to debug on phones
-	private void OnGUI()
-	{
-        //Debug.Log("GUI start");
-        GUIStyle style = new GUIStyle();
-        style.normal.textColor = Color.white;
-        GUIContent gUI = new GUIContent();
-        style.fontSize = 30;
-        gUI.text = showContent;
-        GUI.Label(new Rect(0, 0, 50, 50), gUI,style);
-	}
-
-	//Connecting to google play game account for android user
-	//public void Login(){
-    //    PlayGamesPlatform.Activate();
-    //    Social.localUser.Authenticate((bool success) => {
-    //        if(success){
-    //            try{
-    //                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
-    //            }catch(System.InvalidCastException e){
-    //                showContent = e.ToString();
-    //            }
-    //        }else{
-    //            Debug.Log("Login failed");
-    //        }
-    //    });
-    //}
-
     //private GUI(string text){
     //    GUI.Label()
     //}
@@ -88,12 +60,13 @@ public class GameStates : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        if (isSaving)
-        {
-            LoadLevel();
-            LoadSettings();
-        }
+        //if (isSaving)
+        //{
+        //    //LoadLevel();
+        //    LoadSettings();
+        //}
 
+        deviceId = readDevice();
 
         levels = new string[] {
             "start page", 
@@ -144,6 +117,8 @@ public class GameStates : MonoBehaviour {
 
     }
 
+
+
     public void SaveTutorialData(int checkMark, string saveName){
         PlayerPrefs.SetInt(saveName, checkMark);
     }
@@ -190,6 +165,8 @@ public class GameStates : MonoBehaviour {
 
             // go to curLevel
             SceneManager.LoadScene(curLevelID);
+        }else{
+            SceneManager.LoadScene(3);
         }
 
 
@@ -211,11 +188,52 @@ public class GameStates : MonoBehaviour {
             // load audio volume player has set last time;
             if(UIManager.instance != null)
             {
-
-
             }
 
         }
     }
 
+    public void writeDevice(int id){
+        PlayerPrefs.SetInt("device", id);
+        PlayerPrefs.Save();
+    }
+
+    public int readDevice(){
+        if (PlayerPrefs.HasKey("device"))
+            return PlayerPrefs.GetInt("device");
+        else
+            return -1;
+    }
+
+    public void setAchievement(string id){
+        switch(deviceId){
+            case 0:
+                #if UNITY_ANDROID
+                Social.ReportProgress(id, 100.0f, (bool success) => {
+                    if(success){
+                        showContent = "Achievement got";
+                    }else{
+                        showContent = "Failed";
+                    }
+                });
+                #endif
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+    //GUI log on screen to debug on phones
+    private void OnGUI()
+    {
+        //Debug.Log("GUI start");
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        GUIContent gUI = new GUIContent();
+        style.fontSize = 30;
+        gUI.text = showContent;
+        GUI.Label(new Rect(0, 0, 50, 50), gUI, style);
+    }
 }

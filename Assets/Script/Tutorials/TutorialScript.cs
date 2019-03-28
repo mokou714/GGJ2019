@@ -52,7 +52,10 @@ public class TutorialScript : MonoBehaviour {
         //Debug.Log(player_sc);
         saveName = "tu" + (tutorialNum + 1).ToString();
         checkedMark = GameStates.instance.GetTutorialData(saveName);
+
+        Debug.Log("Checkmark: " + checkedMark);
         inst = new Dictionary<string, hint>();
+
 
         switch(tutorialNum){
             case 0:

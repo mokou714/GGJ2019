@@ -16,6 +16,8 @@ public class Shrink : MonoBehaviour
     private Vector3 origScale;
     private Vector3 origBottomScale;
     private Vector3 origChildScale;
+
+
     private float origHaloSize;
     private float origCatchRadius;
     private float origSlowResTime;
@@ -26,7 +28,9 @@ public class Shrink : MonoBehaviour
 
     private bool startShrink;
     private Transform childPlanet;
-    private Transform bottomSprite;
+    private Transform subChild;
+
+    public Transform bottomSprite;
     private float origGlowSizeShrink;
 
 
@@ -40,15 +44,20 @@ public class Shrink : MonoBehaviour
         //Record the original scale for each component for later resizing
         origScale = transform.GetChild(0).transform.localScale;
         origChildScale = transform.GetChild(1).transform.localScale;
-        childPlanet = transform.GetChild(1);
+        childPlanet = transform.Find("Planet2");
+
         //Debug.Log(gameObject.GetComponent<Planet>().lightController.range);
 
+        if(gameObject.GetComponent<Planet>().lightController != null)
+            origHaloSize = gameObject.GetComponent<Planet>().lightController.range;
 
-        origHaloSize = gameObject.GetComponent<Planet>().lightController.range;
+        bottomSprite = gameObject.GetComponent<Planet>().planetBottom;
 
 
         bottomSprite = gameObject.GetComponent<Planet>().planetBottom;
-        origBottomScale = bottomSprite.localScale;
+
+        if(bottomSprite != null)
+            origBottomScale = bottomSprite.localScale;
 
         origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
         origSlowResTime = gameObject.GetComponent<Planet>().slowRespTime;
@@ -59,7 +68,7 @@ public class Shrink : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.GetComponent<dustPlanet>().thePlayerOnPlanet == null && startShrink){
+        if (transform.GetComponent<Planet>().thePlayerOnPlanet == null && startShrink){
             startShrink = false;
             StartCoroutine(Scale());
         }
@@ -79,12 +88,23 @@ public class Shrink : MonoBehaviour
                 origCatchRadius = transform.gameObject.GetComponent<Planet>().catchRadius;
                 origSlowResTime = gameObject.GetComponent<Planet>().slowRespTime;
                 origGlowSizeShrink = gameObject.GetComponent<Planet>().origGlowSize;
+                childPlanet = transform.Find("Planet2");
+
+                Debug.Log(name + "," + childPlanet);
+                //if (childPlanet.childCount > 0)
+                    //subChild = childPlanet.GetChild(0);
             }
 
             //Debug.Log("Shrink");
             transform.GetChild(0).transform.localScale = origScale * scaleFactor;
             //dust exist, not been aborbed
             childPlanet.localScale = origChildScale * scaleFactor;
+            if(childPlanet.childCount > 0){
+                for (int i = 0; i < childPlanet.childCount; i ++){
+                    childPlanet.GetChild(i).localScale = origChildScale * scaleFactor;
+                }
+            }
+                //subChild.localScale = origChildScale * scaleFactor;
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
             transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
             bottomSprite.localScale = origBottomScale * scaleFactor;

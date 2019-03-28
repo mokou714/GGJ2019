@@ -24,7 +24,9 @@
 
 public static class Achievements
 {
-        public const string achievement_passed_tutorial = "CgkIzevekYYaEAIQAQ"; // <GPGSID>
-
+        public const string achievement_passed_tutorial = "CgkIzevekYYaEAIQAQ"; 
+        public const string achievement_four_continuousJump = "CgkIzevekYYaEAIQAg";
+        public const string unlock_milkyway = "CgkIzevekYYaEAIQAw";
+        public const string unlock_whirlpool = "CgkIzevekYYaEAIQBA";
 }
 

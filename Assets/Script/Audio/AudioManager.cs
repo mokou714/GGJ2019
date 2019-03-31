@@ -8,13 +8,16 @@ public class AudioManager : MonoBehaviour
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
     public AudioSource[] sfxSources;
-    
+    public GameObject sfxSourcesObj;
+
     public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
     float randomPitch;
 
+
+    AudioSource[] sfxAndBackupSources;
 
     public static int sfxNormalLandID = 1;
 
@@ -45,6 +48,14 @@ public class AudioManager : MonoBehaviour
         //Set AudioManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
+        sfxAndBackupSources = sfxSourcesObj.GetComponentsInChildren<AudioSource>();
+        //print("sfxSourcesAndBackupSources: " + sfxAndBackupSources.Length);
+
+        if (PlayerPrefs.HasKey("musicVolume"))
+            ChangeBGMVolume(PlayerPrefs.GetFloat("musicVolume"));
+        if (PlayerPrefs.HasKey("soundVolume"))
+            ChangeSFXVolume(PlayerPrefs.GetFloat("soundVolume"));
+
         // play the bgm
         PlayMusic("soundtrack 2in1");
 
@@ -68,6 +79,8 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(name, 2);
             else if (name == "being hit")
                 sfxSourceMap.Add(name, 3);
+            else if(name == "badge")
+                sfxSourceMap.Add(name, 2);
 
         }
 
@@ -77,7 +90,7 @@ public class AudioManager : MonoBehaviour
         //    print(key + " = " + val);
         //}
 
-
+        
     }
 
     // Update is called once per frame
@@ -193,8 +206,9 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeSFXVolume(float v)
     {
-        foreach (AudioSource a in sfxSources)
+        foreach (AudioSource a in sfxAndBackupSources)
             a.volume = v;
+           
     }
     //Used to play a sound clip with the options to fade out and fade in
     //public void PlaySFX(string name, float fadeOutDuration = 0.3f, float fadeInDuration = 0.2f)
@@ -336,6 +350,11 @@ public class AudioManager : MonoBehaviour
     void RandomizePitch()
     {
         randomPitch = Random.Range(lowPitchRange, highPitchRange);
+    }
+
+    private void OnApplicationQuit()
+    {
+        StartCoroutine(FadeOut(musicSource, 0.5f));
     }
 
 }

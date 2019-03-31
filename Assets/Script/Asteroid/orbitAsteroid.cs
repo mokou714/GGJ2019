@@ -27,10 +27,10 @@ public class orbitAsteroid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!movingBack && orbitCenter != null && Vector3.Distance(transform.position, orbitCenter.position) < radius + 0.5f){
+        if (!movingBack && orbitCenter != null){
+            Debug.Log("move around");
             transform.RotateAround(orbitCenter.position, Vector3.forward, speed * 0.01f);
         }
-            
         if(movingBack){         
             float step = backSpeed * Time.deltaTime;
 

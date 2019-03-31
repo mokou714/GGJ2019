@@ -1,17 +1,16 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Collision.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Planet/GoldenPlanet.cs">
     <Files>
-      <File FileName="Assets/Script/Planet/Shrink.cs" Line="77" Column="1" />
-      <File FileName="Assets/Script/Planet/Planet.cs" Line="51" Column="1" />
-      <File FileName="Assets/Script/Planet/levelPlanet.cs" Line="20" Column="1" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="363" Column="28" />
-      <File FileName="Assets/Script/Planet/dustPlanet.cs" Line="35" Column="12" />
-      <File FileName="Assets/Script/Constants.cs" Line="19" Column="45" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="18" Column="1" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="58" Column="9" />
-      <File FileName="Assets/Script/Collision.cs" Line="52" Column="30" />
+      <File FileName="Assets/Script/Splash.cs" Line="82" Column="5" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="69" Column="18" />
+      <File FileName="Assets/BadgeManager.cs" Line="32" Column="67" />
+      <File FileName="Assets/Script/Collision.cs" Line="79" Column="1" />
+      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="31" Column="38" />
+      <File FileName="Assets/GainedAnimation.cs" Line="26" Column="3" />
+      <File FileName="Assets/Script/UI/UIManager.cs" Line="87" Column="1" />
+      <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="40" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

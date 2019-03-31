@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// version 2 by Ke, 3/29/2019
+// Added menu and redesigned UI
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,19 +10,26 @@ using System;
 
 public class UIManager : MonoBehaviour {
 
+    public Button menuButton;
+
+    public Button backButton;
+    public Button closeButton;
+
+    // menuButtonsGroup
     public Button homeButton;
-    public Button audioButton;
+    public Button resumeButton;
+    public Button settingsButton;
+       
+    // UI objects
+    public GameObject menu;
+    public GameObject menuButtonsGroup;
+    public GameObject settings;
 
-    //public Slider audioSlider;
-    //public GameObject audioPanel;
-
-    public GameObject musicIcon;
-    public GameObject muteIcon;
-
-    bool isAudio = true;
-
+    public spacecraft sc_player;
+    // singleton instance
     public static UIManager instance = null;
 
+    
     private void Awake()
     {
         //Check if there is already an instance 
@@ -39,50 +49,82 @@ public class UIManager : MonoBehaviour {
     // Use this for initialization
     public void Start () {
 
-        homeButton.onClick.AddListener(OnHomeButtonClicked);
-        audioButton.onClick.AddListener(OnAudioButtonClicked);
+        // add UI listeners
+        menuButton.onClick.AddListener(OnMenuButtonClicked);
 
-        //audioPanel.SetActive(false);
+        backButton.onClick.AddListener(OnBackButtonClicked);
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
 
-        //audioSlider.maxValue = 100f;
-        //audioSlider.minValue = 0f;
-        //audioSlider.onValueChanged.AddListener(delegate { OnAudioSliderValueChanged(); });
+        // menuButtonsGroup listeners
+        resumeButton.onClick.AddListener(OnCloseButtonClicked);
+        settingsButton.onClick.AddListener(OnSettingsButtonClicked);
+        homeButton.onClick.AddListener(OnHomeButtonClicked);      
 
-        isAudio = GameStates.isAudio;
+        // Initialize menu
+        for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)
+            menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(true);
 
-        musicIcon.SetActive(isAudio);
-        muteIcon.SetActive(!isAudio);
+        menu.SetActive(false);
 
     }
 
-    private void OnAudioButtonClicked()
+
+    private void OnSettingsButtonClicked()
     {
-        //audioPanel.SetActive(!audioPanel.activeSelf);
-        isAudio = !isAudio;
-        musicIcon.SetActive(isAudio);
-        muteIcon.SetActive(!isAudio);
-        GameStates.isAudio = isAudio;
-        GameStates.bgmVolume = isAudio? 1.0f : 0f;
-        AudioManager.instance.ChangeMasterVolume(GameStates.bgmVolume);
+        settings.SetActive(true);
+        menuButtonsGroup.SetActive(false);
+
+        // To do: add UI animation
+
     }
+
+    private void OnCloseButtonClicked()
+    {
+        // To do: resume from pause
+
+        menu.SetActive(false);
+        StartCoroutine(closeMenu());
+    }
+
+    private void OnBackButtonClicked()
+    {
+        // To do: add UI animations
+
+        // close settings and show first-level menu
+        menuButtonsGroup.SetActive(true);
+        settings.SetActive(false);
+
+    }
+
+    private void OnMenuButtonClicked()
+    {
+        sc_player.requiredSleep = true;
+        // To do: pause?
+        settings.SetActive(false);
+        menuButtonsGroup.SetActive(true);
+
+        for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)  
+            menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(true);
+
+        menu.SetActive(!menu.activeSelf);
+    }
+
+
 
     private void OnHomeButtonClicked()
     {
+        menu.SetActive(false);
         SceneManager.LoadScene("start page");
     }
 
-    void OnAudioSliderValueChanged()
-    {
-        //float vol = audioSlider.value / 100f;
-
-        //GameStates.masterVolume = vol; // for saving system settings
-
-        //AudioManager.instance.ChangeMasterVolume(vol); // change vol
-
-    }
 
     // Update is called once per frame
     void Update () {
 		
 	}
+
+    IEnumerator closeMenu(){
+        yield return new WaitForSeconds(0.1f);
+        sc_player.requiredSleep = false;
+    }
 }

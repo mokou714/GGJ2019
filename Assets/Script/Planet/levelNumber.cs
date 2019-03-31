@@ -20,7 +20,6 @@ public class levelNumber : MonoBehaviour {
             transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 0f);
         }
 
-
         StartCoroutine(fadeIn());
     }
 

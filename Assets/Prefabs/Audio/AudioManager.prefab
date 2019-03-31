@@ -1500,6 +1500,7 @@ MonoBehaviour:
   - {fileID: 82607365473774034}
   - {fileID: 82971415991550240}
   - {fileID: 82379410706662260}
+  sfxSourcesObj: {fileID: 1510984933110224}
   musicSource: {fileID: 82944414433834668}
   lowPitchRange: 0.95
   highPitchRange: 1.05
@@ -1513,5 +1514,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5cdd37f2bb44cc446a17a18b24888b28, type: 3}
   - {fileID: 8300000, guid: daa6cec66c049414589ced81c945cdb1, type: 3}
   - {fileID: 8300000, guid: cd175ae2c0e260d48b3e4793fcd30d4c, type: 3}
+  - {fileID: 8300000, guid: 74b3a276b45c44dfdb1420b79028a471, type: 3}
   pitchVariationSFX:
   - being hit

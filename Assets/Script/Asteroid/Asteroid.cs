@@ -40,9 +40,9 @@ public class Asteroid : MonoBehaviour {
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
 
             //Disable the collider when moveing in case of hitting other asteroids
-            if(transform.GetComponent<Collider2D>().enabled)
-                transform.GetComponent<Collider2D>().enabled = false;
-            if(transform.position == origPosition){
+            //if(transform.GetComponent<Collider2D>().enabled)
+                //transform.GetComponent<Collider2D>().enabled = false;
+            if(Vector3.Distance(transform.position,origPosition) < 0.1f){
                 movingBack = false;
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;

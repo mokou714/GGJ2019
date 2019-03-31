@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4015674475597314}
   - component: {fileID: 114308548204841196}
+  - component: {fileID: 114097110236953618}
   m_Layer: 0
   m_Name: GameStates
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114097110236953618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978871943957410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b87c573165946adb8bf0a98fa10e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114308548204841196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,3 +67,4 @@ MonoBehaviour:
   bigLevelNames: []
   levels: []
   showContent: 
+  deviceId: -1

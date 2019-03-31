@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 
 public class Splash : MonoBehaviour {
 
@@ -23,6 +21,7 @@ public class Splash : MonoBehaviour {
     public Text textfield;
 	// Use this for initialization
 	void Start () {
+        SocialSystem.instance.splash = this;
         title = "";
         source = GetComponent<AudioSource>();
         //source.clip = audioClip;
@@ -30,7 +29,6 @@ public class Splash : MonoBehaviour {
         //source.Play();
 
         StartCoroutine(playSound());
-
 
 	}
 	
@@ -46,7 +44,8 @@ public class Splash : MonoBehaviour {
         if (i < text.Length)
             StartCoroutine(playSound());
         else{
-            SocialAccount();
+            //Ask for social account log in
+            SocialSystem.instance.SocialAccount();
         }
             
     }
@@ -64,81 +63,21 @@ public class Splash : MonoBehaviour {
             StartCoroutine(loadText());
     }
 
+    public void startTheGame(){
+        StartCoroutine(startGame());
+    }
 
     IEnumerator startGame()
     {
         yield return new WaitForSeconds(0.5f);
         int next = SceneManager.GetActiveScene().buildIndex;
+
         if (GameStates.instance.GetTutorialData("pre") == 1)
             next = SceneManager.GetActiveScene().buildIndex + 2;
         else
             next = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(next);
         Destroy(textfield);
-    }
-
-
-    private void SocialAccount(){
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            #if UNITY_ANDROID
-            AndroidLogin();
-            GameStates.instance.writeDevice(0);
-            #endif
-        }else if(Application.platform == RuntimePlatform.IPhonePlayer){
-            
-            iosLogin();
-        }else{
-            StartCoroutine(startGame());
-        }
-    }
-
-
-#if UNITY_ANDROID
-    //Connecting to google play game account for android user
-    public void AndroidLogin()
-    {
-        PlayGamesPlatform.Activate();
-        Social.localUser.Authenticate((bool success) => {
-            if (success)
-            {
-                try
-                {
-                    ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
-                }
-                catch (System.InvalidCastException e)
-                {
-                    
-                }
-            }
-            else
-            {
-                Debug.Log("Login failed");
-            }
-            StartCoroutine(startGame());
-        });
-    }
-
-#endif
-
-    public void iosLogin(){
-        Social.localUser.Authenticate(success => {
-            if (success)
-            {
-                Debug.Log("Authentication successful");
-                string userInfo = "Username: " + Social.localUser.userName +
-                    "\nUser ID: " + Social.localUser.id +
-                    "\nIsUnderage: " + Social.localUser.underage;
-                Debug.Log(userInfo);
-                showContent = userInfo;
-            }
-            else{
-                showContent = "Login failed";
-
-            }
-            StartCoroutine(startGame());  
-                
-        });
     }
 
     //GUI log on screen to debug on phones

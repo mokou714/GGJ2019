@@ -16,24 +16,15 @@ public class GameStates : MonoBehaviour {
     public static int curLevelID = 0;
     public static int unlockedLevelID = 0;
 
-    // audio
-    public static bool isAudio = true;
+    // settings
+    public static bool isPointer = true;
 
-    [Range(0, 1f)]
-    public static float masterVolume = 1.0f;
-
-    [Range(0, 1f)] 
-    public static float bgmVolume = 1.0f;
-
-    [Range(0, 1f)]
-    public static float sfxVolume = 1.0f;
 
     public string[] bigLevelNames;
     public string[] levels;
 
     public string showContent;
-
-    public int deviceId = -1;
+    public int deviceId;
 
     private void Awake()
     {
@@ -49,10 +40,46 @@ public class GameStates : MonoBehaviour {
         //Set GameStates to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
-        //if(Application.platform == RuntimePlatform.Android){
-        //}
+        if(Application.platform == RuntimePlatform.Android){
+            deviceId = 0;
+
+        }else if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            deviceId = 1;
+
+        }
+        //Login();
 
     }
+
+    //GUI log on screen to debug on phones
+	private void OnGUI()
+	{
+        //Debug.Log("GUI start");
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        GUIContent gUI = new GUIContent();
+        style.fontSize = 30;
+        gUI.text = showContent;
+        GUI.Label(new Rect(0, 0, 50, 50), gUI,style);
+	}
+
+	//Connecting to google play game account for android user
+	//public void Login(){
+    //    PlayGamesPlatform.Activate();
+    //    Social.localUser.Authenticate((bool success) => {
+    //        if(success){
+    //            try{
+    //                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
+    //            }catch(System.InvalidCastException e){
+    //                showContent = e.ToString();
+    //            }
+    //        }else{
+    //            Debug.Log("Login failed");
+    //        }
+    //    });
+    //}
+
     //private GUI(string text){
     //    GUI.Label()
     //}
@@ -60,13 +87,23 @@ public class GameStates : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //if (isSaving)
-        //{
-        //    //LoadLevel();
-        //    LoadSettings();
-        //}
+        if (isSaving)
+        {
+            //LoadLevel();
 
-        deviceId = readDevice();
+            if (PlayerPrefs.HasKey("isPointer"))
+            {
+                isPointer = PlayerPrefs.GetInt("isPointer") == 1;
+            }
+            else
+            {
+               isPointer = true;
+            }
+
+            print("isPointer: " + isPointer.ToString());
+
+        }
+
 
         levels = new string[] {
             "start page", 
@@ -89,7 +126,6 @@ public class GameStates : MonoBehaviour {
         if (isSaving)
         {
             SaveLevel();
-            SaveSettings();
         }
         else{
             // clear keys
@@ -100,7 +136,7 @@ public class GameStates : MonoBehaviour {
 
 
     // save system settings data and current level
-    public static void SaveLevel()
+    public void SaveLevel()
     {
         PlayerPrefs.SetInt("hasSavedLevel", 1);
 
@@ -117,8 +153,6 @@ public class GameStates : MonoBehaviour {
 
     }
 
-
-
     public void SaveTutorialData(int checkMark, string saveName){
         PlayerPrefs.SetInt(saveName, checkMark);
     }
@@ -134,18 +168,7 @@ public class GameStates : MonoBehaviour {
     public void CommitSaving(){
         PlayerPrefs.Save();
     }
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetInt("hasSavedSettings", 1);
-        //PlayerPrefs.SetFloat("masterVolume", masterVolume);
-
-        //PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
-        //PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
-        PlayerPrefs.Save();
-
-        print("saved settings");
-
-    }
+    
 
     public void LoadLevel()
     {
@@ -155,85 +178,60 @@ public class GameStates : MonoBehaviour {
         if (PlayerPrefs.HasKey("hasSavedLevel"))
         {
 
-            curLevelID = PlayerPrefs.GetInt("curLevelID");
+            curLevelID = PlayerPrefs.GetInt("curLevelID") + 1;
 
             unlockedLevelID = PlayerPrefs.GetInt("unlockedLevelID");
 
             print("load level: " + curLevelID);
 
-            //
-
             // go to curLevel
             SceneManager.LoadScene(curLevelID);
-        }else{
-            SceneManager.LoadScene(3);
         }
 
 
     }
 
-    public static void LoadSettings()
-    {
-        // check if it is the first time playing
-        if (PlayerPrefs.HasKey("hasSavedSettings"))
+    public bool hasKey(string key){
+        return PlayerPrefs.HasKey(key);
+    }
+
+    // save system settings data and current level
+    public void saveData(string key, object val){
+        if(typeof(object) == typeof(int)){
+            PlayerPrefs.SetInt(key, (int)val);
+        }else if(typeof(object) == typeof(string)){
+            PlayerPrefs.SetString(key, (string)val);
+        }else if (typeof(object) == typeof(float))
         {
-
-            //masterVolume = PlayerPrefs.GetFloat("masterVolume");
-            //bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
-            //sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
-
-
-            // to do: apply settings 
-
-            // load audio volume player has set last time;
-            if(UIManager.instance != null)
-            {
-            }
-
+            PlayerPrefs.SetFloat(key, (float)val);
         }
-    }
-
-    public void writeDevice(int id){
-        PlayerPrefs.SetInt("device", id);
         PlayerPrefs.Save();
     }
 
-    public int readDevice(){
-        if (PlayerPrefs.HasKey("device"))
-            return PlayerPrefs.GetInt("device");
-        else
-            return -1;
-    }
-
-    public void setAchievement(string id){
-        switch(deviceId){
-            case 0:
-                #if UNITY_ANDROID
-                Social.ReportProgress(id, 100.0f, (bool success) => {
-                    if(success){
-                        showContent = "Achievement got";
-                    }else{
-                        showContent = "Failed";
-                    }
-                });
-                #endif
-                break;
-            default:
-                break;
+    public object getData(string key, System.Type type){
+        object ret = null;
+        if (!hasKey(key))
+            return ret;
+        if (type == typeof(int))
+        {
+            ret = PlayerPrefs.GetInt(key);
         }
-
+        else if (typeof(object) == typeof(string))
+        {
+            ret = PlayerPrefs.GetString(key);
+        }
+        else if (typeof(object) == typeof(float))
+        {
+            ret = PlayerPrefs.GetString(key);
+        }
+        return ret;
     }
 
-
-    //GUI log on screen to debug on phones
-    private void OnGUI()
-    {
-        //Debug.Log("GUI start");
-        GUIStyle style = new GUIStyle();
-        style.normal.textColor = Color.white;
-        GUIContent gUI = new GUIContent();
-        style.fontSize = 30;
-        gUI.text = showContent;
-        GUI.Label(new Rect(0, 0, 50, 50), gUI, style);
+    private void blinkSelf(int times){
+        
     }
+
+    //IEnumerator blinkOnce(){
+    //    yield return new WaitForSeconds(0.1f);
+    //} 
 }

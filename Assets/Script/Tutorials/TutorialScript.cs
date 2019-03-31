@@ -25,7 +25,6 @@ public class TutorialScript : MonoBehaviour {
     private bool stopped =false;
 
     //Used to freeze the game
-    private float savedTimeScale;
     private spacecraft player_sc;
 
     //The index of the hint on the second planet
@@ -33,10 +32,8 @@ public class TutorialScript : MonoBehaviour {
 
     //CheckedList is to mark the steps that are already done, so next to it won't repeat
     private int checkedMark = 0;
-    private int checkCursor = 0;
     private string saveName = "";
 
-    private bool init = true;
 
     public Text textfield;
     private Part_1 part_1;
@@ -45,9 +42,6 @@ public class TutorialScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
-        savedTimeScale = Time.timeScale;
         player_sc = player.transform.GetChild(0).GetComponent<spacecraft>();
         //Debug.Log(player_sc);
         saveName = "tu" + (tutorialNum + 1).ToString();
@@ -234,7 +228,6 @@ class hint{
     public bool showed;
     public float x;
     public float y;
-    public bool isShowing;
 
     public hint(string content, bool showed = false, float x = -200, float y = 5){
         this.content = content;

@@ -19,4 +19,8 @@ public class Constants{
     public static float playerGlowSizeMax = 1.5f;
     public int deviceType = 0;
 
+    public static string appId = "";
+
+
+    public static Hashtable awardProbability = new Hashtable() { {"sagi", 200}, {"pisces", 300}, {"aqua", 500}, {"libra", 50} };
 }

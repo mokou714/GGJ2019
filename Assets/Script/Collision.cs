@@ -13,12 +13,14 @@ public class Collision : MonoBehaviour
 
     public ParticleSystem energyLossOnCollide;
     public ParticleSystem burstEnergy;
-
+    public TrailRenderer playerTrailRenderer;
+    private spacecraft sc;
 
     // Use this for initialization
     void Start()
     {
-
+        playerTrailRenderer = transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>();
+        sc = transform.GetChild(0).GetComponent<spacecraft>();
     }
 
     // Update is called once per frame
@@ -44,61 +46,80 @@ public class Collision : MonoBehaviour
     {
         float damage = 0;
         string hit_obj = col.gameObject.tag;
+
         switch (hit_obj)
         {
             case "asteroid":
                 damage = col.gameObject.GetComponent<Asteroid>().damage;
-                StartCoroutine(playerBlink());
-                //UIeffect.blink = true;
                 break;
-
-            case "orbaerolite":
+            case "orbasteroid":
                 damage = col.gameObject.GetComponent<orbitAsteroid>().damage;
-                StartCoroutine(playerBlink());
-                //UIeffect.blink = true;
                 break;
-
             default:
                 return;
-
         }
+
+        if(col.transform.childCount > 1 && col.transform.GetChild(col.transform.childCount - 1).name == "secret"){
+            BadgeManager.instance.showHiddenPlanet(col.transform.GetChild(col.transform.childCount - 1).tag);
+        }
+
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
-        float left_health = transform.GetChild(0).GetComponent<spacecraft>().energy - damage;
+        float left_health = sc.energy - damage;
         if (left_health <= 0)
         {
+            //playerTrailRenderer.enabled = false;
             burstEnergy.Play();
+        }else{
+            StartCoroutine(playerBlink());
         }
-        transform.GetChild(0).GetComponent<spacecraft>().energy = left_health;
-        transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = transform.GetChild(0).GetComponent<spacecraft>().energy / 100f;
+        sc.playerModel.hit += 1;
+        sc.energy = left_health;
+        playerTrailRenderer.time = sc.energy / 100f; 
         collided = true;
         AudioManager.instance.PlaySFX("being hit");
     }
 
+    IEnumerator stopBurst(){
+        yield return new WaitForSeconds(0.2f);
+        burstEnergy.Stop();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Tag: " + collision.gameObject.tag);
+        //Debug.Log("Tag: " + collision.gameObject.tag);
         if (collision.gameObject.tag == "Finish" || collision.gameObject.tag == "preTutorial" || collision.gameObject.tag == "compaign")
         {
-            if (transform.GetChild(0).GetComponent<spacecraft>().dead)
+            if (sc.dead)
                 return;
-            transform.GetChild(0).GetComponent<spacecraft>().won = true;
+            sc.won = true;
             AudioManager.instance.PlaySFX("Next Level");
-            transform.GetChild(0).GetComponent<spacecraft>().requiredSleep = true;
-            transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().time = 0.5f;
+            sc.requiredSleep = true;
+            playerTrailRenderer.time = 0.5f;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-
+            sc.requiredSleep = true;
 
             if (collision.gameObject.tag == "Finish")
             {
                 if (SceneManager.GetActiveScene().buildIndex == 4)
                 {
-                    GameStates.instance.setAchievement(Achievements.achievement_passed_tutorial);
-                    GameStates.instance.setAchievement(Achievements.unlock_whirlpool);
+                    SocialSystem.instance.setAchievement(Achievements.achievement_passed_tutorial);
+                    SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
                 }else if (SceneManager.GetActiveScene().buildIndex == 14)
                 {
-                    GameStates.instance.setAchievement(Achievements.unlock_whirlpool);
+                    SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
                 }
+
+                if(sc.wonAward.Length > 0){
+                    sc.playerModel.wonAward = sc.wonAward;
+                    GameStates.instance.saveData(sc.wonAward, 1);
+                }
+                Debug.Log("Energy left: " + sc.energy);
+                sc.playerModel.energy = sc.energy;
+                Debug.Log("Total score: " + sc.playerModel.calScore());
+                //Save progress in case user kill the app in the background
+                GameStates.instance.SaveLevel();
                 StartCoroutine(waitToNext(1f, false));
+
             }else if (collision.gameObject.tag == "preTutorial"){
                 StartCoroutine(waitToNext(4f, false));
                 GameStates.instance.SaveTutorialData(1,"pre");
@@ -106,8 +127,7 @@ public class Collision : MonoBehaviour
                 Debug.Log("load");
                 StartCoroutine(waitToNext(1f, true));
             }
-                
-                
+
         }
         return;
     }
@@ -128,8 +148,7 @@ public class Collision : MonoBehaviour
         int cur_scene = SceneManager.GetActiveScene().buildIndex;
         if (cur_scene == SceneManager.sceneCount - 2)
             SceneManager.LoadScene("end stage");
-        else
-        {
+        else{
             //int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
             // load next level
             SceneManager.LoadScene(nextLevelID);
@@ -141,8 +160,12 @@ public class Collision : MonoBehaviour
     }
 
     IEnumerator playerBlink() {
-        transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+        playerTrailRenderer.enabled = false;
         yield return new WaitForSeconds(0.05f);
-        transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+        playerTrailRenderer.enabled = true;
     }
+
+
+
+
 }

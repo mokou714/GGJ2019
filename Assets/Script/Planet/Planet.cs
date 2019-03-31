@@ -156,9 +156,8 @@ public class Planet : MonoBehaviour
                 sc.preRotatingPlanet = sc.rotatingPlanet;
                 if (sc.rotatingPlanet != null)
                 {
-                    //Debug.Log("!!!!!!!!");
                     sc.rotatingPlanet.GetComponent<Planet>().playerLeave();
-                    Debug.Log(sc.rotatingPlanet.name);
+                    //Debug.Log(sc.rotatingPlanet.name);
                 }
 
                 sc.rotatingPlanet = null;
@@ -184,6 +183,9 @@ public class Planet : MonoBehaviour
                 canPlaySound = false;
             }
 
+            if(transform.Find("secret") != null){
+                BadgeManager.instance.showHiddenPlanet(transform.Find("secret").tag);
+            }
             catchedAction(sc);
 
         }

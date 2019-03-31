@@ -621,11 +621,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4716562748697414, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.50645506
+      value: 0.67778873
       objectReference: {fileID: 0}
     - target: {fileID: 4716562748697414, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.8622664
+      value: 0.7352568
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114683854660198404, guid: e1724f0471fd141a794dc6a17bdd73da, type: 2}

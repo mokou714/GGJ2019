@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Levels/Selected/9.unity
-=======
-- path: Assets/Levels/ColorInvertedLevels/lv4.unity
->>>>>>> 172b797281b397ea1112196107b8245279a5fa91
+- path: Assets/Levels/Selected/2.unity
   isLoaded: 1
   isActive: 1

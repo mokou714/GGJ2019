@@ -1,16 +1,75 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
-public class spacecraft : MonoBehaviour {
+public class PlayerModel
+{
+    public bool dead;
+
+    public bool won = false;
+    public string wonAward = "";
+    public float pressTime = 0;
+    public int continousJump = 0;
+    public float levelTime = 0;
+    public float energy;
+    public int hit = 0;
+
+    Dictionary<string, float> weight = new Dictionary<string, float>(){{ "conJump", 20 }, 
+        { "holdTime", 40 },
+        { "levelTime", 50 }, 
+        { "energy", 20 } };
+
+    Dictionary<string, float> awardWeight = new Dictionary<string, float>() { 
+        { "aqua", 50}, {"sagi", 100},
+        {"aries", 150}, {"libra", 300}, 
+        {"cancer", 200}, {"pisces", 250}
+    };
+
+    public PlayerModel()
+    {
+        init();
+    }
+
+    public void init()
+    {
+        this.won = false;
+        this.wonAward = "";
+        this.pressTime = 0;
+        this.continousJump = 0;
+        this.levelTime = 0;
+        this.energy = 100f;
+        this.hit = 0;
+    }
+
+    public float calScore(){
+        float holdTimeScore = (float)(weight["holdTime"]/(this.pressTime + 1)) * 100;
+        float energyScore = (float)weight["energy"] * ((this.energy + 1) * 0.1f);
+        float totalTime = (float)weight["levelTime"] / ((this.levelTime + 1) * 10);
+        float conJumpScore = (float)weight["conJump"] * continousJump;
+        float hit_damage = hit * 100;
+        float special = 0;
+        if(this.wonAward.Length > 0){
+            special = (float)this.awardWeight[wonAward];
+        }
+
+        Debug.Log("hold:" + holdTimeScore + ", energy:" + energyScore + ", total:" + totalTime + "conjump:" + conJumpScore);
+        int total = (int)((holdTimeScore + energyScore + totalTime + conJumpScore + special - hit_damage) / 10);
+        return total;
+    }
+}
+
+public class spacecraft : MonoBehaviour
+{
     /*
     This is the script executed in the player, responsible for player control and basic behaviors
     */
 
     // postion when player launch from a planet, used an initial to calculate energy loss
+    public static spacecraft instance;
     Vector2 launchPos;
     float maxDistance;
-    float launchEnergy; 
+    float launchEnergy;
 
 
     public int rotation_sensitivity;
@@ -30,7 +89,7 @@ public class spacecraft : MonoBehaviour {
     public bool rotate_on;
     public Vector3 rotation_center;
     public int rotating_dir;
-      
+
     public GameObject rotatingPlanet;
     public GameObject preRotatingPlanet;
 
@@ -45,11 +104,6 @@ public class spacecraft : MonoBehaviour {
 
     public GameObject Player;
 
-    private float currTime = 0;
-    private float startInSeconds = 1.5f;
-    private bool hide = false;
-    private bool startHide = false;
-    private bool changedBack = true;
     private Rigidbody2D parentRigidBody;
     private float speedThreshold = 3.5f;
     private float curMovingTime = 0;
@@ -64,8 +118,6 @@ public class spacecraft : MonoBehaviour {
     private Vector3 landAxis;
     private bool halfCircle = false;
     public int numRotateCircle = -1;
-    private int continousJump = 0;
-
 
     public bool dead;
     private Light haloController;
@@ -73,25 +125,36 @@ public class spacecraft : MonoBehaviour {
     private Transform arrow;
     public bool showArrow = false;
     public bool won = false;
+    public string wonAward = "";
+    public PlayerModel playerModel;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
+        if (instance == null)
+            instance = this;
         InitPlayer(false);//Init player with reinit parameter being false
 
     }
 
-    private void InitPlayer(bool reinit = true){
+    private void InitPlayer(bool reinit = true)
+    {
         /*
         Todo: this function initialize parameters of player when starting/restarting the current level
         */
         if (requiredSleep)
             return;
-        if(reinit){
+        if (reinit)
+        {
             parentRigidBody.velocity = Vector3.zero;//If it's not the first time init, stop the rigidbody speed for restarting
             numRotateCircle = -1;
             halfCircle = false;
-            continousJump = 0;
-        }else{
+            playerModel.init();
+        }
+        else
+        {
+            playerModel = new PlayerModel();
             //If it is the first time to initialize, store some the initial values.
             parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
             energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
@@ -105,6 +168,8 @@ public class spacecraft : MonoBehaviour {
             arrow = transform.parent.GetChild(2);
 
         }
+        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+        transform.parent.transform.position = spawnPoint;
         rotating_speed = 3f;
         energy = 100f;
         transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
@@ -119,34 +184,40 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet = preRotatingPlanet = null;
         rotate_on = false;
         dead = false;
+        transform.parent.gameObject.GetComponent<Light>().range = 0;
         //arrow.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
 
         //Reinitialize dust particle system on player
-        if(transform.parent.childCount > 1){
+        if (transform.parent.childCount > 1)
+        {
             transform.parent.GetChild(1).GetComponent<ParticleSystem>().Clear();
             var pshap = transform.parent.GetChild(1).GetComponent<ParticleSystem>().shape;
             pshap.radius = 0.0001f;
         }
 
     }
-	
-    private void ReinitScene(){
+
+    private void ReinitScene()
+    {
         /*
         Todo: this function reinitialize the scene's other objects, pulling some of them back to their original positions
         */
         object[] scene_obj = FindObjectsOfType(typeof(GameObject));
 
-        foreach (object obj in scene_obj){
+        foreach (object obj in scene_obj)
+        {
             //Iterate through all the gameobject in this scene to execute their reinitializations
             GameObject single_obj = (GameObject)obj;
             //Debug.Log("Dust planet detected " + single_obj.GetComponent<Planet>());
 
             //Execute basic recovering code for all kinds of planet
-            if(single_obj.GetComponent<Planet>() != null){
+            if (single_obj.GetComponent<Planet>() != null)
+            {
                 single_obj.GetComponent<Planet>().Recover();
             }
             string obj_tag = single_obj.tag;
-            switch(obj_tag){
+            switch (obj_tag)
+            {
                 case "begin":
                     //Add one more check to prevent the mis-tagging causing errors, same as following ones
                     if (single_obj.gameObject.GetComponent<StopParticles>() == null)
@@ -164,8 +235,16 @@ public class spacecraft : MonoBehaviour {
                     if (single_obj.gameObject.GetComponent<orbitAsteroid>() == null)
                         break;
                     //For orbit asteroid, if the asteroid is already out of its orbit, it should go back when the scene restarts
+                    Debug.Log("orb come back");
                     single_obj.gameObject.GetComponent<orbitAsteroid>().Recover();
                     break;
+                //case "orbast":
+                    //Debug.Log("hit key come back");
+                    //if(single_obj.GetComponent<orbitAsteroid>() != null){
+                    //    single_obj.gameObject.GetComponent<orbitAsteroid>().Recover();
+                    //}
+                        
+                    //break;
                 case "dustPlanet":
                     if (single_obj.gameObject.GetComponent<dustPlanet>() == null)
                         break;
@@ -178,14 +257,23 @@ public class spacecraft : MonoBehaviour {
 
     void Update()
     {
-        if(touchHold() && rotate_on){
+        
+        if (requiredSleep)
+            return;
+        if (touchHold() && rotate_on)
+        {
             //rotating_speed = 1.5f;
             //inwardVel = inwardVel / 2;
+            playerModel.pressTime += Time.deltaTime;
             Time.timeScale = 0.5f;
             if (showArrow)
                 arrow.gameObject.SetActive(true);
 
-        }else if (touchRelease()){
+            playerModel.levelTime += Time.deltaTime * 2;
+
+        }
+        else if (touchRelease())
+        {
             //Derail when the input is detected and player is in an orbit
             if (!requiredSleep)
             { //requiredStop is for pause request out of the player object such as from tutorial manager
@@ -198,16 +286,16 @@ public class spacecraft : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
         {
             SceneManager.LoadScene(Application.loadedLevel);
+        }else{
+            playerModel.levelTime += Time.deltaTime;
         }
     }
 
-    void FixedUpdate () {
-        if (requiredSleep)
-            return;
+    void FixedUpdate()
+    {
         //Set up the original width of player
-        transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
-
-        if(rotate_on){
+        if (rotate_on)
+        {
             //If no valid input, keep rotating around the current planet
             Rotate();
             //if(approximateSame(transform.parent.position, landPos)){
@@ -215,66 +303,94 @@ public class spacecraft : MonoBehaviour {
             //}
         }
         //Indicating wether the player is in orbit or flying straight
-        if(launched){
+        if (launched)
+        {
             curMovingTime += Time.deltaTime;
             //Detecting if the previous moment is orbiting
-            if (!movingStart)
+            if (energy > 0)
             {
-                //Debug.Log("Energy starts Losing");
-                movingStart = true;
-                movingTime = curMovingTime;
-                //Debug.Log("start recording :" + movingTime);
-                Vector2 playerVelocity = transform.parent.GetComponent<Rigidbody2D>().velocity;
-                Vector2 newEnergyLossLocalPos = energyLossLocalOffset.magnitude * playerVelocity.normalized;
-                float angleBetween = Mathf.Atan2(newEnergyLossLocalPos.y, newEnergyLossLocalPos.x) * Mathf.Rad2Deg;
-                //print("ANgle: " + angleBetween);
-                Vector3 energyLossRotation = new Vector3(
-                    0, 
-                    0, 
-                    angleBetween - 90);
-                energyLoss.transform.rotation = Quaternion.Euler(energyLossRotation);
-                energyLoss.transform.localPosition = newEnergyLossLocalPos;
-                energyLoss.Play();
-            }else{
-                if (parentRigidBody.velocity.magnitude < speedThreshold)
+                if (!movingStart)
                 {
-                    float dec = (curMovingTime - movingTime) / (parentRigidBody.velocity.magnitude + 0.1f);
-                    energy -= dec; // fast decrease
+                    //Debug.Log("Energy starts Losing");
+                    movingStart = true;
+                    movingTime = curMovingTime;
+                    //Debug.Log("start recording :" + movingTime);
+                    Vector2 playerVelocity = transform.parent.GetComponent<Rigidbody2D>().velocity;
+                    Vector2 newEnergyLossLocalPos = energyLossLocalOffset.magnitude * playerVelocity.normalized;
+                    float angleBetween = Mathf.Atan2(newEnergyLossLocalPos.y, newEnergyLossLocalPos.x) * Mathf.Rad2Deg;
+                    //print("ANgle: " + angleBetween);
+                    Vector3 energyLossRotation = new Vector3(
+                        0,
+                        0,
+                        angleBetween - 90);
+                    energyLoss.transform.rotation = Quaternion.Euler(energyLossRotation);
+                    energyLoss.transform.localPosition = newEnergyLossLocalPos;
+                    energyLoss.Play();
                 }
                 else
                 {
-                    // scale energy with distance
-                    float distance = Vector2.Distance((Vector2)transform.parent.position, launchPos);
+                    if (parentRigidBody.velocity.magnitude < speedThreshold)
+                    {
+                        float dec = (curMovingTime - movingTime) / (parentRigidBody.velocity.magnitude + 0.1f);
+                        energy -= dec; // fast decrease
+                    }
+                    else
+                    {
+                        // scale energy with distance
+                        float distance = Vector2.Distance((Vector2)transform.parent.position, launchPos);
 
-                    energy = launchEnergy * (1 - distance / maxDistance);
+                        energy = launchEnergy * (1 - distance / maxDistance);
+                    }
+
                 }
-                transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
             }
-        }else{
+        }
+        else
+        {
             //If the player is in orbit, stop lossing energy particles
             if (energyLoss.isEmitting)
                 energyLoss.Stop();
         }
 
+        transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().time = energy / 100f;
+        transform.GetChild(0).gameObject.GetComponent<TrailRenderer>().widthMultiplier = originalWidth * energy / 100f;
+
         // Death detection, when the player is out of the camera view
         Vector2 viewportPos = camera.GetComponent<Camera>().WorldToViewportPoint(transform.position);
         if (energy <= 5f ||
             viewportPos.x < -0.2f ||
-            viewportPos.x > 1.2f||
+            viewportPos.x > 1.2f ||
             viewportPos.y < -0.2f ||
-             viewportPos.y > 1.2){
+             viewportPos.y > 1.2)
+        {
+            if (dead)
+                return;
+
+            wonAward = "";
+            transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
+            transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+
             energyLoss.Stop();
 
             /* This is for the condition when the player hits the end point but the death is detected at the same time,
             if the player is already dead, then the end point is not triggered */
             dead = true;
+            Transform good = transform.parent.Find("good");
+            if (good != null)
+            {
+                GainedAnimation gainedAnimation = good.gameObject.GetComponent<GainedAnimation>();
+                StartCoroutine(gainedAnimation.moveStart(gainedAnimation.origTrans, -1));
+            }
+
+
             ReinitScene();
             StartCoroutine(waitInHiding());
         }
 
     }
 
-    void Rotate(){
+    void Rotate()
+    {
         /*
         Todo: this function is for keeping the player rotating around a planet when it is around one
         */
@@ -283,9 +399,12 @@ public class spacecraft : MonoBehaviour {
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position
 
         float rotated_angle = Vector3.Angle(pos2 - pos1, landAxis);
-        if(rotated_angle >= 160 && !halfCircle){
+        if (rotated_angle >= 160 && !halfCircle)
+        {
             halfCircle = true;
-        }else if(rotated_angle <= 20 && halfCircle){
+        }
+        else if (rotated_angle <= 20 && halfCircle)
+        {
             halfCircle = false;
             numRotateCircle += 1;
         }
@@ -293,7 +412,7 @@ public class spacecraft : MonoBehaviour {
         Vector2 currentVelocity = transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
 
         float angle = Vector2.Angle(pos2 - pos1, currentVelocity);
-        Vector2 v1 = Vector2.Dot(currentVelocity,(pos2-pos1).normalized) *(pos2-pos1).normalized ;
+        Vector2 v1 = Vector2.Dot(currentVelocity, (pos2 - pos1).normalized) * (pos2 - pos1).normalized;
         Vector2 newV = (currentVelocity - v1).normalized * rotating_speed;//Get the tangent line 
 
         //Set up a proper inward velocity depending on the planet's catchRadius to prevent the player rotating outward
@@ -302,10 +421,11 @@ public class spacecraft : MonoBehaviour {
 
         float rot = Vector2.SignedAngle(new_vel, Vector2.right);
         Vector3 newRot = new Vector3(0, 0, -rot);
-        arrow.rotation = Quaternion.Euler(newRot);;
+        arrow.rotation = Quaternion.Euler(newRot); ;
     }
 
-    public void Launch(){
+    public void Launch()
+    {
         /*
         Todo: This function makes the player derail when it is in an orbit 
         */
@@ -344,7 +464,7 @@ public class spacecraft : MonoBehaviour {
         rotatingPlanet = null;
         if (arrow.gameObject.activeSelf)
             arrow.gameObject.SetActive(false);
-        if(numRotateCircle == 0)
+        if (numRotateCircle == 0)
             numRotateCircle = 0;
         else
             numRotateCircle = -1;
@@ -352,76 +472,87 @@ public class spacecraft : MonoBehaviour {
         arrow.gameObject.SetActive(false);
     }
 
-    IEnumerator waitInHiding() {
+    IEnumerator waitInHiding()
+    {
         /*
         Todo: this coroutine is used to hide player for a tiny moment after death
         */
-        transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
-        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+
         yield return new WaitForSeconds(0.5f);
-        transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
-        transform.parent.transform.position = spawnPoint;
         InitPlayer();
     }
 
-    public void landOn(){
+    public void landOn()
+    {
         inwardVel = 1 / (10 * rotatingPlanet.GetComponent<Planet>().catchRadius);
         //inwardVel = 1 / (30 * rotatingPlanet.GetComponent<Planet>().catchRadius);
 
-        if(!dead)
+        if (!dead)
             blink();
-        
+
         if (numRotateCircle == 0)
-            continousJump += 1;
+            playerModel.continousJump += 1;
         else
             numRotateCircle = 0;
 
-        if(continousJump == 4){
-            Debug.Log("Continuous Jump!");
-            GameStates.instance.setAchievement(Achievements.achievement_four_continuousJump);
+        if (playerModel.continousJump == 4)
+        {
+            if (GameStates.instance.deviceId == 0)
+                SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
         }
-            
+
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position
         landAxis = pos2 - pos1;
     }
 
-    public void blink(){
+    public void blink()
+    {
         //Todo: Enable the halo
         haloController.enabled = true;
-        if(!dead)
+        if (!dead)
             StartCoroutine(turnoffHalo());
     }
 
-    IEnumerator turnoffHalo(){
+    IEnumerator turnoffHalo()
+    {
         //Todo: Boucing the halo for a round
         float offset = 0.06f;
-        while(true){
+        while (true)
+        {
             haloController.range += offset;
             yield return new WaitForSeconds(0.001f);
 
-            if (haloController.range > Constants.playerGlowSizeMax){
+            if (haloController.range > Constants.playerGlowSizeMax)
+            {
                 offset = -offset;
-            }else if(haloController.range <= 0){
+            }
+            else if (haloController.range <= 0)
+            {
                 haloController.enabled = false;
                 break;
             }
-                
+
         }
     }
 
-    private bool approximateSame(Vector3 pos1, Vector3 pos2){
+    private bool approximateSame(Vector3 pos1, Vector3 pos2)
+    {
         //Debug.Log(pos1 + ", " + pos2);
         return Vector3.Distance(pos1, pos2) <= 0.1f;
     }
 
-    public bool touchHold(){
+    public bool touchHold()
+    {
         return (Input.GetKey(KeyCode.Space) || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)));
     }
 
-    public bool touchRelease(){
+    public bool touchRelease()
+    {
         return (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended));
     }
 
 }
+
+

@@ -10,7 +10,6 @@ public class pulse : MonoBehaviour {
     public float scaleFactor;
     bool startPulse = false;
     Vector3 defaultScale;
-    private bool stop = false;
     public float time = 0.01f;
 
     float T = 0;

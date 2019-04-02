@@ -360,7 +360,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562691391946982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6436886, y: -0.3269094, z: -0.17393388}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4724093074441984}
@@ -1514,6 +1514,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5cdd37f2bb44cc446a17a18b24888b28, type: 3}
   - {fileID: 8300000, guid: daa6cec66c049414589ced81c945cdb1, type: 3}
   - {fileID: 8300000, guid: cd175ae2c0e260d48b3e4793fcd30d4c, type: 3}
-  - {fileID: 8300000, guid: 74b3a276b45c44dfdb1420b79028a471, type: 3}
   pitchVariationSFX:
   - being hit

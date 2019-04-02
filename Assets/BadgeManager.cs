@@ -15,9 +15,11 @@ public class BadgeManager : MonoBehaviour
 
     public int maxNum = 2;
 
+    public int prob = 4;
+
     Dictionary<string, int> nameIndexMap = 
-        new Dictionary<string, int>(){{"aqua", 0}, {"libra", 1}, 
-        {"pisces", 2}, {"sagi", 3}, 
+        new Dictionary<string, int>(){{"aquarius", 0}, {"libra", 1}, 
+        {"pisces", 2}, {"sagittarius", 3}, 
         {"cancer", 4}, {"aries", 5}};
 
 	void Start () {
@@ -25,7 +27,7 @@ public class BadgeManager : MonoBehaviour
             instance = this;
         if(randomPick){
             int num = Random.Range(0, 10);
-            if (num < 5)
+            if (num < prob)
             {
                 int index = Random.Range(1, maxNum + 1);
                 transform.GetChild(index).gameObject.SetActive(true);
@@ -43,10 +45,10 @@ public class BadgeManager : MonoBehaviour
 
     public void showHiddenPlanet(string name){
         if(nameIndexMap.ContainsKey(name) && ! given){
+            given = true;
             int index = Random.Range(1, maxNum);
             transform.GetChild(index).gameObject.SetActive(true);
             transform.GetChild(index).gameObject.GetComponent<GoldenPlanet>().initBadge(random: false, sprite_index: nameIndexMap[name]);
-            given = true;
         }
     }
 }

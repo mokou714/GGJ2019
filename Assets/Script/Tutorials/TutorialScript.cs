@@ -67,7 +67,7 @@ public class TutorialScript : MonoBehaviour {
                 break;
             case 2:
                 inst["energy"] = new hint("You loss energy while flying and\n your size indicates your energy", false, 100, 200);
-                inst["dust"] = new hint("The dust around a planet gives\n you the energy.", false, 100, -100);
+                inst["dust"] = new hint("The dust around a planet gives\n you the energy.", false, 0, -100);
                 break;
             case 3:
                 inst["obstacle"] = new hint("The 'Space Eaters' will eat\n your energy!", false, -50, 250);

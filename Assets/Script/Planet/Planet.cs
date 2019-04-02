@@ -73,6 +73,8 @@ public class Planet : MonoBehaviour
     public virtual void playerLeave(){
         canPlaySound = true;
         thePlayerOnPlanet = null;
+        Debug.Log("Player leave: " + thePlayerOnPlanet);
+
     }
 
     public virtual void playLandingSound() {
@@ -140,8 +142,8 @@ public class Planet : MonoBehaviour
             }
             //position fix
             ob.transform.position = (ob.transform.position - transform.position).normalized * catchRadius + transform.position;
-
             thePlayerOnPlanet = ob;
+            //Debug.Log(thePlayerOnPlanet);
 
             if (sc.energy < Constants.deathHealthVal)
                 return;
@@ -157,7 +159,6 @@ public class Planet : MonoBehaviour
                 if (sc.rotatingPlanet != null)
                 {
                     sc.rotatingPlanet.GetComponent<Planet>().playerLeave();
-                    //Debug.Log(sc.rotatingPlanet.name);
                 }
 
                 sc.rotatingPlanet = null;

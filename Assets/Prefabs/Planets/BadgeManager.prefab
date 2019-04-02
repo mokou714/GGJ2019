@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4201230674219602}
   - component: {fileID: 212737455736171750}
   m_Layer: 0
-  m_Name: sagi
-  m_TagString: sagi
+  m_Name: sagittarius
+  m_TagString: sagittarius
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 212573751844184662}
   m_Layer: 0
   m_Name: aquarius
-  m_TagString: aqua
+  m_TagString: aquarius
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255447868989954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.22, y: -0.38, z: 0}
+  m_LocalPosition: {x: 6.43, y: -6.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4952540481786988}
@@ -338,7 +338,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1492002658965220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.42, y: -0.68, z: 0}
+  m_LocalPosition: {x: -13.85, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4873680540800328}
@@ -352,7 +352,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308851276320738}
-  m_LocalRotation: {x: -0, y: -0, z: 0.114039846, w: -0.9934762}
+  m_LocalRotation: {x: -0, y: -0, z: 0.09668402, w: -0.99531513}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
@@ -462,7 +462,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484449005089470}
-  m_LocalRotation: {x: -0, y: -0, z: 0.63357127, w: 0.7736843}
+  m_LocalRotation: {x: 0, y: 0, z: 0.6469774, w: 0.76250917}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
@@ -477,7 +477,7 @@ Transform:
   m_GameObject: {fileID: 1805677076819742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4870529034815556}
   m_Father: {fileID: 4224447822449102}
@@ -491,7 +491,7 @@ Transform:
   m_GameObject: {fileID: 1868610016093848}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4531439993861560}
   m_Father: {fileID: 4066176986466806}
@@ -543,7 +543,7 @@ Light:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1492002658965220}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -679,8 +679,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc_player: {fileID: 0}
-  randomPick: 1
+  randomPick: 0
   hitKey: {fileID: 0}
+  maxNum: 1
+  prob: 10
 --- !u!114 &114812780917653262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1124,15 +1126,15 @@ SpriteRenderer:
   m_SortingLayerID: 259403215
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 341f32c134f2c420495dbabce15c9ec8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.4, y: 4}
+  m_Size: {x: 4, y: 1.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212737455736171750

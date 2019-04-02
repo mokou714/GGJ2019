@@ -24,8 +24,7 @@ public class UIManager : MonoBehaviour {
     public GameObject menu;
     public GameObject menuButtonsGroup;
     public GameObject settings;
-
-    public spacecraft sc_player;
+         
     // singleton instance
     public static UIManager instance = null;
 
@@ -66,6 +65,8 @@ public class UIManager : MonoBehaviour {
 
         menu.SetActive(false);
 
+
+
     }
 
 
@@ -83,7 +84,6 @@ public class UIManager : MonoBehaviour {
         // To do: resume from pause
 
         menu.SetActive(false);
-        StartCoroutine(closeMenu());
     }
 
     private void OnBackButtonClicked()
@@ -97,8 +97,7 @@ public class UIManager : MonoBehaviour {
     }
 
     private void OnMenuButtonClicked()
-    {
-        sc_player.requiredSleep = true;
+    {   
         // To do: pause?
         settings.SetActive(false);
         menuButtonsGroup.SetActive(true);
@@ -122,9 +121,4 @@ public class UIManager : MonoBehaviour {
     void Update () {
 		
 	}
-
-    IEnumerator closeMenu(){
-        yield return new WaitForSeconds(0.1f);
-        sc_player.requiredSleep = false;
-    }
 }

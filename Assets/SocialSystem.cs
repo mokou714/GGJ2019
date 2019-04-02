@@ -50,10 +50,8 @@ public class SocialSystem : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android)
         {
-#if UNITY_ANDROID
             androidLogin();
             GameStates.instance.saveData("device", 0);
-#endif
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
@@ -114,6 +112,8 @@ public class SocialSystem : MonoBehaviour
             // handle success or failure
             if (success){
                 ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.TOP);
+                //Social.ShowAchievementsUI();
+                Social.ShowLeaderboardUI();
             }else{
                 showContent = "Login failed";
             }

@@ -79,8 +79,6 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(name, 2);
             else if (name == "being hit")
                 sfxSourceMap.Add(name, 3);
-            else if(name == "badge")
-                sfxSourceMap.Add(name, 2);
 
         }
 

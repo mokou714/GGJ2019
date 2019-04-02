@@ -138,7 +138,7 @@ RectTransform:
   m_GameObject: {fileID: 31418477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1475, y: 2.1475, z: 2.1475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1860675197}
   m_RootOrder: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 72036feedb0874ce0a3b2850d200a249, type: 3}
-    m_FontSize: 30
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -5432,6 +5432,11 @@ Prefab:
       propertyPath: isSaving
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114308548204841196, guid: 2543ece1b81581c41aa712eb2c9ee5d0,
+        type: 2}
+      propertyPath: destroy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
   m_IsPrefabAsset: 0
@@ -5594,6 +5599,7 @@ MonoBehaviour:
   slowRespTime: 0
   lightController: {fileID: 0}
   origGlowSize: 0
+  planetSprite: {fileID: 0}
   planetBottom: {fileID: 0}
   dustAmount: 40
   origSizeRatio: 0

@@ -21,13 +21,13 @@ TagManager:
   - preTutorial
   - LandPoint
   - compaign
-  - sagi
   - pisces
   - libra
-  - aqua
   - cancer
   - aries
   - hitkey
+  - sagittarius
+  - aquarius
   layers:
   - Default
   - TransparentFX

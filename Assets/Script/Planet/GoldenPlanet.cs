@@ -11,6 +11,7 @@ public class GoldenPlanet : Planet {
     private SpriteRenderer good;
     public bool awardAvailable = true;
     Transform planet2;
+    private Color origColor;
 
     private Vector3 size;
 	// Use this for initialization
@@ -21,10 +22,8 @@ public class GoldenPlanet : Planet {
         award = transform.Find("Planet2").GetChild(0).gameObject;
         good = award.gameObject.GetComponent<SpriteRenderer>();
 
-
-        //GetComponent<Light>().range *= 10;
-        //origGlowSize = GetComponent<Light>().range;
-
+        planetBottom.localScale = transform.Find("Planet2").localScale;
+        origColor = good.color;
         StartCoroutine(fadeIn());
 	}
 	
@@ -37,33 +36,21 @@ public class GoldenPlanet : Planet {
     public void initBadge(bool random = true, int sprite_index = 0){
         planet2 = transform.Find("Planet2");
         size = planet2.transform.localScale;
-        Debug.Log("Catch radius:" + catchRadius);
+        //Debug.Log("Catch radius:" + catchRadius);
         int index = 0;
         if(random){
             int num_sprite = Random.Range(0, 1000);
-            if (num_sprite < 50)
-            {
-                index = 1;
-            }
-            else if (num_sprite < 150)
-            {
-                index = 2;
-            }
-            else if (num_sprite < 300)
+            if (num_sprite < 150)
             {
                 index = 3;
             }
-            else if (num_sprite < 500)
+            else if (num_sprite < 400)
             {
                 index = 4;
             }
-            else if (num_sprite < 750)
+            else if (num_sprite < 700)
             {
                 index = 5;
-            }
-            else
-            {
-                tag = "aqua";
             }
         }else{
             index = sprite_index;
@@ -90,7 +77,9 @@ public class GoldenPlanet : Planet {
                 float newAlpha = currentAlpha + 0.05f * dir;
 
                 frame.color = new Color(255f, 255f, 255f, newAlpha);
-                good.color = new Color(255f, 255f, 255f, newAlpha);
+                origColor.a = newAlpha;
+                good.color = origColor;
+
 
                 if (currentAlpha <= 0f)
                 {

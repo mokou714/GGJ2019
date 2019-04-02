@@ -60,7 +60,8 @@ public class Collision : MonoBehaviour
         }
 
         if(col.transform.childCount > 1 && col.transform.GetChild(col.transform.childCount - 1).name == "secret"){
-            BadgeManager.instance.showHiddenPlanet(col.transform.GetChild(col.transform.childCount - 1).tag);
+            if(BadgeManager.instance != null)
+                BadgeManager.instance.showHiddenPlanet(col.transform.GetChild(col.transform.childCount - 1).tag);
         }
 
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
@@ -69,9 +70,8 @@ public class Collision : MonoBehaviour
         {
             //playerTrailRenderer.enabled = false;
             burstEnergy.Play();
-        }else{
-            StartCoroutine(playerBlink());
         }
+
         sc.playerModel.hit += 1;
         sc.energy = left_health;
         playerTrailRenderer.time = sc.energy / 100f; 
@@ -94,6 +94,7 @@ public class Collision : MonoBehaviour
             sc.won = true;
             AudioManager.instance.PlaySFX("Next Level");
             sc.requiredSleep = true;
+            sc.requiredFreeze = true;
             playerTrailRenderer.time = 0.5f;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             sc.requiredSleep = true;
@@ -113,13 +114,20 @@ public class Collision : MonoBehaviour
                     sc.playerModel.wonAward = sc.wonAward;
                     GameStates.instance.saveData(sc.wonAward, 1);
                 }
-                Debug.Log("Energy left: " + sc.energy);
-                sc.playerModel.energy = sc.energy;
-                Debug.Log("Total score: " + sc.playerModel.calScore());
-                //Save progress in case user kill the app in the background
-                GameStates.instance.SaveLevel();
-                StartCoroutine(waitToNext(1f, false));
 
+                sc.playerModel.energy = sc.energy;
+                //Debug.Log("SC won: " + sc.wonAward);
+
+                //Debug.Log("Total score: " + sc.playerModel.calScore());
+                //Save progress in case user kill the app in the background
+                saveUserData();
+                GameStates.instance.SaveLevel();
+
+                if (SceneManager.GetActiveScene().name == "2-start"){
+                    StartCoroutine(waitToNext(1f, false, id: SceneManager.GetActiveScene().buildIndex + 2));
+                }else{
+                    StartCoroutine(waitToNext(1f, false));
+                }
             }else if (collision.gameObject.tag == "preTutorial"){
                 StartCoroutine(waitToNext(4f, false));
                 GameStates.instance.SaveTutorialData(1,"pre");
@@ -132,13 +140,30 @@ public class Collision : MonoBehaviour
         return;
     }
 
-    IEnumerator waitToNext(float time, bool load)
+
+    private void saveUserData(){
+        GameStates.instance.globalContinuousJump += sc.playerModel.continousJump;
+        GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJump, GameStates.instance.globalContinuousJumpMax);
+
+        int curMaxJump = (int)GameStates.instance.getData(Constants.maxConstJumpKey, typeof(int));
+        curMaxJump = Mathf.Max(curMaxJump, GameStates.instance.globalContinuousJumpMax);
+
+        GameStates.instance.saveData(Constants.maxConstJumpKey, curMaxJump);
+        Debug.Log("Last continous jump: " + GameStates.instance.globalContinuousJump);
+        Debug.Log("Current max jumps: " + curMaxJump);
+    }
+
+
+    IEnumerator waitToNext(float time, bool load, int id = -1)
     {
         /*
         Todo: this coroutine to show instruction after the player lands on the second planet
         */
+
         yield return new WaitForSeconds(time);
-        if (!load)
+        if(id > 0)
+            startNewLevel(id);
+        else if (!load)
             startNewLevel(SceneManager.GetActiveScene().buildIndex + 1);
         else
             GameStates.instance.LoadLevel();
@@ -152,10 +177,6 @@ public class Collision : MonoBehaviour
             //int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
             // load next level
             SceneManager.LoadScene(nextLevelID);
-
-            // update level records
-            GameStates.curLevelID = nextLevelID;
-            GameStates.unlockedLevelID = nextLevelID;
         }
     }
 

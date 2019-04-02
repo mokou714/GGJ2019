@@ -268,6 +268,7 @@
     <Compile Include="Assets\Script\Planet\dustPlanet.cs" />
     <Compile Include="Assets\Script\Planet\giantPlanet.cs" />
     <Compile Include="Assets\Script\Planet\GoldenPlanet.cs" />
+    <Compile Include="Assets\Script\Planet\levelController.cs" />
     <Compile Include="Assets\Script\Planet\levelNumber.cs" />
     <Compile Include="Assets\Script\Planet\levelPlanet.cs" />
     <Compile Include="Assets\Script\Planet\levelSelection.cs" />
@@ -284,6 +285,8 @@
     <Compile Include="Assets\Script\Startup.cs" />
     <Compile Include="Assets\Script\Tutorials\Part_1.cs" />
     <Compile Include="Assets\Script\Tutorials\TutorialScript.cs" />
+    <Compile Include="Assets\Script\UI\Achieve.cs" />
+    <Compile Include="Assets\Script\UI\UIDiscoveredStar.cs" />
     <Compile Include="Assets\Script\UI\UIManager.cs" />
     <Compile Include="Assets\Script\UI\UISlider.cs" />
     <Compile Include="Assets\Script\UI\UISwitchButton.cs" />

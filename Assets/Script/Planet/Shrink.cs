@@ -108,7 +108,7 @@ public class Shrink : MonoBehaviour
             transform.GetComponent<Planet>().catchRadius = origCatchRadius * scaleFactor;
             transform.GetComponent<Planet>().slowRespTime = origSlowResTime * scaleFactor;
             bottomSprite.localScale = origBottomScale * scaleFactor;
-            Debug.Log(bottomSprite);
+            //Debug.Log(bottomSprite);
 
             gameObject.GetComponent<Planet>().lightController.range = origHaloSize * scaleFactor;
             gameObject.GetComponent<Planet>().origGlowSize = origGlowSizeShrink * scaleFactor;

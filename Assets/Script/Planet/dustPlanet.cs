@@ -10,9 +10,6 @@ public class dustPlanet : Planet
     */
 
     public int dustAmount;
-    
-    //public float catchRadius;
-    //public GameObject thePlayerOnPlanet;
 
     bool startedAbsorb = false;
     bool absorbed = false;
@@ -36,6 +33,8 @@ public class dustPlanet : Planet
         //Save the state of original dust for player respawning
         origDustAmount = dustAmount;
 
+
+
         if(transform.childCount > 0){
             while (!transform.GetChild(index_planet).gameObject.activeSelf && index_planet < transform.childCount)
                 index_planet++;
@@ -55,6 +54,12 @@ public class dustPlanet : Planet
                 origDust = copyDust(transform.GetChild(0).gameObject);
             } 
         }
+        if (name == "invertPlanet")
+        {
+            catchRadius = catchRadius * 3 + 0.3f;
+            return;
+        }
+
 
     }
 

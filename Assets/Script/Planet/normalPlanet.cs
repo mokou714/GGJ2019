@@ -8,6 +8,9 @@ public class normalPlanet : Planet {
 	// Use this for initialization
 	void Start () {
         setup();
+        if(name == "invertPlanet"){
+            catchRadius = catchRadius * 3 + 0.3f;
+        }
 	}
 	
 	// Update is called once per frame

@@ -24,9 +24,15 @@
 
 public static class Achievements
 {
-        public const string achievement_passed_tutorial = "CgkIzevekYYaEAIQAQ"; 
-        public const string achievement_four_continuousJump = "CgkIzevekYYaEAIQAg";
-        public const string unlock_milkyway = "CgkIzevekYYaEAIQAw";
-        public const string unlock_whirlpool = "CgkIzevekYYaEAIQBA";
+        public const string achievement_passed_tutorial = "CgkI2tzJ6JcSEAIQAg"; 
+        public const string achievement_four_continuousJump = "CgkI2tzJ6JcSEAIQAw";
+        public const string unlock_milkyway = "CgkI2tzJ6JcSEAIQBA";
+        public const string unlock_whirlpool = "CgkI2tzJ6JcSEAIQBQ";
+        public const string avoid_eaters = "CgkI2tzJ6JcSEAIQBg";
+
+        public const string milkyway_leaderboard = "CgkI2tzJ6JcSEAIQBw";
+        public const string whirlpool_leaderboard = "CgkI2tzJ6JcSEAIQCA";
+        public const string cont_jump_leaderboard = "CgkI2tzJ6JcSEAIQCQ";
+
 }
 

@@ -15,7 +15,7 @@ public class DustParticles : MonoBehaviour {
 	void Start () {
 
 		planet = transform.parent.gameObject;
-        Debug.Log(planet);
+        //Debug.Log(planet);
 
 		particles = GetComponent<ParticleSystem>();
 		savedPlanetGravityRad = particles.shape.radius;
@@ -46,7 +46,7 @@ public class DustParticles : MonoBehaviour {
 
         savedPlanetGravityRad = planetGrav.catchRadius;
         float x = Mathf.Log(1.6f + savedPlanetGravityRad);
-        Debug.Log(planetGrav.name + " Checking size: " + planetGrav.catchRadius + "," + x);
+        //Debug.Log(planetGrav.name + " Checking size: " + planetGrav.catchRadius + "," + x);
 
 		var pShape = particles.shape;
         pShape.radius = x;

@@ -21,7 +21,7 @@ public class PlayerModel
         { "energy", 20 } };
 
     Dictionary<string, float> awardWeight = new Dictionary<string, float>() { 
-        { "aqua", 50}, {"sagi", 100},
+        { "aquarius", 50}, {"sagittarius", 100},
         {"aries", 150}, {"libra", 300}, 
         {"cancer", 200}, {"pisces", 250}
     };
@@ -100,7 +100,7 @@ public class spacecraft : MonoBehaviour
 
     public ParticleSystem energyLoss;
     private Vector2 energyLossLocalOffset;
-    private Vector3 spawnPoint;
+    public Vector3 spawnPoint;
 
     public GameObject Player;
 
@@ -128,6 +128,7 @@ public class spacecraft : MonoBehaviour
     public string wonAward = "";
     public PlayerModel playerModel;
 
+    public bool requiredFreeze = false;
 
     // Use this for initialization
     void Start()
@@ -185,6 +186,7 @@ public class spacecraft : MonoBehaviour
         rotate_on = false;
         dead = false;
         transform.parent.gameObject.GetComponent<Light>().range = 0;
+
         //arrow.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
 
         //Reinitialize dust particle system on player
@@ -258,19 +260,25 @@ public class spacecraft : MonoBehaviour
     void Update()
     {
         
-        if (requiredSleep)
+        if (requiredSleep){
+            Time.timeScale = 1f;
+            arrow.gameObject.SetActive(false);
             return;
+        }
+            
+        //Debug.Log("Not required");
         if (touchHold() && rotate_on)
         {
             //rotating_speed = 1.5f;
             //inwardVel = inwardVel / 2;
-            playerModel.pressTime += Time.deltaTime;
-            Time.timeScale = 0.5f;
-            if (showArrow)
-                arrow.gameObject.SetActive(true);
+            if (!requiredSleep){
+                playerModel.pressTime += Time.deltaTime;
+                Time.timeScale = 0.5f;
+                if (showArrow)
+                    arrow.gameObject.SetActive(true);
 
-            playerModel.levelTime += Time.deltaTime * 2;
-
+                playerModel.levelTime += Time.deltaTime * 2;
+            }
         }
         else if (touchRelease())
         {
@@ -293,6 +301,8 @@ public class spacecraft : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (requiredFreeze)
+            return;
         //Set up the original width of player
         if (rotate_on)
         {
@@ -365,23 +375,26 @@ public class spacecraft : MonoBehaviour
         {
             if (dead)
                 return;
-
+            dead = true;
             wonAward = "";
             transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
             transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
 
-            energyLoss.Stop();
+            GameStates.instance.globalContinuousJump = 0;
+            GameStates.instance.firstLevelJumpDisrupt = 1;
+            playerModel.continousJump = 0;
 
+
+            energyLoss.Stop();
             /* This is for the condition when the player hits the end point but the death is detected at the same time,
             if the player is already dead, then the end point is not triggered */
-            dead = true;
+
             Transform good = transform.parent.Find("good");
             if (good != null)
             {
                 GainedAnimation gainedAnimation = good.gameObject.GetComponent<GainedAnimation>();
                 StartCoroutine(gainedAnimation.moveStart(gainedAnimation.origTrans, -1));
             }
-
 
             ReinitScene();
             StartCoroutine(waitInHiding());
@@ -490,17 +503,23 @@ public class spacecraft : MonoBehaviour
         if (!dead)
             blink();
 
-        if (numRotateCircle == 0)
-            playerModel.continousJump += 1;
-        else
-            numRotateCircle = 0;
 
+        //Keep track on continous jump of the user
+        if (numRotateCircle == 0){
+            playerModel.continousJump += 1;
+            GameStates.instance.globalContinuousJump += 1;
+        }else{
+            playerModel.continousJump = 0;
+            GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJumpMax, GameStates.instance.globalContinuousJump);
+            GameStates.instance.globalContinuousJump = 0;
+            numRotateCircle = 0;
+        }
+        //When the first time get 4-continuous jump, get achievement
         if (playerModel.continousJump == 4)
         {
             if (GameStates.instance.deviceId == 0)
                 SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
         }
-
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position
         Vector2 pos2 = new Vector2(rotation_center.x, rotation_center.y);//Planet's center position

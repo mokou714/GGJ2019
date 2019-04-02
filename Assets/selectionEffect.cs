@@ -14,14 +14,14 @@ public class selectionEffect : MonoBehaviour,
     public float largeScale;
     Vector3 originScale;
 
-  
+    private int bigNumber;
 
 	// Use this for initialization
 
     void Start()
     {
         originScale = transform.GetChild(0).localScale;
-
+        bigNumber = int.Parse(transform.parent.parent.name);
         // automatically add Physics2DRaycaster to maincamera to make EventSystem work
         addPhysics2DRaycaster();
     }
@@ -85,14 +85,14 @@ public class selectionEffect : MonoBehaviour,
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.GetChild(0).localScale = originScale;
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        string levelName = gameObject.name;
-        print(levelName);
+        int levelName = int.Parse(gameObject.name);
 
-        int levelID = System.Array.IndexOf(GameStates.instance.levels, levelName);
+        int levelID = 10 * (bigNumber - 1) + levelName + 4;
 
         // load level
         SceneManager.LoadScene(levelID);

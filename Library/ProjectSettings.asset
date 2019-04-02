@@ -247,7 +247,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: stargazing.keystore
+  AndroidKeystoreName: stargazing1.keystore
   AndroidKeyaliasName: stargazing
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

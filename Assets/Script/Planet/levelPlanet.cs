@@ -16,40 +16,54 @@ public class levelPlanet : Planet {
     private GameObject levelLine;
     private IEnumerator showLevel;
 
+    public int progress;
+    private Transform planet2;
+    private Vector3 size;
+
+    public GameObject title;
+
+    private int bigNumber;
+
+    private bool landed = false;
 	// Use this for initialization
 	void Start () {
-		
+        setup();
+        size = transform.localScale;
+        bigNumber = int.Parse(name);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         checkCatching();
-
-        if (showingSelection) {
-            //store a copy of showlevels coroutine
-            showLevel = showLevels();
-            StartCoroutine(showLevel);
-            showingSelection = false;
-        }
-        else if (hidingSelection) {
+        if(thePlayerOnPlanet == null && landed){
+            title.SetActive(true);
             for (int i = 0; i < transform.GetChild(2).childCount; ++i)
             {
                 transform.GetChild(2).GetChild(i).gameObject.SetActive(false);
             }
-            //stop showing level
+            //stop showing leve
             StopCoroutine(showLevel);
             Destroy(levelLine);
-            hidingSelection = false;
+            landed = false;
         }
-
     }
 
     public override void catchedAction(spacecraft sc)
     {
+        showLevel = showLevels();
+        StartCoroutine(showLevel);
+        title.SetActive(false);
+        landed = true;
         return;
     }
+    public override void playerLeave()
+	{
+        base.playerLeave();
+	}
 
-    IEnumerator showLevels() {
+
+	IEnumerator showLevels() {
+        Debug.Log("Show levels:" + progress);
         levelLine = Instantiate(levelLinePrefab);
         Transform levels = transform.GetChild(2);
         levelLine.GetComponent<LineRenderer>().positionCount += 1;
@@ -59,7 +73,9 @@ public class levelPlanet : Planet {
         levelLine.SetActive(true);
 
 
-        for (int i=1; i<levels.childCount; ++i) {
+        int to_load = progress / 10 >= bigNumber ? 10 : progress % 10;
+
+        for (int i=1; i < to_load; ++i) {
 
             //check if there is another des for line to go
             //if (i + 1 < levels.childCount) {
@@ -90,5 +106,19 @@ public class levelPlanet : Planet {
         //showingSelection = false;
     }
 
+
+    IEnumerator popOut()
+    {
+        planet2.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+        yield return new WaitForSeconds(0.01f);
+        if (planet2.transform.localScale.x < size.x)
+        {
+            StartCoroutine(popOut());
+        }
+        else
+        {
+            catchRadius = size.x * 3;
+        }
+    }
   
 }

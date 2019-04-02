@@ -142,8 +142,6 @@ public class UIManager : MonoBehaviour {
         // close settings and show first-level menu
 
         print("close button clicked");
-
-
         isStartPage = SceneManager.GetActiveScene().name == "start page";
         if (isStartPage)
             startMenuButtonsGroup.SetActive(true);

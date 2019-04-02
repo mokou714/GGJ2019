@@ -97,6 +97,6 @@ public class selectionEffect : MonoBehaviour,
         Debug.Log("Enter a level");
         // load level
         SceneManager.LoadScene(levelID);
-        UIManager.instance.Start();
+        //UIManager.instance.Start();
     }
 }

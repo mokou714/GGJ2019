@@ -9,15 +9,12 @@ public class UISwitchButton : MonoBehaviour {
 
     public Button button;
     
-    public Animator blackImageAnimator;
-    public Animator whiteImageAnimator;
-
     public RectTransform blackImageRT;
     public RectTransform whiteImageRT;
 
-    public float xl = 37.5f;
-    public float xr = 111.5f;
-    public float y = -37.5f;
+    public float xl = 60f;
+    public float xr = 179f;
+    public float y = -60f;
 
     public float minPressTimeInterval = 0.5f;    
 

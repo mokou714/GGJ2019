@@ -12,10 +12,6 @@ public class GameStates : MonoBehaviour {
 
     public bool isSaving = true;
 
-    // level data
-    public static int curLevelID = 0;
-    public static int unlockedLevelID = 0;
-
     // settings
     public static bool isPointer = true;
 
@@ -24,7 +20,11 @@ public class GameStates : MonoBehaviour {
     public string[] levels;
 
     public string showContent;
+    public int deviceId;
 
+    public int globalContinuousJump = 0;
+    public int firstLevelJumpDisrupt = 0;
+    public int globalContinuousJumpMax = 0;
     private void Awake()
     {
         //Check if there is already an instance 
@@ -39,8 +39,14 @@ public class GameStates : MonoBehaviour {
         //Set GameStates to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
-        //if(Application.platform == RuntimePlatform.Android){
-        //}
+        if(Application.platform == RuntimePlatform.Android){
+            deviceId = 0;
+
+        }else if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            deviceId = 1;
+
+        }
         //Login();
 
     }
@@ -82,7 +88,7 @@ public class GameStates : MonoBehaviour {
     {
         if (isSaving)
         {
-            LoadLevel();
+            //LoadLevel();
 
             if (PlayerPrefs.HasKey("isPointer"))
             {
@@ -129,22 +135,27 @@ public class GameStates : MonoBehaviour {
 
 
     // save system settings data and current level
-    public static void SaveLevel()
+    public void SaveLevel(int curID = -1)
     {
         PlayerPrefs.SetInt("hasSavedLevel", 1);
-
-        curLevelID = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetInt("curLevelID", curLevelID);
+        int curLevelID;
+        if (curID > 0)
+            curLevelID = curID;
+        else
+            curLevelID = SceneManager.GetActiveScene().buildIndex + 1;
+        
+        int unlockedLevelID = SceneManager.GetActiveScene().buildIndex;
 
         if (unlockedLevelID < curLevelID)
             unlockedLevelID = curLevelID;
 
-        PlayerPrefs.SetInt("unlockedLevelID", unlockedLevelID);
+        PlayerPrefs.SetInt(Constants.curLevelKey, unlockedLevelID);
 
         PlayerPrefs.Save();
-        print("save level: " + curLevelID);
 
     }
+
+
 
     public void SaveTutorialData(int checkMark, string saveName){
         PlayerPrefs.SetInt(saveName, checkMark);
@@ -161,30 +172,65 @@ public class GameStates : MonoBehaviour {
     public void CommitSaving(){
         PlayerPrefs.Save();
     }
-    
+
+    public int getProgress(){
+        if (PlayerPrefs.HasKey(Constants.curLevelKey))
+        {
+            int unlockedLevelID = PlayerPrefs.GetInt(Constants.curLevelKey);
+            return unlockedLevelID;
+        }else{
+            return SceneManager.GetActiveScene().buildIndex + 1; 
+        }
+    }
 
     public void LoadLevel()
     {
-        print("LoadLevel");
-
-        // check if it is the first time playing
-        if (PlayerPrefs.HasKey("hasSavedLevel"))
-        {
-
-            curLevelID = PlayerPrefs.GetInt("curLevelID");
-
-            unlockedLevelID = PlayerPrefs.GetInt("unlockedLevelID");
-
-            print("load level: " + curLevelID);
-
-            //
 
             // go to curLevel
-            SceneManager.LoadScene(curLevelID);
-        }
-
-
+        SceneManager.LoadScene(getProgress());
     }
 
+    public bool hasKey(string key){
+        return PlayerPrefs.HasKey(key);
+    }
 
+    // save system settings data and current level
+    public void saveData(string key, object val){
+        if(typeof(object) == typeof(int)){
+            PlayerPrefs.SetInt(key, (int)val);
+        }else if(typeof(object) == typeof(string)){
+            PlayerPrefs.SetString(key, (string)val);
+        }else if (typeof(object) == typeof(float))
+        {
+            PlayerPrefs.SetFloat(key, (float)val);
+        }
+        PlayerPrefs.Save();
+    }
+
+    public object getData(string key, System.Type type){
+        object ret = null;
+        if (!hasKey(key))
+            return ret;
+        if (type == typeof(int))
+        {
+            ret = PlayerPrefs.GetInt(key);
+        }
+        else if (typeof(object) == typeof(string))
+        {
+            ret = PlayerPrefs.GetString(key);
+        }
+        else if (typeof(object) == typeof(float))
+        {
+            ret = PlayerPrefs.GetString(key);
+        }
+        return ret;
+    }
+
+    private void blinkSelf(int times){
+        
+    }
+
+    //IEnumerator blinkOnce(){
+    //    yield return new WaitForSeconds(0.1f);
+    //} 
 }

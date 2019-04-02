@@ -19,15 +19,30 @@ public class UIManager : MonoBehaviour {
     public Button homeButton;
     public Button resumeButton;
     public Button settingsButton;
-       
+
+    // startPageButtonGroup
+    public Button discoveriesButton;
+    public Button startSettingsButton;
+    public Button aboutButton;
+
     // UI objects
     public GameObject menu;
     public GameObject menuButtonsGroup;
-    public GameObject settings;
-         
+    public GameObject startMenuButtonsGroup; // startPage
+
+
+    public GameObject settingsPanel;
+    public GameObject discoveriesPanel;
+    public GameObject aboutPanel;
+
+    string pageName = "game";
+    public string[] discoveredStarNames =
+        { "Sagittarius", "Pisces", "Cancer", "Taurus", "Aquarius", "Libra" };
+
     // singleton instance
     public static UIManager instance = null;
 
+    bool isStartPage = false;
     
     private void Awake()
     {
@@ -40,7 +55,7 @@ public class UIManager : MonoBehaviour {
             //Destroy this, this enforces our singleton pattern so there can only be one instance
             Destroy(gameObject);
 
-        //Set AudioManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
+        //Set Manager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
     }
 
@@ -57,24 +72,53 @@ public class UIManager : MonoBehaviour {
         // menuButtonsGroup listeners
         resumeButton.onClick.AddListener(OnCloseButtonClicked);
         settingsButton.onClick.AddListener(OnSettingsButtonClicked);
-        homeButton.onClick.AddListener(OnHomeButtonClicked);      
+        homeButton.onClick.AddListener(OnHomeButtonClicked);
+
+        // start page menu group listeners
+        discoveriesButton.onClick.AddListener(OnDiscoveryButtonClicked);
+        startSettingsButton.onClick.AddListener(OnSettingsButtonClicked);
+        aboutButton.onClick.AddListener(OnAboutButtonClicked);
 
         // Initialize menu
+        isStartPage = SceneManager.GetActiveScene().name == "start page";
+        
         for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)
-            menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(true);
+        menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(!isStartPage);
+        
+        for (int i = 0; i < startMenuButtonsGroup.transform.childCount; i++)
+            startMenuButtonsGroup.transform.GetChild(i).gameObject.SetActive(isStartPage);
 
+
+        settingsPanel.SetActive(false);
+        discoveriesPanel.SetActive(false);
+        aboutPanel.SetActive(false);
         menu.SetActive(false);
-
-
-
+        
     }
 
 
+
+    private void OnAboutButtonClicked()
+    {
+        aboutPanel.SetActive(true);
+        startMenuButtonsGroup.SetActive(false);
+        pageName = "about";
+    }
+
+    private void OnDiscoveryButtonClicked()
+    {
+        discoveriesPanel.SetActive(true);
+        startMenuButtonsGroup.SetActive(false);
+        pageName = "discoveries";
+
+    }
+
     private void OnSettingsButtonClicked()
     {
-        settings.SetActive(true);
+        settingsPanel.SetActive(true);
         menuButtonsGroup.SetActive(false);
-
+        startMenuButtonsGroup.SetActive(false);
+        pageName = "settings";
         // To do: add UI animation
 
     }
@@ -83,7 +127,12 @@ public class UIManager : MonoBehaviour {
     {
         // To do: resume from pause
 
+        print("close button clicked");
+
         menu.SetActive(false);
+        pageName = "game";
+        menuButton.gameObject.SetActive(true);
+
     }
 
     private void OnBackButtonClicked()
@@ -91,21 +140,55 @@ public class UIManager : MonoBehaviour {
         // To do: add UI animations
 
         // close settings and show first-level menu
-        menuButtonsGroup.SetActive(true);
-        settings.SetActive(false);
+
+        print("close button clicked");
+
+
+        isStartPage = SceneManager.GetActiveScene().name == "start page";
+        if (isStartPage)
+            startMenuButtonsGroup.SetActive(true);
+        else          
+            menuButtonsGroup.SetActive(true);
+
+        switch (pageName)
+        {
+            case "settings":
+                settingsPanel.SetActive(false);
+                break;
+            case "discoveries":
+                discoveriesPanel.SetActive(false);
+                break;
+            case "about":
+                aboutPanel.SetActive(false);
+                break;            
+        }
+
+        pageName = "menu";
 
     }
 
     private void OnMenuButtonClicked()
-    {   
+    {
         // To do: pause?
-        settings.SetActive(false);
-        menuButtonsGroup.SetActive(true);
+        pageName = "menu";
+        isStartPage = SceneManager.GetActiveScene().name == "start page";
 
-        for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)  
-            menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(true);
+        print("cur page: " + SceneManager.GetActiveScene().name);
+        print("isStartPage: " + isStartPage);
 
-        menu.SetActive(!menu.activeSelf);
+        startMenuButtonsGroup.SetActive(isStartPage);
+        menuButtonsGroup.SetActive(!isStartPage);
+        for (int i = 0; i < startMenuButtonsGroup.transform.childCount; i++)
+            startMenuButtonsGroup.transform.GetChild(i).gameObject.SetActive(isStartPage);
+
+        for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)
+            menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(!isStartPage);
+
+        settingsPanel.SetActive(false);
+        discoveriesPanel.SetActive(false);
+        aboutPanel.SetActive(false);
+        menu.SetActive(true);
+        menuButton.gameObject.SetActive(false);
     }
 
 
@@ -119,6 +202,36 @@ public class UIManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            PlayerPrefs.SetInt("Sagittarius", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            PlayerPrefs.SetInt("Pisces", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            PlayerPrefs.SetInt("Cancer", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            PlayerPrefs.SetInt("Taurus", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            PlayerPrefs.SetInt("Aquarius", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            PlayerPrefs.SetInt("Libra", 0);
+        if (Input.GetKeyDown(KeyCode.Alpha0))        
+            foreach (string key in discoveredStarNames)
+                PlayerPrefs.DeleteKey(key);
+
+    }
+
+    public void menuButtonInvert()
+    {
+        for (int i = 0; i < menuButton.transform.childCount; i++)
+        {
+            for (int j = 0; j < menuButton.transform.GetChild(i).childCount; j++)
+            {
+                if (menuButton.transform.GetChild(i).GetChild(j).GetComponent<Image>().color == Color.black)
+                    menuButton.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = Color.white;
+                else
+                    menuButton.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = Color.black;
+            }
+        }
+    }
 }

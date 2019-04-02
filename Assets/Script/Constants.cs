@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Constants{
-    public static string curLevelKey = "unlockedLevelID";
     //The x,y bounds of scenes
     public static float maxX = 16;
     public static float maxY = 10;
@@ -22,7 +21,7 @@ public class Constants{
     public static string appId = "";
 
 
+    public static string curLevelKey = "unlockedLevelID";
     public static string maxConstJumpKey = "maxConstJumpKey";
-
     public static Hashtable awardProbability = new Hashtable() { {"sagi", 200}, {"pisces", 300}, {"aqua", 500}, {"libra", 50} };
 }

@@ -90,10 +90,11 @@ public class selectionEffect : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        
         int levelName = int.Parse(gameObject.name);
 
         int levelID = 10 * (bigNumber - 1) + levelName + 4;
-
+        Debug.Log("Enter a level");
         // load level
         SceneManager.LoadScene(levelID);
         UIManager.instance.Start();

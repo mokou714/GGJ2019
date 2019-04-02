@@ -209,25 +209,25 @@ public class GameStates : MonoBehaviour {
 
     public object getData(string key, System.Type type){
         object ret = null;
-        if (!hasKey(key))
-            return ret;
         if (type == typeof(int))
         {
+            if (!hasKey(key))
+                return 0;
             ret = PlayerPrefs.GetInt(key);
         }
         else if (typeof(object) == typeof(string))
         {
+            if (!hasKey(key))
+                return "";
             ret = PlayerPrefs.GetString(key);
         }
         else if (typeof(object) == typeof(float))
         {
+            if (!hasKey(key))
+                return 0;
             ret = PlayerPrefs.GetString(key);
         }
         return ret;
-    }
-
-    private void blinkSelf(int times){
-        
     }
 
     //IEnumerator blinkOnce(){

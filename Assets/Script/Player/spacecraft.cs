@@ -135,6 +135,7 @@ public class spacecraft : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+        playerModel = new PlayerModel();
         InitPlayer(false);//Init player with reinit parameter being false
 
     }
@@ -155,7 +156,6 @@ public class spacecraft : MonoBehaviour
         }
         else
         {
-            playerModel = new PlayerModel();
             //If it is the first time to initialize, store some the initial values.
             parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
             energyLoss = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
@@ -517,7 +517,7 @@ public class spacecraft : MonoBehaviour
         //When the first time get 4-continuous jump, get achievement
         if (playerModel.continousJump == 4)
         {
-            if (GameStates.instance.deviceId == 0)
+            if (GameStates.instance.isLoggedIn)
                 SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
         }
 

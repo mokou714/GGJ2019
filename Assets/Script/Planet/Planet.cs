@@ -73,7 +73,7 @@ public class Planet : MonoBehaviour
     public virtual void playerLeave(){
         canPlaySound = true;
         thePlayerOnPlanet = null;
-        Debug.Log("Player leave: " + thePlayerOnPlanet);
+        //Debug.Log("Player leave: " + thePlayerOnPlanet);
 
     }
 

@@ -22,7 +22,7 @@ public class GoldenPlanet : Planet {
         award = transform.Find("Planet2").GetChild(0).gameObject;
         good = award.gameObject.GetComponent<SpriteRenderer>();
 
-        planetBottom.localScale = transform.Find("Planet2").localScale;
+        planetBottom.localScale = planetSprite.localScale * 0.5f;
         origColor = good.color;
         StartCoroutine(fadeIn());
 	}
@@ -59,6 +59,8 @@ public class GoldenPlanet : Planet {
         Transform sprites = transform.parent.GetChild(0);
         tag = sprites.GetChild(index).tag;
         transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites.GetChild(index).gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        GetComponent<Light>().range = 0;
 
         planet2.transform.localScale = new Vector3(0, 0, 0);
         StartCoroutine(popOut());
@@ -113,7 +115,7 @@ public class GoldenPlanet : Planet {
         base.catchedAction(sc);
         AudioManager.instance.PlaySFX("badge");
         if(awardAvailable){
-            Debug.Log("Award");
+            //Debug.Log("Award");
             StartCoroutine(award.GetComponent<GainedAnimation>().moveStart(sc.transform.parent.transform, 1));
             awardAvailable = false;
             sc.wonAward = tag;

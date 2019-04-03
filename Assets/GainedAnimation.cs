@@ -21,13 +21,13 @@ public class GainedAnimation : MonoBehaviour {
         origTrans = transform.parent;
         origPos = transform.position;
         origScale = transform.localScale;
-        Debug.Log("SC player:" + transform.parent.parent.parent.gameObject.GetComponent<BadgeManager>().sc_player);
+        //Debug.Log("SC player:" + transform.parent.parent.parent.gameObject.GetComponent<BadgeManager>().sc_player);
         player_sc = transform.parent.parent.parent.gameObject.GetComponent<BadgeManager>().sc_player;
 	}
 	
 	// Update is called once per frame
 	void Update () {  
-        if(transform.parent.name == "Planet2" && !growing){
+        if(transform.parent.name == "Planet2" && !growing && player_sc.wonAward.Length < 1){
             moveBack();
         }
 	}

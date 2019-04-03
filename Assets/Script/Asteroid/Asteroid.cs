@@ -36,17 +36,15 @@ public class Asteroid : MonoBehaviour {
 	{
         //When the player dies, asteroid is supposed to move back to where it originally was
         if(movingBack){
+            //speed = Vector3.Distance(transform.position, origPosition) / maxWaitTime;
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
 
-            //Disable the collider when moveing in case of hitting other asteroids
-            //if(transform.GetComponent<Collider2D>().enabled)
-                //transform.GetComponent<Collider2D>().enabled = false;
             if(Vector3.Distance(transform.position,origPosition) < 0.1f){
-                movingBack = false;
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<Collider2D>().enabled = true;
+                movingBack = false;
             }
         }else{
             //If the asteroids are out of the bound, then freeze it and cancel the collider

@@ -156,7 +156,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.stargazers.stargazing
     Standalone: com.Company.ProductName
-    iOS: com.StarGazers.Stargazing
+    iOS: com.StarGazer.Stargazing
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16

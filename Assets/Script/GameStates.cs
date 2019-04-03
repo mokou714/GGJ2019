@@ -21,6 +21,7 @@ public class GameStates : MonoBehaviour {
 
     public string showContent;
     public int deviceId;
+    public bool isLoggedIn = false;
 
     public int globalContinuousJump = 0;
     public int firstLevelJumpDisrupt = 0;
@@ -63,25 +64,6 @@ public class GameStates : MonoBehaviour {
         GUI.Label(new Rect(0, 0, 50, 50), gUI,style);
 	}
 
-	//Connecting to google play game account for android user
-	//public void Login(){
-    //    PlayGamesPlatform.Activate();
-    //    Social.localUser.Authenticate((bool success) => {
-    //        if(success){
-    //            try{
-    //                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.BOTTOM);
-    //            }catch(System.InvalidCastException e){
-    //                showContent = e.ToString();
-    //            }
-    //        }else{
-    //            Debug.Log("Login failed");
-    //        }
-    //    });
-    //}
-
-    //private GUI(string text){
-    //    GUI.Label()
-    //}
 
     // Use this for initialization
     void Start()
@@ -159,6 +141,7 @@ public class GameStates : MonoBehaviour {
 
     public void SaveTutorialData(int checkMark, string saveName){
         PlayerPrefs.SetInt(saveName, checkMark);
+        PlayerPrefs.Save();
     }
 
     public int GetTutorialData(string saveName){

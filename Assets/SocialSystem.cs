@@ -50,23 +50,22 @@ public class SocialSystem : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android)
         {
-            androidLogin();
             GameStates.instance.saveData("device", 0);
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            iosLogin();
             GameStates.instance.saveData("device", 1);
         }
         else
         {
             splash.startTheGame();
         }
+        logIn();
     }
 
 
-    public void setAchievement(string id)
-    {
+    public void setAchievement(string id){
+
         Social.ReportProgress(id, 100.0f, (bool success) =>
         {
             if (success)
@@ -80,47 +79,72 @@ public class SocialSystem : MonoBehaviour
         });
     }
 
-    public void iosLogin()
-    {
+    public void logIn(){
+#if UNITY_ANDROID
+        PlayGamesPlatform.Activate();
+#endif
         Social.localUser.Authenticate(success =>
         {
             if (success)
             {
-                Debug.Log("Authentication successful");
-                string userInfo = "Username: " + Social.localUser.userName +
-                    "\nUser ID: " + Social.localUser.id +
-                    "\nIsUnderage: " + Social.localUser.underage;
-                Debug.Log(userInfo);
-                showContent = userInfo;
-
-                listAchievements();
+                //Debug.Log("Authentication successful");
+                //string userInfo = "Username: " + Social.localUser.userName +
+                //    "\nUser ID: " + Social.localUser.id +
+                //    "\nIsUnderage: " + Social.localUser.underage;
+                //Debug.Log(userInfo);
+                showContent = "Success";
+                GameStates.instance.isLoggedIn = true;
             }
             else
             {
                 showContent = "Login failed";
-
-            }
-            splash.startTheGame();
-        });
-
-
-    }
-#if UNITY_ANDROID
-    public void androidLogin(){
-        PlayGamesPlatform.Activate();
-        Social.localUser.Authenticate((bool success) => {
-            // handle success or failure
-            if (success){
-                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.TOP);
-                //Social.ShowAchievementsUI();
-                Social.ShowLeaderboardUI();
-            }else{
-                showContent = "Login failed";
             }
             splash.startTheGame();
         });
     }
-#endif
+
+//    public void iosLogin()
+//    {
+//        Social.localUser.Authenticate(success =>
+//        {
+//            if (success)
+//            {
+//                Debug.Log("Authentication successful");
+//                string userInfo = "Username: " + Social.localUser.userName +
+//                    "\nUser ID: " + Social.localUser.id +
+//                    "\nIsUnderage: " + Social.localUser.underage;
+//                Debug.Log(userInfo);
+//                showContent = userInfo;
+
+//                listAchievements();
+//            }
+//            else
+//            {
+//                showContent = "Login failed";
+
+//            }
+//            splash.startTheGame();
+//        });
+
+
+//    }
+//#if UNITY_ANDROID
+//    public void androidLogin(){
+//        PlayGamesPlatform.Activate();
+//        Social.localUser.Authenticate((bool success) => {
+//            // handle success or failure
+//            if (success){
+//                ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.TOP);
+//                //Social.ShowAchievementsUI();
+//                //Social.ShowLeaderboardUI();
+//                GameStates.instance.isLoggedIn = true;
+//            }else{
+//                showContent = "Login failed";
+//            }
+//            splash.startTheGame();
+//        });
+//    }
+//#endif
     public void listAchievements(){
         switch(gameStates.deviceId){
             case 0:

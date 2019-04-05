@@ -136,6 +136,8 @@ public class spacecraft : MonoBehaviour
         if (instance == null)
             instance = this;
         playerModel = new PlayerModel();
+
+        showArrow = ((int)GameStates.instance.getData("isPointer", typeof(int)) < 1);
         InitPlayer(false);//Init player with reinit parameter being false
 
     }
@@ -290,10 +292,10 @@ public class spacecraft : MonoBehaviour
                 //rotating_speed = origSpeed;
                 Time.timeScale = 1;
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
+        }else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
         {
-            SceneManager.LoadScene(Application.loadedLevel);
+            GameStates.instance.reinit();
+            //SceneManager.LoadScene(Application.loadedLevel);
         }else{
             playerModel.levelTime += Time.deltaTime;
         }
@@ -517,8 +519,7 @@ public class spacecraft : MonoBehaviour
         //When the first time get 4-continuous jump, get achievement
         if (playerModel.continousJump == 4)
         {
-            if (GameStates.instance.isLoggedIn)
-                SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
+            SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
         }
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position

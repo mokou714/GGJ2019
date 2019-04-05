@@ -70,7 +70,7 @@ public class GainedAnimation : MonoBehaviour {
             }else{
                 if (dir == 1)
                 {
-                    Debug.Log(transform.parent);
+                    //Debug.Log(transform.parent);
 
                     if(player_sc.dead || player_sc.wonAward.Length < 1){
                         moveBack();

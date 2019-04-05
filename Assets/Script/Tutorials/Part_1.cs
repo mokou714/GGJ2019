@@ -21,11 +21,11 @@ class Part_1 {
         this.monoBehaviour = monoBehaviour;
         Dictionary<string, hint> instr = new Dictionary<string, hint>();
         instr["release"] = new hint("Relase to launch yourself");
-        instr["hold"] = new hint("Hold the screen to enter the pre-launch modet");
-        instr["compliment"] = new hint("Good job!", false, 400, 200);
-        instr["goal_1"] = new hint("Get here!", false, 400, 200);
-        instr["goal_2"] = new hint("Now get here!", false, 500, 300);
-        instr["congrat"] = new hint("Well done, let's get into the game!", false, 0, 300);
+        instr["hold"] = new hint("First, Hold the screen.");
+        instr["compliment"] = new hint("Good job!", false, 300, 150);
+        instr["goal_1"] = new hint("Get here!", false, 200, 200);
+        instr["goal_2"] = new hint("Now get here!", false, 400, 300);
+        instr["congrat"] = new hint("Well done, let's get into the game!", false, 0, 200);
 
         this.inst = instr;
     }
@@ -63,12 +63,11 @@ class Part_1 {
     public void onPlanetRoutine(){
         if (player_sc.rotatingPlanet == firstPlanet)
         {
-            if (player_sc.touchHold())
+            if (player_sc.touchHold() && player_sc.playerModel.pressTime > 1f)
             {
                 showText(inst["release"], 0);
 
-            }
-            else
+            }else
             {
                 showText(inst["hold"], 0);
             }

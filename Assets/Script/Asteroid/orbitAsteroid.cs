@@ -44,7 +44,7 @@ public class orbitAsteroid : MonoBehaviour {
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<Collider2D>().enabled = true;
-                if (transform.parent.GetComponent<AsteroidController>() != null)
+                if (transform.parent != null && transform.parent.GetComponent<AsteroidController>() != null)
                 {
                     if(!tell){
                         transform.parent.GetComponent<AsteroidController>().readyNum += 1;

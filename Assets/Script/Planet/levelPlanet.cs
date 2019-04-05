@@ -25,11 +25,13 @@ public class levelPlanet : Planet {
     private int bigNumber;
 
     private bool landed = false;
+    private Transform planetName; 
 	// Use this for initialization
 	void Start () {
         setup();
         size = transform.localScale;
         bigNumber = int.Parse(name);
+        planetName = transform.Find("title");
 	}
 	
 	// Update is called once per frame
@@ -44,6 +46,7 @@ public class levelPlanet : Planet {
             //stop showing leve
             StopCoroutine(showLevel);
             Destroy(levelLine);
+            planetName.gameObject.SetActive(false);
             landed = false;
         }
     }
@@ -54,6 +57,8 @@ public class levelPlanet : Planet {
         StartCoroutine(showLevel);
         title.SetActive(false);
         landed = true;
+
+        planetName.gameObject.SetActive(true);
         return;
     }
     public override void playerLeave()

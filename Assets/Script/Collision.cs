@@ -99,49 +99,66 @@ public class Collision : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             sc.requiredSleep = true;
 
-            if (collision.gameObject.tag == "Finish")
-            {
-                if (SceneManager.GetActiveScene().buildIndex == 4)
-                {
-                    SocialSystem.instance.setAchievement(Achievements.achievement_passed_tutorial);
-                    SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
-                }else if (SceneManager.GetActiveScene().buildIndex == 14)
-                {
-                    SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
-                }
-
-                if(sc.wonAward.Length > 0){
-                    sc.playerModel.wonAward = sc.wonAward;
-                    GameStates.instance.saveData(sc.wonAward, 1);
-                }
-
-                sc.playerModel.energy = sc.energy;
-                //Debug.Log("SC won: " + sc.wonAward);
-
-                //Debug.Log("Total score: " + sc.playerModel.calScore());
-                //Save progress in case user kill the app in the background
-                saveUserData();
-                GameStates.instance.SaveLevel();
-
+            if (collision.gameObject.tag == "Finish"){
+                int curLevel = 0;
+                string next_level = "";
                 if (SceneManager.GetActiveScene().name == "2-start"){
-                    StartCoroutine(waitToNext(1f, false, id: SceneManager.GetActiveScene().buildIndex + 2));
+                    curLevel = 11;
+                    next_level = "12";
                 }else{
-                    StartCoroutine(waitToNext(1f, false));
+                    curLevel = int.Parse(SceneManager.GetActiveScene().name);
+                    print("cur level:" + curLevel);
+                    if (curLevel == -1)
+                    {
+                        next_level = "1";
+                        curLevel = 0;
+                        if(GameStates.instance.isLoggedIn){
+                            SocialSystem.instance.setAchievement(Achievements.achievement_passed_tutorial);
+                            SocialSystem.instance.setAchievement(Achievements.unlock_milkyway);
+                        }
+
+                    }else if(curLevel == 20){
+                        if (GameStates.instance.isLoggedIn){
+                            SocialSystem.instance.setAchievement(Achievements.passing_all_levels);
+                        }
+                        next_level = "start page";
+                    }else if((curLevel > 0 && curLevel < 20) || curLevel < -1){
+                        if(curLevel == 9){
+                            if ((int)GameStates.instance.getData(Constants.whirpoolStatus, typeof(int)) < 1)
+                                next_level = "2-start";
+                            else
+                                next_level = "10";
+                        }else{
+                            next_level = (curLevel + 1).ToString();
+                        }
+                        if(curLevel > 0 && curLevel <= 20){
+                            sc.playerModel.energy = sc.energy;
+                            saveUserData(curLevel);
+                            if (sc.wonAward.Length > 0)
+                            {
+                                sc.playerModel.wonAward = sc.wonAward;
+                                GameStates.instance.saveData(sc.wonAward, 1);
+                        }
+
+                        }
+                    }
                 }
+                GameStates.instance.SaveLevel(curLevel + 1);
+                if(next_level.Length > 0)
+                    StartCoroutine(waitToNext(1f, false, next_level));
             }else if (collision.gameObject.tag == "preTutorial"){
-                StartCoroutine(waitToNext(4f, false));
+                StartCoroutine(waitToNext(4f, false, "start page"));
                 GameStates.instance.SaveTutorialData(1,"pre");
             }else if (collision.gameObject.tag == "compaign"){
-                Debug.Log("load");
+                //Debug.Log("load");
                 StartCoroutine(waitToNext(1f, true));
             }
-
         }
         return;
     }
 
 
-    private void saveUserData(){
+    public void saveUserData(int curlevel){
         GameStates.instance.globalContinuousJump += sc.playerModel.continousJump;
         GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJump, GameStates.instance.globalContinuousJumpMax);
 
@@ -149,36 +166,92 @@ public class Collision : MonoBehaviour
         curMaxJump = Mathf.Max(curMaxJump, GameStates.instance.globalContinuousJumpMax);
 
         GameStates.instance.saveData(Constants.maxConstJumpKey, curMaxJump);
-        Debug.Log("Last continous jump: " + GameStates.instance.globalContinuousJump);
-        Debug.Log("Current max jumps: " + curMaxJump);
+
+        //print("scores:" + scores);
+        //print("Cur level: " + curlevel);
+
+        float cal_score = sc.playerModel.calScore();
+        //print(score_list.Length + ", " + scores);
+        string level = Constants.bestMilkywayScoreKey;
+        string scores_key = Constants.getScoreKeyMilkeyWay;
+
+        if ((11 <= curlevel && curlevel <= 20) || SceneManager.GetActiveScene().name == "2-start")
+        {
+            level = Constants.bestWhirlpoolScoreKey;
+            scores_key = Constants.getScoreKeyWhirlpool;
+        }
+
+        string scores = (string)GameStates.instance.getData(scores_key, typeof(string));
+        string[] score_list = scores.Split(',');
+        string printscore = "";
+        curlevel = (curlevel - 1) % 10;
+        print("curlevel:" + curlevel);
+
+        if(curlevel < score_list.Length){
+            if (score_list[curlevel].Length > 0)
+            {
+                int res = 0;
+                int.TryParse(score_list[curlevel], out res);
+                print("parse res:" + res);
+                score_list[curlevel] = Mathf.Max(res, cal_score).ToString();
+                //print(score_list[curlevel] + "," + cal_score);
+            }
+            else
+            {
+                score_list[curlevel] = cal_score.ToString();
+            }
+        }else{
+            scores += ("," + cal_score.ToString());
+            score_list = scores.Split(',');
+        }
+
+        for (int j = 0; j < score_list.Length; j++)
+            printscore += (score_list[j] + ",");
+
+        print("curlevel:" + curlevel + " score:" + printscore);
+
+        float best_score = (float)GameStates.instance.getData(level, typeof(float));
+
+
+        int total = 0;
+        for (int i = 0; i < score_list.Length; i++)
+        {
+            if(score_list[i].Length > 0){
+                total += int.Parse(score_list[i]);
+            }
+
+        }
+
+        //if (total > best_score)
+        //{
+        //    SocialSystem.instance.setLeaderBoard(Constants.bestMilkywayScoreKey, (long)total);
+        //}
+        GameStates.instance.saveData(Constants.bestMilkywayScoreKey, Mathf.Max(total, best_score));
+        GameStates.instance.saveData(scores_key, string.Join(",", score_list));
+        GameStates.instance.showContent = Mathf.Max(total, best_score).ToString();
+
+        //Debug.Log("Last continous jump: " + GameStates.instance.globalContinuousJump);
+        //Debug.Log("Current max jumps: " + curMaxJump);
     }
 
 
-    IEnumerator waitToNext(float time, bool load, int id = -1)
+    IEnumerator waitToNext(float time, bool load, string id = "")
     {
         /*
         Todo: this coroutine to show instruction after the player lands on the second planet
         */
 
         yield return new WaitForSeconds(time);
-        if(id > 0)
-            startNewLevel(id);
-        else if (!load)
-            startNewLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        if(id.Length > 0)
+            SceneManager.LoadScene(id);
         else
             GameStates.instance.LoadLevel();
     }
 
-    private void startNewLevel(int nextLevelID){
-        int cur_scene = SceneManager.GetActiveScene().buildIndex;
-        if (cur_scene == SceneManager.sceneCount - 2)
-            SceneManager.LoadScene("end stage");
-        else{
-            //int nextLevelID = SceneManager.GetActiveScene().buildIndex + 1;
-            // load next level
-            SceneManager.LoadScene(nextLevelID);
-        }
-    }
+    //private void startNewLevel(int nextLevelID){
+
+    //    }
+    //}
 
     IEnumerator playerBlink() {
         playerTrailRenderer.enabled = false;

@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 224143992098666524}
   - component: {fileID: 114881085920743404}
   m_Layer: 5
-  m_Name: Cancer
+  m_Name: cancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 224611554663649654}
   - component: {fileID: 114038849137926138}
   m_Layer: 5
-  m_Name: Sagittarius
+  m_Name: sagittarius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1918,7 +1918,7 @@ GameObject:
   - component: {fileID: 224654454302762732}
   - component: {fileID: 114395387102454184}
   m_Layer: 5
-  m_Name: Aquarius
+  m_Name: aquarius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2205,7 +2205,7 @@ GameObject:
   - component: {fileID: 224956473745455606}
   - component: {fileID: 114897228544963442}
   m_Layer: 5
-  m_Name: Taurus
+  m_Name: aries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3050,7 +3050,7 @@ GameObject:
   - component: {fileID: 224926804328857912}
   - component: {fileID: 114415106614314092}
   m_Layer: 5
-  m_Name: Libra
+  m_Name: libra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4969,6 +4969,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1972230437593226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4461275021597830}
+  - component: {fileID: 114221289981587744}
+  - component: {fileID: 114142578843454398}
+  m_Layer: 5
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1973025889719868
 GameObject:
   m_ObjectHideFlags: 1
@@ -5128,7 +5145,7 @@ GameObject:
   - component: {fileID: 224794154330781388}
   - component: {fileID: 114698369281563510}
   m_Layer: 5
-  m_Name: Pisces
+  m_Name: pisces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5167,6 +5184,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4461275021597830
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972230437593226}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224072022190002866}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114002435470443926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5954,7 +5984,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 72036feedb0874ce0a3b2850d200a249, type: 3}
+    m_Font: {fileID: 12800000, guid: 528ee0dfca62bcd4bb0d81281fbdb605, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
@@ -6226,6 +6256,24 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Discoveries
+--- !u!114 &114142578843454398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972230437593226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &114149774799670850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6665,6 +6713,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114221289981587744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972230437593226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!114 &114221600266647968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11805,7 +11867,7 @@ MonoBehaviour:
   - Sagittarius
   - Pisces
   - Cancer
-  - Taurus
+  - Aries
   - Aquarius
   - Libra
 --- !u!114 &114920184147090146
@@ -14418,6 +14480,7 @@ RectTransform:
   - {fileID: 224326654452245342}
   - {fileID: 224867801800249008}
   - {fileID: 224288269426092834}
+  - {fileID: 4461275021597830}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

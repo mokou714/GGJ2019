@@ -80,7 +80,7 @@ public class UISwitchButton : MonoBehaviour {
                 GameStates.isPointer = !GameStates.isPointer;
 
                 // save settings
-                PlayerPrefs.SetInt("isPointer", GameStates.isPointer ? 1 : 0);
+                PlayerPrefs.SetInt("isPointer", GameStates.isPointer ? 0 : 1);
                 PlayerPrefs.Save();
 
                 break;

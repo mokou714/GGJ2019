@@ -67,10 +67,10 @@ public class TutorialScript : MonoBehaviour {
                 break;
             case 2:
                 inst["energy"] = new hint("You loss energy while flying and\n your size indicates your energy", false, 100, 200);
-                inst["dust"] = new hint("The dust around a planet gives\n you the energy.", false, 0, -100);
+                inst["dust"] = new hint("The dust around a planet gives\n you the energy.", false, 0, -200);
                 break;
             case 3:
-                inst["obstacle"] = new hint("The 'Space Eaters' will eat\n your energy!", false, -50, 250);
+                inst["obstacle"] = new hint("The 'Space Eaters' will eat\n your energy!", false, -100, 200);
                 break;
         }
 
@@ -78,7 +78,7 @@ public class TutorialScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(checkedMark);
+        //Debug.Log(checkedMark);
 
         if(tutorialNum == 0){
             part_1.runtimeRoutine();
@@ -110,8 +110,8 @@ public class TutorialScript : MonoBehaviour {
                 part_1.onPlanetRoutine();
             }else if(tutorialNum == 1){
                 if(checkedMark < 1){
-                    hint h = new hint("Get here to start \nthe campaign!", false, 200, -100);
-                    showText(h);
+                    hint start_campagin = new hint("Get here to start the campaign!", false, 250, -100);
+                    showText(start_campagin);
                     player_sc.end.transform.Find("arrow").gameObject.SetActive(true);
                     checkedMark++;
                     GameStates.instance.SaveTutorialData(checkedMark, saveName);

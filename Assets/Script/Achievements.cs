@@ -34,5 +34,7 @@ public static class Achievements
         public const string whirlpool_leaderboard = "CgkI2tzJ6JcSEAIQCA";
         public const string cont_jump_leaderboard = "CgkI2tzJ6JcSEAIQCQ";
 
+        public const string passing_all_levels = "CgkI2tzJ6JcSEAIQDQ";
+
 }
 

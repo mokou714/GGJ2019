@@ -14,6 +14,7 @@ public class invertPlant : Planet {
     private bool playerReached = false;
 
     public Canvas canvas;
+    public GameObject whirlpoolTitle;
 
     void Start(){
         setup();
@@ -33,10 +34,15 @@ public class invertPlant : Planet {
         base.catchedAction(sc);
         if(!playerReached && SceneManager.GetActiveScene().name == "2-start"){
             playerReached = true;
-            Debug.Log("Player reached");
+            //Debug.Log("Player reached");
             sc.spawnPoint = transform.position - new Vector3(5, 1, 0);
             sc.playerModel.init();
-            GameStates.instance.SaveLevel(curID: SceneManager.GetActiveScene().buildIndex - 3);
+            sc.energy = 100f;
+            if((int)GameStates.instance.getProgress() < 11){
+                GameStates.instance.SaveLevel(curID: 11);
+                SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
+                sc.transform.parent.GetComponent<Collision>().saveUserData(11);
+            }
         }
         if(!invBack)
         {
@@ -70,11 +76,15 @@ public class invertPlant : Planet {
             }
         }
         yield return new WaitForSeconds(0.1f);
+        UIManager.instance.menuButtonInvert();
 
-            
         sc.camera.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-        //StartCoroutine(moveCamera());
         move = true;
+
+        yield return new WaitForSeconds(3f);
+        whirlpoolTitle.GetComponent<TitleScript>().showTitle();
+        //StartCoroutine(moveCamera());
+
     }
 
 

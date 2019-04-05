@@ -6,7 +6,8 @@ using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 
 
-public class GameStates : MonoBehaviour {
+public class GameStates : MonoBehaviour
+{
 
     public static GameStates instance = null;
 
@@ -14,7 +15,7 @@ public class GameStates : MonoBehaviour {
 
     // settings
     public static bool isPointer = true;
-
+    public bool destroy = false;
 
     public string[] bigLevelNames;
     public string[] levels;
@@ -26,6 +27,9 @@ public class GameStates : MonoBehaviour {
     public int globalContinuousJump = 0;
     public int firstLevelJumpDisrupt = 0;
     public int globalContinuousJumpMax = 0;
+
+    public GameObject milkywayTitle;
+
     private void Awake()
     {
         //Check if there is already an instance 
@@ -48,8 +52,16 @@ public class GameStates : MonoBehaviour {
             deviceId = 1;
 
         }
+
+        if(destroy){
+            PlayerPrefs.DeleteAll();
+        }
         //Login();
 
+    }
+
+    public void reinit(){
+        PlayerPrefs.DeleteAll();
     }
 
     //GUI log on screen to debug on phones
@@ -85,6 +97,11 @@ public class GameStates : MonoBehaviour {
 
         }
 
+        if(SceneManager.GetActiveScene().buildIndex == 5 && getUnlockedLevels() < 2){
+            if(milkywayTitle != null){
+                milkywayTitle.GetComponent<TitleScript>().showTitle();
+            }
+        }
 
         levels = new string[] {
             "start page", 
@@ -98,7 +115,11 @@ public class GameStates : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        //if(SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex <= 14){
+        //    showContent = getData(Constants.bestMilkywayScoreKey, typeof(float)).ToString();
+        //}else if(SceneManager.GetActiveScene().buildIndex > 14){
+        //    showContent = getData(Constants.bestWhirlpoolScoreKey, typeof(float)).ToString();
+        //}
     }
 
     // save level after quit
@@ -117,22 +138,22 @@ public class GameStates : MonoBehaviour {
 
 
     // save system settings data and current level
-    public void SaveLevel(int curID = -1)
+    public void SaveLevel(int curID = -3)
     {
         PlayerPrefs.SetInt("hasSavedLevel", 1);
         int curLevelID;
-        if (curID > 0)
+        int maxlevel = getUnlockedLevels();
+        if (curID > -3){
             curLevelID = curID;
-        else
+            if(curLevelID > maxlevel){
+                PlayerPrefs.SetInt(Constants.unlockedLevelKey, curLevelID);
+            }
+        }else
             curLevelID = SceneManager.GetActiveScene().buildIndex + 1;
-        
-        int unlockedLevelID = SceneManager.GetActiveScene().buildIndex;
+        //int unlockedLevelID = SceneManager.GetActiveScene().buildIndex + 1;
 
-        if (unlockedLevelID < curLevelID)
-            unlockedLevelID = curLevelID;
-
-        PlayerPrefs.SetInt(Constants.curLevelKey, unlockedLevelID);
-
+        print("Save level:" + curLevelID);
+        PlayerPrefs.SetInt(Constants.curLevelKey, curLevelID);
         PlayerPrefs.Save();
 
     }
@@ -145,7 +166,7 @@ public class GameStates : MonoBehaviour {
     }
 
     public int GetTutorialData(string saveName){
-        Debug.Log("Loading " + saveName + " " + PlayerPrefs.HasKey(saveName));
+        //Debug.Log("Loading " + saveName + " " + PlayerPrefs.HasKey(saveName));
         if (!PlayerPrefs.HasKey(saveName))
             return 0;
         return PlayerPrefs.GetInt(saveName);
@@ -162,15 +183,30 @@ public class GameStates : MonoBehaviour {
             int unlockedLevelID = PlayerPrefs.GetInt(Constants.curLevelKey);
             return unlockedLevelID;
         }else{
-            return SceneManager.GetActiveScene().buildIndex + 1; 
+            return -2; 
+        }
+    }
+
+    public int getUnlockedLevels(){
+        if (PlayerPrefs.HasKey(Constants.unlockedLevelKey))
+        {
+            int unlockedLevelID = PlayerPrefs.GetInt(Constants.unlockedLevelKey);
+            return unlockedLevelID;
+        }else
+        {
+            return -1;
         }
     }
 
     public void LoadLevel()
     {
 
-            // go to curLevel
-        SceneManager.LoadScene(getProgress());
+        // go to curLevel
+        int levelToLoad = getProgress();
+        if(levelToLoad == SceneManager.GetActiveScene().buildIndex)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(getProgress().ToString());
     }
 
     public bool hasKey(string key){
@@ -179,11 +215,12 @@ public class GameStates : MonoBehaviour {
 
     // save system settings data and current level
     public void saveData(string key, object val){
-        if(typeof(object) == typeof(int)){
+        if(val is int){
+            //print(key + " is set to " + val);
             PlayerPrefs.SetInt(key, (int)val);
-        }else if(typeof(object) == typeof(string)){
+        }else if(val is string){
             PlayerPrefs.SetString(key, (string)val);
-        }else if (typeof(object) == typeof(float))
+        }else if (val is float)
         {
             PlayerPrefs.SetFloat(key, (float)val);
         }
@@ -198,17 +235,17 @@ public class GameStates : MonoBehaviour {
                 return 0;
             ret = PlayerPrefs.GetInt(key);
         }
-        else if (typeof(object) == typeof(string))
+        else if (type == typeof(string))
         {
             if (!hasKey(key))
                 return "";
             ret = PlayerPrefs.GetString(key);
         }
-        else if (typeof(object) == typeof(float))
+        else if (type == typeof(float))
         {
             if (!hasKey(key))
-                return 0;
-            ret = PlayerPrefs.GetString(key);
+                return 0f;
+            ret = PlayerPrefs.GetFloat(key);
         }
         return ret;
     }

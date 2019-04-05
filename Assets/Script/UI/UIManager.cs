@@ -35,9 +35,12 @@ public class UIManager : MonoBehaviour {
     public GameObject discoveriesPanel;
     public GameObject aboutPanel;
 
+    private Button achievement;
+    private Button leaderboard;
+
     string pageName = "game";
     public string[] discoveredStarNames =
-        { "Sagittarius", "Pisces", "Cancer", "Taurus", "Aquarius", "Libra" };
+        { "sagittarius", "pisces", "cancer", "aries", "aquarius", "libra" };
 
     // singleton instance
     public static UIManager instance = null;
@@ -79,6 +82,12 @@ public class UIManager : MonoBehaviour {
         startSettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         aboutButton.onClick.AddListener(OnAboutButtonClicked);
 
+        // set onclick to achievement and leaderboard
+        achievement = discoveriesPanel.transform.Find("AchievementButton").GetComponent<Button>();
+        leaderboard = discoveriesPanel.transform.Find("LeaderBoardButton").GetComponent<Button>();
+        achievement.onClick.AddListener(SocialSystem.instance.listAchievements);
+        leaderboard.onClick.AddListener(SocialSystem.instance.listLeaderboard);
+
         // Initialize menu
         isStartPage = SceneManager.GetActiveScene().name == "start page";
         
@@ -88,27 +97,36 @@ public class UIManager : MonoBehaviour {
         for (int i = 0; i < startMenuButtonsGroup.transform.childCount; i++)
             startMenuButtonsGroup.transform.GetChild(i).gameObject.SetActive(isStartPage);
 
-
-        settingsPanel.SetActive(false);
-        discoveriesPanel.SetActive(false);
-        aboutPanel.SetActive(false);
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+        if (discoveriesPanel != null)
+            discoveriesPanel.SetActive(false);
+        if (aboutPanel != null)
+            aboutPanel.SetActive(false);
         menu.SetActive(false);
-        
+
+        List<string> changeColorLevels = new List<string> {"11", "12", "13"};
+
+        if(changeColorLevels.Contains(SceneManager.GetActiveScene().name)){
+            menuButtonInvert();
+        }
+            
     }
-
-
 
     private void OnAboutButtonClicked()
     {
-        aboutPanel.SetActive(true);
-        startMenuButtonsGroup.SetActive(false);
+        if (aboutPanel != null)
+            aboutPanel.SetActive(true);
+        if (menuButtonsGroup != null)
+            startMenuButtonsGroup.SetActive(false);
         pageName = "about";
     }
 
     private void OnDiscoveryButtonClicked()
     {
         discoveriesPanel.SetActive(true);
-        startMenuButtonsGroup.SetActive(false);
+        if (menuButtonsGroup != null)
+            startMenuButtonsGroup.SetActive(false);
         pageName = "discoveries";
 
     }
@@ -116,8 +134,10 @@ public class UIManager : MonoBehaviour {
     private void OnSettingsButtonClicked()
     {
         settingsPanel.SetActive(true);
-        menuButtonsGroup.SetActive(false);
-        startMenuButtonsGroup.SetActive(false);
+        if (menuButtonsGroup != null)
+            menuButtonsGroup.SetActive(false);
+        if(startMenuButtonsGroup != null)
+            startMenuButtonsGroup.SetActive(false);
         pageName = "settings";
         // To do: add UI animation
 
@@ -127,12 +147,17 @@ public class UIManager : MonoBehaviour {
     {
         // To do: resume from pause
 
-        print("close button clicked");
+        //print("close button clicked");
 
         menu.SetActive(false);
         pageName = "game";
         menuButton.gameObject.SetActive(true);
+        StartCoroutine(reactivatePlayer());
+    }
 
+    IEnumerator reactivatePlayer(){
+        yield return new WaitForSeconds(0.1f);
+        spacecraft.instance.requiredSleep = false;
     }
 
     private void OnBackButtonClicked()
@@ -141,7 +166,7 @@ public class UIManager : MonoBehaviour {
 
         // close settings and show first-level menu
 
-        print("close button clicked");
+        //print("close button clicked");
         isStartPage = SceneManager.GetActiveScene().name == "start page";
         if (isStartPage)
             startMenuButtonsGroup.SetActive(true);
@@ -168,6 +193,7 @@ public class UIManager : MonoBehaviour {
     private void OnMenuButtonClicked()
     {
         // To do: pause?
+        spacecraft.instance.requiredSleep = true;
         pageName = "menu";
         isStartPage = SceneManager.GetActiveScene().name == "start page";
 
@@ -202,21 +228,23 @@ public class UIManager : MonoBehaviour {
     void Update () {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            PlayerPrefs.SetInt("Sagittarius", 0);
+            PlayerPrefs.SetInt("sagittarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            PlayerPrefs.SetInt("Pisces", 0);
+            PlayerPrefs.SetInt("pisces", 0);
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            PlayerPrefs.SetInt("Cancer", 0);
+            PlayerPrefs.SetInt("cancer", 0);
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            PlayerPrefs.SetInt("Taurus", 0);
+            PlayerPrefs.SetInt("aries", 0);
         if (Input.GetKeyDown(KeyCode.Alpha5))
-            PlayerPrefs.SetInt("Aquarius", 0);
+            PlayerPrefs.SetInt("aquarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha6))
-            PlayerPrefs.SetInt("Libra", 0);
+            PlayerPrefs.SetInt("libra", 0);
         if (Input.GetKeyDown(KeyCode.Alpha0))        
             foreach (string key in discoveredStarNames)
                 PlayerPrefs.DeleteKey(key);
 
+        if (!menuButton.gameObject.activeSelf)
+            menuButton.gameObject.SetActive(true);
     }
 
     public void menuButtonInvert()

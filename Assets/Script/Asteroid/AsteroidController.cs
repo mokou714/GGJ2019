@@ -11,7 +11,6 @@ public class AsteroidController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(readyNum + "," + transform.childCount);
 
         if(readyNum == transform.childCount){
             for (int i = 0; i < transform.childCount; i++)

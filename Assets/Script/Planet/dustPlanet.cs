@@ -46,7 +46,7 @@ public class dustPlanet : Planet
                 planetRef = transform.GetChild(index_planet);
                 origPlanetSize = planetRef.localScale.x;
 
-                Debug.Log("About to check size");
+                //Debug.Log("About to check size");
                 GameObject dust = transform.GetChild(0).gameObject;
 
                 dust.GetComponent<DustParticles>().checkSetDustSize(this);

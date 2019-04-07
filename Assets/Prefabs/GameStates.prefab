@@ -6553,7 +6553,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978871943957410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.51, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4710179517284404}
@@ -11603,7 +11603,7 @@ MonoBehaviour:
   lowPitchRange: 0.95
   highPitchRange: 1.05
   musicList:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 10a9e6b9091e6994fa75302a533c8c18, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 59245f75c44cf4166b74cfd9a9a8489f, type: 3}
   - {fileID: 8300000, guid: 14417b5af2544b143ae95372b0c48834, type: 3}
@@ -12468,7 +12468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSaving: 1
-  destroy: 1
+  destroy: 0
   bigLevelNames: []
   levels: []
   showContent: 

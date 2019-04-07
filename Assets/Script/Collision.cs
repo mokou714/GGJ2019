@@ -138,6 +138,7 @@ public class Collision : MonoBehaviour
                             {
                                 sc.playerModel.wonAward = sc.wonAward;
                                 GameStates.instance.saveData(sc.wonAward, 1);
+                                print("saved: " + sc.wonAward);
                         }
 
                         }

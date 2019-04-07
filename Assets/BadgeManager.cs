@@ -18,9 +18,9 @@ public class BadgeManager : MonoBehaviour
     public int prob = 4;
 
     Dictionary<string, int> nameIndexMap = 
-        new Dictionary<string, int>(){{"aquarius", 0}, {"libra", 1}, 
+        new Dictionary<string, int>(){{"aquarius", 0}, 
         {"pisces", 2}, {"sagittarius", 3}, 
-        {"cancer", 4}, {"aries", 5}};
+        {"cancer", 4}};
 
 	void Start () {
         if (instance == null)

@@ -1,16 +1,16 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Camera/camController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/GameStates.cs">
     <Files>
-      <File FileName="Assets/GainedAnimation.cs" Line="73" Column="1" />
-      <File FileName="Assets/Script/Constants.cs" Line="29" Column="62" />
-      <File FileName="Assets/Script/GameStates.cs" Line="102" Column="71" />
       <File FileName="Assets/Script/Planet/levelPlanet.cs" Line="73" Column="42" />
       <File FileName="Assets/TitleScript.cs" Line="19" Column="1" />
-      <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="78" Column="46" />
+      <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="143" Column="40" />
       <File FileName="Assets/invertPlant.cs" Line="84" Column="42" />
-      <File FileName="Assets/Script/Camera/camController.cs" Line="68" Column="10" />
+      <File FileName="Assets/Script/Camera/camController.cs" Line="43" Column="19" />
+      <File FileName="Assets/BadgeManager.cs" Line="45" Column="5" />
+      <File FileName="Assets/Script/Collision.cs" Line="140" Column="56" />
+      <File FileName="Assets/Script/GameStates.cs" Line="228" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

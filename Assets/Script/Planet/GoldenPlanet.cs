@@ -17,7 +17,6 @@ public class GoldenPlanet : Planet {
 	// Use this for initialization
 	void Start () {
         setup();
-
         frame = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         award = transform.Find("Planet2").GetChild(0).gameObject;
         good = award.gameObject.GetComponent<SpriteRenderer>();
@@ -37,20 +36,30 @@ public class GoldenPlanet : Planet {
         planet2 = transform.Find("Planet2");
         size = planet2.transform.localScale;
         //Debug.Log("Catch radius:" + catchRadius);
+
+        if(!checkHasTaken("firstBadge")){
+            Transform intro = transform.Find("intro");
+            if(intro)
+                intro.gameObject.SetActive(true);
+            GameStates.instance.saveData("firstBadge", 1);
+
+        }
+            
+
         int index = 0;
         if(random){
             int num_sprite = Random.Range(0, 1000);
-            if (num_sprite < 150)
+            if (num_sprite < 100)
             {
                 index = 3;
             }
-            else if (num_sprite < 400)
+            else if (num_sprite < 300)
             {
                 index = 4;
             }
-            else if (num_sprite < 700)
+            else if (num_sprite < 600)
             {
-                index = 5;
+                index = 2;
             }
         }else{
             index = sprite_index;
@@ -58,6 +67,14 @@ public class GoldenPlanet : Planet {
 
         Transform sprites = transform.parent.GetChild(0);
         tag = sprites.GetChild(index).tag;
+
+        if (checkHasTaken(tag)){
+            print("badge has been taken");
+            gameObject.SetActive(false);
+            return;
+        }
+            
+
         transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites.GetChild(index).gameObject.GetComponent<SpriteRenderer>().sprite;
 
         GetComponent<Light>().range = 0;
@@ -123,6 +140,7 @@ public class GoldenPlanet : Planet {
 	}
 
     private bool checkHasTaken(string key){
+        print("Check key: " + key + ", " + GameStates.instance.hasKey(key));
         return GameStates.instance.hasKey(key);
     }
 

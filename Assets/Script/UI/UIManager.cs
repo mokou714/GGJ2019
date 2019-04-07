@@ -66,6 +66,8 @@ public class UIManager : MonoBehaviour {
     // Use this for initialization
     public void Start () {
 
+        Time.timeScale = 1;
+
         // add UI listeners
         menuButton.onClick.AddListener(OnMenuButtonClicked);
 
@@ -142,7 +144,7 @@ public class UIManager : MonoBehaviour {
 
     IEnumerator RequireSleep(float startTime)
     {
-        yield return new WaitForSeconds(startTime);
+        yield return new WaitForSecondsRealtime(startTime);
         spacecraft.instance.requiredSleep = false;
     }
 
@@ -189,16 +191,19 @@ public class UIManager : MonoBehaviour {
 
     private void OnMenuButtonClicked()
     {
+
+        print("clicked menu");
+
         pageName = "menu";
         gameTitle.SetActive(false);
 
         isStartPage = SceneManager.GetActiveScene().name == "start page";
         
         startMenuButtonsGroup.SetActive(isStartPage);
-        menuButtonsGroup.SetActive(!isStartPage);
         for (int i = 0; i < startMenuButtonsGroup.transform.childCount; i++)
             startMenuButtonsGroup.transform.GetChild(i).gameObject.SetActive(isStartPage);
 
+        menuButtonsGroup.SetActive(!isStartPage);
         for (int i = 0; i < menuButtonsGroup.transform.childCount; i++)
             menuButtonsGroup.transform.GetChild(i).gameObject.SetActive(!isStartPage);
 

@@ -20,6 +20,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] musicSources;
     int curMusicSourceID = 0;
 
+    public float musicFadeOutTime = 1f;
+    public float musicFadeInTime = 1f;
+
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
@@ -90,6 +93,8 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 6);
             else if (n == "Unlocking")
                 sfxSourceMap.Add(n, 7);
+            else if (n == "Star")
+                sfxSourceMap.Add(n, 8);
         }
 
         musicSourceMap = new Dictionary<string, int>();
@@ -140,14 +145,25 @@ public class AudioManager : MonoBehaviour
         {
             PlayMusic("bgm0");
         }
-        if (n == "-2")
+        else if (n != "pre_tutorial" && n != "start page")
         {
             PlayMusic("bgm1");
         }
+        else if(n == "start page")
+        {
+            StartCoroutine(PlaySFXatTime(2f, "Star"));
+        }
     }
 
+    IEnumerator PlaySFXatTime(float time, params string[] names)
+    {
+        yield return new WaitForSeconds(time);
+        PlaySFX(names);
+    }
+   
+
     //Used to play a bgm music clip by its name
-    public void PlayMusic(string n, bool isLoop = true, float fadeOutTime = 0, float fadeInTime = 0)
+    public void PlayMusic(string n, bool isLoop = true)
     {
         print("PlayMusic");
 
@@ -173,11 +189,18 @@ public class AudioManager : MonoBehaviour
             src.clip = musicList[ci];
 
             // To-do cross fade two sources
-                       
-            src.Play();
-            
+
+            //float v = PlayerPrefs.HasKey("")
+
+            StartCoroutine(FadeIn(src, musicFadeInTime, 1));
+
+
+
             if (musicSources[curMusicSourceID].isPlaying && curMusicSourceID != si)
-                musicSources[curMusicSourceID].Stop();
+            {
+                StartCoroutine(FadeOut(musicSources[curMusicSourceID], musicFadeOutTime));
+            }
+                
 
             curMusicSourceID = si;
         }
@@ -255,7 +278,9 @@ public class AudioManager : MonoBehaviour
             }
             
             src.Play();
-            
+
+            print("played " + src.clip.name);
+
         }
         else
         {

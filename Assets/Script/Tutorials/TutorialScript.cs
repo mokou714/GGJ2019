@@ -59,6 +59,7 @@ public class TutorialScript : MonoBehaviour {
                 //printList();
                 part_1 = new Part_1(player_sc, firstPlanet, secondPlanet, textfield, this);
                 if(checkedMark < 1){
+                    playerIntro.GetComponent<Text>().text = "This is You :)";
                     StartCoroutine(waitToShowStuff(playerIntro, 1f));
                 }
                 break;
@@ -234,7 +235,7 @@ class hint{
     public float x;
     public float y;
 
-    public hint(string content, bool showed = false, float x = -200, float y = 5){
+    public hint(string content, bool showed = false, float x = -200, float y = 50){
         this.content = content;
         this.showed = showed;
         this.x = x;

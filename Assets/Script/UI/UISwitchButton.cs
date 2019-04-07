@@ -62,12 +62,11 @@ public class UISwitchButton : MonoBehaviour {
 
     private void OnClicked()
     {
-
         // detect input intervals to prevent multiple fast inputs
-        if (Time.time - lastTime < minPressTimeInterval)
+        if (Time.unscaledTime - lastTime < minPressTimeInterval)
             return;
         else
-            lastTime = Time.time;
+            lastTime = Time.unscaledTime;
 
 
         switch (gameObject.name)
@@ -80,7 +79,7 @@ public class UISwitchButton : MonoBehaviour {
                 GameStates.isPointer = !GameStates.isPointer;
 
                 // save settings
-                PlayerPrefs.SetInt("isPointer", GameStates.isPointer ? 0 : 1);
+                PlayerPrefs.SetInt("isPointer", GameStates.isPointer ? 1 : 0);
                 PlayerPrefs.Save();
 
                 break;
@@ -100,8 +99,8 @@ public class UISwitchButton : MonoBehaviour {
             while (whiteImageRT.anchoredPosition.x > xl)
             {
                 // volume needs to go up by this much very frame in order to fade in during "duration" sec
-                whiteImageRT.anchoredPosition += Time.deltaTime / duration * (xr - xl) * Vector2.left;
-                blackImageRT.anchoredPosition += Time.deltaTime / duration * (xr - xl) * Vector2.right;
+                whiteImageRT.anchoredPosition += Time.unscaledDeltaTime / duration * (xr - xl) * Vector2.left;
+                blackImageRT.anchoredPosition += Time.unscaledDeltaTime / duration * (xr - xl) * Vector2.right;
                 yield return null;
             }
             whiteImageRT.anchoredPosition = new Vector2(xl, y);
@@ -116,8 +115,8 @@ public class UISwitchButton : MonoBehaviour {
             while (whiteImageRT.anchoredPosition.x < xr)
             {
                 // volume needs to go up by this much very frame in order to fade in during "duration" sec
-                whiteImageRT.anchoredPosition += Time.deltaTime / duration * (xr - xl) * Vector2.right;
-                blackImageRT.anchoredPosition += Time.deltaTime / duration * (xr - xl) * Vector2.left;
+                whiteImageRT.anchoredPosition += Time.unscaledDeltaTime / duration * (xr - xl) * Vector2.right;
+                blackImageRT.anchoredPosition += Time.unscaledDeltaTime / duration * (xr - xl) * Vector2.left;
                 yield return null;
             }
 

@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioMixerSnapshot paused;
+    public AudioMixerSnapshot unpaused;
+    public float pauseTransitionTime = 0.01f;
+
     // sometimes we will have more than one sfx clip playing at the same time
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
     public AudioSource[] sfxSources;
-    public GameObject sfxSourcesObj;
 
     public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
@@ -16,8 +21,8 @@ public class AudioManager : MonoBehaviour
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
     float randomPitch;
 
-
-    AudioSource[] sfxAndBackupSources;
+    // this includes backup sources, this is used by ChangeSFXVolume()
+    AudioSource[] allSFXSources;
 
     public static int sfxNormalLandID = 1;
 
@@ -48,7 +53,7 @@ public class AudioManager : MonoBehaviour
         //Set AudioManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
-        sfxAndBackupSources = sfxSourcesObj.GetComponentsInChildren<AudioSource>();
+        allSFXSources = sfxSources[0].transform.parent.GetComponentsInChildren<AudioSource>();
         //print("sfxSourcesAndBackupSources: " + sfxAndBackupSources.Length);
 
         if (PlayerPrefs.HasKey("musicVolume"))
@@ -69,17 +74,24 @@ public class AudioManager : MonoBehaviour
         sfxSourceMap = new Dictionary<string, int>();
         foreach (AudioClip clip in sfxList)
         {
-            string name = clip.name;
+            string n = clip.name;
 
-            if (name == "Next Level")
-                sfxSourceMap.Add(name, 0);
-            else if (name.Contains("Harp Land"))
-                sfxSourceMap.Add(name, 1);
-            else if (name.Contains("Harp Charge"))
-                sfxSourceMap.Add(name, 2);
-            else if (name == "being hit")
-                sfxSourceMap.Add(name, 3);
-
+            if (n.Contains("NextLevel"))
+                sfxSourceMap.Add(n, 0);
+            else if (n.Contains("Harp Land"))
+                sfxSourceMap.Add(n, 1);
+            else if (n.Contains("Harp Charge"))
+                sfxSourceMap.Add(n, 2);
+            else if (n == "being hit")
+                sfxSourceMap.Add(n, 3);
+            else if (n == "Die")
+                sfxSourceMap.Add(n, 4);
+            else if (n.Contains ("BadgeEmerge"))
+                sfxSourceMap.Add(n, 5);
+            else if (n == "BadgeLand")
+                sfxSourceMap.Add(n, 6);
+            else if (n == "Unlocking")
+                sfxSourceMap.Add(n, 7);
         }
 
         //foreach (string key in sfxSourceMap.Keys)
@@ -90,14 +102,7 @@ public class AudioManager : MonoBehaviour
 
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
+    
     //Used to play a bgm music clip by its name
     public void PlayMusic(string name, bool isLoop = true)
     {       
@@ -112,17 +117,18 @@ public class AudioManager : MonoBehaviour
         // play the clip.
         musicSource.Play();
     }
-
-
-    //Used to play a sound clip
-    public void PlaySFX(string name)
+    
+    //Used to play a sound clip by its name, if has more inputs, randomly choose one
+    public void PlaySFX(params string[] ns)
     {
         int si = 0;
         int ci = 0;
         AudioSource src;
 
+        string n = ns[Random.Range(0, ns.Length)];
+
         // find the primary audioSource registered for playing this clip
-        if (sfxSourceMap.TryGetValue(name, out si))
+        if (sfxSourceMap.TryGetValue(n, out si))
         {
             // Some sfx like "being hit" will be called frequently, 
             // Need two or more audio sources to avoid noise in between two "being hit" plays
@@ -155,7 +161,7 @@ public class AudioManager : MonoBehaviour
             // find the clip id from the sfxList by name
             for (int i = 0; i < sfxList.Length; i++)
             {
-                if (sfxList[i].name == name)
+                if (sfxList[i].name == n)
                 {
                     ci = i;
                     break;
@@ -169,7 +175,7 @@ public class AudioManager : MonoBehaviour
             // varies its pitch if pitchVariation is applied to this clip in the inspector
             foreach (string s in pitchVariationSFX)
             {
-                if (s == name)
+                if (s == n)
                 {
                     RandomizePitch();
 
@@ -187,11 +193,30 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            print("please specify which sfx source to play this sfx clip in AudioManager.sfxSourceMap");
+            print("please specify a sfx source to play this sfx clip in AudioManager.Start()");
         }
 
     }
 
+    // find if a clip is being played
+    public bool IsPlaying(string n)
+    {
+        int si; // audiosource id
+        if (sfxSourceMap.TryGetValue(n, out si))        
+            foreach (AudioSource a in sfxSources[si].gameObject.GetComponentsInChildren<AudioSource>())            
+                if (a.isPlaying && a.clip.name == n)
+                    return true;
+        return false;
+    }
+
+    public void PauseTransition()
+    {
+        if(Time.timeScale == 0)
+            paused.TransitionTo(pauseTransitionTime);
+        else
+            unpaused.TransitionTo(pauseTransitionTime);
+    }
+    
     public void ChangeMasterVolume(float v)
     {
         ChangeBGMVolume(v);
@@ -204,7 +229,7 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeSFXVolume(float v)
     {
-        foreach (AudioSource a in sfxAndBackupSources)
+        foreach (AudioSource a in allSFXSources)
             a.volume = v;
            
     }
@@ -325,7 +350,7 @@ public class AudioManager : MonoBehaviour
     {
         while (src.volume > 0.01f)
         {
-            src.volume -= Time.deltaTime / duration; // volume needs to go down by this much very frame in order to fade out during "duration" sec
+            src.volume -= Time.unscaledDeltaTime / duration; // volume needs to go down by this much very frame in order to fade out during "duration" sec
             yield return null;
         }
         src.volume = 0;
@@ -339,7 +364,7 @@ public class AudioManager : MonoBehaviour
         src.Play();
         while (src.volume < maxVolume)
         {
-            src.volume += Time.deltaTime / duration; // volume needs to go up by this much very frame in order to fade in during "duration" sec
+            src.volume += Time.unscaledDeltaTime / duration; // volume needs to go up by this much very frame in order to fade in during "duration" sec
             yield return null;
         }
         src.volume = maxVolume;
@@ -352,7 +377,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        StartCoroutine(FadeOut(musicSource, 0.5f));
+        StartCoroutine(FadeOut(musicSource, 1f));
     }
 
 }

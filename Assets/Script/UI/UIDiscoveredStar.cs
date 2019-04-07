@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class UIDiscoveredStar : MonoBehaviour {
 
     public GameObject unknown;
     public GameObject content;
+
+    public UIFrame frame;
+
+    public float contentFadeInTime = 2f;
 
     private void OnEnable()
     {
@@ -13,23 +17,23 @@ public class UIDiscoveredStar : MonoBehaviour {
             unknown = transform.GetChild(0).gameObject;
         if (content == null)
             content = transform.GetChild(1).gameObject;
-        //print("Award: " + name + ", " + PlayerPrefs.HasKey(name));
+
         // using name of the star as the key
         if (PlayerPrefs.HasKey(name))
         {
-            
             int value = PlayerPrefs.GetInt(name);
 
             // special unlocking animation and sound played for first time
             if(value == 0)
             {
                 // To do: sfx and animation
-                PlayerPrefs.SetInt(name, 1);
-
+                StartCoroutine(ShowStar());
+                AudioManager.instance.PlaySFX("Unlocking");
             }
             else if(value == 1)
             {
-                // just display the content
+                // display the content and frame
+                frame.gameObject.SetActive(true);
                 unknown.SetActive(false);
                 content.SetActive(true);
             }
@@ -37,10 +41,41 @@ public class UIDiscoveredStar : MonoBehaviour {
         }
         else
         {
+            // display only the edges of the frame
+            frame.gameObject.SetActive(true);
+            frame.DisplayOnlyEdges();
+
             // display the unknown image
             unknown.SetActive(true);
             content.SetActive(false);
         }
+
+        PlayerPrefs.Save();
     }
 
+    IEnumerator ShowStar()
+    {
+        frame.HideLines();
+
+        unknown.SetActive(false);
+        
+        StartCoroutine(frame.Show());
+
+        yield return new WaitForSecondsRealtime(frame.dotFadeDuration);
+
+        // fade in content after dot appears
+        content.SetActive(true);
+
+        StartCoroutine(UIManager.instance.FadeInWhiteImages
+            (contentFadeInTime, content.GetComponentsInChildren<Image>()));
+
+        StartCoroutine(UIManager.instance.FadeInTexts
+            (contentFadeInTime, content.GetComponentsInChildren<Text>()));
+
+
+        PlayerPrefs.SetInt(name, 1);
+
+    }
+
+    
 }

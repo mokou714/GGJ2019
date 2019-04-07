@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+
 
 
 public class AudioManager : MonoBehaviour
@@ -15,7 +17,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource[] sfxSources;
 
-    public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
+    public AudioSource[] musicSources;
+    int curMusicSourceID = 0;
+
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
@@ -35,8 +39,11 @@ public class AudioManager : MonoBehaviour
     // specifies which sfx clip (name) will be played primarily on which sfx source (id in sfxSources list)
     public Dictionary<string, int> sfxSourceMap;
 
-    public string[] pitchVariationSFX;
+    // specifies which sfx clip (name) will be played primarily on which bgm source (id in bgmSources list)
+    public Dictionary<string, int> musicSourceMap;
 
+
+    public string[] pitchVariationSFX;
 
     // Sington pattern
     void Awake()
@@ -61,15 +68,6 @@ public class AudioManager : MonoBehaviour
         if (PlayerPrefs.HasKey("soundVolume"))
             ChangeSFXVolume(PlayerPrefs.GetFloat("soundVolume"));
 
-        // play the bgm
-        // PlayMusic("soundtrack 2in1");
-        PlayMusic("soundtrack 2in1");
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
         // register sfx clips to sfx sources
         sfxSourceMap = new Dictionary<string, int>();
         foreach (AudioClip clip in sfxList)
@@ -86,7 +84,7 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 3);
             else if (n == "Die")
                 sfxSourceMap.Add(n, 4);
-            else if (n.Contains ("BadgeEmerge"))
+            else if (n.Contains("BadgeEmerge"))
                 sfxSourceMap.Add(n, 5);
             else if (n == "BadgeLand")
                 sfxSourceMap.Add(n, 6);
@@ -94,28 +92,96 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 7);
         }
 
+        musicSourceMap = new Dictionary<string, int>();
+        foreach (AudioClip clip in musicList)
+        {
+            string n = clip.name;
+
+            if (n == "bgm0")
+                musicSourceMap.Add(n, 0);
+            else if (n == "bgm1")
+                musicSourceMap.Add(n, 1);
+            else if (n == "bgm2")
+                musicSourceMap.Add(n, 2);
+        }
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "pre_tutorial")
+        {
+            PlayMusic("bgm0");
+        }
+        if (sceneName == "-2")
+        {
+            PlayMusic("bgm1");
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+        
+
         //foreach (string key in sfxSourceMap.Keys)
         //{
         //    float val = sfxSourceMap[key];
         //    print(key + " = " + val);
         //}
 
-        
     }
-    
-    //Used to play a bgm music clip by its name
-    public void PlayMusic(string name, bool isLoop = true)
-    {       
-        // find the clip from the musicList by name
-        foreach (AudioClip clip in musicList)
-            if (clip.name == name)
-                musicSource.clip = clip;
-        
-        // set loop option
-        musicSource.loop = isLoop;
 
-        // play the clip.
-        musicSource.Play();
+    // play music and transition
+    private void OnLevelWasLoaded(int level)
+    {
+        print("loaded");
+
+        string n = SceneManager.GetActiveScene().name;
+        if(n == "pre_tutorial")
+        {
+            PlayMusic("bgm0");
+        }
+        if (n == "-2")
+        {
+            PlayMusic("bgm1");
+        }
+    }
+
+    //Used to play a bgm music clip by its name
+    public void PlayMusic(string n, bool isLoop = true, float fadeOutTime = 0, float fadeInTime = 0)
+    {
+        print("PlayMusic");
+
+        int si = 0;
+        int ci = 0;
+        AudioSource src;
+
+        if (musicSourceMap.TryGetValue(n, out si))
+        {
+            src = musicSources[si];
+
+            // find the clip id from the sfxList by name
+            for (int i = 0; i < musicList.Length; i++)
+            {
+                if (musicList[i].name == n)
+                {
+                    ci = i;
+                    break;
+                }
+            }
+
+            //Load the clip to the right music source
+            src.clip = musicList[ci];
+
+            // To-do cross fade two sources
+                       
+            src.Play();
+            
+            if (musicSources[curMusicSourceID].isPlaying && curMusicSourceID != si)
+                musicSources[curMusicSourceID].Stop();
+
+            curMusicSourceID = si;
+        }
+        
     }
     
     //Used to play a sound clip by its name, if has more inputs, randomly choose one
@@ -225,14 +291,18 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeBGMVolume(float v)
     {
-        musicSource.volume = v;
+        foreach (AudioSource a in musicSources)
+            a.volume = v;
     }
+
     public void ChangeSFXVolume(float v)
     {
         foreach (AudioSource a in allSFXSources)
             a.volume = v;
            
     }
+
+
     //Used to play a sound clip with the options to fade out and fade in
     //public void PlaySFX(string name, float fadeOutDuration = 0.3f, float fadeInDuration = 0.2f)
     //{
@@ -375,9 +445,6 @@ public class AudioManager : MonoBehaviour
         randomPitch = Random.Range(lowPitchRange, highPitchRange);
     }
 
-    private void OnApplicationQuit()
-    {
-        StartCoroutine(FadeOut(musicSource, 1f));
-    }
+
 
 }

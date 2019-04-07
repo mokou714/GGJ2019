@@ -152,8 +152,8 @@ public class spacecraft : MonoBehaviour
         /*
         Todo: this function initialize parameters of player when starting/restarting the current level
         */
-        if (requiredSleep)
-            return;
+        //if (requiredSleep)
+            //return;
         if (reinit)
         {
             parentRigidBody.velocity = Vector3.zero;//If it's not the first time init, stop the rigidbody speed for restarting
@@ -266,7 +266,7 @@ public class spacecraft : MonoBehaviour
 
     void Update()
     {
-        print("time scale:" + Time.timeScale);
+        //print("time scale:" + Time.timeScale);
         if (requiredSleep){
 //            Time.timeScale = 1f;
             arrow.gameObject.SetActive(false);
@@ -498,7 +498,7 @@ public class spacecraft : MonoBehaviour
         Todo: this coroutine is used to hide player for a tiny moment after death
         */
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         InitPlayer();
     }
 

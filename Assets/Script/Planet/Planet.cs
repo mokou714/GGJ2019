@@ -54,7 +54,8 @@ public class Planet : MonoBehaviour
         //planetBottom.localScale = transform.Find("Planet2").localScale * 0.5f;
         if (planetBottom != null)
         {
-            planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
+            if(planetSprite != null)
+                planetBottom.localScale = planetSprite.localScale * (float)(0.3f);
         }
 
         if (lightController != null)

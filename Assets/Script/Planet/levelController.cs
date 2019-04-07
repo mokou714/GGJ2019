@@ -12,7 +12,7 @@ public class levelController : MonoBehaviour {
         Debug.Log("Progress:" + progress);
         if (progress > 0){
 
-            textTutorial.SetActive(false);
+            //textTutorial.SetActive(false);
 
             int bigLevel = (progress - 1) / 10 + 1;
             for (int i = 1; i < bigLevel + 1; i++){

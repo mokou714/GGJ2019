@@ -21,6 +21,7 @@ public class Constants{
 
     public static string appId = "";
 
+    public static float minTimeScale = 0.001f;
 
     public static string curLevelKey = "unlockedLevelID";
     public static string lastTimeLevelKey = "lastTimeLevelKey";

@@ -50,8 +50,10 @@ public class TutorialScript : MonoBehaviour {
         Debug.Log("Checkmark: " + checkedMark);
         inst = new Dictionary<string, hint>();
 
+        if (textfield == null)
+            textfield = GameObject.FindGameObjectWithTag("tutorialText").GetComponent<Text>();
 
-        switch(tutorialNum){
+        switch (tutorialNum){
             case 0:
                 //Start page
                 //printList();
@@ -80,7 +82,10 @@ public class TutorialScript : MonoBehaviour {
 	void Update () {
         //Debug.Log(checkedMark);
 
-        if(tutorialNum == 0){
+        if (textfield == null)
+            textfield = GameObject.FindGameObjectWithTag("tutorialText").GetComponent<Text>();
+
+        if (tutorialNum == 0){
             part_1.runtimeRoutine();
         }else if(player_sc.won && (tutorialNum == 1 || tutorialNum == 2 || tutorialNum == 3)){
             showText(null);
@@ -110,7 +115,7 @@ public class TutorialScript : MonoBehaviour {
                 part_1.onPlanetRoutine();
             }else if(tutorialNum == 1){
                 if(checkedMark < 1){
-                    hint start_campagin = new hint("Get here to start the campaign!", false, 250, -100);
+                    hint start_campagin = new hint("Get here to start!", false, 260, -100);
                     showText(start_campagin);
                     player_sc.end.transform.Find("arrow").gameObject.SetActive(true);
                     checkedMark++;

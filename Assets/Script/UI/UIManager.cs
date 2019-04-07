@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour {
     public string[] discoveredStarNames =
         { "Sagittarius", "Pisces", "Cancer", "Taurus", "Aquarius", "Libra" };
 
+
     // singleton instance
     public static UIManager instance = null;
 
@@ -103,7 +104,8 @@ public class UIManager : MonoBehaviour {
 
     public void Pause()
     {
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        spacecraft.instance.requiredSleep = true;
+        Time.timeScale = Time.timeScale == Constants.minTimeScale ? 1 : Constants.minTimeScale;
         AudioManager.instance.PauseTransition();
     }
 
@@ -138,8 +140,15 @@ public class UIManager : MonoBehaviour {
 
     }
 
+    IEnumerator RequireSleep(float startTime)
+    {
+        yield return new WaitForSeconds(startTime);
+        spacecraft.instance.requiredSleep = false;
+    }
+
     private void OnCloseButtonClicked()
     {
+        StartCoroutine(RequireSleep(0.5f));
         menu.SetActive(false);
         pageName = "game";
         menuButton.gameObject.SetActive(true);
@@ -209,6 +218,7 @@ public class UIManager : MonoBehaviour {
     private void OnHomeButtonClicked()
     {
         menu.SetActive(false);
+        Pause();
         SceneManager.LoadScene("start page");
     }
 
@@ -232,7 +242,7 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
 
     void Update () {
-
+     
         if (Input.GetKeyDown(KeyCode.Alpha1))
             PlayerPrefs.SetInt("Sagittarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -301,11 +311,13 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    isStartPage = SceneManager.GetActiveScene().name == "start page";
-    //    gameTitle.SetActive(isStartPage);
-    //}
+    private void OnLevelWasLoaded(int level)
+    {
+        isStartPage = SceneManager.GetActiveScene().name == "start page";
+        gameTitle.SetActive(isStartPage);
+
+        menuButton.gameObject.SetActive(true);
+    }
 
     public void menuButtonInvert()
     {

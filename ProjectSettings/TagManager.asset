@@ -28,6 +28,8 @@ TagManager:
   - hitkey
   - sagittarius
   - aquarius
+  - tutorialText
+  - levelTitle
   layers:
   - Default
   - TransparentFX

@@ -62,8 +62,8 @@ public class AudioManager : MonoBehaviour
             ChangeSFXVolume(PlayerPrefs.GetFloat("soundVolume"));
 
         // play the bgm
+        // PlayMusic("soundtrack 2in1");
         PlayMusic("soundtrack 2in1");
-
     }
 
     // Use this for initialization

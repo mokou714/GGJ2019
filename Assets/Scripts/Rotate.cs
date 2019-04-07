@@ -10,8 +10,8 @@ public class Rotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 newRot = transform.rotation.eulerAngles;
-		newRot.z += degreesASecond * Time.deltaTime;
-		transform.rotation = Quaternion.Euler(newRot);
-	}
+        Vector3 newRot = transform.rotation.eulerAngles;
+        newRot.z += degreesASecond * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(newRot);
+    }
 }

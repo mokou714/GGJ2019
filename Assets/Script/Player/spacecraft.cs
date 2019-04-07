@@ -137,7 +137,12 @@ public class spacecraft : MonoBehaviour
             instance = this;
         playerModel = new PlayerModel();
 
-        showArrow = ((int)GameStates.instance.getData("isPointer", typeof(int)) < 1);
+        if (!PlayerPrefs.HasKey("isPointer"))
+            showArrow = true;
+        else
+            showArrow = (PlayerPrefs.GetInt("isPointer") == 1);
+
+        //showArrow = ((int)GameStates.instance.getData("isPointer", typeof(int)) < 1);
         InitPlayer(false);//Init player with reinit parameter being false
 
     }
@@ -261,9 +266,9 @@ public class spacecraft : MonoBehaviour
 
     void Update()
     {
-        
+        print("time scale:" + Time.timeScale);
         if (requiredSleep){
-            Time.timeScale = 1f;
+//            Time.timeScale = 1f;
             arrow.gameObject.SetActive(false);
             return;
         }

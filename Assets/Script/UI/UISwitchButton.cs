@@ -80,6 +80,7 @@ public class UISwitchButton : MonoBehaviour {
 
                 // save settings
                 PlayerPrefs.SetInt("isPointer", GameStates.isPointer ? 1 : 0);
+                spacecraft.instance.showArrow = GameStates.isPointer;
                 PlayerPrefs.Save();
 
                 break;

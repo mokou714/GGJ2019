@@ -13,6 +13,8 @@ public class GameStates : MonoBehaviour
 
     public bool isSaving = true;
 
+    
+
     // settings
     public static bool isPointer = true;
     public bool destroy = false;
@@ -77,6 +79,23 @@ public class GameStates : MonoBehaviour
 	}
 
 
+    private void OnLevelWasLoaded(int level)
+    {
+        string n = SceneManager.GetActiveScene().name;
+        if (n == "1" || n == "11")
+        {
+            GameObject title = GameObject.FindGameObjectWithTag("levelTitle");
+
+            if (title != null)
+            {
+                title.GetComponent<TitleScript>().showTitle();
+            }
+            
+        }
+        
+
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -120,6 +139,7 @@ public class GameStates : MonoBehaviour
         //}else if(SceneManager.GetActiveScene().buildIndex > 14){
         //    showContent = getData(Constants.bestWhirlpoolScoreKey, typeof(float)).ToString();
         //}
+
     }
 
     // save level after quit

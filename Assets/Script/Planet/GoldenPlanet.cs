@@ -44,8 +44,7 @@ public class GoldenPlanet : Planet {
             GameStates.instance.saveData("firstBadge", 1);
 
         }
-            
-
+         
         int index = 0;
         if(random){
             int num_sprite = Random.Range(0, 1000);
@@ -80,6 +79,9 @@ public class GoldenPlanet : Planet {
         GetComponent<Light>().range = 0;
 
         planet2.transform.localScale = new Vector3(0, 0, 0);
+
+        
+
         StartCoroutine(popOut());
     }
 
@@ -90,7 +92,7 @@ public class GoldenPlanet : Planet {
        
         while (true){
             if (thePlayerOnPlanet != null && currentAlpha >= 0.5f){
-                Debug.Log("Stopped");
+                //Debug.Log("Stopped");
             }else{
                 currentAlpha = frame.color.a;
                 float newAlpha = currentAlpha + 0.05f * dir;
@@ -126,11 +128,14 @@ public class GoldenPlanet : Planet {
     }
 
 
+    public override void playLandingSound()
+    {
+        AudioManager.instance.PlaySFX("BadgeLand");
+    }
 
-	public override void catchedAction(spacecraft sc)
+    public override void catchedAction(spacecraft sc)
 	{
         base.catchedAction(sc);
-        AudioManager.instance.PlaySFX("badge");
         if(awardAvailable){
             //Debug.Log("Award");
             StartCoroutine(award.GetComponent<GainedAnimation>().moveStart(sc.transform.parent.transform, 1));
@@ -145,13 +150,18 @@ public class GoldenPlanet : Planet {
     }
 
     IEnumerator popOut(){
-        planet2.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
-        yield return new WaitForSeconds(0.01f);
-        if (planet2.transform.localScale.x < size.x)
+        
+        //planet2.transform.localScale = Vector3.zero;
+
+        while(planet2.transform.localScale.x < size.x)
         {
-            StartCoroutine(popOut());
-        }else{
-            catchRadius = size.x * 3;
+            planet2.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);            
+            yield return new WaitForSeconds(0.01f);
+
         }
+
+        //play sfx
+        AudioManager.instance.PlaySFX("BadgeEmerge", "BadgeEmerge1");
+        catchRadius = size.x * 3;
     }
 }

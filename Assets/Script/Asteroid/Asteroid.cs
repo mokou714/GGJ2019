@@ -28,8 +28,8 @@ public class Asteroid : MonoBehaviour {
         GameObject endObj = GameObject.FindWithTag("end");
         if (endObj != null)
             endCollider = endObj.transform.GetChild(2).GetComponent<CapsuleCollider2D>();
-        if (endCollider != null)
-            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), endCollider);
+        //if (endCollider != null)
+            //Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), endCollider);
 	}
 
 	void Update()
@@ -41,18 +41,19 @@ public class Asteroid : MonoBehaviour {
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
 
             if(Vector3.Distance(transform.position,origPosition) < 0.1f){
-                transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                //transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
-                transform.GetComponent<Collider2D>().enabled = true;
+                //transform.GetComponent<Collider2D>().enabled = true;
                 movingBack = false;
             }
-        }else{
-            //If the asteroids are out of the bound, then freeze it and cancel the collider
-            if(Mathf.Abs(transform.position.x) > maxX + offset|| Mathf.Abs(transform.position.y) > maxY + offset){
-                transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                transform.GetComponent<Collider2D>().enabled = false;
-            }
         }
+        //else{
+        //    //If the asteroids are out of the bound, then freeze it and cancel the collider
+        //    if(Mathf.Abs(transform.position.x) > maxX + offset|| Mathf.Abs(transform.position.y) > maxY + offset){
+        //        //transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        //        //transform.GetComponent<Collider2D>().enabled = false;
+        //    }
+        //}
 
 	}
 
@@ -123,6 +124,5 @@ public class Asteroid : MonoBehaviour {
         int rand_y = Random.Range(-1, 1);
         return new Vector2(rand_x, rand_y);
     }
-
 
 }

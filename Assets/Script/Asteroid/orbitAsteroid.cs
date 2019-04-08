@@ -36,7 +36,7 @@ public class orbitAsteroid : MonoBehaviour {
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
             //Disable the collider when moveing in case of hitting other asteroids
             if (transform.GetComponent<Collider2D>().enabled)
-                transform.GetComponent<Collider2D>().enabled = false;
+                //transform.GetComponent<Collider2D>().enabled = false;
             //print(Vector3.Distance(transform.position, origPosition));
             if (Vector3.Distance(transform.position, origPosition) < 0.1f)
             {
@@ -59,7 +59,7 @@ public class orbitAsteroid : MonoBehaviour {
             if (Mathf.Abs(transform.position.x) > maxX + offset || Mathf.Abs(transform.position.y) > maxY + offset)
             {
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                transform.GetComponent<Collider2D>().enabled = false;
+                //transform.GetComponent<Collider2D>().enabled = false;
             }
         }
 

@@ -95,6 +95,8 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 7);
             else if (n == "Star")
                 sfxSourceMap.Add(n, 8);
+            else if (n.Contains("Harp Charge"))
+                sfxSourceMap.Add(n, 8);
         }
         
         //foreach (string key in sfxSourceMap.Keys)
@@ -375,6 +377,40 @@ public class AudioManager : MonoBehaviour
            
     }
 
+    private void Update()
+    {
+        print(musicSources[curMusicSourceID].time);
+    }
+
+    IEnumerator FadeOut(AudioSource src, float duration)
+    {
+        while (src.volume > 0.01f)
+        {
+            src.volume -= Time.unscaledDeltaTime / duration; // volume needs to go down by this much very frame in order to fade out during "duration" sec
+            yield return null;
+        }
+        src.volume = 0;
+        src.Stop();
+        src.volume = 1;
+
+    }
+    IEnumerator FadeIn(AudioSource src, float duration, float maxVolume)
+    {
+        src.volume = 0;
+        src.Play();
+        while (src.volume < maxVolume)
+        {
+            src.volume += Time.unscaledDeltaTime / duration; // volume needs to go up by this much very frame in order to fade in during "duration" sec
+            yield return null;
+        }
+        src.volume = maxVolume;
+    }
+
+    void RandomizePitch()
+    {
+        randomPitch = Random.Range(lowPitchRange, highPitchRange);
+    }
+
 
     //Used to play a sound clip with the options to fade out and fade in
     //public void PlaySFX(string name, float fadeOutDuration = 0.3f, float fadeInDuration = 0.2f)
@@ -489,34 +525,6 @@ public class AudioManager : MonoBehaviour
 
     // Used by PlayMusic() and PlaySFX() to cross fade betweem audio clips
     // reference: https://www.youtube.com/watch?v=OrJXjnNcyE0
-    IEnumerator FadeOut(AudioSource src, float duration)
-    {
-        while (src.volume > 0.01f)
-        {
-            src.volume -= Time.unscaledDeltaTime / duration; // volume needs to go down by this much very frame in order to fade out during "duration" sec
-            yield return null;
-        }
-        src.volume = 0;
-        src.Stop();
-        src.volume = 1;
-
-    }
-    IEnumerator FadeIn(AudioSource src, float duration, float maxVolume)
-    {
-        src.volume = 0;
-        src.Play();
-        while (src.volume < maxVolume)
-        {
-            src.volume += Time.unscaledDeltaTime / duration; // volume needs to go up by this much very frame in order to fade in during "duration" sec
-            yield return null;
-        }
-        src.volume = maxVolume;
-    }
-
-    void RandomizePitch()
-    {
-        randomPitch = Random.Range(lowPitchRange, highPitchRange);
-    }
 
 
 

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Splash : MonoBehaviour {
 
     string title;
-    string text = "Star Gazers Studio";
+    string text = "StarGazers Studio";
     int i = 0;
     public Font font;
     GUIContent gUI;

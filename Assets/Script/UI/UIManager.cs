@@ -60,12 +60,16 @@ public class UIManager : MonoBehaviour {
 
         //Set Manager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        menuButton.gameObject.SetActive(sceneName != "splash page");
+
     }
 
 
     // Use this for initialization
     public void Start () {
-
+                
         Time.timeScale = 1;
 
         // add UI listeners
@@ -225,6 +229,7 @@ public class UIManager : MonoBehaviour {
         menu.SetActive(false);
         Pause();
         SceneManager.LoadScene("start page");
+        AudioManager.instance.SwitchToStartMusic();
     }
 
 
@@ -318,10 +323,11 @@ public class UIManager : MonoBehaviour {
 
     private void OnLevelWasLoaded(int level)
     {
-        isStartPage = SceneManager.GetActiveScene().name == "start page";
-        gameTitle.SetActive(isStartPage);
+        string sceneName = SceneManager.GetActiveScene().name;
 
-        menuButton.gameObject.SetActive(true);
+        isStartPage = sceneName == "start page";
+        gameTitle.SetActive(isStartPage);
+        menuButton.gameObject.SetActive(sceneName!="splash page");
     }
 
     public void menuButtonInvert()

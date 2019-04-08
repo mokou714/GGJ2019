@@ -96,13 +96,18 @@ public class AudioManager : MonoBehaviour
             else if (n == "Star")
                 sfxSourceMap.Add(n, 8);
         }
-
+        
+        //foreach (string key in sfxSourceMap.Keys)
+        //{
+        //    float val = sfxSourceMap[key];
+        //    print(key + " = " + val);
+        //}
         musicSourceMap = new Dictionary<string, int>();
         foreach (AudioClip clip in musicList)
         {
             string n = clip.name;
 
-            if (n == "bgm0")
+            if (n == "bgm0a" || n == "bgm0b")
                 musicSourceMap.Add(n, 0);
             else if (n == "bgm1")
                 musicSourceMap.Add(n, 1);
@@ -110,15 +115,26 @@ public class AudioManager : MonoBehaviour
                 musicSourceMap.Add(n, 2);
         }
 
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "pre_tutorial")
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
+        if (buildIndex < 3)
         {
-            PlayMusic("bgm0");
+            int unlockedLevel = -2;
+            if (PlayerPrefs.HasKey(Constants.curLevelKey))
+                unlockedLevel = PlayerPrefs.GetInt(Constants.curLevelKey);                
+             
+            if (unlockedLevel <= 10)
+                PlayMusic("bgm0a");
+            else if (unlockedLevel > 10 && unlockedLevel < 21)
+                PlayMusic("bgm0b");
         }
-        if (sceneName == "-2")
-        {
+        else if (buildIndex < 14)
             PlayMusic("bgm1");
-        }
+        else if (buildIndex < 24)
+            PlayMusic("bgm2");
+
+
+
+
     }
 
     // Use this for initialization
@@ -127,45 +143,79 @@ public class AudioManager : MonoBehaviour
 
         
 
-        //foreach (string key in sfxSourceMap.Keys)
-        //{
-        //    float val = sfxSourceMap[key];
-        //    print(key + " = " + val);
-        //}
-
     }
 
-    // play music and transition
-    private void OnLevelWasLoaded(int level)
-    {
-        print("loaded");
 
-        string n = SceneManager.GetActiveScene().name;
-        if(n == "pre_tutorial")
-        {
-            PlayMusic("bgm0");
-        }
-        else if (n != "pre_tutorial" && n != "start page")
-        {
-            PlayMusic("bgm1");
-        }
-        else if(n == "start page")
+    public IEnumerator PlaySFXatTime(float time, params string[] names)
+    {
+        yield return new WaitForSeconds(time);
+        PlaySFX(names);
+    }
+
+    //Called by Colliions -> OnTriggerEnter2D
+    public void PlayLevelFinishSFX(string curLevelName)
+    {
+        // entering a new big level or from startpage
+        if (curLevelName == "start page" || curLevelName == "-1" || curLevelName == "2-start")
+            PlaySFX("NextLevel2");
+
+        // entering the end sub-level of the current big level
+        else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
+            PlaySFX("NextLevel1");
+
+        else
+            PlaySFX("NextLevel");
+
+        if(curLevelName == "start page")
         {
             StartCoroutine(PlaySFXatTime(2f, "Star"));
         }
     }
 
-    IEnumerator PlaySFXatTime(float time, params string[] names)
+    // called by collision
+    public void SwitchMusic(string curLevelName)
     {
-        yield return new WaitForSeconds(time);
-        PlaySFX(names);
+        if (curLevelName == "startPage")
+        {
+            // find out what is the next level
+            int nextLevel = GameStates.instance.getProgress();
+            if (nextLevel>0 && nextLevel <= 10)
+                PlayMusic("bgm1");
+            else if(nextLevel>10 && nextLevel<21)
+                PlayMusic("bgm2");
+           
+        }
+
+        // end of title bgm, switch to bgm1
+        else if (curLevelName == "-1")
+        {
+            PlayMusic("bgm1");
+        }
+
+        // end of bgm1, switch to bgm2
+        else if (curLevelName == "2-start")
+        {
+            PlayMusic("bgm2");
+        }
+
     }
-   
+    public void SwitchToStartMusic()
+    {
+        int nextLevel = GameStates.instance.getProgress();
+        if(nextLevel > 0 && nextLevel <= 10)
+            PlayMusic("bgm0a");
+        else if (nextLevel > 10 && nextLevel < 21)
+            PlayMusic("bgm0b");
+    }
 
     //Used to play a bgm music clip by its name
     public void PlayMusic(string n, bool isLoop = true)
     {
-        print("PlayMusic");
+        print("PlayMusic" + SceneManager.GetActiveScene().name);
+
+        // is playing the same
+        if (musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n)
+            return;
 
         int si = 0;
         int ci = 0;
@@ -190,11 +240,9 @@ public class AudioManager : MonoBehaviour
 
             // To-do cross fade two sources
 
-            //float v = PlayerPrefs.HasKey("")
+            float v = PlayerPrefs.HasKey("musicVolume") ? PlayerPrefs.GetFloat("musicVolume") : 1;
 
-            StartCoroutine(FadeIn(src, musicFadeInTime, 1));
-
-
+            StartCoroutine(FadeIn(src, musicFadeInTime, v));
 
             if (musicSources[curMusicSourceID].isPlaying && curMusicSourceID != si)
             {
@@ -279,7 +327,7 @@ public class AudioManager : MonoBehaviour
             
             src.Play();
 
-            print("played " + src.clip.name);
+   
 
         }
         else

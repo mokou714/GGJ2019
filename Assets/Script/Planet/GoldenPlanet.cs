@@ -161,7 +161,7 @@ public class GoldenPlanet : Planet {
         }
 
         //play sfx
-        AudioManager.instance.PlaySFX("BadgeEmerge", "BadgeEmerge1");
+        AudioManager.instance.PlaySFX("BadgeEmerge");
         catchRadius = size.x * 3;
     }
 }

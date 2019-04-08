@@ -99,14 +99,19 @@ public class Collision : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             sc.requiredSleep = true;
 
+            // play sfx and switch music if needed
+            string sceneName = SceneManager.GetActiveScene().name;
+            AudioManager.instance.PlayLevelFinishSFX(sceneName);
+            AudioManager.instance.SwitchMusic(sceneName);
+
             if (collision.gameObject.tag == "Finish"){
                 int curLevel = 0;
                 string next_level = "";
-                if (SceneManager.GetActiveScene().name == "2-start"){
+                if (sceneName == "2-start"){
                     curLevel = 11;
                     next_level = "12";
                 }else{
-                    curLevel = int.Parse(SceneManager.GetActiveScene().name);
+                    curLevel = int.Parse(sceneName);
                     print("cur level:" + curLevel);
                     if (curLevel == -1)
                     {
@@ -139,11 +144,13 @@ public class Collision : MonoBehaviour
                                 sc.playerModel.wonAward = sc.wonAward;
                                 GameStates.instance.saveData(sc.wonAward, 1);
                                 print("saved: " + sc.wonAward);
-                        }
+                            }
 
                         }
                     }
                 }
+                                
+
                 GameStates.instance.SaveLevel(curLevel + 1);
                 if(next_level.Length > 0)
                     StartCoroutine(waitToNext(1f, false, next_level));
@@ -157,6 +164,8 @@ public class Collision : MonoBehaviour
         }
         return;
     }
+
+    
 
 
     public void saveUserData(int curlevel){
@@ -259,7 +268,6 @@ public class Collision : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         playerTrailRenderer.enabled = true;
     }
-
 
 
 

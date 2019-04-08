@@ -13,8 +13,6 @@ public class GameStates : MonoBehaviour
 
     public bool isSaving = true;
 
-    
-
     // settings
     public static bool isPointer = true;
     public bool destroy = false;
@@ -226,7 +224,7 @@ public class GameStates : MonoBehaviour
         if(levelToLoad == SceneManager.GetActiveScene().buildIndex)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
-            SceneManager.LoadScene(getProgress().ToString());
+            SceneManager.LoadScene(levelToLoad.ToString());
     }
 
     public bool hasKey(string key){

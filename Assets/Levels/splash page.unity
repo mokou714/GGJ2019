@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Star Gazers Present
+  m_Text: StarGazers Studio
 --- !u!222 &270471055
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -530,6 +530,10 @@ Prefab:
     - target: {fileID: 114308548204841196, guid: 2543ece1b81581c41aa712eb2c9ee5d0,
         type: 2}
       propertyPath: destroy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577978880868062, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -17,12 +17,11 @@ public class UIDiscoveredStar : MonoBehaviour {
             unknown = transform.GetChild(0).gameObject;
         if (content == null)
             content = transform.GetChild(1).gameObject;
-
+        print(name + ", " + PlayerPrefs.HasKey(name));
         // using name of the star as the key
         if (PlayerPrefs.HasKey(name))
         {
             int value = PlayerPrefs.GetInt(name);
-
             // special unlocking animation and sound played for first time
             if(value == 0)
             {

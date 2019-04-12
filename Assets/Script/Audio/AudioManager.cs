@@ -177,47 +177,71 @@ public class AudioManager : MonoBehaviour
     // called by collision
     public void SwitchMusic(string curLevelName)
     {
-        if (curLevelName == "startPage")
-        {
-            // find out what is the next level
-            int nextLevel = GameStates.instance.getProgress();
-            if (nextLevel>0 && nextLevel <= 10)
-                PlayMusic("bgm1");
-            else if(nextLevel>10 && nextLevel<21)
-                PlayMusic("bgm2");
+        //print("switching music");
+        //if (curLevelName == "startPage")
+        //{
+        //    // find out what is the next level
+        //    int nextLevel = GameStates.instance.getProgress();
+        //    if (nextLevel>0 && nextLevel <= 10)
+        //        PlayMusic("bgm1");
+        //    else if(nextLevel>10 && nextLevel<21)
+        //        PlayMusic("bgm2");
            
-        }
+        //}
 
         // end of title bgm, switch to bgm1
-        else if (curLevelName == "-1")
+        if (curLevelName == "-1")
         {
             PlayMusic("bgm1");
         }
 
         // end of bgm1, switch to bgm2
-        else if (curLevelName == "2-start")
-        {
-            PlayMusic("bgm2");
-        }
+        //else if (curLevelName == "2-start")
+        //{
+        //    PlayMusic("bgm2");
+        //}
 
     }
+
     public void SwitchToStartMusic()
     {
-        int nextLevel = GameStates.instance.getProgress();
-        if(nextLevel > 0 && nextLevel <= 10)
-            PlayMusic("bgm0a");
-        else if (nextLevel > 10 && nextLevel < 21)
-            PlayMusic("bgm0b");
+        int curLevel;
+        string curScene = SceneManager.GetActiveScene().name;
+        print("On load " + curScene);
+
+        if (curScene == "start page")
+        {
+
+            // find out what is the next level
+            int nextLevel = GameStates.instance.getProgress();
+            if (nextLevel > 0 && nextLevel <= 10)
+                PlayMusic("bgm0a");
+            else if (nextLevel > 10 && nextLevel <= 21)
+                PlayMusic("bgm0b");
+        }else if (curScene == "2-start")
+        {
+            PlayMusic("bgm1");
+        }
+
+        if (int.TryParse(curScene, out curLevel))
+        {
+            if (curLevel > 0 && curLevel <= 10)
+                PlayMusic("bgm1");
+            else if (curLevel > 10 && curLevel <= 21)
+                PlayMusic("bgm2");
+        }
     }
 
     //Used to play a bgm music clip by its name
     public void PlayMusic(string n, bool isLoop = true)
     {
-        print("PlayMusic" + SceneManager.GetActiveScene().name);
+        print("PlayMusic " + SceneManager.GetActiveScene().name + "," + n);
 
         // is playing the same
-        if (musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n)
+        if (musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n){
             return;
+        }
+            
 
         int si = 0;
         int ci = 0;
@@ -263,7 +287,7 @@ public class AudioManager : MonoBehaviour
         int si = 0;
         int ci = 0;
         AudioSource src;
-
+        print("playing " + ns);
         string n = ns[Random.Range(0, ns.Length)];
 
         // find the primary audioSource registered for playing this clip
@@ -379,7 +403,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        print(musicSources[curMusicSourceID].time);
+        //print(musicSources[curMusicSourceID].time);
     }
 
     IEnumerator FadeOut(AudioSource src, float duration)

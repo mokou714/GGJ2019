@@ -28,17 +28,18 @@ public class orbitAsteroid : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (!movingBack && orbitCenter != null){
-
             transform.RotateAround(orbitCenter.position, Vector3.forward, speed * 0.01f);
         }
-        else if(movingBack){         
+        else if(movingBack){
+            if (GetComponent<Rigidbody2D>().velocity.magnitude > 0)
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             float step = backSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);
             //Disable the collider when moveing in case of hitting other asteroids
             if (transform.GetComponent<Collider2D>().enabled)
                 //transform.GetComponent<Collider2D>().enabled = false;
             //print(Vector3.Distance(transform.position, origPosition));
-            if (Vector3.Distance(transform.position, origPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, origPosition) < 0.001f)
             {
                 
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);

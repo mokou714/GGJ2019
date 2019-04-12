@@ -1,4 +1,11 @@
-Level -2, -1 
+已解决:
+1、第8关开始的迷之撞击声；
+2、手动开始关卡的时候音乐不转换；
+3、20关撞击陨石死亡后陨石不马上返回；
+4、有些可移动陨石撞不动
+
+
+Level -2, -1
 Textbox 位置、大小
 
 Level start page
@@ -12,23 +19,13 @@ Collider 要改
 
 level 2
 badge星球射上去轨道太小
- 
+
 
 level 4 出现水瓶座，与level2重复
 level 8 过关时有撞击声音
 
 level 2-start 第一个星球会使屏幕黑白变色闪
 变色后menu没有变回来
-
-Level 12
-右侧圆形陨石不被撞动
-
-Level 13
-
-NullReferenceException: Object reference not set to an instance of an object
-Planet.setup () (at Assets/Script/Planet/Planet.cs:57)
-invertPlant.Start () (at Assets/invertPlant.cs:20)
-
 
 Level 15
 

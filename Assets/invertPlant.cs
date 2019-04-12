@@ -38,6 +38,7 @@ public class invertPlant : Planet {
             sc.spawnPoint = transform.position - new Vector3(5, 1, 0);
             sc.playerModel.init();
             sc.energy = 100f;
+            GameStates.instance.saveData(Constants.whirpoolStatus, 1);
             if((int)GameStates.instance.getProgress() < 11){
                 GameStates.instance.SaveLevel(curID: 11);
                 SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
@@ -77,7 +78,7 @@ public class invertPlant : Planet {
         }
         yield return new WaitForSeconds(0.1f);
         UIManager.instance.menuButtonInvert();
-
+        AudioManager.instance.PlayMusic("bgm2");
         sc.camera.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         move = true;
 

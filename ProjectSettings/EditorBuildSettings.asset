@@ -51,6 +51,9 @@ EditorBuildSettings:
     path: Assets/Levels/Selected/2-start.unity
     guid: 865bc5cc0b4144b40a10c3b9cb0b9acf
   - enabled: 1
+    path: Assets/Levels/Selected/10.unity
+    guid: 041eb5c57cca14b6fb584bb94018fab3
+  - enabled: 1
     path: Assets/Levels/ColorInvertedLevels/11.unity
     guid: 2e157ea58d95e40d183eeff56e4c716f
   - enabled: 1
@@ -74,6 +77,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/ColorInvertedLevels/18.unity
     guid: e88e65c47f78c4a369d19c67e6b0342f
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/19.unity
+    guid: 7c3b4d4a3bd721f45addb535953255c0
+  - enabled: 1
+    path: Assets/Levels/ColorInvertedLevels/20.unity
+    guid: 2dc5a33dc474cfd4e9e5a375ceb88c95
   - enabled: 0
     path: Assets/Levels/level 1-7.unity
     guid: d0b12c57d3b1a412c960b77a7f6927bb

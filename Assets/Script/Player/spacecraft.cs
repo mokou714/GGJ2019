@@ -244,7 +244,7 @@ public class spacecraft : MonoBehaviour
                     if (single_obj.gameObject.GetComponent<orbitAsteroid>() == null)
                         break;
                     //For orbit asteroid, if the asteroid is already out of its orbit, it should go back when the scene restarts
-                    Debug.Log("orb come back");
+                    //Debug.Log("orb come back");
                     single_obj.gameObject.GetComponent<orbitAsteroid>().Recover();
                     break;
                 //case "orbast":
@@ -403,7 +403,6 @@ public class spacecraft : MonoBehaviour
                 StartCoroutine(gainedAnimation.moveStart(gainedAnimation.origTrans, -1));
             }
 
-            ReinitScene();
             StartCoroutine(waitInHiding());
         }
 
@@ -500,6 +499,8 @@ public class spacecraft : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         InitPlayer();
+        ReinitScene();
+
     }
 
     public void landOn()

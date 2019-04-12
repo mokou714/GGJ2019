@@ -328,6 +328,11 @@ public class UIManager : MonoBehaviour {
         isStartPage = sceneName == "start page";
         gameTitle.SetActive(isStartPage);
         menuButton.gameObject.SetActive(sceneName!="splash page");
+
+        //if(!isStartPage && sceneName != "2-start"){
+        //    int sceneNum = int.Parse(sceneName);
+        //}
+        AudioManager.instance.SwitchToStartMusic();
     }
 
     public void menuButtonInvert()

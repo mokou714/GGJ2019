@@ -51,9 +51,11 @@ public class Collision : MonoBehaviour
         {
             case "asteroid":
                 damage = col.gameObject.GetComponent<Asteroid>().damage;
+                AudioManager.instance.PlaySFX("being hit");
                 break;
             case "orbasteroid":
                 damage = col.gameObject.GetComponent<orbitAsteroid>().damage;
+                AudioManager.instance.PlaySFX("being hit");
                 break;
             default:
                 return;
@@ -76,7 +78,6 @@ public class Collision : MonoBehaviour
         sc.energy = left_health;
         playerTrailRenderer.time = sc.energy / 100f; 
         collided = true;
-        AudioManager.instance.PlaySFX("being hit");
     }
 
     IEnumerator stopBurst(){
@@ -102,7 +103,7 @@ public class Collision : MonoBehaviour
             // play sfx and switch music if needed
             string sceneName = SceneManager.GetActiveScene().name;
             AudioManager.instance.PlayLevelFinishSFX(sceneName);
-            AudioManager.instance.SwitchMusic(sceneName);
+            //AudioManager.instance.SwitchMusic(sceneName);
 
             if (collision.gameObject.tag == "Finish"){
                 int curLevel = 0;

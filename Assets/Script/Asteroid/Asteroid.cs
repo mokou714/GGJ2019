@@ -36,6 +36,8 @@ public class Asteroid : MonoBehaviour {
 	{
         //When the player dies, asteroid is supposed to move back to where it originally was
         if(movingBack){
+            if (GetComponent<Rigidbody2D>().velocity.magnitude > 0)
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             //speed = Vector3.Distance(transform.position, origPosition) / maxWaitTime;
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, origPosition, step);

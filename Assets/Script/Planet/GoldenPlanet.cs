@@ -130,6 +130,7 @@ public class GoldenPlanet : Planet {
 
     public override void playLandingSound()
     {
+        base.playLandingSound();
         AudioManager.instance.PlaySFX("BadgeLand");
     }
 

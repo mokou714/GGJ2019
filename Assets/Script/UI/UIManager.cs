@@ -254,17 +254,17 @@ public class UIManager : MonoBehaviour {
     void Update () {
      
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            PlayerPrefs.SetInt("Sagittarius", 0);
+            PlayerPrefs.SetInt("sagittarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            PlayerPrefs.SetInt("Pisces", 0);
+            PlayerPrefs.SetInt("pisces", 0);
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            PlayerPrefs.SetInt("Cancer", 0);
+            PlayerPrefs.SetInt("cancer", 0);
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            PlayerPrefs.SetInt("Taurus", 0);
+            PlayerPrefs.SetInt("taurus", 0);
         if (Input.GetKeyDown(KeyCode.Alpha5))
-            PlayerPrefs.SetInt("Aquarius", 0);
+            PlayerPrefs.SetInt("aquarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha6))
-            PlayerPrefs.SetInt("Libra", 0);
+            PlayerPrefs.SetInt("libra", 0);
         if (Input.GetKeyDown(KeyCode.Alpha0))        
             foreach (string key in discoveredStarNames)
                 PlayerPrefs.DeleteKey(key);

@@ -93,7 +93,7 @@ public class Collision : MonoBehaviour
             if (sc.dead)
                 return;
             sc.won = true;
-            AudioManager.instance.PlaySFX("Next Level");
+            
             sc.requiredSleep = true;
             sc.requiredFreeze = true;
             playerTrailRenderer.time = 0.5f;

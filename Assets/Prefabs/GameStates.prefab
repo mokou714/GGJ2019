@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4423089531366506}
   - component: {fileID: 82926081193543426}
   m_Layer: 0
-  m_Name: NormalLand
+  m_Name: Landing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 4017450534756344}
   - component: {fileID: 82889662059075320}
   m_Layer: 0
-  m_Name: NormalLandBackupSource
+  m_Name: LandingBackupSource (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1729,7 +1729,7 @@ GameObject:
   - component: {fileID: 224663940823271228}
   - component: {fileID: 114604377520266580}
   m_Layer: 5
-  m_Name: Pisces
+  m_Name: pisces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1918,6 +1918,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1333489026953950
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4680501626460968}
+  - component: {fileID: 82225471130894484}
+  m_Layer: 0
+  m_Name: LandingBackupSource (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1335098997088686
 GameObject:
   m_ObjectHideFlags: 1
@@ -2009,7 +2025,7 @@ GameObject:
   - component: {fileID: 224210889011382764}
   - component: {fileID: 114699670802504566}
   m_Layer: 5
-  m_Name: Aries
+  m_Name: aries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2590,7 +2606,7 @@ GameObject:
   - component: {fileID: 4318608867640546}
   - component: {fileID: 82486332962018624}
   m_Layer: 0
-  m_Name: EnergyLandBackupSource
+  m_Name: ChargeBackupSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2884,7 +2900,7 @@ GameObject:
   - component: {fileID: 224750192899437702}
   - component: {fileID: 114179877494568400}
   m_Layer: 5
-  m_Name: Sagittarius
+  m_Name: sagittarius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2900,7 +2916,7 @@ GameObject:
   - component: {fileID: 224225539667842518}
   - component: {fileID: 114342043217109948}
   m_Layer: 5
-  m_Name: Cancer
+  m_Name: cancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3885,7 +3901,7 @@ GameObject:
   - component: {fileID: 224597971920165976}
   - component: {fileID: 114060825556175608}
   m_Layer: 5
-  m_Name: Libra
+  m_Name: libra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4608,7 +4624,7 @@ GameObject:
   - component: {fileID: 224503985969278898}
   - component: {fileID: 114970466033728374}
   m_Layer: 5
-  m_Name: Aquarius
+  m_Name: aquarius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5955,6 +5971,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1924934761737834
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4437245378328164}
+  - component: {fileID: 82331251292369774}
+  m_Layer: 0
+  m_Name: LandingBackupSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1929392071680218
 GameObject:
   m_ObjectHideFlags: 1
@@ -6294,7 +6326,7 @@ GameObject:
   - component: {fileID: 4841735030921208}
   - component: {fileID: 82206878875554188}
   m_Layer: 0
-  m_Name: EnergyLand
+  m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6507,8 +6539,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978871943957410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.51, y: 0.62, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30.369999, y: 12.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4710179517284404}
@@ -6522,12 +6554,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255207595749636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423089531366506}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4082421163625520
 Transform:
@@ -6655,9 +6687,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4437245378328164}
+  - {fileID: 4680501626460968}
   - {fileID: 4017450534756344}
   m_Father: {fileID: 4257972176891340}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4437245378328164
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924934761737834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4423089531366506}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4482183084836370
 Transform:
@@ -6739,6 +6786,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4257972176891340}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4680501626460968
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333489026953950}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4423089531366506}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4708863567970654
 Transform:
@@ -7578,6 +7638,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &82225471130894484
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333489026953950}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243212812123165162, guid: 11467b970e0d94e92afbb7bd7c6646d5,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &82271431305073550
 AudioSource:
   m_ObjectHideFlags: 1
@@ -7770,6 +7926,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &82331251292369774
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924934761737834}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243212812123165162, guid: 11467b970e0d94e92afbb7bd7c6646d5,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &82342987520078968
 AudioSource:
   m_ObjectHideFlags: 1
@@ -7778,8 +8030,7 @@ AudioSource:
   m_GameObject: {fileID: 1849967297220792}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243040576120068302, guid: 11467b970e0d94e92afbb7bd7c6646d5,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7874,8 +8125,7 @@ AudioSource:
   m_GameObject: {fileID: 1514451867339024}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243040576120068302, guid: 11467b970e0d94e92afbb7bd7c6646d5,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -8546,8 +8796,7 @@ AudioSource:
   m_GameObject: {fileID: 1237430992783490}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243040576120068302, guid: 11467b970e0d94e92afbb7bd7c6646d5,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -8834,8 +9083,7 @@ AudioSource:
   m_GameObject: {fileID: 1525632408431022}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243040576120068302, guid: 11467b970e0d94e92afbb7bd7c6646d5,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -9559,12 +9807,12 @@ MonoBehaviour:
   aboutPanel: {fileID: 1964379351524732}
   gameTitle: {fileID: 1336222299672670}
   discoveredStarNames:
-  - Sagittarius
-  - Pisces
-  - Cancer
-  - Taurus
-  - Aquarius
-  - Libra
+  - ssagittarius
+  - pisces
+  - cancer
+  - taurus
+  - aquarius
+  - libra
 --- !u!114 &114048328028577468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11119,6 +11367,7 @@ MonoBehaviour:
   paused: {fileID: 24500006, guid: 11467b970e0d94e92afbb7bd7c6646d5, type: 2}
   unpaused: {fileID: 245239780923039000, guid: 11467b970e0d94e92afbb7bd7c6646d5, type: 2}
   pauseTransitionTime: 0.5
+  isDevMode: 1
   sfxSources:
   - {fileID: 82981073844856696}
   - {fileID: 82926081193543426}
@@ -11158,10 +11407,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: add45d932d2cac34199d6777f5d159b0, type: 3}
   - {fileID: 8300000, guid: 4f91afb0faf6ba0429cefec10b644cb4, type: 3}
   - {fileID: 8300000, guid: 16e0e393871174849955ba77757e1b87, type: 3}
+  - {fileID: 8300000, guid: 5a7f0b202bb862a4d8891564bceb46c4, type: 3}
+  - {fileID: 8300000, guid: 4268b40a166d22e4685fbf35aec1bf02, type: 3}
+  - {fileID: 8300000, guid: 2af9338fbffc0ee488557b162f36e111, type: 3}
+  - {fileID: 8300000, guid: 5ad604f309a826741956c3f4b1991de2, type: 3}
+  - {fileID: 8300000, guid: 42326fb15b272604ab7afff8aaf25dd7, type: 3}
+  - {fileID: 8300000, guid: ba7d68789aee9a941bc060e835b26480, type: 3}
+  - {fileID: 8300000, guid: 665c76f0fad08a249b7366dc7c0cc11f, type: 3}
+  - {fileID: 8300000, guid: 3e8ef24cf84bb8a45b84a9677a4b460d, type: 3}
+  - {fileID: 8300000, guid: 8002734cd07faec45b090f0296a54cb3, type: 3}
+  - {fileID: 8300000, guid: 3e657fa07b2dca141a55f7a4010bcd38, type: 3}
+  - {fileID: 8300000, guid: 28bc61e59035b324fb5af7c3c471b298, type: 3}
+  - {fileID: 8300000, guid: 6ce17cac2331db84490ecf98974d0bd0, type: 3}
+  - {fileID: 8300000, guid: a583f2fc272f57146b2bb02f65e67dc5, type: 3}
+  - {fileID: 8300000, guid: ae2595fee6a79054b96131451c5d9adf, type: 3}
+  - {fileID: 8300000, guid: 0f6e9469a660f3d4ca977082e3a1b23e, type: 3}
   pitchVariationSFX:
-  - being hit
-  - Die
   - NextLevel
+  - being hit
 --- !u!114 &114228009388806946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12006,10 +12269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b288f2b09ec3243a6a4b2d7772e56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSaving: 1
+  isSaving: 0
   destroy: 0
   bigLevelNames: []
-  levels: []
   showContent: 
   deviceId: -1
   isLoggedIn: 0

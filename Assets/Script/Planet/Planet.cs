@@ -80,13 +80,34 @@ public class Planet : MonoBehaviour
     }
 
     public virtual void playLandingSound() {
-        if (SceneManager.GetActiveScene().buildIndex != 0){
-            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
-            AudioManager.sfxNormalLandID++;
-            if (AudioManager.sfxNormalLandID > 4){
-                AudioManager.sfxNormalLandID = 1;
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (buildIndex > 0 && buildIndex <= 13)
+        {
+            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.landingSfxID.ToString());
+        }
+        else if (buildIndex > 13 && buildIndex < 26)
+        {
+            float t = AudioManager.instance.GetMusicPlaybackTime("bgm2");
+            string pitch = "";
+            if ((t >= 10 && t < 22)|| (t >= 50 && t < 62))
+            {
+                pitch = "-2";
             }
+            else if ((t >= 28 && t < 39) || (t >= 68))
+            {
+                pitch = "-4";
+            }
+            print("t: " + t + ", pitch: " + pitch);
+            AudioManager.instance.PlaySFX("Lv2 " + "Harp Land" + pitch + "_" + AudioManager.landingSfxID.ToString());
+        }
+
+        AudioManager.landingSfxID++;
+
+        if (AudioManager.landingSfxID > 4)
+        {
+            AudioManager.landingSfxID = 1;
         }
     }
 

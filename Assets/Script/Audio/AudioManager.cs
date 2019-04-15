@@ -374,6 +374,7 @@ public class AudioManager : MonoBehaviour
         {
             PlaySFX(2f, "Star");
         }
+
     }
 
     //Used to play a sound clip by its name, with delay in secs, if has more inputs, randomly choose one

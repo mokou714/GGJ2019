@@ -130,7 +130,7 @@ public class AudioManager : MonoBehaviour
         }
         else if (buildIndex < 14)
             PlayMusic("bgm1");
-        else if (buildIndex < 24)
+        else 
             PlayMusic("bgm2");
                
     }

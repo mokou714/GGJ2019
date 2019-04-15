@@ -156,7 +156,7 @@ public class dustPlanet : Planet
 
             if (buildIndex > 0 && buildIndex <= 13)
             {
-                AudioManager.instance.PlaySFX(.15f, "Harp Charge");   //Play the audio for absorbing dust after delay
+                AudioManager.instance.PlaySFX(.225f, "Harp Charge");   //Play the audio for absorbing dust after delay
             }
             else if (buildIndex > 13 && buildIndex < 26)
             {
@@ -171,7 +171,7 @@ public class dustPlanet : Planet
                     pitch = "-4";
                 }
                 
-                AudioManager.instance.PlaySFX(.15f, "Lv2 " + "Harp Charge" + pitch);
+                AudioManager.instance.PlaySFX(.4f, "Lv2 " + "Harp Charge" + pitch);
             }
 
             //print("plays harp charge");

@@ -6539,8 +6539,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978871943957410}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.369999, y: 12.61, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.51, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4710179517284404}
@@ -11390,7 +11390,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1f05459823c637d4fb6e62dd850a890b, type: 3}
   - {fileID: 8300000, guid: 163e81ac31382e94eb99667b36c2a02e, type: 3}
   - {fileID: 8300000, guid: 10a9e6b9091e6994fa75302a533c8c18, type: 3}
-  - {fileID: 8300000, guid: aef279da2ecc5ce429b1981e104d5358, type: 3}
+  - {fileID: 8300000, guid: 90eca8556d671ab4aa0bbb0690a592db, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 59245f75c44cf4166b74cfd9a9a8489f, type: 3}
   - {fileID: 8300000, guid: 14417b5af2544b143ae95372b0c48834, type: 3}
@@ -12269,7 +12269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b288f2b09ec3243a6a4b2d7772e56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSaving: 0
+  isSaving: 1
   destroy: 0
   bigLevelNames: []
   showContent: 

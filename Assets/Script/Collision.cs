@@ -103,7 +103,7 @@ public class Collision : MonoBehaviour
             // play sfx and switch music if needed
             string sceneName = SceneManager.GetActiveScene().name;
             AudioManager.instance.PlayLevelFinishSFX(sceneName);
-            //AudioManager.instance.SwitchMusic(sceneName);
+            //AudioManager.instance.SwitchMusic(sceneName);                        
 
             if (collision.gameObject.tag == "Finish"){
                 int curLevel = 0;
@@ -143,7 +143,10 @@ public class Collision : MonoBehaviour
                             if (sc.wonAward.Length > 0)
                             {
                                 sc.playerModel.wonAward = sc.wonAward;
-                                GameStates.instance.saveData(sc.wonAward, 1);
+                                GameStates.instance.saveData(sc.wonAward, 0);
+
+                                StartCoroutine(UIManager.instance.ShowDiscoveries());
+
                                 print("saved: " + sc.wonAward);
                             }
 

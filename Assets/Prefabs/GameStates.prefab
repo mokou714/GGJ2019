@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 114092105826614814}
   - component: {fileID: 114272501577798500}
   m_Layer: 5
-  m_Name: AchievementButton
+  m_Name: AchievementsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3317,7 +3317,7 @@ GameObject:
   - component: {fileID: 114352674949194770}
   - component: {fileID: 114916429783545578}
   m_Layer: 5
-  m_Name: LeaderBoardButton
+  m_Name: LeaderboardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7550,7 +7550,7 @@ AudioSource:
   m_GameObject: {fileID: 1064525957738600}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243883188191161752, guid: 11467b970e0d94e92afbb7bd7c6646d5,
+  OutputAudioMixerGroup: {fileID: 243334982616657044, guid: 11467b970e0d94e92afbb7bd7c6646d5,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -8412,7 +8412,7 @@ AudioSource:
   m_GameObject: {fileID: 1225559531938430}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243605998276004976, guid: 11467b970e0d94e92afbb7bd7c6646d5,
+  OutputAudioMixerGroup: {fileID: 243678157058103642, guid: 11467b970e0d94e92afbb7bd7c6646d5,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -9799,6 +9799,8 @@ MonoBehaviour:
   discoveriesButton: {fileID: 114467472858012896}
   startSettingsButton: {fileID: 114856114951258300}
   aboutButton: {fileID: 114547728007720678}
+  achievementsButton: {fileID: 114092105826614814}
+  leaderboardButton: {fileID: 114352674949194770}
   menu: {fileID: 1591693418514906}
   menuButtonsGroup: {fileID: 1455954369555158}
   startMenuButtonsGroup: {fileID: 1438633169451212}
@@ -11397,7 +11399,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 75b6280f4ca740441ba31bae0e930e6a, type: 3}
   - {fileID: 8300000, guid: 4f84ee1d84602e346a17db4cf2d08916, type: 3}
   - {fileID: 8300000, guid: 5cdd37f2bb44cc446a17a18b24888b28, type: 3}
-  - {fileID: 8300000, guid: daa6cec66c049414589ced81c945cdb1, type: 3}
+  - {fileID: 8300000, guid: a5c1d66152d1c744a86ef192dc61aa4b, type: 3}
   - {fileID: 8300000, guid: cd175ae2c0e260d48b3e4793fcd30d4c, type: 3}
   - {fileID: 8300000, guid: 0413e2461b706ba42bbe723f5661d031, type: 3}
   - {fileID: 8300000, guid: 0348ba0a0041d5a48a7168d9f692e704, type: 3}
@@ -11422,9 +11424,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a583f2fc272f57146b2bb02f65e67dc5, type: 3}
   - {fileID: 8300000, guid: ae2595fee6a79054b96131451c5d9adf, type: 3}
   - {fileID: 8300000, guid: 0f6e9469a660f3d4ca977082e3a1b23e, type: 3}
+  - {fileID: 8300000, guid: 5ac694d2eddbf7541817067a32553416, type: 3}
+  - {fileID: 8300000, guid: 1eece623609ecd04eb44f12bd594d1aa, type: 3}
   pitchVariationSFX:
   - NextLevel
   - being hit
+  - Die
 --- !u!114 &114228009388806946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15281,7 +15286,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 82b699c7d6ae4004999a07be7db322b1, type: 3}
-    m_FontSize: 80
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -22855,7 +22860,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 397, y: 79}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224372721081900996
 RectTransform:
@@ -26489,7 +26494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 124}
+  m_AnchoredPosition: {x: 0, y: 190}
   m_SizeDelta: {x: 456.7, y: 111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224892520757667328

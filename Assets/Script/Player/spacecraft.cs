@@ -383,6 +383,10 @@ public class spacecraft : MonoBehaviour
             if (dead)
                 return;
             dead = true;
+
+            // play die sfx
+            AudioManager.instance.PlaySFX("Die");
+
             wonAward = "";
             transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
             transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;

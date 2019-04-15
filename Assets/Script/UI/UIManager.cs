@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour {
     public Button startSettingsButton;
     public Button aboutButton;
 
+    // Discoveries page
+    public Button achievementsButton;
+    public Button leaderboardButton;
+
     // UI objects
     public GameObject menu;
     public GameObject menuButtonsGroup;
@@ -46,7 +50,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager instance = null;
 
     bool isStartPage = false;
-    
+
     private void Awake()
     {
         //Check if there is already an instance 
@@ -88,8 +92,11 @@ public class UIManager : MonoBehaviour {
         startSettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         aboutButton.onClick.AddListener(OnAboutButtonClicked);
 
+        achievementsButton.onClick.AddListener(OnAchievementsButtonClicked);
+        leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
+
         // Initialize 
-        
+
         isStartPage = SceneManager.GetActiveScene().name == "start page";
 
         gameTitle.SetActive(isStartPage);
@@ -106,6 +113,39 @@ public class UIManager : MonoBehaviour {
         aboutPanel.SetActive(false);
         menu.SetActive(false);
         
+    }
+
+    private void OnLeaderboardButtonClicked()
+    {
+        SocialSystem.instance.listLeaderboard();
+    }
+
+    private void OnAchievementsButtonClicked()
+    {
+        SocialSystem.instance.listAchievements();
+    }
+
+    public IEnumerator ShowDiscoveries()
+    {
+        menu.SetActive(true);
+        discoveriesPanel.SetActive(true);
+        closeButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
+        achievementsButton.gameObject.SetActive(false);
+        leaderboardButton.gameObject.SetActive(false);
+
+        Pause();
+        
+        yield return new WaitForSecondsRealtime(4.5f);
+
+        achievementsButton.gameObject.SetActive(true);
+        leaderboardButton.gameObject.SetActive(true);
+        closeButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
+        discoveriesPanel.SetActive(false);
+        menu.SetActive(false);
+
+        Pause();
     }
 
     public void Pause()

@@ -132,10 +132,7 @@ public class AudioManager : MonoBehaviour
             PlayMusic("bgm1");
         else if (buildIndex < 24)
             PlayMusic("bgm2");
-
-
-
-
+               
     }
 
     // Use this for initialization
@@ -165,30 +162,21 @@ public class AudioManager : MonoBehaviour
         return -1;
     }
 
-    public IEnumerator PlaySFXatTime(float time, params string[] names)
-    {
-        yield return new WaitForSeconds(time);
-        PlaySFX(names);
-    }
 
     //Called by Colliions -> OnTriggerEnter2D
     public void PlayLevelFinishSFX(string curLevelName)
     {
         // entering a new big level or from startpage
         if (curLevelName == "start page" || curLevelName == "-1" || curLevelName == "2-start")
-            PlaySFX("NextLevel2");
-
+            //PlaySFX("NextLevel2");
+            PlaySFX("NextLevel_1");
         // entering the end sub-level of the current big level
-        else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
-            PlaySFX("NextLevel1");
+        //else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
+            //PlaySFX("NextLevel1");
 
         else
-            PlaySFX("NextLevel");
-
-        if(curLevelName == "start page")
-        {
-            StartCoroutine(PlaySFXatTime(2f, "Star"));
-        }
+            PlaySFX("NextLevel_0");
+        
     }
 
     // called by collision
@@ -378,6 +366,14 @@ public class AudioManager : MonoBehaviour
             print("please specify a sfx source to play this sfx clip in AudioManager.Start()");
         }
 
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 2)
+        {
+            PlaySFX(2f, "Star");
+        }
     }
 
     //Used to play a sound clip by its name, with delay in secs, if has more inputs, randomly choose one

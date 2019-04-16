@@ -69,7 +69,7 @@ public class spacecraft : MonoBehaviour
     public static spacecraft instance;
     Vector2 launchPos;
     float maxDistance;
-    float launchEnergy;
+    public float launchEnergy;
 
 
     public int rotation_sensitivity;

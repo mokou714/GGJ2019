@@ -38,4 +38,9 @@ public class Constants{
 
 
     public static Hashtable awardProbability = new Hashtable() { {"sagi", 200}, {"pisces", 300}, {"aqua", 500}, {"libra", 50} };
+
+    public static Dictionary<string, string> awardAchievementID = new Dictionary<string, string>() { { "sagittarius", "CgkI2tzJ6JcSEAIQEA" }, { "pisces", "CgkI2tzJ6JcSEAIQDw" }, 
+                                                                    { "aquarius", "CgkI2tzJ6JcSEAIQDg" }, { "libra", "CgkI2tzJ6JcSEAIQEw" },
+                                                                    {"aries", "CgkI2tzJ6JcSEAIQEg"}, {"cancer", "CgkI2tzJ6JcSEAIQEQ"} };
+
 }

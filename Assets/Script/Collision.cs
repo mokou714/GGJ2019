@@ -75,8 +75,9 @@ public class Collision : MonoBehaviour
         }
 
         sc.playerModel.hit += 1;
-        sc.energy = left_health;
-        playerTrailRenderer.time = sc.energy / 100f; 
+        sc.launchEnergy = left_health;
+        print("sc energy: " + sc.launchEnergy);
+        playerTrailRenderer.time = sc.launchEnergy / 100f; 
         collided = true;
     }
 
@@ -144,6 +145,8 @@ public class Collision : MonoBehaviour
                             {
                                 sc.playerModel.wonAward = sc.wonAward;
                                 GameStates.instance.saveData(sc.wonAward, 1);
+                                if (GameStates.instance.isLoggedIn && Constants.awardAchievementID.ContainsKey(sc.wonAward))
+                                    SocialSystem.instance.setAchievement(Constants.awardAchievementID[sc.wonAward]);
                                 print("saved: " + sc.wonAward);
                             }
 

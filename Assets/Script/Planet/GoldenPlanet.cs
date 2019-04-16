@@ -129,7 +129,7 @@ public class GoldenPlanet : Planet {
 
 
     public override void playLandingSound()
-    {
+    {        
         AudioManager.instance.PlaySFX("BadgeLand");
     }
 
@@ -161,7 +161,7 @@ public class GoldenPlanet : Planet {
         }
 
         //play sfx
-        AudioManager.instance.PlaySFX("BadgeEmerge");
+        // AudioManager.instance.PlaySFX(0.5f, "BadgeEmerge");
         catchRadius = size.x * 3;
     }
 }

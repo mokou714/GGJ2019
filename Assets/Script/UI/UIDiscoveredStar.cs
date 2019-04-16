@@ -22,21 +22,19 @@ public class UIDiscoveredStar : MonoBehaviour {
         if (PlayerPrefs.HasKey(name))
         {
             int value = PlayerPrefs.GetInt(name);
-            // special unlocking animation and sound played for first time
-            if(value == 0)
+            // moved to finishing a level
+            if (value == 0)
             {
                 // To do: sfx and animation
                 StartCoroutine(ShowStar());
-                AudioManager.instance.PlaySFX("Unlocking");
+                AudioManager.instance.PlaySFX(.5f, "Unlocking");
             }
-            else if(value == 1)
+            else if (value == 1)
             {
-                // display the content and frame
                 frame.gameObject.SetActive(true);
                 unknown.SetActive(false);
                 content.SetActive(true);
-            }
-
+            }            
         }
         else
         {
@@ -54,6 +52,8 @@ public class UIDiscoveredStar : MonoBehaviour {
 
     IEnumerator ShowStar()
     {
+        PlayerPrefs.SetInt(name, 1);
+
         frame.HideLines();
 
         unknown.SetActive(false);
@@ -70,9 +70,6 @@ public class UIDiscoveredStar : MonoBehaviour {
 
         StartCoroutine(UIManager.instance.FadeInTexts
             (contentFadeInTime, content.GetComponentsInChildren<Text>()));
-
-
-        PlayerPrefs.SetInt(name, 1);
 
     }
 

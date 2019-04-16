@@ -69,11 +69,11 @@ public class TutorialScript : MonoBehaviour {
 
                 break;
             case 2:
-                inst["energy"] = new hint("You loss energy while flying and\n your size indicates your energy", false, 100, 200);
-                inst["dust"] = new hint("The dust around a planet gives\n you the energy.", false, 0, -200);
+                inst["energy"] = new hint("You lose energy during interstellar travels.", false, 100, 200);
+                inst["dust"] = new hint("The stardust around a planet charges\n your energy.", false, 0, -200);
                 break;
             case 3:
-                inst["obstacle"] = new hint("The 'Space Eaters' will eat\n your energy!", false, -100, 200);
+                inst["obstacle"] = new hint("Avoid these squared rocks!\nThey can smash you into pieces.", false, -120, 210);
                 break;
         }
 
@@ -179,7 +179,7 @@ public class TutorialScript : MonoBehaviour {
         Todo: this coroutine is used wait to show warning for obstacles
         */
         yield return new WaitForSeconds(time);
-        obj.SetActive(true);
+        //obj.SetActive(true);
         stopped = true;
         checkedMark++;
     }

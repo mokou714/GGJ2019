@@ -34,12 +34,12 @@ public class levelNumber : MonoBehaviour {
 
     IEnumerator fadeIn()
     {
-        float currentAlpha = 0f;
+        float currentAlpha = 0.2f;
         int dir = 1;
 
         while (true)
         {
-            if (currentAlpha <= 0f)
+            if (currentAlpha <= 0.2f)
                 dir = 1;
             else if(currentAlpha >= 1f)
                 dir = -1;

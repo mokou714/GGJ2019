@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot unpaused;
     public float pauseTransitionTime = 0.01f;
 
+    public bool isDevMode = true;
     // sometimes we will have more than one sfx clip playing at the same time
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
@@ -24,14 +25,14 @@ public class AudioManager : MonoBehaviour
     public float musicFadeInTime = 1f;
 
     public static AudioManager instance = null;     //Allows other scripts to call functions from AudioManager.             
-    public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
-    public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
+    public float lowPitchRange = .9f;              //The lowest a sound effect will be randomly pitched.
+    public float highPitchRange = 1.1f;            //The highest a sound effect will be randomly pitched.
     float randomPitch;
 
     // this includes backup sources, this is used by ChangeSFXVolume()
     AudioSource[] allSFXSources;
 
-    public static int sfxNormalLandID = 1;
+    public static int landingSfxID = 1;
 
     // Music clip List
     public AudioClip[] musicList;
@@ -95,8 +96,6 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 7);
             else if (n == "Star")
                 sfxSourceMap.Add(n, 8);
-            else if (n.Contains("Harp Charge"))
-                sfxSourceMap.Add(n, 8);
         }
         
         //foreach (string key in sfxSourceMap.Keys)
@@ -131,47 +130,53 @@ public class AudioManager : MonoBehaviour
         }
         else if (buildIndex < 14)
             PlayMusic("bgm1");
-        else if (buildIndex < 24)
+        else 
             PlayMusic("bgm2");
-
-
-
-
+               
     }
 
     // Use this for initialization
     void Start()
     {
 
-        
 
     }
 
-
-    public IEnumerator PlaySFXatTime(float time, params string[] names)
+    // get the current playback time of an audio clip
+    public float GetMusicPlaybackTime(string n)
     {
-        yield return new WaitForSeconds(time);
-        PlaySFX(names);
+        // search in the dictionary for the audio source
+        int si = 0;
+        if(musicSourceMap.TryGetValue(n, out si))
+        {
+            AudioSource a = musicSources[si];
+            if (a.isPlaying && a.clip.name == n)
+                return a.time;
+            else
+            {
+                print("Music clip is not playing");
+                return -1;
+            }
+        }
+        print("Music clip not registered to an audio source");
+        return -1;
     }
+
 
     //Called by Colliions -> OnTriggerEnter2D
     public void PlayLevelFinishSFX(string curLevelName)
     {
         // entering a new big level or from startpage
         if (curLevelName == "start page" || curLevelName == "-1" || curLevelName == "2-start")
-            PlaySFX("NextLevel2");
-
+            //PlaySFX("NextLevel2");
+            PlaySFX("NextLevel_1");
         // entering the end sub-level of the current big level
-        else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
-            PlaySFX("NextLevel1");
+        //else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
+            //PlaySFX("NextLevel1");
 
         else
-            PlaySFX("NextLevel");
-
-        if(curLevelName == "start page")
-        {
-            StartCoroutine(PlaySFXatTime(2f, "Star"));
-        }
+            PlaySFX("NextLevel_0");
+        
     }
 
     // called by collision
@@ -235,7 +240,7 @@ public class AudioManager : MonoBehaviour
     //Used to play a bgm music clip by its name
     public void PlayMusic(string n, bool isLoop = true)
     {
-        print("PlayMusic " + SceneManager.GetActiveScene().name + "," + n);
+        //print("PlayMusic " + SceneManager.GetActiveScene().name + "," + n);
 
         // is playing the same
         if (musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n){
@@ -280,14 +285,105 @@ public class AudioManager : MonoBehaviour
         }
         
     }
-    
-    //Used to play a sound clip by its name, if has more inputs, randomly choose one
+
+
     public void PlaySFX(params string[] ns)
     {
         int si = 0;
         int ci = 0;
         AudioSource src;
-        print("playing " + ns);
+        //print("playing " + ns);
+        string n = ns[Random.Range(0, ns.Length)];
+
+        // find the primary audioSource registered for playing this clip
+        if (sfxSourceMap.TryGetValue(n, out si))
+        {
+            // Some sfx like "being hit" will be called frequently, 
+            // Need two or more audio sources to avoid noise in between two "being hit" plays
+            // reference: https://forum.unity.com/threads/problem-with-audio-crackling.482086/
+
+            // if the primary audioSource is busy playing the same clip,
+            // find an idle backup source (in its children) to play it
+            if (sfxSources[si].isPlaying)
+            {
+                AudioSource[] backupSources = sfxSources[si].gameObject.GetComponentsInChildren<AudioSource>();
+                src = backupSources[backupSources.Length - 1]; // get the last one by default
+                for (int i = 0; i < backupSources.Length; i++)
+                {
+                    if (!backupSources[i].isPlaying)
+                    {
+                        src = backupSources[i];
+                        //print("backupSource: " + i);
+                        break;
+                    }
+
+                }
+
+            }
+            else
+            {
+                // play the clip with the primary audioSource
+                src = sfxSources[si];
+            }
+
+            // find the clip id from the sfxList by name
+            for (int i = 0; i < sfxList.Length; i++)
+            {
+                if (sfxList[i].name == n)
+                {
+                    ci = i;
+                    break;
+                }
+            }
+
+
+            //Load the clip
+            src.clip = sfxList[ci];
+
+            // varies its pitch if pitchVariation is applied to this clip in the inspector
+            foreach (string s in pitchVariationSFX)
+            {
+                if (s == n)
+                {
+                    RandomizePitch();
+
+                    //Set the pitch of the audio source to the randomly chosen pitch.                     
+                    src.pitch = randomPitch;
+
+                    //print("src.pitch: " + src.pitch);
+
+                    break;
+                }
+            }
+
+            src.Play();
+
+            if (isDevMode)
+                print("Playing:" + src.clip.name);
+        }
+        else
+        {
+            print("please specify a sfx source to play this sfx clip in AudioManager.Start()");
+        }
+
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 2)
+        {
+            PlaySFX(2f, "Star");
+        }
+
+    }
+
+    //Used to play a sound clip by its name, with delay in secs, if has more inputs, randomly choose one
+    public void PlaySFX(float delay = 0, params string[] ns)
+    {
+        int si = 0;
+        int ci = 0;
+        AudioSource src;
+        //print("playing " + ns);
         string n = ns[Random.Range(0, ns.Length)];
 
         // find the primary audioSource registered for playing this clip
@@ -345,14 +441,13 @@ public class AudioManager : MonoBehaviour
                     //Set the pitch of the audio source to the randomly chosen pitch.                     
                     src.pitch = randomPitch;
 
-                    //print("src.pitch: " + src.pitch);
+                    print("src.pitch: " + src.pitch);
 
                     break;
                 }
             }
             
-            src.Play();
-
+            src.PlayDelayed(delay);
    
 
         }
@@ -371,6 +466,12 @@ public class AudioManager : MonoBehaviour
             foreach (AudioSource a in sfxSources[si].gameObject.GetComponentsInChildren<AudioSource>())            
                 if (a.isPlaying && a.clip.name == n)
                     return true;
+
+        if (musicSourceMap.TryGetValue(n, out si))
+            foreach (AudioSource a in musicSources[si].gameObject.GetComponentsInChildren<AudioSource>())
+                if (a.isPlaying && a.clip.name == n)
+                    return true;
+
         return false;
     }
 

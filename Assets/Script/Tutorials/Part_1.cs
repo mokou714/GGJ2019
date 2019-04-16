@@ -18,10 +18,11 @@ class Part_1 {
         this.firstPlanet = firstPlanet;
         this.secondPlanet = secondPlanet;
         this.textfield = textfield;
+
         this.monoBehaviour = monoBehaviour;
         Dictionary<string, hint> instr = new Dictionary<string, hint>();
         instr["release"] = new hint("Relase to launch yourself");
-        instr["hold"] = new hint("First, Hold the screen.");
+        instr["hold"] = new hint("First, press and hold your screen.");
         instr["compliment"] = new hint("Good job!", false, 300, 150);
         instr["goal_1"] = new hint("Get here!", false, 200, 200);
         instr["goal_2"] = new hint("Now get here!", false, 400, 300);
@@ -107,6 +108,8 @@ class Part_1 {
 
     private void showText(hint text, float time_interval = 0.01f)
     {
+        if (textfield == null)
+            textfield = GameObject.FindGameObjectWithTag("tutorialText").GetComponent<Text>();
         if (text == null)
         {
             textfield.text = "";

@@ -1,19 +1,16 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Constants.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Tutorials/TutorialScript.cs">
     <Files>
       <File FileName="Assets/Script/Planet/levelController.cs" Line="15" Column="35" />
-      <File FileName="Assets/invertPlant.cs" Line="41" Column="71" />
-      <File FileName="Assets/Script/Collision.cs" Line="58" Column="42" />
-      <File FileName="Assets/Script/Audio/AudioManager.cs" Line="290" Column="30" />
-      <File FileName="Assets/Script/Asteroid/orbitAsteroid.cs" Line="34" Column="13" />
-      <File FileName="Assets/Script/Player/spacecraft.cs" Line="247" Column="34" />
-      <File FileName="Assets/Script/Asteroid/Asteroid.cs" Line="40" Column="77" />
-      <File FileName="Assets/selectionEffect.cs" Line="101" Column="6" />
-      <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="148" Column="1" />
-      <File FileName="Assets/Script/UI/UIDiscoveredStar.cs" Line="20" Column="53" />
-      <File FileName="Assets/Script/Constants.cs" Line="42" Column="45" />
+      <File FileName="Assets/Script/Audio/AudioManager.cs" Line="243" Column="35" />
+      <File FileName="Assets/Script/Player/spacecraft.cs" Line="530" Column="42" />
+      <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/UI/UIDiscoveredStar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Constants.cs" Line="47" Column="1" />
+      <File FileName="Assets/Script/Tutorials/Part_1.cs" Line="118" Column="18" />
+      <File FileName="Assets/Script/Tutorials/TutorialScript.cs" Line="53" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

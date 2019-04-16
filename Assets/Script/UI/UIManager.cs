@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour {
     public Button startSettingsButton;
     public Button aboutButton;
 
+    // Discoveries page
+    public Button achievementsButton;
+    public Button leaderboardButton;
+
     // UI objects
     public GameObject menu;
     public GameObject menuButtonsGroup;
@@ -46,7 +50,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager instance = null;
 
     bool isStartPage = false;
-    
+
     private void Awake()
     {
         //Check if there is already an instance 
@@ -88,8 +92,11 @@ public class UIManager : MonoBehaviour {
         startSettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         aboutButton.onClick.AddListener(OnAboutButtonClicked);
 
+        achievementsButton.onClick.AddListener(OnAchievementsButtonClicked);
+        leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
+
         // Initialize 
-        
+
         isStartPage = SceneManager.GetActiveScene().name == "start page";
 
         gameTitle.SetActive(isStartPage);
@@ -106,6 +113,39 @@ public class UIManager : MonoBehaviour {
         aboutPanel.SetActive(false);
         menu.SetActive(false);
         
+    }
+
+    private void OnLeaderboardButtonClicked()
+    {
+        SocialSystem.instance.listLeaderboard();
+    }
+
+    private void OnAchievementsButtonClicked()
+    {
+        SocialSystem.instance.listAchievements();
+    }
+
+    public IEnumerator ShowDiscoveries()
+    {
+        menu.SetActive(true);
+        discoveriesPanel.SetActive(true);
+        closeButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
+        achievementsButton.gameObject.SetActive(false);
+        leaderboardButton.gameObject.SetActive(false);
+
+        Pause();
+        
+        yield return new WaitForSecondsRealtime(4.5f);
+
+        achievementsButton.gameObject.SetActive(true);
+        leaderboardButton.gameObject.SetActive(true);
+        closeButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
+        discoveriesPanel.SetActive(false);
+        menu.SetActive(false);
+
+        Pause();
     }
 
     public void Pause()
@@ -254,17 +294,17 @@ public class UIManager : MonoBehaviour {
     void Update () {
      
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            PlayerPrefs.SetInt("Sagittarius", 0);
+            PlayerPrefs.SetInt("sagittarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            PlayerPrefs.SetInt("Pisces", 0);
+            PlayerPrefs.SetInt("pisces", 0);
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            PlayerPrefs.SetInt("Cancer", 0);
+            PlayerPrefs.SetInt("cancer", 0);
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            PlayerPrefs.SetInt("Taurus", 0);
+            PlayerPrefs.SetInt("taurus", 0);
         if (Input.GetKeyDown(KeyCode.Alpha5))
-            PlayerPrefs.SetInt("Aquarius", 0);
+            PlayerPrefs.SetInt("aquarius", 0);
         if (Input.GetKeyDown(KeyCode.Alpha6))
-            PlayerPrefs.SetInt("Libra", 0);
+            PlayerPrefs.SetInt("libra", 0);
         if (Input.GetKeyDown(KeyCode.Alpha0))        
             foreach (string key in discoveredStarNames)
                 PlayerPrefs.DeleteKey(key);

@@ -94,7 +94,7 @@ public class Collision : MonoBehaviour
             if (sc.dead)
                 return;
             sc.won = true;
-            AudioManager.instance.PlaySFX("Next Level");
+            
             sc.requiredSleep = true;
             sc.requiredFreeze = true;
             playerTrailRenderer.time = 0.5f;
@@ -104,7 +104,7 @@ public class Collision : MonoBehaviour
             // play sfx and switch music if needed
             string sceneName = SceneManager.GetActiveScene().name;
             AudioManager.instance.PlayLevelFinishSFX(sceneName);
-            //AudioManager.instance.SwitchMusic(sceneName);
+            //AudioManager.instance.SwitchMusic(sceneName);                        
 
             if (collision.gameObject.tag == "Finish"){
                 int curLevel = 0;
@@ -147,6 +147,11 @@ public class Collision : MonoBehaviour
                                 GameStates.instance.saveData(sc.wonAward, 1);
                                 if (GameStates.instance.isLoggedIn && Constants.awardAchievementID.ContainsKey(sc.wonAward))
                                     SocialSystem.instance.setAchievement(Constants.awardAchievementID[sc.wonAward]);
+
+                                GameStates.instance.saveData(sc.wonAward, 0);
+
+                                StartCoroutine(UIManager.instance.ShowDiscoveries());
+
                                 print("saved: " + sc.wonAward);
                             }
 

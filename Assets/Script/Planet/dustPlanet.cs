@@ -146,25 +146,37 @@ public class dustPlanet : Planet
 
     public override void playLandingSound()
     {
+        base.playLandingSound();
+
         //Indicate if the sound should be played so that it doesn't play repeatedly
         if (dustAmount > 0)
         {
-            //print("plays harp charge");
-            AudioManager.instance.PlaySFX("Harp Charge_2");   //Play the audio for absorbing dust
-        }
-        else
-        {
-            if (SceneManager.GetActiveScene().buildIndex != 0)
-            {
-                AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
 
-                AudioManager.sfxNormalLandID++;
-                if (AudioManager.sfxNormalLandID > 4)
-                {
-                    AudioManager.sfxNormalLandID = 1;
-                }
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
+            if (buildIndex > 0 && buildIndex <= 13)
+            {
+                AudioManager.instance.PlaySFX(.4f, "Harp Charge");   //Play the audio for absorbing dust after delay
             }
-        }
+            else if (buildIndex > 13 && buildIndex < 26)
+            {
+                float t = AudioManager.instance.GetMusicPlaybackTime("bgm2");
+                string pitch = "";
+                if ((t >= 10 && t < 22) || (t >= 50 && t < 62))
+                {
+                    pitch = "-2";
+                }
+                else if ((t >= 28 && t < 39) || (t >= 68))
+                {
+                    pitch = "-4";
+                }
+                
+                AudioManager.instance.PlaySFX(.4f, "Lv2 " + "Harp Charge" + pitch);
+            }
+
+            //print("plays harp charge");
+
+        }       
 
     }
 }

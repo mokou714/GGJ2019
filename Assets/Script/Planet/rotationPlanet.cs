@@ -81,12 +81,12 @@ public class rotationPlanet : MonoBehaviour
                     {
                         if (SceneManager.GetActiveScene().buildIndex != 0)
                         {
-                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.sfxNormalLandID.ToString());
+                            AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.landingSfxID.ToString());
 
-                            AudioManager.sfxNormalLandID++;
-                            if (AudioManager.sfxNormalLandID > 4)
+                            AudioManager.landingSfxID++;
+                            if (AudioManager.landingSfxID > 4)
                             {
-                                AudioManager.sfxNormalLandID = 1;
+                                AudioManager.landingSfxID = 1;
                             }
                         }
                         

@@ -5422,30 +5422,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1481518980032630, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: sagittarius
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309232299555976, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: pisces
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483666212099320, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: cancer
-      objectReference: {fileID: 0}
-    - target: {fileID: 1345056522544112, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: aries
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741116097254160, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: aquarius
-      objectReference: {fileID: 0}
-    - target: {fileID: 1624294303419648, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
-      propertyPath: m_Name
-      value: libra
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}
   m_IsPrefabAsset: 0

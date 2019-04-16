@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement; 
 
 public class PlayerModel
 {
@@ -130,6 +131,8 @@ public class spacecraft : MonoBehaviour
 
     public bool requiredFreeze = false;
 
+    public bool startPage = false;
+
     // Use this for initialization
     void Start()
     {
@@ -142,8 +145,12 @@ public class spacecraft : MonoBehaviour
         else
             showArrow = (PlayerPrefs.GetInt("isPointer") == 1);
 
+        if (SceneManager.GetActiveScene().name == "start page")
+            startPage = true;
+
         //showArrow = ((int)GameStates.instance.getData("isPointer", typeof(int)) < 1);
         InitPlayer(false);//Init player with reinit parameter being false
+
 
     }
 
@@ -383,6 +390,10 @@ public class spacecraft : MonoBehaviour
             if (dead)
                 return;
             dead = true;
+
+            // play die sfx
+            AudioManager.instance.PlaySFX("Die");
+
             wonAward = "";
             transform.GetChild(0).GetComponent<TrailRenderer>().Clear();
             transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
@@ -513,19 +524,24 @@ public class spacecraft : MonoBehaviour
 
 
         //Keep track on continous jump of the user
-        if (numRotateCircle == 0){
-            playerModel.continousJump += 1;
-            GameStates.instance.globalContinuousJump += 1;
-        }else{
-            playerModel.continousJump = 0;
-            GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJumpMax, GameStates.instance.globalContinuousJump);
-            GameStates.instance.globalContinuousJump = 0;
-            numRotateCircle = 0;
-        }
-        //When the first time get 4-continuous jump, get achievement
-        if (playerModel.continousJump == 4)
-        {
-            SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
+        if(!startPage){
+            if (numRotateCircle == 0)
+            {
+                playerModel.continousJump += 1;
+                GameStates.instance.globalContinuousJump += 1;
+            }
+            else
+            {
+                playerModel.continousJump = 0;
+                GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJumpMax, GameStates.instance.globalContinuousJump);
+                GameStates.instance.globalContinuousJump = 0;
+                numRotateCircle = 0;
+            }
+            //When the first time get 4-continuous jump, get achievement
+            if (playerModel.continousJump == 4)
+            {
+                SocialSystem.instance.setAchievement(Achievements.achievement_four_continuousJump);
+            }
         }
 
         Vector2 pos1 = new Vector2(transform.position.x, transform.position.y);//Player's position

@@ -16,9 +16,7 @@ public class GameStates : MonoBehaviour
     // settings
     public static bool isPointer = true;
     public bool destroy = false;
-
     public string[] bigLevelNames;
-    public string[] levels;
 
     public string showContent;
     public int deviceId;
@@ -119,11 +117,6 @@ public class GameStates : MonoBehaviour
                 milkywayTitle.GetComponent<TitleScript>().showTitle();
             }
         }
-
-        levels = new string[] {
-            "start page", 
-            "1-1", "1-2", "1-3", "1-4",
-            "2-1", "2-2", "2-3", "2-4" };
 
         //PlayerPrefs.SetString("checkedList", null);
         //Debug.Log(PlayerPrefs.GetString("checkedList"));

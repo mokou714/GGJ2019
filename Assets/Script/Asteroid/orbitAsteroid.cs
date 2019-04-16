@@ -38,10 +38,10 @@ public class orbitAsteroid : MonoBehaviour {
             //Disable the collider when moveing in case of hitting other asteroids
             if (transform.GetComponent<Collider2D>().enabled)
                 //transform.GetComponent<Collider2D>().enabled = false;
-            //print(Vector3.Distance(transform.position, origPosition));
-            if (Vector3.Distance(transform.position, origPosition) < 0.001f)
+            //print(Vector2.Distance(transform.position, origPosition));
+            if (Vector2.Distance(transform.position, origPosition) < 0.01f)
             {
-                
+                //print("Got back");
                 transform.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 transform.GetComponent<Collider2D>().enabled = true;

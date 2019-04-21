@@ -129,6 +129,8 @@ public class UIManager : MonoBehaviour {
     public IEnumerator ShowDiscoveries()
     {
         menu.SetActive(true);
+        settingsPanel.SetActive(false);
+        aboutPanel.SetActive(false);
         discoveriesPanel.SetActive(true);
         closeButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);

@@ -12467,7 +12467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSaving: 1
-  destroy: 0
+  destroy: 1
   bigLevelNames: []
   showContent: 
   deviceId: -1

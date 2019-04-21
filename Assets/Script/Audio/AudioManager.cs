@@ -128,7 +128,7 @@ public class AudioManager : MonoBehaviour
             else if (unlockedLevel > 10 && unlockedLevel < 21)
                 PlayMusic("bgm0b");
         }
-        else if (buildIndex < 14)
+        else if (buildIndex < 14 || buildIndex == 26) // end Stage
             PlayMusic("bgm1");
         else 
             PlayMusic("bgm2");

@@ -1,7 +1,4 @@
-﻿// version 2 by Ke, 3/29/2019
-// Added menu and redesigned UI
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -317,52 +314,61 @@ public class UIManager : MonoBehaviour {
 
     public IEnumerator FadeOutWhiteImages(float time, params Image[] images)
     {
-        float a0 = images[0].color.a * 255;// 0-1
+        float a0 = images[0].color.a;
         float a = a0;
-        while (a > 0.1f)
+        while (a > 0.01f)
         {
-            a -= Time.unscaledDeltaTime / time * a0;
-            foreach (Image i in images)            
-                i.color = new Color32(255, 255, 255, (byte)a);
+            a -= Time.unscaledDeltaTime / time;
+            foreach (Image i in images)
+                i.color = new Color(1, 1, 1, a);
             yield return null;
         }
     }
     public IEnumerator FadeInWhiteImages(float time, params Image[] images)
     {
         float a = 0;
-        while (a <255f)
+        while (a < 1f)
         {
-            a += Time.unscaledDeltaTime / time * 255f;
+            a += Time.unscaledDeltaTime / time;
             foreach (Image i in images)
-                i.color = new Color32(255, 255, 255, (byte)a);
+                i.color = new Color(1, 1, 1, a);
             yield return null;
         }
 
         foreach (Image i in images)
-            i.color = new Color32(255, 255, 255, 255);
+            i.color = new Color(1, 1, 1, a);
     }
     public IEnumerator FadeOutTexts(float time, params Text[] texts)
     {
-        float a0 = texts[0].color.a * 255;
-        float a = a0;
-        while (a > 0.1f)
+        float a = texts[0].color.a;
+        while (a > 0.01f)
         {
-            a -= Time.unscaledDeltaTime / time * a0;
+            a -= Time.unscaledDeltaTime / time;
             foreach (Text text in texts)
-                text.color = new Color32(255, 255, 255, (byte)a);
+                text.color = new Color(1, 1, 1, a);
             yield return null;
         }
+
+        foreach (Text text in texts)
+            text.color = new Color(1, 1, 1, 0);
+
     }
     public IEnumerator FadeInTexts(float time, params Text[] texts)
     {
         float a = 0;
-        while (a > 0.1f)
+        foreach (Text text in texts)
+            text.color = new Color(1, 1, 1, 0);
+
+        while (a < 1)
         {
-            a += Time.unscaledDeltaTime / time * 255f;
+            a += Time.unscaledDeltaTime / time;
             foreach (Text text in texts)
-                text.color = new Color32(255, 255, 255, (byte)a);
+                text.color = new Color(1, 1, 1, a);
             yield return null;
         }
+
+        foreach (Text text in texts)
+            text.color = new Color(1, 1, 1, 1);
     }
 
     private void OnLevelWasLoaded(int level)
@@ -371,8 +377,7 @@ public class UIManager : MonoBehaviour {
 
         isStartPage = sceneName == "start page";
         gameTitle.SetActive(isStartPage);
-        menuButton.gameObject.SetActive(sceneName!="splash page");
-
+        menuButton.gameObject.SetActive(sceneName!="splash page" && sceneName != "end stage");
 
         if (whiteLevels.Contains(sceneName))
         {

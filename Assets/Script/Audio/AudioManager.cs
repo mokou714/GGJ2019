@@ -178,62 +178,39 @@ public class AudioManager : MonoBehaviour
             PlaySFX("NextLevel_0");
         
     }
-
-    // called by collision
-    public void SwitchMusic(string curLevelName)
-    {
-        //print("switching music");
-        //if (curLevelName == "startPage")
-        //{
-        //    // find out what is the next level
-        //    int nextLevel = GameStates.instance.getProgress();
-        //    if (nextLevel>0 && nextLevel <= 10)
-        //        PlayMusic("bgm1");
-        //    else if(nextLevel>10 && nextLevel<21)
-        //        PlayMusic("bgm2");
            
-        //}
-
-        // end of title bgm, switch to bgm1
-        if (curLevelName == "-1")
-        {
-            PlayMusic("bgm1");
-        }
-
-        // end of bgm1, switch to bgm2
-        //else if (curLevelName == "2-start")
-        //{
-        //    PlayMusic("bgm2");
-        //}
-
-    }
-
-    public void SwitchToStartMusic()
+    private void OnLevelWasLoaded(int level)
     {
-        int curLevel;
         string curScene = SceneManager.GetActiveScene().name;
-        print("On load " + curScene);
-
-        if (curScene == "start page")
-        {
-
-            // find out what is the next level
-            int nextLevel = GameStates.instance.getProgress();
-            if (nextLevel > 0 && nextLevel <= 10)
-                PlayMusic("bgm0a");
-            else if (nextLevel > 10 && nextLevel <= 21)
-                PlayMusic("bgm0b");
-        }else if (curScene == "2-start")
-        {
-            PlayMusic("bgm1");
-        }
+        int curLevel;
 
         if (int.TryParse(curScene, out curLevel))
         {
             if (curLevel > 0 && curLevel <= 10)
                 PlayMusic("bgm1");
-            else if (curLevel > 10 && curLevel <= 21)
+            else if (curLevel > 10 && curLevel <= 20)
                 PlayMusic("bgm2");
+        }
+
+        if (curScene == "start page")
+        {
+            // find out what is next level (the locked big level)
+            int nextLevel = GameStates.instance.getProgress();
+            if (nextLevel > 0 && nextLevel <= 10)
+                PlayMusic("bgm0a");
+            else if (nextLevel > 10 && nextLevel <= 21)
+                PlayMusic("bgm0b");
+            else
+                PlayMusic("bgm0a");
+        }
+        else if (curScene == "2-start")
+        {
+            PlayMusic("bgm1");
+        }
+
+        if (level == 26)
+        {
+            PlayMusic("bgm1");
         }
     }
 
@@ -242,8 +219,9 @@ public class AudioManager : MonoBehaviour
     {
         //print("PlayMusic " + SceneManager.GetActiveScene().name + "," + n);
 
-        // is playing the same
-        if (musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n){
+        // is playing the same, and music is in loop mode
+        if (isLoop && musicSources[curMusicSourceID].isPlaying && musicSources[curMusicSourceID].clip.name == n)
+        {
             return;
         }
             
@@ -368,14 +346,6 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        if (level == 2)
-        {
-            PlaySFX(2f, "Star");
-        }
-
-    }
 
     //Used to play a sound clip by its name, with delay in secs, if has more inputs, randomly choose one
     public void PlaySFX(float delay = 0, params string[] ns)

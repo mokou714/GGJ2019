@@ -270,7 +270,6 @@ public class UIManager : MonoBehaviour {
         menu.SetActive(false);
         Pause();
         SceneManager.LoadScene("start page");
-        AudioManager.instance.SwitchToStartMusic();
     }
 
 
@@ -384,7 +383,6 @@ public class UIManager : MonoBehaviour {
             print("Convert color");
             menuButtonInvert();
         }
-        AudioManager.instance.SwitchToStartMusic();
     }
 
     public void menuButtonInvert()

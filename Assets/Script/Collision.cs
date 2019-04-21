@@ -129,7 +129,7 @@ public class Collision : MonoBehaviour
                         if (GameStates.instance.isLoggedIn){
                             SocialSystem.instance.setAchievement(Achievements.passing_all_levels);
                         }
-                        next_level = "start page";
+                        next_level = "end stage";
                     }else if((curLevel > 0 && curLevel < 20) || curLevel < -1){
                         if(curLevel == 9){
                             if ((int)GameStates.instance.getData(Constants.whirpoolStatus, typeof(int)) < 1)

@@ -23,9 +23,9 @@ class Part_1 {
         Dictionary<string, hint> instr = new Dictionary<string, hint>();
         instr["release"] = new hint("Relase to launch yourself");
         instr["hold"] = new hint("First, press and hold your screen.");
-        instr["compliment"] = new hint("Good job!", false, 300, 150);
+        instr["compliment"] = new hint("Good job!", false, 200, 200);
         instr["goal_1"] = new hint("Get here!", false, 200, 200);
-        instr["goal_2"] = new hint("Now get here!", false, 400, 300);
+        instr["goal_2"] = new hint("Now get here!", false, 350, 300);
         instr["congrat"] = new hint("Well done, let's get into the game!", false, 0, 200);
 
         this.inst = instr;

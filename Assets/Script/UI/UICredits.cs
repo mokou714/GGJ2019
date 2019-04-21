@@ -21,21 +21,25 @@ public class UICredits : MonoBehaviour
 
     bool isShowingCredits = false;
 
-    Color transparrent = new Color(1, 1, 1, 0.2f);
+    Color transparrent = new Color(1, 1, 1, 0);
 
     // Use this for initialization
     void Start()
     {
+        nameText.gameObject.SetActive(false);
+        workText.gameObject.SetActive(false);
+        skipButton.gameObject.SetActive(false);
         skipButton.onClick.AddListener(OnSkipButtonClicked);
         skipButton.GetComponentInChildren<Text>().color = transparrent;
 
-        StartCoroutine(ShowCredits());
+        // StartCoroutine(ShowCredits());
     }
 
     private void Update()
     {
         // twinkle the skip button
-        skipButton.GetComponentInChildren<Text>().color = Color.Lerp(transparrent, new Color(1, 1, 1, 0.5f), Mathf.PingPong(Time.time, fadeInTime) / (fadeInTime ));
+        if(skipButton.gameObject.activeSelf)
+            skipButton.GetComponentInChildren<Text>().color = Color.Lerp(transparrent, new Color(1, 1, 1, 0.5f), Mathf.PingPong(Time.time, 3f) / 3f);
 
     }
 
@@ -55,7 +59,9 @@ public class UICredits : MonoBehaviour
 
             if (isShowingCredits)
                 StopCoroutine(ShowCredits());
-        }        
+        }    
+        else
+            StartCoroutine(ShowCredits());
     }
 
     IEnumerator ShowCredits()

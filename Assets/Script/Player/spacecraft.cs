@@ -145,7 +145,7 @@ public class spacecraft : MonoBehaviour
         else
             showArrow = (PlayerPrefs.GetInt("isPointer") == 1);
 
-        if (SceneManager.GetActiveScene().name == "start page")
+        if (SceneManager.GetActiveScene().name == "start page" || SceneManager.GetActiveScene().name == "pre_tutorial")
             startPage = true;
 
         //showArrow = ((int)GameStates.instance.getData("isPointer", typeof(int)) < 1);

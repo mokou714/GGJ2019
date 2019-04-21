@@ -159,8 +159,11 @@ public class GameStates : MonoBehaviour
             if(curLevelID > maxlevel){
                 PlayerPrefs.SetInt(Constants.unlockedLevelKey, curLevelID);
             }
-        }else
-            curLevelID = SceneManager.GetActiveScene().buildIndex + 1;
+        }else{
+
+            int.TryParse(SceneManager.GetActiveScene().name, out curLevelID);
+        }
+            
         //int unlockedLevelID = SceneManager.GetActiveScene().buildIndex + 1;
 
         print("Save level:" + curLevelID);

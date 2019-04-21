@@ -76,7 +76,8 @@ public class Collision : MonoBehaviour
 
         sc.playerModel.hit += 1;
         sc.launchEnergy = left_health;
-        print("sc energy: " + sc.launchEnergy);
+        //print("sc energy: " + sc.launchEnergy);
+        sc.energy = sc.launchEnergy;
         playerTrailRenderer.time = sc.launchEnergy / 100f; 
         collided = true;
     }

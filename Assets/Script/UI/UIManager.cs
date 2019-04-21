@@ -68,6 +68,10 @@ public class UIManager : MonoBehaviour {
         string sceneName = SceneManager.GetActiveScene().name;
         menuButton.gameObject.SetActive(sceneName != "splash page");
 
+        List<string> whiteLevels = new List<string>(){"11", "12", "13"};
+        if(whiteLevels.Contains(sceneName)){
+            menuButtonInvert();
+        }
     }
 
 
@@ -112,6 +116,8 @@ public class UIManager : MonoBehaviour {
         discoveriesPanel.SetActive(false);
         aboutPanel.SetActive(false);
         menu.SetActive(false);
+
+
         
     }
 

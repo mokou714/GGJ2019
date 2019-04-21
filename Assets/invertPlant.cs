@@ -52,6 +52,7 @@ public class invertPlant : Planet {
         }
         else{
             sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack = true;
+            UIManager.instance.menuButtonInvert();
         }
     }
 
@@ -62,8 +63,9 @@ public class invertPlant : Planet {
         yield return new WaitForSeconds(1f);
         sc.camera.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
 
-        if (canvas != null)
-            canvas.GetComponent<UIManager>().menuButtonInvert();
+        //if (canvas != null)
+            //canvas.GetComponent<UIManager>().menuButtonInvert();
+        UIManager.instance.menuButtonInvert();
 
         for (int i = 0; i < transform.parent.childCount; i++)
         {
@@ -77,7 +79,6 @@ public class invertPlant : Planet {
             }
         }
         yield return new WaitForSeconds(0.1f);
-        UIManager.instance.menuButtonInvert();
         AudioManager.instance.PlayMusic("bgm2");
         sc.camera.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         move = true;

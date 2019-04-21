@@ -286,12 +286,15 @@ public class spacecraft : MonoBehaviour
             //rotating_speed = 1.5f;
             //inwardVel = inwardVel / 2;
             if (!requiredSleep){
-                playerModel.pressTime += Time.deltaTime;
+                
                 Time.timeScale = 0.5f;
                 if (showArrow)
                     arrow.gameObject.SetActive(true);
-
-                playerModel.levelTime += Time.deltaTime * 2;
+                if (playerModel != null){
+                    playerModel.levelTime += Time.deltaTime * 2;
+                    playerModel.pressTime += Time.deltaTime;
+                }
+                    
             }
         }
         else if (touchRelease())
@@ -309,7 +312,8 @@ public class spacecraft : MonoBehaviour
             GameStates.instance.reinit();
             //SceneManager.LoadScene(Application.loadedLevel);
         }else{
-            playerModel.levelTime += Time.deltaTime;
+            if(playerModel != null)
+                playerModel.levelTime += Time.deltaTime;
         }
     }
 

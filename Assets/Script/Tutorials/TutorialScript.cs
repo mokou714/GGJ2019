@@ -99,7 +99,7 @@ public class TutorialScript : MonoBehaviour {
         if ( Input.GetKeyDown(KeyCode.Space) || (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended)){
             if(stopped){
                 if(tutorialNum == 0){
-                    if(playerIntro.activeSelf){
+                    if(playerIntro != null && playerIntro.activeSelf){
                         playerIntro.SetActive(false);
                     }
 

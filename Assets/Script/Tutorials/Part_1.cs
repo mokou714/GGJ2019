@@ -55,7 +55,7 @@ class Part_1 {
 
         }
         if(player_sc.won){
-            Debug.Log("Won!");
+            //Debug.Log("Won!");
             monoBehaviour.StartCoroutine(showEnd(0, inst["congrat"], null));
         }
 

@@ -2593,7 +2593,7 @@ GameObject:
   - component: {fileID: 1539445524}
   m_Layer: 0
   m_Name: secret
-  m_TagString: cancer
+  m_TagString: libra
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

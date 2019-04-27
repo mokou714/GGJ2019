@@ -9,7 +9,7 @@ public class levelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {         
         int progress = GameStates.instance.getUnlockedLevels();
-        Debug.Log("Progress:" + progress);
+        //Debug.Log("Progress:" + progress);
         if (progress > 0){
 
             //textTutorial.SetActive(false);
@@ -26,11 +26,23 @@ public class levelController : MonoBehaviour {
                     child.gameObject.GetComponent<levelPlanet>().progress = progress;
                 }
             }
+
+            // play sfx when a new big level is unlocked
+            if (!PlayerPrefs.HasKey("bigLevel") && bigLevel==1)
+            {
+                PlayerPrefs.SetInt("bigLevel", 1);
+                AudioManager.instance.PlaySFX(2f, "Star");
+            }
+            else if (PlayerPrefs.HasKey("bigLevel"))
+            {
+                if(PlayerPrefs.GetInt("bigLevel") == 1 && bigLevel == 2)
+                {
+                    PlayerPrefs.SetInt("bigLevel", 2);
+                    AudioManager.instance.PlaySFX(2f, "Star");
+                }
+            }
+
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+   
 }

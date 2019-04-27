@@ -23,7 +23,7 @@ public class Constants{
 
     public static float minTimeScale = 0.001f;
 
-    public static string curLevelKey = "unlockedLevelID";
+    public static string curLevelKey = "curLevelID";
     public static string lastTimeLevelKey = "lastTimeLevelKey";
     public static string milkywayStatus = "milkywayStatus";
     public static string whirpoolStatus = "whirlpoolStatus";

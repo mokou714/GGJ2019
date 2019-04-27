@@ -70,10 +70,10 @@ public class TutorialScript : MonoBehaviour {
                 break;
             case 2:
                 inst["energy"] = new hint("You lose energy during interstellar travels.", false, 100, 200);
-                inst["dust"] = new hint("The stardust around a planet charges\n your energy.", false, 0, -200);
+                inst["dust"] = new hint("The dust charges your energy.", false, 0, -200);
                 break;
             case 3:
-                inst["obstacle"] = new hint("Avoid these squared rocks!\nThey can smash you into pieces.", false, -120, 210);
+                inst["obstacle"] = new hint("Avoid these squared rocks!", false, -220, 200);
                 break;
         }
 
@@ -116,7 +116,7 @@ public class TutorialScript : MonoBehaviour {
                 part_1.onPlanetRoutine();
             }else if(tutorialNum == 1){
                 if(checkedMark < 1){
-                    hint start_campagin = new hint("Get here to start!", false, 260, -100);
+                    hint start_campagin = new hint("Get here to start!", false, 270, -110);
                     showText(start_campagin);
                     player_sc.end.transform.Find("arrow").gameObject.SetActive(true);
                     checkedMark++;

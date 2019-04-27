@@ -158,18 +158,9 @@ public class GameStates : MonoBehaviour
             curLevelID = curID;
             if(curLevelID > maxlevel){
                 PlayerPrefs.SetInt(Constants.unlockedLevelKey, curLevelID);
+                PlayerPrefs.Save();
             }
-        }else{
-
-            int.TryParse(SceneManager.GetActiveScene().name, out curLevelID);
-        }
-            
-        //int unlockedLevelID = SceneManager.GetActiveScene().buildIndex + 1;
-
-        print("Save level:" + curLevelID);
-        PlayerPrefs.SetInt(Constants.curLevelKey, curLevelID);
-        PlayerPrefs.Save();
-
+        } 
     }
 
 
@@ -194,8 +185,9 @@ public class GameStates : MonoBehaviour
     public int getProgress(){
         if (PlayerPrefs.HasKey(Constants.curLevelKey))
         {
-            int unlockedLevelID = PlayerPrefs.GetInt(Constants.curLevelKey);
-            return unlockedLevelID;
+            int curlevel = PlayerPrefs.GetInt(Constants.curLevelKey);
+            //print("Progress:" + curlevel);
+            return curlevel;
         }else{
             return -2; 
         }
@@ -217,10 +209,12 @@ public class GameStates : MonoBehaviour
 
         // go to curLevel
         int levelToLoad = getProgress();
-        if(levelToLoad == SceneManager.GetActiveScene().buildIndex)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        else
-            SceneManager.LoadScene(levelToLoad.ToString());
+        if (levelToLoad == 0)
+            levelToLoad++;
+        //if(levelToLoad == SceneManager.GetActiveScene().buildIndex)
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //else
+        SceneManager.LoadScene(levelToLoad.ToString());
     }
 
     public bool hasKey(string key){
@@ -238,6 +232,7 @@ public class GameStates : MonoBehaviour
         {
             PlayerPrefs.SetFloat(key, (float)val);
         }
+        print("saved " + key + ", " + val);
         PlayerPrefs.Save();
     }
 

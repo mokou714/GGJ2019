@@ -272,6 +272,8 @@ public class UIManager : MonoBehaviour {
     {
         menu.SetActive(false);
         Pause();
+        if(transform.Find("Tutorials").GetChild(0).GetComponent<Text>() != null)
+            transform.Find("Tutorials").GetChild(0).GetComponent<Text>().text = "";
         SceneManager.LoadScene("start page");
         AudioManager.instance.SwitchToStartMusic();
     }

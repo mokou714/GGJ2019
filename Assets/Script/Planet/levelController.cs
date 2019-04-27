@@ -19,6 +19,10 @@ public class levelController : MonoBehaviour {
                 Transform child = transform.Find(i.ToString());
                 if(child != null){
                     child.gameObject.SetActive(true);
+                    if ((int)GameStates.instance.getData("showed" + i.ToString(), typeof(int)) == 0){
+                        child.GetComponent<levelPlanet>().showUp();
+                        GameStates.instance.saveData("showed" + i.ToString(), 1);
+                    }
                     child.gameObject.GetComponent<levelPlanet>().progress = progress;
                 }
             }

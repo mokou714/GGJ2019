@@ -18,7 +18,10 @@ public class levelPlanet : Planet {
 
     public int progress;
     private Transform planet2;
+    private Transform particle;
+
     private Vector3 size;
+    private Vector3 orig_particle_size;
 
     public GameObject title;
 
@@ -29,9 +32,10 @@ public class levelPlanet : Planet {
 	// Use this for initialization
 	void Start () {
         setup();
-        size = transform.localScale;
         bigNumber = int.Parse(name);
         planetName = transform.Find("title");
+        planet2 = transform.Find("Planet2");
+
 	}
 	
 	// Update is called once per frame
@@ -111,18 +115,29 @@ public class levelPlanet : Planet {
         //showingSelection = false;
     }
 
-
-    IEnumerator popOut()
-    {
-        planet2.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
-        yield return new WaitForSeconds(0.01f);
-        if (planet2.transform.localScale.x < size.x)
-        {
-            StartCoroutine(popOut());
+    public void showUp(){
+        if(planet2 == null){
+            planet2 = transform.Find("Planet2");
+            size = planet2.localScale;
+            particle = planet2.GetChild(0);
+            orig_particle_size = particle.localScale;
         }
-        else
+            
+        //planet2.localScale = Vector3.zero;
+        print("Pop out");
+        StartCoroutine(popOut(0));
+    }
+
+    IEnumerator popOut(float ratio)
+    {
+        planet2.localScale = size * ratio;
+        particle.localScale = orig_particle_size * ratio;
+        yield return new WaitForSeconds(0.01f);
+        if (ratio < 1)
         {
-            catchRadius = size.x * 3;
+            StartCoroutine(popOut(ratio + 0.01f));
+        }else{
+            catchRadius = planet2.localScale.x;
         }
     }
   

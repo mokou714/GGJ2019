@@ -64,7 +64,7 @@ class Part_1 {
     public void onPlanetRoutine(){
         if (player_sc.rotatingPlanet == firstPlanet)
         {
-            if (player_sc.touchHold() && player_sc.playerModel.pressTime > 1f)
+            if (player_sc.touchHold() && player_sc.playerModel.pressTime > 0.7f)
             {
                 showText(inst["release"], 0);
 

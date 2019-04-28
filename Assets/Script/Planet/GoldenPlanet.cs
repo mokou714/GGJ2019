@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoldenPlanet : Planet {
     private int dir = 1;
@@ -14,12 +15,21 @@ public class GoldenPlanet : Planet {
     private Color origColor;
 
     private Vector3 size;
+    private Color origFrameColor;
+
 	// Use this for initialization
 	void Start () {
         setup();
         frame = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         award = transform.Find("Planet2").GetChild(0).gameObject;
         good = award.gameObject.GetComponent<SpriteRenderer>();
+
+
+        if( 16 <= SceneManager.GetActiveScene().buildIndex || SceneManager.GetActiveScene().buildIndex <= 18){
+            print("Invert color");
+            frame.color = Color.black;
+            origFrameColor = frame.color;
+        }
 
         planetBottom.localScale = planetSprite.localScale * 0.5f;
         origColor = good.color;
@@ -97,7 +107,7 @@ public class GoldenPlanet : Planet {
                 currentAlpha = frame.color.a;
                 float newAlpha = currentAlpha + 0.05f * dir;
 
-                frame.color = new Color(255f, 255f, 255f, newAlpha);
+                frame.color = new Color(origFrameColor.r, origFrameColor.b, origFrameColor.g, newAlpha);
                 origColor.a = newAlpha;
                 good.color = origColor;
 

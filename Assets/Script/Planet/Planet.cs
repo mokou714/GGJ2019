@@ -86,6 +86,8 @@ public class Planet : MonoBehaviour
         if (buildIndex > 0 && buildIndex <= 13)
         {
             AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.landingSfxID.ToString());
+
+            print("play landing sound");
         }
         else if (buildIndex > 13 && buildIndex < 26)
         {
@@ -101,6 +103,9 @@ public class Planet : MonoBehaviour
             }
             print("t: " + t + ", pitch: " + pitch);
             AudioManager.instance.PlaySFX("Lv2 " + "Harp Land" + pitch + "_" + AudioManager.landingSfxID.ToString());
+
+            print("play landing sound");
+
         }
 
         AudioManager.landingSfxID++;

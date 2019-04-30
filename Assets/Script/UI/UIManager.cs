@@ -112,8 +112,6 @@ public class UIManager : MonoBehaviour {
         aboutPanel.SetActive(false);
         menu.SetActive(false);
 
-
-        
     }
 
     private void OnLeaderboardButtonClicked()
@@ -129,6 +127,10 @@ public class UIManager : MonoBehaviour {
     public IEnumerator ShowDiscoveries()
     {
         menu.SetActive(true);
+
+        menuButtonsGroup.SetActive(false);
+        startMenuButtonsGroup.SetActive(false);
+
         settingsPanel.SetActive(false);
         aboutPanel.SetActive(false);
         discoveriesPanel.SetActive(true);
@@ -146,6 +148,7 @@ public class UIManager : MonoBehaviour {
         closeButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
         discoveriesPanel.SetActive(false);
+
         menu.SetActive(false);
 
         Pause();

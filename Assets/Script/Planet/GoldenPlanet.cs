@@ -25,11 +25,14 @@ public class GoldenPlanet : Planet {
         good = award.gameObject.GetComponent<SpriteRenderer>();
 
 
-        if( 16 <= SceneManager.GetActiveScene().buildIndex || SceneManager.GetActiveScene().buildIndex <= 18){
+        if( 16 <= SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex <= 18){
             print("Invert color");
             frame.color = Color.black;
-            origFrameColor = frame.color;
+
+        }else{
+            frame.color = Color.white;
         }
+        origFrameColor = frame.color;
 
         planetBottom.localScale = planetSprite.localScale * 0.5f;
         origColor = good.color;
@@ -155,7 +158,7 @@ public class GoldenPlanet : Planet {
 	}
 
     private bool checkHasTaken(string key){
-        print("Check key: " + key + ", " + GameStates.instance.hasKey(key));
+        //print("Check key: " + key + ", " + GameStates.instance.hasKey(key));
         return GameStates.instance.hasKey(key);
     }
 

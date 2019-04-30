@@ -36,6 +36,10 @@ public class UIManager : MonoBehaviour {
     public GameObject discoveriesPanel;
     public GameObject aboutPanel;
 
+    public Button facebook;
+    public Button twitter;
+    public Button rateus;
+
     public GameObject gameTitle;
 
     string pageName = "game";
@@ -90,6 +94,8 @@ public class UIManager : MonoBehaviour {
         discoveriesButton.onClick.AddListener(OnDiscoveriesButtonClicked);
         startSettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         aboutButton.onClick.AddListener(OnAboutButtonClicked);
+        facebook.onClick.AddListener(onFacebookShow);
+        twitter.onClick.AddListener(onTWitterShow);
 
         achievementsButton.onClick.AddListener(OnAchievementsButtonClicked);
         leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
@@ -114,6 +120,14 @@ public class UIManager : MonoBehaviour {
 
 
         
+    }
+
+    public void onFacebookShow(){
+        Application.OpenURL("https://www.facebook.com/stargazinggame");
+    }
+
+    public void onTWitterShow(){
+        Application.OpenURL("https://twitter.com/StarGazingGame");
     }
 
     private void OnLeaderboardButtonClicked()
@@ -386,15 +400,9 @@ public class UIManager : MonoBehaviour {
 
         int res;
 
-        if(name != "start page"){
-            bool s = int.TryParse(sceneName, out res);
-            if (s)
-            {
-                GameStates.instance.saveData(Constants.curLevelKey, res);
-                print("Saved cur level " + GameStates.instance.getData(Constants.curLevelKey, typeof(int)));
-            }
+        if(level > 2){
+            GameStates.instance.saveData(Constants.curLevelKey, sceneName);
         }
-
 
         if (whiteLevels.Contains(sceneName))
         {

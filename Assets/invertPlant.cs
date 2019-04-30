@@ -39,8 +39,9 @@ public class invertPlant : Planet {
             sc.playerModel.init();
             sc.energy = 100f;
             GameStates.instance.saveData(Constants.whirpoolStatus, 1);
-            if((int)GameStates.instance.getProgress() < 11){
+            if((int)GameStates.instance.getUnlockedLevels() < 11){
                 GameStates.instance.SaveLevel(curID: 11);
+                GameStates.instance.saveData(Constants.curLevelKey, "11");
                 SocialSystem.instance.setAchievement(Achievements.unlock_whirlpool);
                 sc.transform.parent.GetComponent<Collision>().saveUserData(11);
             }

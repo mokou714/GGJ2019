@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot unpaused;
     public float pauseTransitionTime = 0.01f;
 
-    public bool isDevMode = true;
+    public bool isDevMode = false;
     // sometimes we will have more than one sfx clip playing at the same time
     // so we need to have multiple audio sources, each of which primarily handles one sfx
 
@@ -195,7 +195,7 @@ public class AudioManager : MonoBehaviour
         if (curScene == "start page")
         {
             // find out what is next level (the locked big level)
-            int nextLevel = GameStates.instance.getProgress();
+            int nextLevel = GameStates.instance.getUnlockedLevels();
             if (nextLevel > 0 && nextLevel <= 10)
                 PlayMusic("bgm0a");
             else if (nextLevel > 10 && nextLevel <= 21)

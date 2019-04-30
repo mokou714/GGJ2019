@@ -20,7 +20,7 @@ public class BadgeManager : MonoBehaviour
     Dictionary<string, int> nameIndexMap = 
         new Dictionary<string, int>(){{"aquarius", 0}, 
         {"pisces", 2}, {"sagittarius", 3}, 
-        {"cancer", 4}};
+        {"cancer", 4}, {"libra", 1}, {"aries", 5}};
 
 	void Start () {
         if (instance == null)
@@ -30,7 +30,6 @@ public class BadgeManager : MonoBehaviour
             if (num < prob)
             {
                 int index = Random.Range(1, maxNum + 1);
-                print("Pick " + index);
                 transform.GetChild(index).gameObject.SetActive(true);
                 transform.GetChild(index).gameObject.GetComponent<GoldenPlanet>().initBadge();
                 given = true;

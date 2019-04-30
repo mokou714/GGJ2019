@@ -2555,22 +2555,22 @@ Prefab:
     - target: {fileID: 70069892205678546, guid: e1300d96f36064ec297d83fe4851982a,
         type: 2}
       propertyPath: m_Offset.x
-      value: 0.86000264
+      value: 0.8600059
       objectReference: {fileID: 0}
     - target: {fileID: 70069892205678546, guid: e1300d96f36064ec297d83fe4851982a,
         type: 2}
       propertyPath: m_Offset.y
-      value: 0.3477296
+      value: 0.8143615
       objectReference: {fileID: 0}
     - target: {fileID: 70069892205678546, guid: e1300d96f36064ec297d83fe4851982a,
         type: 2}
       propertyPath: m_Size.x
-      value: 2.0631752
+      value: 2.0631673
       objectReference: {fileID: 0}
     - target: {fileID: 70069892205678546, guid: e1300d96f36064ec297d83fe4851982a,
         type: 2}
       propertyPath: m_Size.y
-      value: 3.4403324
+      value: 5.4015183
       objectReference: {fileID: 0}
     - target: {fileID: 4823086485298708, guid: e1300d96f36064ec297d83fe4851982a, type: 2}
       propertyPath: m_LocalRotation.z

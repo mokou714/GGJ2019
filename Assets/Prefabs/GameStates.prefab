@@ -9933,6 +9933,9 @@ MonoBehaviour:
   settingsPanel: {fileID: 1006088061258942}
   discoveriesPanel: {fileID: 1016984926280350}
   aboutPanel: {fileID: 1964379351524732}
+  facebook: {fileID: 114119765735350372}
+  twitter: {fileID: 114479016151711942}
+  rateus: {fileID: 114993550992190594}
   gameTitle: {fileID: 1336222299672670}
   discoveredStarNames:
   - ssagittarius

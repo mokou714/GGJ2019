@@ -62,8 +62,9 @@ public class Collision : MonoBehaviour
         }
 
         if(col.transform.childCount > 1 && col.transform.GetChild(col.transform.childCount - 1).name == "secret"){
-            if(BadgeManager.instance != null)
+            if(BadgeManager.instance != null){
                 BadgeManager.instance.showHiddenPlanet(col.transform.GetChild(col.transform.childCount - 1).tag);
+            }
         }
 
         col.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * collide_strengh;
@@ -248,7 +249,7 @@ public class Collision : MonoBehaviour
         //}
         GameStates.instance.saveData(Constants.bestMilkywayScoreKey, Mathf.Max(total, best_score));
         GameStates.instance.saveData(scores_key, string.Join(",", score_list));
-        GameStates.instance.showContent = Mathf.Max(total, best_score).ToString();
+        //GameStates.instance.showContent = Mathf.Max(total, best_score).ToString();
 
         //Debug.Log("Last continous jump: " + GameStates.instance.globalContinuousJump);
         //Debug.Log("Current max jumps: " + curMaxJump);

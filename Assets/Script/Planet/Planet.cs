@@ -99,7 +99,7 @@ public class Planet : MonoBehaviour
             {
                 pitch = "-4";
             }
-            print("t: " + t + ", pitch: " + pitch);
+            //print("t: " + t + ", pitch: " + pitch);
             AudioManager.instance.PlaySFX("Lv2 " + "Harp Land" + pitch + "_" + AudioManager.landingSfxID.ToString());
         }
 

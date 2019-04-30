@@ -15,7 +15,7 @@ public class SocialSystem : MonoBehaviour
     public GameStates gameStates;
     private string showContent = "";
     public Splash splash;
-    public bool debug = true;
+    public bool debug = false;
 
     private void Awake()
     {
@@ -117,13 +117,15 @@ public class SocialSystem : MonoBehaviour
 #if UNITY_ANDROID 
                 ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.TOP);
 #endif
-                showContent = "Success";
+
+                //showContent = "Success";
                 GameStates.instance.isLoggedIn = true;
                 //setAchievement(Achievements.achievement_passed_tutorial);
                 //setLeaderBoard(Achievements.cont_jump_leaderboard, 10);
-            }else{
-                showContent = "Login failed";
             }
+            //else{
+            //    showContent = "Login failed";
+            //}
             splash.startTheGame();
         });
     }
@@ -189,7 +191,7 @@ public class SocialSystem : MonoBehaviour
         {
             Social.ShowLeaderboardUI();
         }else{
-            print("Not logged In");
+            showContent = "Show failed";
         }
     }
 

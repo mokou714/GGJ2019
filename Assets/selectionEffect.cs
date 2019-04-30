@@ -96,7 +96,15 @@ public class selectionEffect : MonoBehaviour,
         int levelID = 10 * (bigNumber - 1) + levelName;
         Debug.Log("Enter a level");
         // load level
-        SceneManager.LoadScene(levelID.ToString());
+        if(levelID == 10){
+            if(GameStates.instance.getUnlockedLevels() > 10){
+                SceneManager.LoadScene(levelID.ToString());
+            }else{
+                SceneManager.LoadScene("2-start");
+            }
+        }else{
+            SceneManager.LoadScene(levelID.ToString());
+        }
         //UIManager.instance.Start();
     }
 }

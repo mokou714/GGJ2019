@@ -84,10 +84,10 @@ EditorBuildSettings:
     path: Assets/Levels/ColorInvertedLevels/20.unity
     guid: 2dc5a33dc474cfd4e9e5a375ceb88c95
   - enabled: 0
-    path: Assets/Levels/level 1-7.unity
+    path: Assets/Levels/Test/level 1-7.unity
     guid: d0b12c57d3b1a412c960b77a7f6927bb
   - enabled: 0
-    path: Assets/Levels/level 1-9.unity
+    path: Assets/Levels/Test/level 1-9.unity
     guid: 9a30e00f06f4341a5a0e87dc9eeb3bfa
   - enabled: 0
     path: Assets/Levels/level 1/new level 1.unity

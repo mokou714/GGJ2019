@@ -182,14 +182,14 @@ public class GameStates : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public int getProgress(){
+    public string getProgress(){
         if (PlayerPrefs.HasKey(Constants.curLevelKey))
         {
-            int curlevel = PlayerPrefs.GetInt(Constants.curLevelKey);
+            string curlevel = PlayerPrefs.GetString(Constants.curLevelKey);
             //print("Progress:" + curlevel);
             return curlevel;
         }else{
-            return -2; 
+            return "-2"; 
         }
     }
 
@@ -206,15 +206,10 @@ public class GameStates : MonoBehaviour
 
     public void LoadLevel()
     {
-
         // go to curLevel
-        int levelToLoad = getProgress();
-        if (levelToLoad == 0)
-            levelToLoad++;
-        //if(levelToLoad == SceneManager.GetActiveScene().buildIndex)
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //else
-        SceneManager.LoadScene(levelToLoad.ToString());
+        string levelToLoad = getProgress();
+        //print("level to load:" + levelToLoad);
+        SceneManager.LoadScene(levelToLoad);
     }
 
     public bool hasKey(string key){
@@ -232,7 +227,7 @@ public class GameStates : MonoBehaviour
         {
             PlayerPrefs.SetFloat(key, (float)val);
         }
-        print("saved " + key + ", " + val);
+        //print("saved " + key + ", " + val);
         PlayerPrefs.Save();
     }
 

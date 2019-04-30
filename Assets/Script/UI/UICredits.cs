@@ -63,7 +63,7 @@ public class UICredits : MonoBehaviour
                 StopCoroutine(ShowCredits());
         }    
         else{
-            GameStates.instance.saveData(Constants.curLevelKey, 1);
+            GameStates.instance.saveData(Constants.curLevelKey, "1");
             StartCoroutine(ShowCredits());
         }
     }

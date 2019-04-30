@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.4
+  bundleVersion: 0.6
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -157,8 +157,9 @@ PlayerSettings:
     Android: com.stargazers.stargazing
     Standalone: com.Company.ProductName
     iOS: com.StarGazer.Stargazing
-  buildNumber: {}
-  AndroidBundleVersionCode: 2
+  buildNumber:
+    iOS: 1
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -173,7 +174,7 @@ PlayerSettings:
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 4054
-  iPhoneSdkVersion: 989
+  iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 8.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
@@ -247,7 +248,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: stargazing.keystore
+  AndroidKeystoreName: stargazing1.keystore
   AndroidKeyaliasName: stargazing
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

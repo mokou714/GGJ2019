@@ -16,6 +16,10 @@ public class invertPlant : Planet {
     public Canvas canvas;
     public GameObject whirlpoolTitle;
 
+    private bool inverted = false;
+
+    public GameObject badge;
+
     void Start(){
         setup();
 
@@ -46,14 +50,20 @@ public class invertPlant : Planet {
                 sc.transform.parent.GetComponent<Collision>().saveUserData(11);
             }
         }
-        if(!invBack)
+        if(!invBack && !inverted)
         {
             sc.camera.transform.GetChild(0).GetComponent<colorInverter>().inverting = true;
             StartCoroutine(invertActions(sc));
         }
         else{
-            sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack = true;
-            UIManager.instance.menuButtonInvert();
+            if(!inverted){
+                sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack = true;
+                //UIManager.instance.menuButtonInvert();
+                if (badge != null){
+                    badge.GetComponent<GoldenPlanet>().inverted = true;                    
+                }
+                    
+            }
         }
     }
 
@@ -87,7 +97,7 @@ public class invertPlant : Planet {
         yield return new WaitForSeconds(3f);
         whirlpoolTitle.GetComponent<TitleScript>().showTitle();
         //StartCoroutine(moveCamera());
-
+        inverted = true;
     }
 
 

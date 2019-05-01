@@ -55,6 +55,7 @@ public class GameStates : MonoBehaviour
             PlayerPrefs.DeleteAll();
         }
         //Login();
+        GameStates.instance.globalContinuousJumpMax = (int)getData(Constants.maxConstJumpKey, typeof(int));
 
     }
 

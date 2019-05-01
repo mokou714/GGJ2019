@@ -42,10 +42,6 @@ public class SocialSystem : MonoBehaviour
     void Start()
     {
         gameStates = GameStates.instance;
-        //PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
-        //PlayGamesPlatform.InitializeInstance(config);
-        //// recommended for debugging:
-        //PlayGamesPlatform.DebugLogEnabled = true;
     }
 
     // Update is called once per frame
@@ -77,16 +73,16 @@ public class SocialSystem : MonoBehaviour
         if(GameStates.instance.isLoggedIn){
             Social.ReportProgress(id, 100f, (bool success) =>
             {
-                if (success)
-                {
-                    if (debug)
-                        showContent = "Achievement got";
-                }
-                else
-                {
-                    if (debug)
-                        showContent = "Set Achievement Failed";
-                }
+                //if (success)
+                //{
+                //    if (debug)
+                //        showContent = "Achievement got";
+                //}
+                //else
+                //{
+                //    if (debug)
+                //        showContent = "Set Achievement Failed";
+                //}
             });
 
         }
@@ -95,13 +91,15 @@ public class SocialSystem : MonoBehaviour
     public void setLeaderBoard(string id, long score){
         if (GameStates.instance.isLoggedIn){
             Social.ReportScore(score, id, (bool success) => {
-                if(success){
-                    if (debug)
-                        showContent = "Leaderboard got";
-                }else{
-                    if (debug)
-                        showContent = "Leaderboard failed";
-                }
+                //if(success){
+                //    if (debug)
+                //        showContent = "Leaderboard got";
+                //}else{
+                //    if (debug)
+                //        showContent = "Leaderboard failed";
+                //}
+                //if(success)
+                    //showContent = "Set leaderboard";
             });
         }
     }
@@ -114,7 +112,7 @@ public class SocialSystem : MonoBehaviour
         Social.localUser.Authenticate(success =>
         {
             if (success){
-#if UNITY_ANDROID 
+#if UNITY_ANDROID
                 ((PlayGamesPlatform)Social.Active).SetGravityForPopups(Gravity.TOP);
 #endif
 
@@ -174,15 +172,33 @@ public class SocialSystem : MonoBehaviour
 //#endif
 
     public void syncUserData(){
-        
+        //Social.LoadAchievements(achievements => {
+        //    if (achievements.Length > 0)
+        //    {
+        //        Debug.Log("Got " + achievements.Length + " achievement instances");
+        //        string myAchievements = "My achievements:\n";
+        //        foreach (IAchievement achievement in achievements)
+        //        {
+        //            myAchievements += "\t" +
+        //                achievement.id + " " +
+        //                achievement.percentCompleted + " " +
+        //                achievement.completed + " " +
+        //                achievement.lastReportedDate + "\n";
+        //        }
+        //        Debug.Log(myAchievements);
+        //    }
+        //    else
+        //        Debug.Log("No achievements returned");
+        //});
     }
 
     public void listAchievements(){
         if(GameStates.instance.isLoggedIn){
             Social.ShowAchievementsUI();
-        }else{
-            print("Not logged In");
         }
+        //else{
+        //    print("Not logged In");
+        //}
     }
 
     public void listLeaderboard()
@@ -190,9 +206,10 @@ public class SocialSystem : MonoBehaviour
         if (GameStates.instance.isLoggedIn)
         {
             Social.ShowLeaderboardUI();
-        }else{
-            showContent = "Show failed";
         }
+        //else{
+        //    showContent = "Not logged In";
+        //}
     }
 
     //GUI log on screen to debug on phones

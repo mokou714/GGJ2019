@@ -537,7 +537,11 @@ public class spacecraft : MonoBehaviour
             else
             {
                 playerModel.continousJump = 0;
-                GameStates.instance.globalContinuousJumpMax = Mathf.Max(GameStates.instance.globalContinuousJumpMax, GameStates.instance.globalContinuousJump);
+                if(GameStates.instance.globalContinuousJumpMax < GameStates.instance.globalContinuousJump){
+                    GameStates.instance.globalContinuousJumpMax = GameStates.instance.globalContinuousJump;
+                    GameStates.instance.saveData(Constants.maxConstJumpKey, GameStates.instance.globalContinuousJumpMax);
+                    SocialSystem.instance.setLeaderBoard(Achievements.cont_jump_leaderboard, GameStates.instance.globalContinuousJumpMax);
+                }
                 GameStates.instance.globalContinuousJump = 0;
                 numRotateCircle = 0;
             }

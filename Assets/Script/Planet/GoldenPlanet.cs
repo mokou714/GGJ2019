@@ -16,6 +16,7 @@ public class GoldenPlanet : Planet {
 
     private Vector3 size;
     private Color origFrameColor;
+    public bool inverted;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,7 @@ public class GoldenPlanet : Planet {
         good = award.gameObject.GetComponent<SpriteRenderer>();
 
 
-        if( 16 <= SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex <= 18){
+        if( 16 <= SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex <= 17){
             print("Invert color");
             frame.color = Color.black;
 
@@ -89,7 +90,8 @@ public class GoldenPlanet : Planet {
 
         transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites.GetChild(index).gameObject.GetComponent<SpriteRenderer>().sprite;
 
-        GetComponent<Light>().range = 0;
+        if(GetComponent<Light>() != null)
+            GetComponent<Light>().range = 0;
 
         planet2.transform.localScale = new Vector3(0, 0, 0);
 
@@ -155,6 +157,16 @@ public class GoldenPlanet : Planet {
             awardAvailable = false;
             sc.wonAward = tag;
         }
+
+        if(SceneManager.GetActiveScene().buildIndex == 18){
+            if(!sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack && !inverted){
+                if(frame != null)
+                    frame.color = Color.black;
+                if (good != null)
+                    good.color = Color.black;
+            }
+        }
+
 	}
 
     private bool checkHasTaken(string key){

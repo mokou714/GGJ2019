@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         string sceneName = SceneManager.GetActiveScene().name;
-        menuButton.gameObject.SetActive(sceneName != "splash page");
+        menuButton.gameObject.SetActive(sceneName != "splash page" && sceneName != "pre_tutorial");
 
 
     }
@@ -96,6 +96,7 @@ public class UIManager : MonoBehaviour {
         aboutButton.onClick.AddListener(OnAboutButtonClicked);
         facebook.onClick.AddListener(onFacebookShow);
         twitter.onClick.AddListener(onTWitterShow);
+        rateus.onClick.AddListener(onRateUs);
 
         achievementsButton.onClick.AddListener(OnAchievementsButtonClicked);
         leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
@@ -118,8 +119,6 @@ public class UIManager : MonoBehaviour {
         aboutPanel.SetActive(false);
         menu.SetActive(false);
 
-
-        
     }
 
     public void onFacebookShow(){
@@ -128,6 +127,14 @@ public class UIManager : MonoBehaviour {
 
     public void onTWitterShow(){
         Application.OpenURL("https://twitter.com/StarGazingGame");
+    }
+
+    public void onRateUs(){
+        if(GameStates.instance.deviceId == 0)
+            Application.OpenURL("market://details?id=com.stargazers.stargazing");
+        else
+            Application.OpenURL("itms-apps://itunes.apple.com/app/id1458238463");
+            
     }
 
     private void OnLeaderboardButtonClicked()
@@ -143,6 +150,10 @@ public class UIManager : MonoBehaviour {
     public IEnumerator ShowDiscoveries()
     {
         menu.SetActive(true);
+
+        menuButtonsGroup.SetActive(false);
+        startMenuButtonsGroup.SetActive(false);
+
         settingsPanel.SetActive(false);
         aboutPanel.SetActive(false);
         discoveriesPanel.SetActive(true);
@@ -160,6 +171,7 @@ public class UIManager : MonoBehaviour {
         closeButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
         discoveriesPanel.SetActive(false);
+
         menu.SetActive(false);
 
         Pause();
@@ -394,9 +406,9 @@ public class UIManager : MonoBehaviour {
 
         isStartPage = sceneName == "start page";
         gameTitle.SetActive(isStartPage);
-        menuButton.gameObject.SetActive(sceneName!="splash page" && sceneName != "end stage");
+        menuButton.gameObject.SetActive(sceneName!="splash page" && sceneName != "end stage" && sceneName != "pre_tutorial");
 
-        print("Pre saved " + GameStates.instance.getProgress());
+        //print("Pre saved " + GameStates.instance.getProgress());
 
         int res;
 

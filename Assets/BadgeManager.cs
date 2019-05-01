@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BadgeManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class BadgeManager : MonoBehaviour
 	void Start () {
         if (instance == null)
             instance = this;
+
+        if(SceneManager.GetActiveScene().buildIndex == 18){
+            showHiddenPlanet("aries");
+        }
+
         if(randomPick){
             int num = Random.Range(0, 10);
             if (num < prob)

@@ -21,67 +21,67 @@ EditorBuildSettings:
     path: Assets/Levels/-1.unity
     guid: 6351305f1ecc8419fb6fe8fb485f2b7b
   - enabled: 1
-    path: Assets/Levels/Selected/1.unity
+    path: Assets/Levels/1.unity
     guid: 92fe6a669c07341c0b8702f40b27e473
   - enabled: 1
-    path: Assets/Levels/Selected/2.unity
+    path: Assets/Levels/2.unity
     guid: 0a1a9793bce3d491b8f691da753b6c6b
   - enabled: 1
-    path: Assets/Levels/Selected/3.unity
+    path: Assets/Levels/3.unity
     guid: 935c64ffe5392c540a0cd2bfe0e1d53b
   - enabled: 1
-    path: Assets/Levels/Selected/4.unity
+    path: Assets/Levels/4.unity
     guid: 8d9b15d6804db42059cb36ccd57c7da1
   - enabled: 1
-    path: Assets/Levels/Selected/5.unity
+    path: Assets/Levels/5.unity
     guid: 7b08fc578e0364a96b028ed378335ea0
   - enabled: 1
-    path: Assets/Levels/Selected/6.unity
+    path: Assets/Levels/6.unity
     guid: 00647bee8b953463f9dc56d2c850624f
   - enabled: 1
-    path: Assets/Levels/Selected/7.unity
+    path: Assets/Levels/7.unity
     guid: d25e32914c126f846af974391c8251b0
   - enabled: 1
-    path: Assets/Levels/Selected/8.unity
+    path: Assets/Levels/8.unity
     guid: 4f0442d336d894402bba3375fd9884ee
   - enabled: 1
-    path: Assets/Levels/Selected/9.unity
+    path: Assets/Levels/9.unity
     guid: 4033fef7078cd450cacffe6bb6404f02
   - enabled: 1
-    path: Assets/Levels/Selected/2-start.unity
+    path: Assets/Levels/2-start.unity
     guid: 865bc5cc0b4144b40a10c3b9cb0b9acf
   - enabled: 1
-    path: Assets/Levels/Selected/10.unity
+    path: Assets/Levels/10.unity
     guid: 041eb5c57cca14b6fb584bb94018fab3
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/11.unity
+    path: Assets/Levels/11.unity
     guid: 2e157ea58d95e40d183eeff56e4c716f
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/12.unity
+    path: Assets/Levels/12.unity
     guid: 5e2f6aa261212a2499c79effbff8e0a8
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/13.unity
+    path: Assets/Levels/13.unity
     guid: 7bd1f0c9aaa80e24abaf840bc9267b68
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/14.unity
+    path: Assets/Levels/14.unity
     guid: 30083d6cf22cd4875a46e3025870903d
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/15.unity
+    path: Assets/Levels/15.unity
     guid: 3a3ae8d26a83c4ce9987ed6daf61742c
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/16.unity
+    path: Assets/Levels/16.unity
     guid: daae24a31c3084149b76de0784ecbe65
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/17.unity
+    path: Assets/Levels/17.unity
     guid: 3f17546eb1805412b88c30d43253ef13
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/18.unity
+    path: Assets/Levels/18.unity
     guid: e88e65c47f78c4a369d19c67e6b0342f
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/19.unity
+    path: Assets/Levels/19.unity
     guid: 7c3b4d4a3bd721f45addb535953255c0
   - enabled: 1
-    path: Assets/Levels/ColorInvertedLevels/20.unity
+    path: Assets/Levels/20.unity
     guid: 2dc5a33dc474cfd4e9e5a375ceb88c95
   - enabled: 0
     path: Assets/Levels/Test/level 1-7.unity

@@ -147,6 +147,7 @@ public class Collision : MonoBehaviour
                             {
                                 sc.playerModel.wonAward = sc.wonAward;
                                 GameStates.instance.saveData(sc.wonAward, 1);
+
                                 if (GameStates.instance.isLoggedIn && Constants.awardAchievementID.ContainsKey(sc.wonAward))
                                     SocialSystem.instance.setAchievement(Constants.awardAchievementID[sc.wonAward]);
 
@@ -188,17 +189,14 @@ public class Collision : MonoBehaviour
 
         GameStates.instance.saveData(Constants.maxConstJumpKey, curMaxJump);
 
-        //print("scores:" + scores);
-        //print("Cur level: " + curlevel);
-
         float cal_score = sc.playerModel.calScore();
         //print(score_list.Length + ", " + scores);
-        string level = Constants.bestMilkywayScoreKey;
+        string level = Achievements.milkyway_leaderboard;
         string scores_key = Constants.getScoreKeyMilkeyWay;
 
         if ((11 <= curlevel && curlevel <= 20) || SceneManager.GetActiveScene().name == "2-start")
         {
-            level = Constants.bestWhirlpoolScoreKey;
+            level = Achievements.milkyway_leaderboard;
             scores_key = Constants.getScoreKeyWhirlpool;
         }
 
@@ -229,10 +227,10 @@ public class Collision : MonoBehaviour
         for (int j = 0; j < score_list.Length; j++)
             printscore += (score_list[j] + ",");
 
+
         print("curlevel:" + curlevel + " score:" + printscore);
 
         float best_score = (float)GameStates.instance.getData(level, typeof(float));
-
 
         int total = 0;
         for (int i = 0; i < score_list.Length; i++)
@@ -240,19 +238,21 @@ public class Collision : MonoBehaviour
             if(score_list[i].Length > 0){
                 total += int.Parse(score_list[i]);
             }
-
         }
 
-        //if (total > best_score)
-        //{
-        //    SocialSystem.instance.setLeaderBoard(Constants.bestMilkywayScoreKey, (long)total);
-        //}
-        GameStates.instance.saveData(Constants.bestMilkywayScoreKey, Mathf.Max(total, best_score));
+        if (total > best_score)
+        {
+            best_score = total;
+            print("Best score " + best_score);
+            SocialSystem.instance.setLeaderBoard(level, (long)best_score);
+        }
+
+        GameStates.instance.saveData(level, best_score);
         GameStates.instance.saveData(scores_key, string.Join(",", score_list));
         //GameStates.instance.showContent = Mathf.Max(total, best_score).ToString();
 
         //Debug.Log("Last continous jump: " + GameStates.instance.globalContinuousJump);
-        //Debug.Log("Current max jumps: " + curMaxJump);
+        Debug.Log("Current max jumps: " + curMaxJump);
     }
 
 

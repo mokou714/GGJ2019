@@ -277,7 +277,7 @@ public class AudioManager : MonoBehaviour
         if (sfxSourceMap.TryGetValue(n, out si))
         {
             // Some sfx like "being hit" will be called frequently, 
-            // Need two or more audio sources to avoid noise in between two "being hit" plays
+            // Need two or more audio sources to avoid noise between two plays
             // reference: https://forum.unity.com/threads/problem-with-audio-crackling.482086/
 
             // if the primary audioSource is busy playing the same clip,
@@ -285,16 +285,16 @@ public class AudioManager : MonoBehaviour
             if (sfxSources[si].isPlaying)
             {
                 AudioSource[] backupSources = sfxSources[si].gameObject.GetComponentsInChildren<AudioSource>();
-                src = backupSources[backupSources.Length - 1]; // get the last one by default
+                src = backupSources[0]; // get the first one by default
                 for (int i = 0; i < backupSources.Length; i++)
                 {
                     if (!backupSources[i].isPlaying)
                     {
                         src = backupSources[i];
-                        //print("backupSource: " + i);
+                        if(isDevMode)
+                            print("backupSource: " + i);
                         break;
                     }
-
                 }
 
             }

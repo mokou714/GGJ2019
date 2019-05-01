@@ -24,10 +24,20 @@
 
 public static class Achieve
 {
-        public const string achievement_unlock_the_chaotic_milky_way = "CgkI2tzJ6JcSEAIQBA"; // <GPGSID>
-        public const string achievement_unlock_the_abnormal_whirlpool = "CgkI2tzJ6JcSEAIQBQ"; // <GPGSID>
-        public const string achievement_passing_the_tutorial = "CgkI2tzJ6JcSEAIQAg"; // <GPGSID>
+        public const string achievement_cancer = "CgkI2tzJ6JcSEAIQEQ"; // <GPGSID>
+        public const string achievement_passing_all_levels = "CgkI2tzJ6JcSEAIQDQ"; // <GPGSID>
         public const string achievement_4_continuous_jumps = "CgkI2tzJ6JcSEAIQAw"; // <GPGSID>
+        public const string leaderboard_the_abnormal_whirlpool = "CgkI2tzJ6JcSEAIQCA"; // <GPGSID>
+        public const string achievement_libra = "CgkI2tzJ6JcSEAIQEw"; // <GPGSID>
+        public const string leaderboard_continuous_jumps_through_all_levels = "CgkI2tzJ6JcSEAIQCQ"; // <GPGSID>
+        public const string achievement_unlock_the_abnormal_whirlpool = "CgkI2tzJ6JcSEAIQBQ"; // <GPGSID>
+        public const string leaderboard_the_chaotic_milky_way = "CgkI2tzJ6JcSEAIQBw"; // <GPGSID>
+        public const string achievement_sagittarius = "CgkI2tzJ6JcSEAIQEA"; // <GPGSID>
+        public const string achievement_aries = "CgkI2tzJ6JcSEAIQEg"; // <GPGSID>
+        public const string achievement_passing_the_tutorial = "CgkI2tzJ6JcSEAIQAg"; // <GPGSID>
+        public const string achievement_aquarius = "CgkI2tzJ6JcSEAIQDg"; // <GPGSID>
+        public const string achievement_pisces = "CgkI2tzJ6JcSEAIQDw"; // <GPGSID>
+        public const string achievement_unlock_the_chaotic_milky_way = "CgkI2tzJ6JcSEAIQBA"; // <GPGSID>
 
 }
 

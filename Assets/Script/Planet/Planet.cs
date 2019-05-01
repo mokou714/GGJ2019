@@ -47,6 +47,7 @@ public class Planet : MonoBehaviour
         planetSprite = transform.Find("Planet2");
 
         planetBottom = transform.Find("Bottom");
+
         lightController = GetComponent<Light>();
         if(planetSprite)
             catchRadius = planetSprite.localScale.x;
@@ -86,6 +87,8 @@ public class Planet : MonoBehaviour
         if (buildIndex > 0 && buildIndex <= 13)
         {
             AudioManager.instance.PlaySFX("Harp Land_" + AudioManager.landingSfxID.ToString());
+
+            print("play landing sound");
         }
         else if (buildIndex > 13 && buildIndex < 26)
         {
@@ -101,6 +104,9 @@ public class Planet : MonoBehaviour
             }
             //print("t: " + t + ", pitch: " + pitch);
             AudioManager.instance.PlaySFX("Lv2 " + "Harp Land" + pitch + "_" + AudioManager.landingSfxID.ToString());
+
+            print("play landing sound");
+
         }
 
         AudioManager.landingSfxID++;
@@ -217,8 +223,8 @@ public class Planet : MonoBehaviour
 
     public void PlanetBlink()
     {
-        if (lightController != null)
-            lightController.enabled = true;
+        //if (lightController != null)
+            //lightController.enabled = true;
         StartCoroutine(turnoffHalo());
     }
 

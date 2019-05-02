@@ -8,7 +8,7 @@
       <File FileName="Assets/Script/Meteor/MeteorSpawner.cs" Line="8" Column="22" />
       <File FileName="Assets/Script/Collision.cs" Line="189" Column="9" />
       <File FileName="Assets/Script/Player/spacecraft.cs" Line="515" Column="47" />
-      <File FileName="Assets/Script/UI/UIManager.cs" Line="133" Column="13" />
+      <File FileName="Assets/Script/UI/UIManager.cs" Line="139" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -90,7 +90,9 @@ public class selectionEffect : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+
+        AudioManager.instance.PlaySFX("SelectLevel");
+
         int levelName = int.Parse(gameObject.name);
 
         int levelID = 10 * (bigNumber - 1) + levelName;

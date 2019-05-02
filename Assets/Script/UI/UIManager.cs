@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour {
     // singleton instance
     public static UIManager instance = null;
 
-    bool isStartPage = false;
+    public bool isStartPage = false;
 
     private void Awake()
     {
@@ -122,15 +122,18 @@ public class UIManager : MonoBehaviour {
     }
 
     public void onFacebookShow(){
+    
         Application.OpenURL("https://www.facebook.com/stargazinggame");
     }
 
     public void onTWitterShow(){
+
         Application.OpenURL("https://twitter.com/StarGazingGame");
     }
 
     public void onRateUs(){
-        if(GameStates.instance.deviceId == 0)
+
+        if (GameStates.instance.deviceId == 0)
             Application.OpenURL("market://details?id=com.stargazers.stargazing");
         else
             Application.OpenURL("itms-apps://itunes.apple.com/app/id1458238463");
@@ -186,6 +189,8 @@ public class UIManager : MonoBehaviour {
 
     private void OnAboutButtonClicked()
     {
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         aboutPanel.SetActive(true);
         backButton.gameObject.SetActive(true);
 
@@ -195,6 +200,8 @@ public class UIManager : MonoBehaviour {
 
     private void OnDiscoveriesButtonClicked()
     {
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         discoveriesPanel.SetActive(true);
         backButton.gameObject.SetActive(true);
 
@@ -205,6 +212,8 @@ public class UIManager : MonoBehaviour {
 
     private void OnSettingsButtonClicked()
     {
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         settingsPanel.SetActive(true);
         backButton.gameObject.SetActive(true);
 
@@ -223,6 +232,8 @@ public class UIManager : MonoBehaviour {
 
     private void OnCloseButtonClicked()
     {
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         StartCoroutine(RequireSleep(0.5f));
         menu.SetActive(false);
         pageName = "game";
@@ -237,7 +248,8 @@ public class UIManager : MonoBehaviour {
         // To do: add UI animations
 
         // close settings and show first-level menu
-        
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         isStartPage = SceneManager.GetActiveScene().name == "start page";
         if (isStartPage)
             startMenuButtonsGroup.SetActive(true);
@@ -265,7 +277,7 @@ public class UIManager : MonoBehaviour {
     private void OnMenuButtonClicked()
     {
 
-        print("clicked menu");
+        AudioManager.instance.PlaySFX("ClickMenu");
 
         pageName = "menu";
         gameTitle.SetActive(false);
@@ -295,6 +307,8 @@ public class UIManager : MonoBehaviour {
 
     private void OnHomeButtonClicked()
     {
+        AudioManager.instance.PlaySFX("ClickMenu");
+
         menu.SetActive(false);
         Pause();
         if(transform.Find("Tutorials").GetChild(0).GetComponent<Text>() != null)

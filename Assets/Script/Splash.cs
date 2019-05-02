@@ -15,7 +15,6 @@ public class Splash : MonoBehaviour {
     float time = 0.2f;
     float interval = 0.2f;
 
-    private AudioSource source;
     public string showContent;
 
     public Text textfield;
@@ -23,7 +22,6 @@ public class Splash : MonoBehaviour {
 	void Start () {
         SocialSystem.instance.splash = this;
         title = "";
-        source = GetComponent<AudioSource>();
         //source.clip = audioClip;
         StartCoroutine(loadText());
         //source.Play();
@@ -32,15 +30,11 @@ public class Splash : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     IEnumerator playSound()
     {
-        source.Play();
-        yield return new WaitForSeconds(0.3f);
+        AudioManager.instance.PlaySFX("ChalkClips_1", "ChalkClips_2");
+        yield return new WaitForSeconds(0.5f);
         if (i < text.Length)
             StartCoroutine(playSound());
         else{

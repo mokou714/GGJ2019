@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioMixerSnapshot paused;
+    public AudioMixer master;
+    public AudioMixerSnapshot pausedInGame;
     public AudioMixerSnapshot unpaused;
-    public float pauseTransitionTime = 0.01f;
+    public AudioMixerSnapshot pausedInTitle;
+    float pauseTransitionTime = .2f;
 
     public bool isDevMode = false;
     // sometimes we will have more than one sfx clip playing at the same time
@@ -19,6 +23,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] sfxSources;
 
     public AudioSource[] musicSources;
+
+    public AudioSource ambienceSource;
+
     int curMusicSourceID = 0;
 
     public float musicFadeOutTime = 1f;
@@ -52,6 +59,7 @@ public class AudioManager : MonoBehaviour
     // Sington pattern
     void Awake()
     {
+
         //Check if there is already an instance of AudioManager
         if (instance == null)
             //if not, set it to this.
@@ -63,6 +71,10 @@ public class AudioManager : MonoBehaviour
 
         //Set AudioManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
+
+        // set unscaledTime for pause transitions
+        master.updateMode = AudioMixerUpdateMode.UnscaledTime;
+
 
         allSFXSources = sfxSources[0].transform.parent.GetComponentsInChildren<AudioSource>();
         //print("sfxSourcesAndBackupSources: " + sfxAndBackupSources.Length);
@@ -96,6 +108,14 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 7);
             else if (n == "Star")
                 sfxSourceMap.Add(n, 8);
+            else if (n == "ClickMenu")
+                sfxSourceMap.Add(n, 9);
+            else if (n.Contains("ChalkClips"))
+                sfxSourceMap.Add(n, 10);
+            else if (n == "SelectLevel")
+                sfxSourceMap.Add(n, 11);
+
+
         }
         
         //foreach (string key in sfxSourceMap.Keys)
@@ -114,10 +134,19 @@ public class AudioManager : MonoBehaviour
                 musicSourceMap.Add(n, 1);
             else if (n == "bgm2")
                 musicSourceMap.Add(n, 2);
+
+
         }
 
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
-        if (buildIndex < 3)
+
+        if (buildIndex != 0) // do not play ambience on splash page
+            if (!ambienceSource.isPlaying)
+                ambienceSource.Play();
+
+        if (buildIndex == 0)
+            return;
+        else if (buildIndex == 2) // start page
         {
             int unlockedLevel = -2;
             if (PlayerPrefs.HasKey(Constants.curLevelKey))
@@ -184,9 +213,13 @@ public class AudioManager : MonoBehaviour
         string curScene = SceneManager.GetActiveScene().name;
         int curLevel;
 
+        if(!ambienceSource.isPlaying)
+            ambienceSource.Play();
+
+
         if (int.TryParse(curScene, out curLevel))
         {
-            if (curLevel > 0 && curLevel <= 10)
+            if (curLevel > -3 && curLevel <= 10)
                 PlayMusic("bgm1");
             else if (curLevel > 10 && curLevel <= 20)
                 PlayMusic("bgm2");
@@ -213,6 +246,7 @@ public class AudioManager : MonoBehaviour
             PlayMusic("bgm1");
         }
     }
+
 
     //Used to play a bgm music clip by its name
     public void PlayMusic(string n, bool isLoop = true)
@@ -314,8 +348,6 @@ public class AudioManager : MonoBehaviour
                 }
             }
 
-
-            //Load the clip
             src.clip = sfxList[ci];
 
             // varies its pitch if pitchVariation is applied to this clip in the inspector
@@ -447,10 +479,28 @@ public class AudioManager : MonoBehaviour
 
     public void PauseTransition()
     {
-        if(Time.timeScale == 0)
-            paused.TransitionTo(pauseTransitionTime);
+
+        if (Time.timeScale == Constants.minTimeScale)
+        {
+            // paused        
+            if (UIManager.instance.isStartPage)
+            {
+                print("transitioned to pausedInTitle");
+                pausedInTitle.TransitionTo(pauseTransitionTime);
+            }
+            else
+            {
+                print("transitioned to pausedInGame");
+                pausedInGame.TransitionTo(pauseTransitionTime);
+            }
+        }
         else
+        {
+            print("transitioned to pausedInGame");
             unpaused.TransitionTo(pauseTransitionTime);
+           
+        }
+
     }
     
     public void ChangeMasterVolume(float v)

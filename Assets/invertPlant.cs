@@ -58,10 +58,11 @@ public class invertPlant : Planet {
         else{
             if(!inverted){
                 sc.camera.transform.GetChild(0).GetComponent<colorInverter>().invertingBack = true;
-                //UIManager.instance.menuButtonInvert();
+                UIManager.instance.menuButtonInvert();
                 if (badge != null){
                     badge.GetComponent<GoldenPlanet>().inverted = true;                    
                 }
+                inverted = true;
                     
             }
         }

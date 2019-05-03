@@ -127,6 +127,7 @@ public class Collision : MonoBehaviour
                         }
 
                     }else if(curLevel == 20){
+                        GameStates.instance.saveData(Constants.curLevelKey, "1");
                         if (GameStates.instance.isLoggedIn){
                             SocialSystem.instance.setAchievement(Achievements.passing_all_levels);
                         }

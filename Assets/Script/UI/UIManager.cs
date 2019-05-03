@@ -426,7 +426,7 @@ public class UIManager : MonoBehaviour {
 
         int res;
 
-        if(level > 2){
+        if(level > 2 && level < 26){
             GameStates.instance.saveData(Constants.curLevelKey, sceneName);
         }
 

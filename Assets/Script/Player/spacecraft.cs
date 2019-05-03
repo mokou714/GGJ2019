@@ -307,11 +307,13 @@ public class spacecraft : MonoBehaviour
                 //rotating_speed = origSpeed;
                 Time.timeScale = 1;
             }
-        }else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
-        {
-            GameStates.instance.reinit();
-            //SceneManager.LoadScene(Application.loadedLevel);
-        }else{
+        }
+        //else if (Input.GetKeyDown(KeyCode.R) || (Input.touchCount == 2))
+        //{
+        //    GameStates.instance.reinit();
+        //    //SceneManager.LoadScene(Application.loadedLevel);
+        //}
+        else{
             if(playerModel != null)
                 playerModel.levelTime += Time.deltaTime;
         }

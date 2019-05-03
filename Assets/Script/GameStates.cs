@@ -187,9 +187,12 @@ public class GameStates : MonoBehaviour
         if (PlayerPrefs.HasKey(Constants.curLevelKey))
         {
             string curlevel = PlayerPrefs.GetString(Constants.curLevelKey);
-            //print("Progress:" + curlevel);
+            print("Got key progress " + curlevel);
+
             return curlevel;
         }else{
+            print("No progress");
+
             return "-2"; 
         }
     }

@@ -46,7 +46,6 @@ public class UICredits : MonoBehaviour
     private void OnSkipButtonClicked()
     {
         StopCoroutine(ShowCredits());
-        GameStates.instance.saveData(Constants.curLevelKey, 1);
         SceneManager.LoadScene("start page");
     }
 
@@ -64,6 +63,7 @@ public class UICredits : MonoBehaviour
         }    
         else{
             GameStates.instance.saveData(Constants.curLevelKey, "1");
+            //print("stored level " + GameStates.instance.getData(Constants.curLevelKey, typeof(string)));
             StartCoroutine(ShowCredits());
         }
     }

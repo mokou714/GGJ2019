@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GoldenPlanet : Planet {
     private int dir = 1;
@@ -55,6 +56,15 @@ public class GoldenPlanet : Planet {
             Transform intro = transform.Find("intro");
             if(intro)
                 intro.gameObject.SetActive(true);
+
+            GameObject text;
+            text = GameObject.FindGameObjectWithTag("tutorialText");
+            text.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, 270, 0);
+            if (text != null)
+            {
+                text.GetComponent<Text>().text = "You just discovered a badge,\n get it and pass the level!";
+            }
+
             GameStates.instance.saveData("firstBadge", 1);
 
         }

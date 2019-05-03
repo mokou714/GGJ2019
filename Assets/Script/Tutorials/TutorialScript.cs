@@ -53,6 +53,9 @@ public class TutorialScript : MonoBehaviour {
         if (textfield == null)
             textfield = GameObject.FindGameObjectWithTag("tutorialText").GetComponent<Text>();
 
+
+        textfield.text = "";
+
         switch (tutorialNum){
             case 0:
                 //Start page

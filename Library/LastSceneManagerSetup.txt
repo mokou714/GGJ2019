@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Levels/6.unity
+- path: Assets/Levels/splash page.unity
   isLoaded: 1
   isActive: 1

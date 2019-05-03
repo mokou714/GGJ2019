@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 class Part_1 {
     public spacecraft player_sc;
@@ -125,6 +126,7 @@ class Part_1 {
 
     IEnumerator loadText(string text, int i, float time_interval)
     {
+
         yield return new WaitForSeconds(time_interval);
         textfield.text = textfield.text + text[i];
         if (i < text.Length - 1)

@@ -5365,7 +5365,7 @@ MonoBehaviour:
   origGlowSize: 0
   planetSprite: {fileID: 0}
   planetBottom: {fileID: 0}
-  dustAmount: 40
+  dustAmount: 0
   origSizeRatio: 0
 --- !u!58 &1526693423
 CircleCollider2D:

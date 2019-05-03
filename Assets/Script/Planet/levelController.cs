@@ -31,7 +31,7 @@ public class levelController : MonoBehaviour {
             if (!PlayerPrefs.HasKey("bigLevel") && bigLevel==1)
             {
                 PlayerPrefs.SetInt("bigLevel", 1);
-                AudioManager.instance.PlaySFX(2f, "Star");
+                AudioManager.instance.PlaySFX(0.4f, "Star");
             }
             else if (PlayerPrefs.HasKey("bigLevel"))
             {

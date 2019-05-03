@@ -40,8 +40,8 @@ public class TutorialScript : MonoBehaviour {
     Dictionary<string, hint> inst;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         player_sc = player.transform.GetChild(0).GetComponent<spacecraft>();
         //Debug.Log(player_sc);
         saveName = "tu" + (tutorialNum + 1).ToString();
@@ -85,6 +85,7 @@ public class TutorialScript : MonoBehaviour {
 
         if (textfield == null)
             textfield = GameObject.FindGameObjectWithTag("tutorialText").GetComponent<Text>();
+            
 
         if (tutorialNum == 0){
             part_1.runtimeRoutine();
@@ -228,7 +229,6 @@ public class TutorialScript : MonoBehaviour {
 
 }
 
-
 class hint{
     public string content;
     public bool showed;
@@ -242,4 +242,5 @@ class hint{
         this.y = y;
     }
 }
+
 

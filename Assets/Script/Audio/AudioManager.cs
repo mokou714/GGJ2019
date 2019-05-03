@@ -24,8 +24,6 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource[] musicSources;
 
-    public AudioSource ambienceSource;
-
     int curMusicSourceID = 0;
 
     public float musicFadeOutTime = 1f;
@@ -114,7 +112,8 @@ public class AudioManager : MonoBehaviour
                 sfxSourceMap.Add(n, 10);
             else if (n == "SelectLevel")
                 sfxSourceMap.Add(n, 11);
-
+            else if (n == "Ambience")
+                sfxSourceMap.Add(n, 12);
 
         }
         
@@ -141,8 +140,8 @@ public class AudioManager : MonoBehaviour
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
 
         if (buildIndex != 0) // do not play ambience on splash page
-            if (!ambienceSource.isPlaying)
-                ambienceSource.Play();
+            if (IsPlaying("Ambience") == false)
+                PlaySFX("Ambience");
 
         if (buildIndex == 0)
             return;
@@ -196,15 +195,15 @@ public class AudioManager : MonoBehaviour
     public void PlayLevelFinishSFX(string curLevelName)
     {
         // entering a new big level or from startpage
-        if (curLevelName == "start page" || curLevelName == "-1" || curLevelName == "2-start")
+        //if (curLevelName == "start page" || curLevelName == "-1" || curLevelName == "2-start")
             //PlaySFX("NextLevel2");
             PlaySFX("NextLevel_1");
         // entering the end sub-level of the current big level
         //else if (curLevelName == "9" || curLevelName == "17" || curLevelName == "-2")
             //PlaySFX("NextLevel1");
 
-        else
-            PlaySFX("NextLevel_0");
+        //else
+            //PlaySFX("NextLevel_0");
         
     }
            
@@ -213,8 +212,8 @@ public class AudioManager : MonoBehaviour
         string curScene = SceneManager.GetActiveScene().name;
         int curLevel;
 
-        if(!ambienceSource.isPlaying)
-            ambienceSource.Play();
+        if (IsPlaying("Ambience") == false)
+            PlaySFX("Ambience");
 
 
         if (int.TryParse(curScene, out curLevel))

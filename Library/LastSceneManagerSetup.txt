@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Levels/start page.unity
-=======
 - path: Assets/Levels/splash page.unity
->>>>>>> 5e407f4e0009798b36cff333a49b41712fe57ae0
   isLoaded: 1
   isActive: 1

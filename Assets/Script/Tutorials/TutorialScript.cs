@@ -120,7 +120,7 @@ public class TutorialScript : MonoBehaviour {
                 part_1.onPlanetRoutine();
             }else if(tutorialNum == 1){
                 if(checkedMark < 1){
-                    hint start_campagin = new hint("Get here to start!", false, 200, -85);
+                    hint start_campagin = new hint("Get here to start!", false, 250, -110);
                     showText(start_campagin);
                     player_sc.end.transform.Find("arrow").gameObject.SetActive(true);
                     checkedMark++;

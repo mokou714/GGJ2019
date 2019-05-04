@@ -104,9 +104,9 @@ public class Collision : MonoBehaviour
             sc.requiredSleep = true;
 
             // play sfx and switch music if needed
-            string sceneName = SceneManager.GetActiveScene().name;
-            AudioManager.instance.PlayLevelFinishSFX(sceneName);
-            //AudioManager.instance.SwitchMusic(sceneName);                        
+            string sceneName = SceneManager.GetActiveScene().name;                  
+
+            bool playFinishSfx = true;
 
             if (collision.gameObject.tag == "Finish"){
                 int curLevel = 0;
@@ -154,6 +154,7 @@ public class Collision : MonoBehaviour
 
                                 GameStates.instance.saveData(sc.wonAward, 0);
 
+                                playFinishSfx = false;
                                 StartCoroutine(UIManager.instance.ShowDiscoveries());
 
                                 print("saved: " + sc.wonAward);
@@ -174,6 +175,13 @@ public class Collision : MonoBehaviour
                 //Debug.Log("load");
                 StartCoroutine(waitToNext(1f, true));
             }
+
+
+
+            if(playFinishSfx)
+                AudioManager.instance.PlayLevelFinishSFX(sceneName);
+            //AudioManager.instance.SwitchMusic(sceneName);    
+
         }
         return;
     }

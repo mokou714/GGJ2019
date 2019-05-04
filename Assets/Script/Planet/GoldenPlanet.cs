@@ -18,6 +18,8 @@ public class GoldenPlanet : Planet {
     private Vector3 size;
     private Color origFrameColor;
     public bool inverted;
+    private GameObject text;
+    private Transform intro;
 
 	// Use this for initialization
 	void Start () {
@@ -52,12 +54,11 @@ public class GoldenPlanet : Planet {
         size = planet2.transform.localScale;
         //Debug.Log("Catch radius:" + catchRadius);
 
-        if(!checkHasTaken("firstBadge")){
-            Transform intro = transform.Find("intro");
+        if(!checkHasTaken("firstBadge") && SceneManager.GetActiveScene().buildIndex == 6){
+            intro = transform.Find("intro");
             if(intro)
                 intro.gameObject.SetActive(true);
 
-            GameObject text;
             text = GameObject.FindGameObjectWithTag("tutorialText");
             text.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, 270, 0);
             if (text != null)
@@ -166,6 +167,17 @@ public class GoldenPlanet : Planet {
             StartCoroutine(award.GetComponent<GainedAnimation>().moveStart(sc.transform.parent.transform, 1));
             awardAvailable = false;
             sc.wonAward = tag;
+
+            if(text != null){
+                if(text.GetComponent<Text>() != null){
+                    text.GetComponent<Text>().text = "";
+                }
+            }
+
+            if(intro != null){
+                intro.gameObject.SetActive(false);
+            }
+
         }
 
         if(SceneManager.GetActiveScene().buildIndex == 18){

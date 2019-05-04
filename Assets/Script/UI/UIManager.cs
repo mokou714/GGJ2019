@@ -152,6 +152,7 @@ public class UIManager : MonoBehaviour {
 
     public IEnumerator ShowDiscoveries()
     {
+
         menu.SetActive(true);
 
         menuButtonsGroup.SetActive(false);
@@ -167,7 +168,7 @@ public class UIManager : MonoBehaviour {
 
         Pause();
         
-        yield return new WaitForSecondsRealtime(4.5f);
+        yield return new WaitForSecondsRealtime(4.25f);
 
         achievementsButton.gameObject.SetActive(true);
         leaderboardButton.gameObject.SetActive(true);

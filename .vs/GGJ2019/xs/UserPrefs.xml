@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{157628EE-6CAD-8795-A604-80BFDAFB6274}|">
   <MonoDevelop.Ide.ItemProperties.GGJ2019 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Collision.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Tutorials/TutorialScript.cs">
     <Files>
-      <File FileName="Assets/Script/Audio/AudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Audio/AudioManager.cs" Line="195" Column="35" />
       <File FileName="Assets/BadgeManager.cs" Line="57" Column="82" />
       <File FileName="Assets/Script/Meteor/MeteorSpawner.cs" Line="8" Column="22" />
       <File FileName="Assets/Script/UI/UICredits.cs" Line="66" Column="78" />
       <File FileName="Assets/Script/GameStates.cs" Line="190" Column="32" />
-      <File FileName="Assets/Script/UI/UIManager.cs" Line="427" Column="17" />
+      <File FileName="Assets/Script/UI/UIManager.cs" Line="171" Column="53" />
       <File FileName="Assets/Script/Planet/GoldenPlanet.cs" Line="57" Column="89" />
-      <File FileName="Assets/Script/Tutorials/TutorialScript.cs" Line="133" Column="35" />
+      <File FileName="Assets/Script/Tutorials/TutorialScript.cs" Line="123" Column="90" />
       <File FileName="Assets/Script/Tutorials/Part_1.cs" Line="16" Column="96" />
-      <File FileName="Assets/Script/Collision.cs" Line="130" Column="63" />
+      <File FileName="Assets/Script/Collision.cs" Line="183" Column="64" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -16,13 +16,12 @@ public class pulse : MonoBehaviour {
 
     GameObject player;
 
-
-
     void Start(){
         scaleFactor = 1f;
         defaultScale = transform.lossyScale;
 
         StartCoroutine(Scale());
+
         //StartCoroutine(Pulse());
     }
 
@@ -41,6 +40,9 @@ public class pulse : MonoBehaviour {
     }
 
     IEnumerator Scale() {
+        yield return new WaitForSeconds(time);
+
+
         while (true){
 
             if (player == null)

@@ -60,7 +60,13 @@ public class GoldenPlanet : Planet {
                 intro.gameObject.SetActive(true);
 
             text = GameObject.FindGameObjectWithTag("tutorialText");
-            text.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, 270, 0);
+
+            float ratio = ((float)Screen.width / (float)Screen.height) / (16f/9f);
+
+            print("ratio " +ratio);
+
+            float word_x = 400f * ratio;
+            text.GetComponent<RectTransform>().anchoredPosition = new Vector3(word_x, 270, 0);
             if (text != null)
             {
                 text.GetComponent<Text>().text = "You just discovered a badge,\n get it and pass the level!";
@@ -69,7 +75,7 @@ public class GoldenPlanet : Planet {
             GameStates.instance.saveData("firstBadge", 1);
 
         }
-         
+
         int index = 0;
         if(random){
             int num_sprite = Random.Range(0, 1000);

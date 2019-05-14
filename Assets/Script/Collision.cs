@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Collision : MonoBehaviour
 {
@@ -117,6 +118,7 @@ public class Collision : MonoBehaviour
                 }else{
                     curLevel = int.Parse(sceneName);
                     print("cur level:" + curLevel);
+
                     if (curLevel == -1)
                     {
                         next_level = "1";
@@ -132,7 +134,16 @@ public class Collision : MonoBehaviour
                             SocialSystem.instance.setAchievement(Achievements.passing_all_levels);
                         }
                         next_level = "end stage";
-                    }else if((curLevel > 0 && curLevel < 20) || curLevel < -1){
+                    }
+                    if((curLevel > 0 && curLevel < 20) || curLevel < -1){
+                        if(curLevel == 2){
+                            GameObject text;
+                            text = GameObject.FindGameObjectWithTag("tutorialText");
+                            if(text != null){
+                                text.GetComponent<Text>().text = "";
+                            }
+                        }
+
                         if(curLevel == 9){
                             if ((int)GameStates.instance.getData(Constants.whirpoolStatus, typeof(int)) < 1)
                                 next_level = "2-start";

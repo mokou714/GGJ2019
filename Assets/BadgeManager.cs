@@ -31,6 +31,9 @@ public class BadgeManager : MonoBehaviour
             showHiddenPlanet("aries");
         }
 
+        if (GameStates.instance.hasKey("firstBadge"))
+            prob = 4;
+
         if(randomPick){
             int num = Random.Range(0, 10);
             if (num < prob)

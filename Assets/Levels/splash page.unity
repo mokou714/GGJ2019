@@ -230,7 +230,7 @@ Prefab:
     - target: {fileID: 114308548204841196, guid: 2543ece1b81581c41aa712eb2c9ee5d0,
         type: 2}
       propertyPath: destroy
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2543ece1b81581c41aa712eb2c9ee5d0, type: 2}

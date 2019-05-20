@@ -13,10 +13,12 @@ public class pulse : MonoBehaviour {
     public float time = 0.01f;
 
     float T = 0;
+    bool pulseWaiting;
 
     GameObject player;
 
     void Start(){
+
         scaleFactor = 1f;
         defaultScale = transform.lossyScale;
 
@@ -34,13 +36,17 @@ public class pulse : MonoBehaviour {
             T += Time.deltaTime * pulseSpeed;
             scaleFactor = Mathf.Cos(T) * 1 / 100 + 1;
             //if (Mathf.Abs(Mathf.Cos(T)-1f) < 0.0001f)
-                //Debug.Log("scaleFactor " + scaleFactor);
+            //Debug.Log("scaleFactor " + scaleFactor);
         }
 
     }
 
+
+
+
+
     IEnumerator Scale() {
-        yield return new WaitForSeconds(time);
+        //yield return new WaitForSeconds(time);
 
 
         while (true){
@@ -60,8 +66,11 @@ public class pulse : MonoBehaviour {
                     Vector3 newPos = transform.position - (transform.position - player.transform.position) * scaleFactor;
                     player.transform.position = newPos;
                 }
+
             }
+
             yield return new WaitForSeconds(time);
+
         }
 
     }

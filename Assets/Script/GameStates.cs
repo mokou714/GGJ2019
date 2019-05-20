@@ -96,6 +96,9 @@ public class GameStates : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //fixed FPS 60
+        Application.targetFrameRate = 60;
+
         if (isSaving)
         {
             //LoadLevel();
